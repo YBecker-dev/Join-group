@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="/assets/style/main.css" />
+    <link rel="stylesheet" href="/assets/style/summary_user.css" />
+    <link rel="stylesheet" href="/assets/style/standart.css" />
+    <title>Summery</title>
+  </head>
+  <body onload="initSummary()">
+    <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content"></div>
+    </section>
+
+    <header>
+      <div class="header-content">
+        <p>Kanban Project Management Tool</p>
+        <img class="logo-responsive" src="/assets/img/Logo/logo_dark.png" alt="" />
+        <div class="header-user">
+          <img
+            class="help-icon"
+            onclick="loadHelp()"
+            src="/assets/img/icon/header_user_interface/help.png"
+            alt="help"
+          />
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" id="userInitials"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <div class="sidebar-links-container">
+          <a class="sidebar-links active" id="sidebar-summary" href="/assets/html/summery.html">
+            <div class="sidebar-links-content">
+              <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />
+              <p>Summary</p>
+            </div>
+          </a>
+          <a class="sidebar-links" id="sidebar-add-task" href="/assets/html/add_task.html">
+            <div class="sidebar-links-content">
+              <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />
+              <p>Add Task</p>
+            </div>
+          </a>
+          <a class="sidebar-links" id="sidebar-board" href="/assets/html/board.html">
+            <div class="sidebar-links-content">
+              <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
+              <p>Board</p>
+            </div>
+          </a>
+          <a class="sidebar-links" id="sidebar-contacts" href="/assets/html/contacts.html">
+            <div class="sidebar-links-content">
+              <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />
+              <p>Contacts</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <div class="sidebar-legal-stuff-container">
+          <a
+            class="sidebar-legal-stuff-links"
+            id="sidebar-privacy-policy"
+            href="/assets/html/privacy-policy_internal.html"
+            >Privacy Policy</a
+          >
+        </div>
+        <div class="sidebar-legal-stuff-container">
+          <a class="sidebar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
+            >Legal Notice</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="greeting-message d-none" id="user-greeting"></div>
+    <div class="greeting-message d-none" id="guest-greeting"></div>
+
+    <section class="main-content d-none">
+      <div class="contentspace-html">
+        <div class="headline_container">
+          <h1>Join 360</h1>
+          <div class="vector5"></div>
+          <p>Key Metrics at a Glance</p>
+          <div class="vector5-mobil"></div>
+        </div>
+
+        <div class="task-monitor">
+          <div class="section-one">
+            <div class="content-one hover-one transform-left" onclick="loadBoard()">
+              <div class="content-one-icon">
+                <div class="pen-icon"></div>
+              </div>
+              <div class="content-info">
+                <h1 id="task_to_do"></h1>
+                <p>To-do</p>
+              </div>
+            </div>
+            <div class="content-one hover-one transform-right" onclick="loadBoard()">
+              <div class="content-one-icon">
+                <div class="check-icon"></div>
+              </div>
+              <div class="content-info">
+                <h1 id="task_done"></h1>
+                <p>Done</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-two hover-two transform-left" onclick="loadBoard()">
+            <div class="content-two-left">
+              <div>
+                <img src="/assets/img/icon/urgent.png" />
+              </div>
+              <div class="content-info-two">
+                <h1 id="task_urgent"></h1>
+                <p>Urgent</p>
+              </div>
+            </div>
+            <div class="seperator-two"></div>
+            <div class="content-two-right">
+              <h4 id="deadline">October 16, 2022</h4>
+              <p>Upcoming Deadline</p>
+            </div>
+          </div>
+          <div class="section-three">
+            <div class="content-three hover-three transform-left-center" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_in_board"></h1>
+                <p>Tasks in Board</p>
+              </div>
+            </div>
+            <div class="content-three hover-three" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_in_progress"></h1>
+                <p>Tasks In Progress</p>
+              </div>
+            </div>
+            <div class="content-three hover-three transform-right-center" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_awaiting_feedback"></h1>
+                <p>Awaiting Feedback</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="greeting">
+        <h2 id="userGreeting"></h2>
+        <h1 id="userName"></h1>
+      </div>
+    </section>
+  </body>
+
+  <script src="/assets/script/templates.js"></script>
+  <script src="/assets/script/summary.js"></script>
+  <script src="/assets/script/board.js"></script>
+  <script src="/assets/script/main.js"></script>
+  <script src="/assets/script/add_task.js"></script>
+  <script src="/assets/script/contacts.js"></script>
+</html>

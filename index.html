@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/style/standart.css" />
+    <link rel="stylesheet" href="assets/style/buttons.css" />
+    <link rel="stylesheet" href="assets/style/index.css" />
+    <title>Join</title>
+  </head>
+  <body onload="init()">
+    <main>
+      <div class="main-header-content">
+        <div class="main-header">
+          <div class="main-header-logo"></div>
+          <img id="start-logo" class="preload" src="/assets/img/Logo/logo_dark.png" alt="Logo" />
+          <div class="Signup">
+            <p>Not a Join user?</p>
+            <a href="./assets/html/register.html"><button>Sign up</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="login">
+        <div class="login-content">
+          <div class="login-header">
+            <h1>Log in</h1>
+            <div class="login-underline"></div>
+          </div>
+
+          <form id="login-form" onsubmit="loginUser(event)">
+            <div class="input-group-container">
+              <div class="input-group">
+                <input type="email" placeholder="Email" id="email" autocomplete="email" required />
+                <span class="input-icon">
+                  <img src="assets/img/icon/mail.png" />
+                </span>
+              </div>
+              <div class="input-group">
+                <input type="password" placeholder="Password" id="password" autocomplete="current-password" required />
+                <span class="input-icon">
+                  <img src="assets/img/icon/lock.png" id="password-icon" />
+                </span>
+              </div>
+            </div>
+            <div id="login-failed" class="d-none warning">
+              <span>
+                <p>Die Email oder das Password kann keinem Konto zugeordnet werden.</p>
+                <p>Versuche es nochmal oder erstelle ein JOIN Konto</p>
+              </span>
+            </div>
+            <div class="login-buttons">
+              <button class="login-btn">Log in</button>
+              <button class="guest-btn" type="button" onclick="logginAsGuest()">Guest Log in</button>
+            </div>
+          </form>
+        </div>
+        <div class="Signup-responsive">
+          <p>Not a Join user?</p>
+          <a href="./assets/html/register.html"><button>Sign up</button></a>
+        </div>
+        <div class="login-footer">
+          <!--Angepasst-->
+          <a href="assets/html/privacy-policy_external.html" onclick="//privacyPolicyMPA()">Prvacy Police</a>
+          <a href="assets/html/legal-notice_external.html" onclick="//legalNoticeMPA()">Legal Notice</a>
+        </div>
+      </div>
+    </main>
+
+    <script src="assets/script/login.js"></script>
+    <!--<script src="/assets/script/main.js"></script>-->
+  </body>
+</html>
+<script>
+  function init() {
+    // Initialize any necessary components or variables
+    console.log('Login page initialized');
+  }
+
+  function logginAsGuest() {
+    // Function to handle guest login
+    localStorage.setItem('announcedUser', JSON.stringify('Guest Guest'));
+    localStorage.setItem('showGreeting', 'true');
+    window.location.href = 'assets/html/summery.html';
+  }

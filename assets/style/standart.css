@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter';
+    scroll-behavior: smooth;
+    line-height: 120%;
+}
+
+body {
+    background-color: #F6F7F8 !important;
+    text-align: center;
+}
+
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/inter-v19-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+h1 {
+    font-size: 64px;
+    font-weight: bold;
+    padding: 48px 0 16px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #BEBEBE;
+    opacity: 1;
+}
+
+a:hover {
+    color: #2AABE2;
+    font-weight: bold;
+}
+
+.d-none,
+.hidden {
+    display: none !important;
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+textarea:focus,
+input#email:focus,
+input#password-confirm:focus,
+input#password:focus,
+input#title:focus,
+input#date:focus,
+input[type="date"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2 !important
+}
+
+input#newContactName:focus,
+input#newContactMail:focus,
+input#newContactPhone:focus,
+input#editContactName:focus,
+input#editContactMail:focus,
+input#editContactPhone:focus {
+    outline: none;
+    border-color: initial;
+    border: none !important;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: url('../img/icon/checkbox.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background: url('../img/icon/checked_checkbox.png') no-repeat center center;
+    background-size: contain;
+}
+
+.contentspace-html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}

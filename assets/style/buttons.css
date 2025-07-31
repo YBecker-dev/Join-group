@@ -1,0 +1,43 @@
+.guest-btn {
+    background-color: white;
+    color: rgb(41, 54, 71);
+    border: 1px solid rgb(41, 54, 71);
+}
+
+button {
+    background-color: rgb(41, 54, 71);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    height: 48px;
+}
+
+button:hover {
+    background-color: #2AABE2;
+}
+
+.date-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.create-button:hover,
+.ok-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    background-color: #2AABE2;
+    transform: translateY(1px);
+}
+
+.clear-button:hover {
+    border: solid 1px #29abe2;
+    background-color: white;
+    color: #29abe2;
+    transform: translateY(1px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}

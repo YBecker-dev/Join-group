@@ -1,0 +1,159 @@
+.content-position{
+    position: absolute;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sticky-wrapper{
+    width: 100%;
+    padding-top: 169px;
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-bottom: 50px;
+}
+h1{
+    padding: 0;
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+.What-is-Join>h3{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+}
+.header{
+    /*top: 200px;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 73px;
+    width: 1014px;
+    margin-bottom: 20px;
+    
+}
+.welcome-content{
+    text-align: start;
+}
+.headline{
+    flex-grow: 1;
+    text-align: start;
+
+}
+.backward{
+    position: fixed;
+    height: 37px;
+    width: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.backward:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgb(222, 237, 241);
+}
+.help-content{
+    height: 1024px;
+    width: 1014px;
+    
+}
+.What-is-Join{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: start;
+    padding-top: 16px;
+}
+.div1{
+    /*height: 61px;*/
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    text-align: start;
+}
+.div1>h2{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+.counter>h3{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+a,.join-color{
+    color: #29abe2;
+    text-decoration: none;
+}
+.space{
+    height: 50px;
+    width: 100%;
+    
+}
+@media(max-width: 1439px){
+    .main-content{
+        padding: 0 !important;
+    }
+    .backward{
+        position: static;
+    }
+}
+@media(max-width: 1160px){
+
+    .main-content{
+        padding: 0 !important;
+    }
+    .sticky-wrapper{
+        padding-left: 12px;
+        padding-right: 12px;
+       
+        
+    }
+    .header{
+        width: 100%;
+    }
+    .help-content{
+        width: 100%;
+    }
+    .space{
+        height: 100px;
+    }
+}
+@media(max-width: 1008px){
+    .content-position{
+        position: static;
+    }
+   
+    .sticky-wrapper{
+        padding-top: 80px;
+    }
+   
+    .help-content{
+        width: 95%;
+        text-align: start;
+    }
+    .space{
+        height: 100px;
+    }
+    .backward{
+        position: static;
+        z-index: 0;
+        img{
+            height: 32px;
+            width: 32px;
+        }
+    }
+}
