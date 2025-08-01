@@ -18,6 +18,12 @@ function getNoteTemplateContactDetails(indexDetails) {
   let user = contacts[indexDetails];
 
   return `  <div class="namesDetails">
+              <div class="contactHeadlineMobile">
+                <h2>Contacts</h2>
+                <span class="team">Better with a team</span>
+                <img class="showArrowMobile" src="../img/icon/arrow-left.png" alt="Arrow - back to Contact List">
+                <div class="separatingLineMobile"></div>
+              </div>
               <div class="contactInformations">
                 <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
                 <div class="contactDetails">
@@ -54,7 +60,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 }
 
 function editDeleteOverlay() {
-  
+
 }
 
 // add new Contact
