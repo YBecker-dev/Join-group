@@ -1,0 +1,7 @@
+.sidebar-links-section{
+    height: 100%;
+}
+.sidebar-links-container{
+    height: 100%;
+    justify-content: space-between;
+}
