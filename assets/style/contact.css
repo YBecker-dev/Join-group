@@ -562,7 +562,7 @@ h4 {
         height: 100%;
     }
 
-    .addContactBtn-mobile,
+    .addNewContactButtonMobile,
     .editContactBtn-mobile {
         display: block;
         background-color: #293647;
@@ -571,7 +571,7 @@ h4 {
         width: 60px;
         border-radius: 10rem;
         bottom: 120px;
-        right: 12px;
+        right: 20px;
     }
 
     .contact-headline-mobile {

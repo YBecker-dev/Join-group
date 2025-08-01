@@ -135,7 +135,7 @@ function getNoteTemplateEditContact(index) {
                   <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
                   <button onclick="updateContact(${index})" class="create-button">Save<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
                 </div>
-              </div> 
+              </div>
             </div>`;
 }
 
