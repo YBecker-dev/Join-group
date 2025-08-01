@@ -92,66 +92,68 @@
           <p>Key Metrics at a Glance</p>
           <div class="vector5-mobil"></div>
         </div>
+        
 
-        <div class="task-monitor">
-          <div class="section-one">
-            <div class="content-one hover-one transform-left" onclick="loadBoard()">
-              <div class="content-one-icon">
-                <div class="pen-icon"></div>
+          <div class="task-monitor">
+            <div class="section-one">
+              <div class="content-one hover-one transform-left" onclick="loadBoard()">
+                <div class="content-one-icon">
+                  <div class="pen-icon"></div>
+                </div>
+                <div class="content-info">
+                  <h1 id="task_to_do"></h1>
+                  <p>To-do</p>
+                </div>
               </div>
-              <div class="content-info">
-                <h1 id="task_to_do"></h1>
-                <p>To-do</p>
+              <div class="content-one hover-one transform-right" onclick="loadBoard()">
+                <div class="content-one-icon">
+                  <div class="check-icon"></div>
+                </div>
+                <div class="content-info">
+                  <h1 id="task_done"></h1>
+                  <p>Done</p>
+                </div>
               </div>
             </div>
-            <div class="content-one hover-one transform-right" onclick="loadBoard()">
-              <div class="content-one-icon">
-                <div class="check-icon"></div>
-              </div>
-              <div class="content-info">
-                <h1 id="task_done"></h1>
-                <p>Done</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="section-two hover-two transform-left" onclick="loadBoard()">
-            <div class="content-two-left">
-              <div>
-                <img src="/assets/img/icon/urgent.png" />
+            <div class="section-two hover-two transform-left" onclick="loadBoard()">
+              <div class="content-two-left">
+                <div>
+                  <img src="/assets/img/icon/urgent.png" />
+                </div>
+                <div class="content-info-two">
+                  <h1 id="task_urgent"></h1>
+                  <p>Urgent</p>
+                </div>
               </div>
-              <div class="content-info-two">
-                <h1 id="task_urgent"></h1>
-                <p>Urgent</p>
+              <div class="seperator-two"></div>
+              <div class="content-two-right">
+                <h4 id="deadline">October 16, 2022</h4>
+                <p>Upcoming Deadline</p>
               </div>
             </div>
-            <div class="seperator-two"></div>
-            <div class="content-two-right">
-              <h4 id="deadline">October 16, 2022</h4>
-              <p>Upcoming Deadline</p>
+            <div class="section-three">
+              <div class="content-three hover-three transform-left-center" onclick="loadBoard()">
+                <div class="content-three-info">
+                  <h1 id="task_in_board"></h1>
+                  <p>Tasks in Board</p>
+                </div>
+              </div>
+              <div class="content-three hover-three" onclick="loadBoard()">
+                <div class="content-three-info">
+                  <h1 id="task_in_progress"></h1>
+                  <p>Tasks In Progress</p>
+                </div>
+              </div>
+              <div class="content-three hover-three transform-right-center" onclick="loadBoard()">
+                <div class="content-three-info">
+                  <h1 id="task_awaiting_feedback"></h1>
+                  <p>Awaiting Feedback</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="section-three">
-            <div class="content-three hover-three transform-left-center" onclick="loadBoard()">
-              <div class="content-three-info">
-                <h1 id="task_in_board"></h1>
-                <p>Tasks in Board</p>
-              </div>
-            </div>
-            <div class="content-three hover-three" onclick="loadBoard()">
-              <div class="content-three-info">
-                <h1 id="task_in_progress"></h1>
-                <p>Tasks In Progress</p>
-              </div>
-            </div>
-            <div class="content-three hover-three transform-right-center" onclick="loadBoard()">
-              <div class="content-three-info">
-                <h1 id="task_awaiting_feedback"></h1>
-                <p>Awaiting Feedback</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       <div class="greeting">
