@@ -616,19 +616,55 @@ function showSearchResult() {
   }
   const inputValue = inputRef.value;
   const searchResult = processTaskSearch(taskCollection, inputValue);
-  //console.log(taskCollection);
   console.log('Suchbegriff', inputValue);
   console.log('Gefundene Tasks', searchResult);
   if (searchResult.length === 0) {
-    // Looks like it works :-)
     console.log('Keine Ergebnisse gefunden');
-    alert('kein Ergebnis gefunden'); // overlay muss implementiert werden
-    //let board= document.querySelector('board');
-    //board.innerHTML += noteNoTaskFounded();
+    toggleNoResultOverlay();
+    
   }
   taskVisibilty(searchResult);
+  //showNoTaskContent();
+  
 }
 
+function toggleNoResultOverlay(){
+  let overlay = document.getElementById('overlay-no-result');
+  let content = document.getElementById('no-result-content');
+  overlay.classList.remove('d-none');
+  content.innerHTML = noteNoTaskFounded();
+  
+}
+
+function showNoTaskContent(){
+  let noTaskText;
+  let doneArea = document.getElementById('done');
+  let awaitFeedbackArea = document.getElementById('awaitFeedback');
+  let inProgressArea = document.getElementById('inProgress');
+  let todoArea = document.getElementById('todo')
+  if(doneArea.querySelector('.d-none')){
+    noTaskText = 'Done';
+    doneArea.innerHTML = getEmptyDragArea(noTaskText)
+  }
+  if(awaitFeedbackArea.querySelector('.d-none')){
+    noTaskText = 'Await feedback';
+    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText)
+  }
+  if (inProgressArea.querySelector('.d-none')) {
+    noTaskText = 'In progress';
+    inProgressArea.innerHTML = getEmptyDragArea(noTaskText);
+  }
+  if (todoArea.querySelector('.d-none')) {
+    noTaskText = 'To do';
+    todoArea.innerHTML = getEmptyDragArea(noTaskText);
+  }
+}
+
+let closeOverlay = () =>{
+  let overlay = document.getElementById('overlay-no-result');
+  overlay.classList.add('d-none');
+  window.location.reload();
+}
 /**
  * take the inputValue and filter the TaskCollection array by Object -title and description.
  * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
@@ -675,4 +711,5 @@ function taskVisibilty(filterTask) {
       taskObject.element.classList.add('d-none');
     }
   });
+  showNoTaskContent();
 }

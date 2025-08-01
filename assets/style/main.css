@@ -206,10 +206,6 @@ header {
     color: #fff;
 }
 
-.sidebar-legal-stuff-links {
-    /*padding-left: 56px;*/
-}
-
 .sidebar-links.active img {
     filter: brightness(0) invert(1);
 }

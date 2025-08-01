@@ -249,8 +249,9 @@ function getEmptyDragArea(noTaskText) {
 
 function noteNoTaskFounded() {
   return `
-    <div class="no-result">
-        <h3>Keine Ergebnisse gefunden</h3>
+    <div class="no-result-position">
+        <h4>Kein Ergebnis gefunden.</h4>
+        <button class="guest-btn" onclick="closeOverlay()">Ok</button>
     </div>
   `;
 }
