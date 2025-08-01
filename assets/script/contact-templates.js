@@ -45,7 +45,16 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
+              <button class="editContactBtnMobile" onclick="openMobileEditOverlay()">
+                <div class="dotted"></div>
+                <div class="dotted"></div>
+                <div class="dotted"></div>
+              </button>
             </div>`;
+}
+
+function editDeleteOverlay() {
+  
 }
 
 // add new Contact
@@ -104,9 +113,7 @@ function getNoteTemplateEditContact(index) {
             </div>
             <div class="editDiv">
               <div class="profile-img profileInitials">
-                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${
-    user.initials
-  }</p>
+                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
               </div>        
               <div class="profilDiv">
               <div class="closeDiv">
