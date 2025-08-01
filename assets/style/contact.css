@@ -21,7 +21,7 @@
     position: relative;
 }
 
-.add-new-contact-button {
+.addNewContactButton {
     height: 52px;
     max-width: 352px;
     width: 100%;
@@ -206,6 +206,10 @@ h2 {
     flex-direction: column;
     gap: 8px;
     overflow: hidden;
+}
+
+.editContactBtnMobile {
+    display: none;
 }
 
 #contactContent {
@@ -563,8 +567,9 @@ h4 {
     }
 
     .addNewContactButtonMobile,
-    .editContactBtn-mobile {
+    .editContactBtnMobile {
         display: block;
+        position: absolute;
         background-color: #293647;
         position: fixed;
         height: 60px;
@@ -574,7 +579,7 @@ h4 {
         right: 20px;
     }
 
-    .contact-headline-mobile {
+    .contactHeadlineMobile {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -583,6 +588,7 @@ h4 {
         margin-left: 20px;
     }
 
+    .addNewContactButton,
     .contact-headline {
         display: none;
     }
