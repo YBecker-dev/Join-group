@@ -33,6 +33,10 @@
     transform: translateY(-1px);
 }
 
+.addNewContactButtonMobile {
+    display: none;
+}
+
 .btn {
     display: flex;
     justify-content: center;
@@ -589,7 +593,16 @@ h4 {
         width: 60px;
         border-radius: 10rem;
         bottom: 120px;
-        right: 20px;
+        
+    }
+
+    .addNewContactButtonMobile {
+        left: 350px;
+    }
+
+    .editContactBtnMobile {
+        right: 12px;
+        bottom: 120px;
     }
 
     .addNewContactButton,
@@ -633,7 +646,7 @@ h4 {
         margin-left: auto;
     }
 
-    .editMobile {
+    .editDeleteOverlayMobile {
         position: fixed;
         display: block;
         width: 120px;
