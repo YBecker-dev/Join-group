@@ -579,15 +579,14 @@ h4 {
 
     .addNewContactButtonMobile,
     .editContactBtnMobile {
+        position: fixed;
         display: block;
-        position: absolute;
         background-color: #293647;
         position: fixed;
         height: 60px;
         width: 60px;
         border-radius: 10rem;
-        bottom: 120px;
-        
+        bottom: 120px;  
     }
 
     .addNewContactButtonMobile {
@@ -598,6 +597,13 @@ h4 {
         right: 12px;
     }
 
+    .editOverlayMobile {
+        width: 100px;
+        height: 200px;
+        background-color: #404447;
+    }
+
+    .contactIcons,
     .cancel-button,
     .close,
     .contactLogo,
@@ -647,14 +653,16 @@ h4 {
         display: block;
         width: 120px;
         height: 110px;
-        box-shadow: 1px 1px 2px -6px rgba(0, 0, 0, 0.51);
-        -webkit-box-shadow: 1px 1px 26px -6px rgba(0, 0, 0, 0.51);
-        -moz-box-shadow: 2px 29px 26px -6px rgba(192, 133, 133, 0.51);
+        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
         bottom: 120px;
         right: 120px;
         border-top-left-radius: 1.2rem;
         border-top-right-radius: 1.2rem;
         border-bottom-left-radius: 1.2rem;
+    }
+
+    .mobile {
+        margin: 20px;
     }
 
     .editDivMobile {

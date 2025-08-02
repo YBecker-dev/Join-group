@@ -61,16 +61,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 
 function editDeleteOverlay() {
 
-    return `  <div class="editDeleteOverlayMobile"> 
-                <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
-                  <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                  <span class="editText">Edit</span>
-                </div>
-                <div id="deleteOverlay" onclick="deleteContact(${indexDetails})">
-                  <img class="editIcon" src="../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                  <span class="editText">Delete</span>
-                </div>
-              </div>`
+    return ` `
 }
 
 // add new Contact

@@ -79,6 +79,10 @@ function openDetails(index) {
   setanimation(details, index);
 }
 
+function openMobileEditOverlay() {
+
+}
+
 function closeContactDetails(allContacts, details) {
   allContacts.forEach((contact) => contact.classList.remove('active'));
   details.classList.remove('show');
