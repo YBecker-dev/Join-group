@@ -158,6 +158,14 @@ function closeOverlay() {
   }
 }
 
+function closeDetails() {
+  let contentCloseDetails = document.getElementById('namesDetails');
+  if (contentCloseDetails) {
+    contentCloseDetails.classList.add('d-none');
+    contentCloseDetails.innerHTML = '';
+  }
+}
+
 async function deleteContact(index) {
   let firebaseId = contacts[index].id;
   if (!firebaseId) {
