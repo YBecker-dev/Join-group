@@ -448,16 +448,6 @@ async function saveEditedTask(event, taskId) {
     assignedTo.push(contacts[selectedContacts[i]].id);
   }
 
-  let subtasks = [];
-  document.querySelectorAll('#subtasks-container .subtask-item').forEach((item) => {
-    const text = item.querySelector('li').textContent.trim();
-    const checkbox = item.querySelector('input[type="checkbox"]');
-    subtasks.push({
-      text: text,
-      status: checkbox && checkbox.checked ? 'checked' : 'unchecked',
-    });
-  });
-
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let oldTask = await response.json();
   let status = oldTask.status || 'todo';
@@ -621,11 +611,8 @@ function showSearchResult() {
   if (searchResult.length === 0) {
     console.log('Keine Ergebnisse gefunden');
     toggleNoResultOverlay();
-    
   }
   taskVisibilty(searchResult);
-  //showNoTaskContent();
-  
 }
 
 function toggleNoResultOverlay(){
