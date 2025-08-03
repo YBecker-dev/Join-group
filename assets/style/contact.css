@@ -168,7 +168,8 @@ h2 {
     margin-left: 60px;
     display: flex;
     flex-direction: column;
-    gap: 21px;
+    height: 100vh;
+    /* gap: 21px; */
 }
 
 .contactInformations {
@@ -564,8 +565,12 @@ h4 {
 
 @media (max-width: 1440px) {
     .contactList {
-        width: 60%;
+        width: 100vw;
         height: 100%;
+    }
+
+     .contactDetails {
+        width: 100vw;
     }
 
     .contactHeadlineMobile {
@@ -577,25 +582,27 @@ h4 {
         margin-left: 20px;
     }
 
+   
+
     .addNewContactButtonMobile,
     .editContactBtnMobile {
-        position: fixed;
+        position: sticky;
         display: block;
         background-color: #293647;
-        position: fixed;
         height: 60px;
         width: 60px;
         border-radius: 10rem;
-        bottom: 120px;  
+        /* bottom: 20px;   */
     }
 
     .addNewContactButtonMobile {
-        left: 350px;
+        left: 400px;
+        bottom: 120px;
     }
 
-    .editContactBtnMobile {
+    /* .editContactBtnMobile {
         right: 12px;
-    }
+    } */
 
     .editOverlayMobile {
         width: 100px;
@@ -625,8 +632,8 @@ h4 {
     }
 
     .showArrowMobile {
-        display: block;
-        position: fixed;
+        /* display: block;
+        position: fixed; */
         width: 24px;
         height: auto;
         top: 120px;
@@ -698,8 +705,6 @@ h4 {
 
     .editDiv {
         width: 29rem;
-        /* margin-left: auto;
-        margin-right: auto; */
         border-top-right-radius: 0;
         border-bottom-right-radius: 1.2rem;
         border-bottom-left-radius: 1.2rem;
@@ -727,9 +732,12 @@ h4 {
         margin-bottom: 8px;
     }
 }
-
 @media (max-width: 1008px) {
     .main-content {
         display: flex !important;
+    }
+
+    .addNewContactButtonMobile {
+        display: block !important;
     }
 }
