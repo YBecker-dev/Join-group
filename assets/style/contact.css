@@ -654,8 +654,8 @@ h4 {
         width: 120px;
         height: 110px;
         box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
-        bottom: 120px;
-        right: 120px;
+        bottom: 100px;
+        right: 20px;
         border-top-left-radius: 1.2rem;
         border-top-right-radius: 1.2rem;
         border-bottom-left-radius: 1.2rem;
