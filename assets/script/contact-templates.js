@@ -42,13 +42,13 @@ function getNoteTemplateContactDetails(indexDetails) {
               </div>
               <p class="contact-Information">Contact Information</p>
               <div class="infoBlock">
-               <div class="infoBlock-details">
-                <h4>Email</h4>
-                <a class="mail" href="mailto:${user.email}">${user.email}</a>
+                <div class="infoBlock-details">
+                  <h4>Email</h4>
+                  <a class="mail" href="mailto:${user.email}">${user.email}</a>
                 </div>
-               <div class="infoBlock-details">
-                <h4>Phone</h4>
-                <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
+                <div class="infoBlock-details">
+                  <h4>Phone</h4>
+                  <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
               <button class="editContactBtnMobile" onclick="showMobileEditOverlay()">
