@@ -19,17 +19,20 @@ function getNoteTemplateContactDetails(indexDetails) {
 
   return `  <div class="namesDetails" id="namesDetails">
               <div class="contactHeadlineMobile">
-                <h2>Contacts</h2>
-                <span class="team">Better with a team</span>
+                <div class="headlineMobile">
+                  <h2>Contacts</h2>
+                  <span class="team">Better with a team</span>
+                  <div class="separatingLineMobile"></div>
+                </div>
                 <img class="showArrowMobile" onclick="closeDetails()" src="../img/icon/arrow-left.png" alt="Arrow - back to Contact List">
-                <div class="separatingLineMobile"></div>
               </div>
               <div class="contactInformations">
                 <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
+                
                 <div class="contactDetails">
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
-                          <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
+                    <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
                       <span class="editText">Edit</span>
                     </div>
