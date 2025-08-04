@@ -292,6 +292,12 @@
     gap: 32px;
 }
 
+.search-form-board{
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
+    z-index: 100;
+}
+
 .addTaskBtn {
     margin: 0;
     display: flex;
@@ -333,14 +339,24 @@
     align-items: center;
     border: 1px solid #D1D1D1;
     position: relative;
+   
+    
 }
 
+.no-padding-input{
+    padding-right: 0 !important;
+    padding-left: 16px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 .input-find-Task>input {
     font-size: 20px;
     border: #FFFFFF;
     height: 48px;
     width: 366px;
     border-radius: 10px;
+    padding-left: 16px ;
+    
 }
 
 .search-icon {

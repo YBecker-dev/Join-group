@@ -79,8 +79,10 @@ function openDetails(index) {
   setanimation(details, index);
 }
 
-function openMobileEditOverlay() {
-
+function showMobileEditOverlay() {
+  let mobileButton = document.getElementById('editDeleteOverlayMobile');
+  
+  mobileButton += innerHTML.getNoteTemplateMobileEditOverlay();
 }
 
 function closeContactDetails(allContacts, details) {

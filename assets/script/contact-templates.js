@@ -19,17 +19,20 @@ function getNoteTemplateContactDetails(indexDetails) {
 
   return `  <div class="namesDetails" id="namesDetails">
               <div class="contactHeadlineMobile">
-                <h2>Contacts</h2>
-                <span class="team">Better with a team</span>
+                <div class="headlineMobile">
+                  <h2>Contacts</h2>
+                  <span class="team">Better with a team</span>
+                  <div class="separatingLineMobile"></div>
+                </div>
                 <img class="showArrowMobile" onclick="closeDetails()" src="../img/icon/arrow-left.png" alt="Arrow - back to Contact List">
-                <div class="separatingLineMobile"></div>
               </div>
               <div class="contactInformations">
                 <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
+                
                 <div class="contactDetails">
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
-                          <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
+                    <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
                       <span class="editText">Edit</span>
                     </div>
@@ -42,26 +45,21 @@ function getNoteTemplateContactDetails(indexDetails) {
               </div>
               <p class="contact-Information">Contact Information</p>
               <div class="infoBlock">
-               <div class="infoBlock-details">
-                <h4>Email</h4>
-                <a class="mail" href="mailto:${user.email}">${user.email}</a>
+                <div class="infoBlock-details">
+                  <h4>Email</h4>
+                  <a class="mail" href="mailto:${user.email}">${user.email}</a>
                 </div>
-               <div class="infoBlock-details">
-                <h4>Phone</h4>
-                <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
+                <div class="infoBlock-details">
+                  <h4>Phone</h4>
+                  <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
-              <button class="editContactBtnMobile" onclick="openMobileEditOverlay()">
+              <button class="editContactBtnMobile" onclick="showMobileEditOverlay()">
                 <div class="dotted"></div>
                 <div class="dotted"></div>
                 <div class="dotted"></div>
               </button>
             </div>`;
-}
-
-function editDeleteOverlay() {
-
-    return ` `
 }
 
 // add new Contact
@@ -128,21 +126,15 @@ function getNoteTemplateEditContact(index) {
               </div>
                 <div class="add-new-contact-inputs">
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="addNewContactInput">
-                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${
-                      user.name || ''
-                    }" oninput="validateNameInput(this)">
+                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${user.name || ''}" oninput="validateNameInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactEmailDiv">
-                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="eventBubbling(event)" value="${
-                      user.email || ''
-                    }" oninput="validateEmailInput(this)">
+                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="eventBubbling(event)" value="${user.email || ''}" oninput="validateEmailInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactPhoneDiv">
-                    <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${
-                      user.phone || ''
-                    }" oninput="validatePhoneInput(this)">
+                    <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${user.phone || ''}" oninput="validatePhoneInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
                 <div class="accept">
@@ -153,4 +145,16 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
+function getNoteTemplateMobileEditOverlay() {
 
+  return` <div class="editDeleteOverlayMobile"> 
+            <div id="editOverlayMobile" class="mobile" onclick="openEditOverlay(${indexDetails})">
+              <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+              <span class="editText">Edit</span>
+            </div>
+            <div id="deleteOverlayMobile" onclick="deleteContact(${indexDetails})">
+              <img class="editIcon" src="../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+              <span class="editText">Delete</span>
+            </div>
+          </div>`;
+}
