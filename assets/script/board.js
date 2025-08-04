@@ -568,9 +568,7 @@ function processTasksInformation() {
   for (let dragArea of dragAreas) {
     let taskContainers = dragArea.querySelectorAll('.board-task-container');
     for (let taskContainer of taskContainers) {
-      //console.log(taskContainer);
       let taskId = taskContainer.id;
-      //console.log(taskId);
       let currentTaskTitle = '';
       let currentTaskDescription = '';
       let titleElement = taskContainer.querySelector('.board-task-title');
@@ -585,11 +583,10 @@ function processTasksInformation() {
         id: taskId,
         title: currentTaskTitle,
         description: currentTaskDescription,
-        element: taskContainer, // Die Referenz zum HTML-Element
+        element: taskContainer,
       });
     }
   }
-  //console.table(taskCollection);
   showSearchResult();
 }
 
@@ -601,15 +598,11 @@ function processTasksInformation() {
 function showSearchResult() {
   let inputRef = document.getElementById('find-Task');
   if (!inputRef) {
-    console.log('Kein Treffer');
     return;
   }
   const inputValue = inputRef.value;
   const searchResult = processTaskSearch(taskCollection, inputValue);
-  console.log('Suchbegriff', inputValue);
-  console.log('Gefundene Tasks', searchResult);
   if (searchResult.length === 0) {
-    console.log('Keine Ergebnisse gefunden');
     toggleNoResultOverlay();
   }
   taskVisibilty(searchResult);
@@ -689,7 +682,6 @@ function processTaskSearch(filterTask, searchString) {
  */
 function taskVisibilty(filterTask) {
   const matchedTaskIds = new Set(filterTask.map((task) => task.id));
-  //console.log(matchedTaskIds);
   taskCollection.forEach((taskObject) => {
     const isMatched = matchedTaskIds.has(taskObject.id);
     if (isMatched) {

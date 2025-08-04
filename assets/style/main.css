@@ -307,6 +307,7 @@ input#add-task-input3:focus {
     right: 0;
     bottom: 0;
     overflow: auto;
+    max-width: 1920px;
 }
 
 @media (max-width: 1439px) {

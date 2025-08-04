@@ -140,6 +140,9 @@ a,.join-color{
     .sticky-wrapper{
         padding-top: 80px;
     }
+    .headline>h1{
+        font-size: 47px;
+    }
    
     .help-content{
         width: 95%;
