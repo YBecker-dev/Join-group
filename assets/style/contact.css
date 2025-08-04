@@ -375,7 +375,7 @@ h4 {
     padding: 0px 21px;
     border: solid;
     border-width: 0.06rem;
-    border-color: #a6adb3;
+    border-color: #d1d1d1;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
@@ -518,6 +518,10 @@ h4 {
 #editOverlay:hover .editIcon,
 #deleteOverlay:hover .editIcon {
     filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+}
+
+.addNewContactDiv:hover {
+    border: 1px solid #a89a9a;
 }
 
 @keyframes slideInFromRight {

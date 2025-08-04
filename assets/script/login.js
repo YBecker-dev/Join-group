@@ -62,6 +62,18 @@ async function checkUser(event) {
   event.preventDefault();
   let mail = document.getElementById('email');
   let password = document.getElementById('password');
+  let valid = true;
+  if (!mail.value || mail.value.trim() === '') {
+    shakeInput(mail, 'Bitte eine E-Mail eingeben!');
+    valid = false;
+  }
+  if (!password.value || password.value.trim() === '') {
+    shakeInput(password, 'Bitte ein Passwort eingeben!');
+    valid = false;
+  }
+  if (!valid) {
+    return;
+  }
   let findUser = false;
   try {
     let response = await fetch(BASE_URL + '/login' + '.json');
@@ -98,6 +110,17 @@ async function checkUser(event) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function shakeInput(input, message) {
+  input.classList.add('shake');
+  input.setCustomValidity(message);
+  input.reportValidity();
+  let parentDiv = input.closest('.input-group');
+  if (parentDiv) parentDiv.classList.add('input-error');
+  setTimeout(() => {
+    input.classList.remove('shake');
+  }, 300);
 }
 
 let resetForm = () => document.getElementById('login-form').reset();

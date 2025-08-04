@@ -231,6 +231,13 @@ textarea::placeholder {
 
 }
 
+input#email:hover,
+input#password:hover,
+input#name:hover,
+input#password-confirm:hover {
+    border: 1px solid #a89a9a;
+}
+
 
 @media (max-width: 1180px) {
     .main-header-logo {

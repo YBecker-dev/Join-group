@@ -320,10 +320,12 @@ function shakeInput(input, message) {
   input.classList.add('shake');
   input.setCustomValidity(message);
   input.reportValidity();
-  let parentDiv = input.closest('.addNewContactDiv');
+  let parentDiv = input.closest('.input-group');
   if (parentDiv) parentDiv.classList.add('input-error');
   setTimeout(() => {
     input.classList.remove('shake');
+    input.setCustomValidity(''); // Fehlermeldung zurücksetzen
+    if (parentDiv) parentDiv.classList.remove('input-error');
   }, 300);
 }
 
