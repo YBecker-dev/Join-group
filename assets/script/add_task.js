@@ -107,7 +107,6 @@ function selectCustomOption(element) {
   handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
 }
 
-// send formular data to Firebase when all checks are passed
 function addFormValidation(formId) {
   let form = document.getElementById(formId);
   if (!form) return;
@@ -169,7 +168,6 @@ function checkDate() {
     return false;
   }
 
-  // Prüfe Format DD/MM/YYYY
   const value = input2.value.trim();
   if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
     input2.classList.add('input-error');
@@ -177,7 +175,6 @@ function checkDate() {
     return false;
   }
 
-  // Prüfe, ob es ein echtes Datum ist
   const [day, month, year] = value.split('/').map(Number);
   const dateObj = new Date(year, month - 1, day);
   if (dateObj.getFullYear() !== year || dateObj.getMonth() + 1 !== month || dateObj.getDate() !== day) {
@@ -346,7 +343,7 @@ function onSubtaskInputKeydown(event) {
 
 function enableCreateTaskButton(dateInput) {
   let title = document.getElementById('title');
-  let date = dateInput || document.getElementById('date') 
+  let date = dateInput || document.getElementById('date');
   let categorySelected = document.getElementById('category-dropdown-selected');
   let button = document.getElementById('create-task-button');
   if (!title || !date || !categorySelected || !button) return;

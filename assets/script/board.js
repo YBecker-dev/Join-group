@@ -448,6 +448,17 @@ async function saveEditedTask(event, taskId) {
     assignedTo.push(contacts[selectedContacts[i]].id);
   }
 
+  let subtasks = [];
+  let subtaskItemRefs = document.querySelectorAll('#subtasks-container .subtask-item');
+  subtaskItemRefs.forEach((subtaskItemRef) => {
+    let subtaskLiRef = subtaskItemRef.querySelector('li');
+    let checkbox = subtaskItemRef.querySelector('input[type="checkbox"]');
+    subtasks.push({
+      text: subtaskLiRef ? subtaskLiRef.textContent.trim() : '',
+      status: checkbox && checkbox.checked ? 'checked' : 'unchecked',
+    });
+  });
+
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let oldTask = await response.json();
   let status = oldTask.status || 'todo';
@@ -463,7 +474,7 @@ async function saveEditedTask(event, taskId) {
     status,
     category,
     addTaskId: oldTask.addTaskId,
-    sequence: oldTask.sequence
+    sequence: oldTask.sequence,
   };
 
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
@@ -608,27 +619,26 @@ function showSearchResult() {
   taskVisibilty(searchResult);
 }
 
-function toggleNoResultOverlay(){
+function toggleNoResultOverlay() {
   let overlay = document.getElementById('overlay-no-result');
   let content = document.getElementById('no-result-content');
   overlay.classList.remove('d-none');
   content.innerHTML = noteNoTaskFounded();
-  
 }
 
-function showNoTaskContent(){
+function showNoTaskContent() {
   let noTaskText;
   let doneArea = document.getElementById('done');
   let awaitFeedbackArea = document.getElementById('awaitFeedback');
   let inProgressArea = document.getElementById('inProgress');
-  let todoArea = document.getElementById('todo')
-  if(doneArea.querySelector('.d-none')){
+  let todoArea = document.getElementById('todo');
+  if (doneArea.querySelector('.d-none')) {
     noTaskText = 'Done';
-    doneArea.innerHTML = getEmptyDragArea(noTaskText)
+    doneArea.innerHTML = getEmptyDragArea(noTaskText);
   }
-  if(awaitFeedbackArea.querySelector('.d-none')){
+  if (awaitFeedbackArea.querySelector('.d-none')) {
     noTaskText = 'Await feedback';
-    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText)
+    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText);
   }
   if (inProgressArea.querySelector('.d-none')) {
     noTaskText = 'In progress';
@@ -640,11 +650,11 @@ function showNoTaskContent(){
   }
 }
 
-let closeOverlay = () =>{
+let closeOverlay = () => {
   let overlay = document.getElementById('overlay-no-result');
   overlay.classList.add('d-none');
   window.location.reload();
-}
+};
 /**
  * take the inputValue and filter the TaskCollection array by Object -title and description.
  * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects

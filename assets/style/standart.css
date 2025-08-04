@@ -78,10 +78,17 @@ input#newContactMail:focus,
 input#newContactPhone:focus,
 input#editContactName:focus,
 input#editContactMail:focus,
-input#editContactPhone:focus {
+input#editContactPhone:focus,
+.subtask-item-edit:focus-within  {
     outline: none;
     border-color: initial;
     border: none !important;
+
+}
+
+#subtask-edit-input:focus {
+    border: 1px solid #2AABE2 !important;
+    border-radius: 5px;
 }
 
 .checkbox {
