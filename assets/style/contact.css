@@ -574,40 +574,68 @@ h4 {
 
     .contactList {
         width: 100vw;
-        height: 100vh;
+        height: 90vh;
+        padding: 0;
+        display: flex;
+        justify-content: center;
     }
 
      .namesDetails {
-        margin-left: 60px;
+        /* margin-left: auto;
+        margin-right: auto; */
         width: 100vw;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     .contactHeadlineMobile {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
+        display: block;
         margin-top: 120px;
     }
 
-    .addNewContactButtonMobile,
-    .editContactBtnMobile {
+    .headlineMobile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .separatingLineMobile {
+        width: 7rem;
+        height: 3px;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+        background-color: #29abe2;
+    }
+
+    .showArrowMobile {
+        display: block;
+        position: fixed;
+        width: 24px;
+        height: auto;
+        top: 120px;
+        left: 80%;
+    }
+
+    .editContactBtnMobile,
+    .addNewContactButtonMobile {
+        margin-right: 16px;
         display: block;
         position: sticky;
         background-color: #293647;
         height: 60px;
         width: 60px;
         border-radius: 10rem;
-        bottom: 120px;
+       
     }
 
     .addNewContactButtonMobile {
-        left: 440px;
+        top: 90%;
     }
 
     .editContactBtnMobile {
-        left: 440px;
+        bottom: 120px;
+        left: 88%;
     }
 
     .editOverlayMobile {
@@ -629,22 +657,7 @@ h4 {
         margin-bottom: 1rem;
     }
 
-    .separatingLineMobile {
-        width: 7rem;
-        height: 3px;
-        margin-top: 1rem;
-        margin-bottom: 3rem;
-        background-color: #29abe2;
-    }
-
-    .showArrowMobile {
-        display: block;
-        position: fixed;
-        width: 24px;
-        height: auto;
-        top: 120px;
-        left: 440px;
-    }
+ 
 
     .newContactMobile {
         margin: auto;
@@ -745,5 +758,32 @@ h4 {
 
     .addNewContactButtonMobile {
         display: block !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .initialOverlay {
+        margin-right: 20px;
+        width: 70px;
+        height: 70px;
+        font-size: 35px;
+    }
+
+    .infoName {
+        font-size: 1.5rem;
+    }
+
+    .showArrowMobile {
+        left: 75%;
+    }
+}
+
+@media (max-width: 630px) {
+    .details {
+        margin-left: 10px;
+    }
+
+    .infoName {
+        font-size: 1rem;
     }
 }
