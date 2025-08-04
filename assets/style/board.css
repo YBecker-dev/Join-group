@@ -14,12 +14,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    margin-left: 100px;
+    /*margin-left: 100px;*/
     min-height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #F6F7F8; /*test*/
     z-index: 1;
 }
 .no-result-position{
