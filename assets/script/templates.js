@@ -92,7 +92,7 @@ function contactsOverlayTemplate(initials, name, color) {
   return `
         <div class="peoples-info">
           <div class="initials" style="background-color: ${color};">
-            <p class="p-Tag">${initials}</p>
+            <span>${initials}</span>
           </div>
           <div class="people-name">
             <p class="p-Tag">${name}</p>

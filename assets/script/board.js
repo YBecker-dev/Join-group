@@ -429,8 +429,15 @@ async function saveEditedTask(event, taskId) {
     body: JSON.stringify(updatedTask),
   });
 
-  toggleBoardOverlay(taskId);
   await pushTasksInBoard();
+  
+  let overlay_content = document.getElementById('overlay-content-loader');
+  let response2 = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  let updatedTaskData = await response2.json();
+  if (updatedTaskData) {
+    overlay_content.innerHTML = getTaskOverlay(updatedTaskData, taskId, oldTask.addTaskId);
+  }
+  
   return false;
 }
 
