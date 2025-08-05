@@ -3,40 +3,41 @@ let currentDraggedTaskId = null;
 async function initBoard() {
   await loadContacts();
   await pushTasksInBoard();
-  document.addEventListener('dragend', removeAllHighlights);
+  dragAndDropEventListner();
+  //document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function toggleHighlight(id, add) {
-  let element = document.getElementById(id);
-  if (!element) return;
-  if (add) {
-    element.classList.add('drag-area-highlight');
-  } else {
-    element.classList.remove('drag-area-highlight');
-  }
-}
-
-function removeAllHighlights() {
-  toggleHighlight('todo', false);
-  toggleHighlight('inProgress', false);
-  toggleHighlight('awaitFeedback', false);
-  toggleHighlight('done', false);
-}
-
-function eventBubbling(event) {
-  event.stopPropagation();
-}
-
-function startDragging(taskId) {
-  currentDraggedTaskId = taskId;
-}
+//function allowDrop(ev) {
+//  ev.preventDefault();
+//}
+//
+//function toggleHighlight(id, add) {
+//  let element = document.getElementById(id);
+//  if (!element) return;
+//  if (add) {
+//    element.classList.add('drag-area-highlight');
+//  } else {
+//    element.classList.remove('drag-area-highlight');
+//  }
+//}
+//
+//function removeAllHighlights() {
+//  toggleHighlight('todo', false);
+//  toggleHighlight('inProgress', false);
+//  toggleHighlight('awaitFeedback', false);
+//  toggleHighlight('done', false);
+//}
+//
+//function eventBubbling(event) {
+//  event.stopPropagation();
+//}
+//
+//function startDragging(taskId) {
+//  currentDraggedTaskId = taskId;
+//}
 
 function emptyDragArea() {
   let noTaskText;
@@ -62,18 +63,18 @@ function emptyDragArea() {
   }
 }
 
-async function moveTo(newStatus) {
-  if (!currentDraggedTaskId) return;
-  let allTasks = await fetchAllTasks();
-  let maxSequence = getMaxSequenceForStatus(allTasks, newStatus);
-  let task = await fetchTaskById(currentDraggedTaskId);
-  if (!task) return;
-  updateTaskStatusAndSequence(task, newStatus, maxSequence);
-  await saveTask(currentDraggedTaskId, task);
-  await pushTasksInBoard();
-  emptyDragArea();
-  currentDraggedTaskId = null;
-}
+//async function moveTo(newStatus) {
+//  if (!currentDraggedTaskId) return;
+//  let allTasks = await fetchAllTasks();
+//  let maxSequence = getMaxSequenceForStatus(allTasks, newStatus);
+//  let task = await fetchTaskById(currentDraggedTaskId);
+//  if (!task) return;
+//  updateTaskStatusAndSequence(task, newStatus, maxSequence);
+//  await saveTask(currentDraggedTaskId, task);
+//  await pushTasksInBoard();
+//  emptyDragArea();
+//  currentDraggedTaskId = null;
+//}
 
 async function fetchAllTasks() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
@@ -275,17 +276,17 @@ function countDoneSubtasks(subtasks) {
   return done;
 }
 
-function enableDragAndDropBoard(task, div) {
-  if (task.status === 'todo') {
-    document.getElementById('todo').appendChild(div);
-  } else if (task.status === 'inProgress') {
-    document.getElementById('inProgress').appendChild(div);
-  } else if (task.status === 'awaitFeedback') {
-    document.getElementById('awaitFeedback').appendChild(div);
-  } else if (task.status === 'done') {
-    document.getElementById('done').appendChild(div);
-  }
-}
+//function enableDragAndDropBoard(task, div) {
+//  if (task.status === 'todo') {
+//    document.getElementById('todo').appendChild(div);
+//  } else if (task.status === 'inProgress') {
+//    document.getElementById('inProgress').appendChild(div);
+//  } else if (task.status === 'awaitFeedback') {
+//    document.getElementById('awaitFeedback').appendChild(div);
+//  } else if (task.status === 'done') {
+//    document.getElementById('done').appendChild(div);
+//  }
+//}
 
 async function deleteTaskFromFirebase(addTaskIdToDelete) {
   let tasks = await fetchAllTasksFromFirebase();
@@ -556,6 +557,7 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
     overlayContent.classList.add('show');
   }, 10);
 }
+<<<<<<< HEAD
 
 
 let initEventListnerProcessTasksInformation = () => {
@@ -710,3 +712,5 @@ function taskVisibilty(filterTask) {
     }
   }); 
 }
+=======
+>>>>>>> 89eb744 (outsource the 'Dag&Drop' and 'Search' functions to search.js and drag&drop.js. in this case reduce some functions)
