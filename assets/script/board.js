@@ -557,6 +557,7 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
   }, 10);
 }
 
+
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
   if (searchInput) {
@@ -598,6 +599,7 @@ function processTasksInformation() {
       });
     }
   }
+  console.table(taskCollection);
   showSearchResult();
 }
 
@@ -613,6 +615,8 @@ function showSearchResult() {
   }
   const inputValue = inputRef.value;
   const searchResult = processTaskSearch(taskCollection, inputValue);
+  console.log('Suchbegriff', inputValue);
+  console.log('Gefundene Tasks', searchResult);
   if (searchResult.length === 0) {
     toggleNoResultOverlay();
   }
@@ -623,6 +627,7 @@ function toggleNoResultOverlay() {
   let overlay = document.getElementById('overlay-no-result');
   let content = document.getElementById('no-result-content');
   overlay.classList.remove('d-none');
+  //showNoTaskContent();
   content.innerHTML = noteNoTaskFounded();
 }
 
@@ -631,23 +636,23 @@ function showNoTaskContent() {
   let doneArea = document.getElementById('done');
   let awaitFeedbackArea = document.getElementById('awaitFeedback');
   let inProgressArea = document.getElementById('inProgress');
-  let todoArea = document.getElementById('todo');
-  if (doneArea.querySelector('.d-none')) {
+  let todoArea = document.getElementById('todo')
+  //if(doneArea.querySelector('.d-none')){
     noTaskText = 'Done';
-    doneArea.innerHTML = getEmptyDragArea(noTaskText);
-  }
-  if (awaitFeedbackArea.querySelector('.d-none')) {
+    doneArea.innerHTML = getEmptyDragArea(noTaskText)
+  //}
+  //if(awaitFeedbackArea.querySelector('.d-none')){
     noTaskText = 'Await feedback';
-    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText);
-  }
-  if (inProgressArea.querySelector('.d-none')) {
+    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText)
+  //}
+  //if (inProgressArea.querySelector('.d-none')) {
     noTaskText = 'In progress';
     inProgressArea.innerHTML = getEmptyDragArea(noTaskText);
-  }
-  if (todoArea.querySelector('.d-none')) {
+  //}
+  //if (todoArea.querySelector('.d-none')) {
     noTaskText = 'To do';
     todoArea.innerHTML = getEmptyDragArea(noTaskText);
-  }
+  //}
 }
 
 let closeOverlay = () => {
@@ -663,8 +668,8 @@ let closeOverlay = () => {
  * @returns Array if Searchstring contains object.title or description
  */
 function processTaskSearch(filterTask, searchString) {
-  // filterTask = taskCollection
-  // serchString == inputValue
+   //filterTask = taskCollection
+   //searchString == inputValue
   const searchTerm = String(searchString).toLowerCase();
   if (searchTerm === '') {
     return filterTask;
@@ -683,6 +688,8 @@ function processTaskSearch(filterTask, searchString) {
       description = '';
     }
     const textOutput = (title + '' + description).toLowerCase();
+    //console.log(textOutput);
+    //console.log(textOutput.includes(searchTerm));
     return textOutput.includes(searchTerm);
   });
 }
@@ -692,13 +699,14 @@ function processTaskSearch(filterTask, searchString) {
  */
 function taskVisibilty(filterTask) {
   const matchedTaskIds = new Set(filterTask.map((task) => task.id));
+  //console.log(matchedTaskIds);
   taskCollection.forEach((taskObject) => {
     const isMatched = matchedTaskIds.has(taskObject.id);
+    //console.log(taskObject.title+ " mit der ID "+taskObject.id+" erfüllt die Suchkreterien "+isMatched)
     if (isMatched) {
       taskObject.element.classList.remove('d-none');
     } else {
       taskObject.element.classList.add('d-none');
     }
-  });
-  showNoTaskContent();
+  }); 
 }

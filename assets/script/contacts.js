@@ -81,8 +81,8 @@ function openDetails(index) {
 
 function showMobileEditOverlay() {
   let mobileButton = document.getElementById('editDeleteOverlayMobile');
-  
-  mobileButton += innerHTML.getNoteTemplateMobileEditOverlay();
+  mobileButton.classList.toggle('d-none');
+  innerHTML = getNoteTemplateMobileEditOverlay();
 }
 
 function closeContactDetails(allContacts, details) {

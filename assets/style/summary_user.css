@@ -356,6 +356,9 @@
 
 @media (max-width: 1440px){
 
+    body{
+        overflow: hidden;
+    }
     .d-none-for-greeting {
         display: none;
     }
@@ -375,11 +378,6 @@
         margin-bottom: 30px;
 
     }
-    /*.main-content{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }*/
     
     .headline_container{
         height: 100px;
