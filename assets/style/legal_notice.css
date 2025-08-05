@@ -19,6 +19,7 @@
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0;
+    padding-top: 0;
 }
 .content{
     display: flex;
@@ -46,6 +47,9 @@
 
 }*/
 @media (max-width: 1439px) {
+    .body-flex{
+        padding-top: 128px;
+    }
     .backward{
         
         height: 37px;
@@ -62,7 +66,7 @@
 }
 @media(max-width: 1015px){
     .body-flex{
-        padding-top: 168px;
+        padding-top: 128px;
         padding-left: 0;
         padding-right: 0;
         padding-bottom: 128px;
