@@ -4,40 +4,10 @@ async function initBoard() {
   await loadContacts();
   await pushTasksInBoard();
   dragAndDropEventListner();
-  //document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
 }
-
-//function allowDrop(ev) {
-//  ev.preventDefault();
-//}
-//
-//function toggleHighlight(id, add) {
-//  let element = document.getElementById(id);
-//  if (!element) return;
-//  if (add) {
-//    element.classList.add('drag-area-highlight');
-//  } else {
-//    element.classList.remove('drag-area-highlight');
-//  }
-//}
-//
-//function removeAllHighlights() {
-//  toggleHighlight('todo', false);
-//  toggleHighlight('inProgress', false);
-//  toggleHighlight('awaitFeedback', false);
-//  toggleHighlight('done', false);
-//}
-//
-//function eventBubbling(event) {
-//  event.stopPropagation();
-//}
-//
-//function startDragging(taskId) {
-//  currentDraggedTaskId = taskId;
-//}
 
 function emptyDragArea() {
   let noTaskText;
@@ -62,19 +32,6 @@ function emptyDragArea() {
     todoArea.innerHTML = getEmptyDragArea(noTaskText);
   }
 }
-
-//async function moveTo(newStatus) {
-//  if (!currentDraggedTaskId) return;
-//  let allTasks = await fetchAllTasks();
-//  let maxSequence = getMaxSequenceForStatus(allTasks, newStatus);
-//  let task = await fetchTaskById(currentDraggedTaskId);
-//  if (!task) return;
-//  updateTaskStatusAndSequence(task, newStatus, maxSequence);
-//  await saveTask(currentDraggedTaskId, task);
-//  await pushTasksInBoard();
-//  emptyDragArea();
-//  currentDraggedTaskId = null;
-//}
 
 async function fetchAllTasks() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
@@ -275,18 +232,6 @@ function countDoneSubtasks(subtasks) {
   }
   return done;
 }
-
-//function enableDragAndDropBoard(task, div) {
-//  if (task.status === 'todo') {
-//    document.getElementById('todo').appendChild(div);
-//  } else if (task.status === 'inProgress') {
-//    document.getElementById('inProgress').appendChild(div);
-//  } else if (task.status === 'awaitFeedback') {
-//    document.getElementById('awaitFeedback').appendChild(div);
-//  } else if (task.status === 'done') {
-//    document.getElementById('done').appendChild(div);
-//  }
-//}
 
 async function deleteTaskFromFirebase(addTaskIdToDelete) {
   let tasks = await fetchAllTasksFromFirebase();
@@ -557,160 +502,3 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
     overlayContent.classList.add('show');
   }, 10);
 }
-<<<<<<< HEAD
-
-
-let initEventListnerProcessTasksInformation = () => {
-  let searchInput = document.getElementById('find-Task');
-  if (searchInput) {
-    searchInput.addEventListener('input', processTasksInformation);
-  }
-};
-/**
- * iterate through all tasks in the DOM and save the task title,
- * the description, the ID and the HTML element in the taskCollection array
- */
-let taskCollection = []; // Globales Array
-function processTasksInformation() {
-  taskCollection = []; // Array zurücksetzen
-  let boardRef = document.getElementById('board');
-  if (!boardRef) {
-    console.error("Element mit ID 'board' nicht gefunden.");
-    return;
-  }
-  let dragAreas = boardRef.querySelectorAll('.drag-area');
-  for (let dragArea of dragAreas) {
-    let taskContainers = dragArea.querySelectorAll('.board-task-container');
-    for (let taskContainer of taskContainers) {
-      let taskId = taskContainer.id;
-      let currentTaskTitle = '';
-      let currentTaskDescription = '';
-      let titleElement = taskContainer.querySelector('.board-task-title');
-      if (titleElement) {
-        currentTaskTitle = titleElement.innerText.trim();
-      }
-      let descriptionElement = taskContainer.querySelector('.board-task-description');
-      if (descriptionElement) {
-        currentTaskDescription = descriptionElement.innerText.trim();
-      }
-      taskCollection.push({
-        id: taskId,
-        title: currentTaskTitle,
-        description: currentTaskDescription,
-        element: taskContainer,
-      });
-    }
-  }
-  console.table(taskCollection);
-  showSearchResult();
-}
-
-/**
- * receive the input value and call the functions processTaskSearch() and taskVisibility()
- *  The main idea of this function is to implement a middleware functionality
- * @returns flase, undefined
- */
-function showSearchResult() {
-  let inputRef = document.getElementById('find-Task');
-  if (!inputRef) {
-    return;
-  }
-  const inputValue = inputRef.value;
-  const searchResult = processTaskSearch(taskCollection, inputValue);
-  console.log('Suchbegriff', inputValue);
-  console.log('Gefundene Tasks', searchResult);
-  if (searchResult.length === 0) {
-    toggleNoResultOverlay();
-  }
-  taskVisibilty(searchResult);
-}
-
-function toggleNoResultOverlay() {
-  let overlay = document.getElementById('overlay-no-result');
-  let content = document.getElementById('no-result-content');
-  overlay.classList.remove('d-none');
-  //showNoTaskContent();
-  content.innerHTML = noteNoTaskFounded();
-}
-
-function showNoTaskContent() {
-  let noTaskText;
-  let doneArea = document.getElementById('done');
-  let awaitFeedbackArea = document.getElementById('awaitFeedback');
-  let inProgressArea = document.getElementById('inProgress');
-  let todoArea = document.getElementById('todo')
-  //if(doneArea.querySelector('.d-none')){
-    noTaskText = 'Done';
-    doneArea.innerHTML = getEmptyDragArea(noTaskText)
-  //}
-  //if(awaitFeedbackArea.querySelector('.d-none')){
-    noTaskText = 'Await feedback';
-    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText)
-  //}
-  //if (inProgressArea.querySelector('.d-none')) {
-    noTaskText = 'In progress';
-    inProgressArea.innerHTML = getEmptyDragArea(noTaskText);
-  //}
-  //if (todoArea.querySelector('.d-none')) {
-    noTaskText = 'To do';
-    todoArea.innerHTML = getEmptyDragArea(noTaskText);
-  //}
-}
-
-let closeOverlay = () => {
-  let overlay = document.getElementById('overlay-no-result');
-  overlay.classList.add('d-none');
-  window.location.reload();
-};
-/**
- * take the inputValue and filter the TaskCollection array by Object -title and description.
- * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
- * @param {Array[Object]} filterTask
- * @param {Array[Object]} searchString
- * @returns Array if Searchstring contains object.title or description
- */
-function processTaskSearch(filterTask, searchString) {
-   //filterTask = taskCollection
-   //searchString == inputValue
-  const searchTerm = String(searchString).toLowerCase();
-  if (searchTerm === '') {
-    return filterTask;
-  }
-  return filterTask.filter((singleTaskObject) => {
-    let title;
-    let description;
-    if (singleTaskObject.title) {
-      title = singleTaskObject.title.trim();
-    } else {
-      title = '';
-    }
-    if (singleTaskObject.description) {
-      description = singleTaskObject.description.trim();
-    } else {
-      description = '';
-    }
-    const textOutput = (title + '' + description).toLowerCase();
-    //console.log(textOutput);
-    //console.log(textOutput.includes(searchTerm));
-    return textOutput.includes(searchTerm);
-  });
-}
-/**
- * Controls the visibility of tasks through search input.
- * @param {Arraa[Object]} filterTask
- */
-function taskVisibilty(filterTask) {
-  const matchedTaskIds = new Set(filterTask.map((task) => task.id));
-  //console.log(matchedTaskIds);
-  taskCollection.forEach((taskObject) => {
-    const isMatched = matchedTaskIds.has(taskObject.id);
-    //console.log(taskObject.title+ " mit der ID "+taskObject.id+" erfüllt die Suchkreterien "+isMatched)
-    if (isMatched) {
-      taskObject.element.classList.remove('d-none');
-    } else {
-      taskObject.element.classList.add('d-none');
-    }
-  }); 
-}
-=======
->>>>>>> 89eb744 (outsource the 'Dag&Drop' and 'Search' functions to search.js and drag&drop.js. in this case reduce some functions)

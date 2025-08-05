@@ -2,7 +2,6 @@ function dragAndDropEventListner(){
   document.addEventListener('dragend', removeAllHighlights);
 }
 
-
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -22,10 +21,6 @@ function removeAllHighlights() {
   toggleHighlight('inProgress', false);
   toggleHighlight('awaitFeedback', false);
   toggleHighlight('done', false);
-}
-
-function eventBubbling(event) {
-  event.stopPropagation();
 }
 
 function startDragging(taskId) {

@@ -140,7 +140,7 @@ async function saveToFirebase(contact) {
       closeOverlay();
     } catch (error) {}
   } catch (error) {
-    console.error('Fehler beim Speichern:', error);
+    console.error(error);
   }
 }
 
@@ -314,21 +314,15 @@ function validatePhoneInput(input) {
   clearInputError(input);
 }
 
-function validateEmailInput(input) {
-  input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
-  clearInputError(input);
-  input.setCustomValidity('');
-}
-
 function shakeInput(input, message) {
   input.classList.add('shake');
+  input.classList.add('input-error');
   input.setCustomValidity(message);
   input.reportValidity();
   let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.add('input-error');
   setTimeout(() => {
     input.classList.remove('shake');
-    input.setCustomValidity('');
   }, 300);
 }
 
@@ -337,6 +331,12 @@ function clearInputError(input) {
   input.classList.remove('input-error');
   let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.remove('input-error');
+}
+
+function validateEmailInput(input) {
+  input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
+  clearInputError(input);
+  input.setCustomValidity('');
 }
 
 function validateNameInput(input) {

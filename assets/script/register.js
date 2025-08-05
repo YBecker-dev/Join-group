@@ -45,6 +45,7 @@ function handlePasswordInput() {
   }
   this.classList.remove('input-error');
   document.getElementById('password-warning').classList.add('d-none');
+  this.setCustomValidity('');
 }
 
 function handlePasswordConfirmInput() {
@@ -58,6 +59,7 @@ function handlePasswordConfirmInput() {
   }
   this.classList.remove('input-error');
   document.getElementById('password-confirm-warning').classList.add('d-none');
+  this.setCustomValidity('');
 }
 
 function togglePassword1Visibility() {
@@ -85,13 +87,21 @@ function togglePassword2Visibility() {
 }
 
 function handleNameInput() {
+  if (validateNameInput) {
+    validateNameInput(this);
+  }
   this.classList.remove('input-error');
   document.getElementById('name-warning').classList.add('d-none');
+  this.setCustomValidity('');
 }
 
 function handleEmailInput() {
+  if (validateEmailInput) {
+    validateEmailInput(this);
+  }
   this.classList.remove('input-error');
   document.getElementById('email-warning').classList.add('d-none');
+  this.setCustomValidity('');
 }
 
 function handleCheckboxChange() {
@@ -148,7 +158,7 @@ function showEmailAlreadyExistsError() {
   let emailWarning = document.getElementById('email-warning');
   emailWarning.textContent = 'Diese E-Mail-Adresse ist bereits registriert!';
   emailWarning.classList.remove('d-none');
-  shakeInput(emailInput);
+  shakeInput(emailInput, 'Diese E-Mail-Adresse ist bereits registriert!');
 }
 
 async function addUser() {
@@ -195,7 +205,10 @@ function handleUserCreationResult(loginResponse) {
   }
 }
 
-let resetForm = () => document.getElementById('register-form').reset();
+let resetForm = () => {
+  document.getElementById('register-form').reset();
+  setupEventListeners();
+};
 
 function showSuccessMessage() {
   let successSection = document.getElementById('success-register-section');
@@ -226,7 +239,20 @@ function formSubmit(event) {
   }
 }
 
+function clearAllValidationStates() {
+  nameInput.setCustomValidity('');
+  emailInput.setCustomValidity('');
+  passwordInput.setCustomValidity('');
+  passwordConfirmInput.setCustomValidity('');
+  nameInput.classList.remove('input-error');
+  emailInput.classList.remove('input-error');
+  passwordInput.classList.remove('input-error');
+  passwordConfirmInput.classList.remove('input-error');
+  checkbox.classList.remove('input-error');
+}
+
 function checkAllFields() {
+  clearAllValidationStates();
   checkName();
   checkEmail();
   checkPassword();
@@ -236,10 +262,10 @@ function checkAllFields() {
 
 function checkName() {
   nameWarning = document.getElementById('name-warning');
-  if (nameInput.value.length < 3 || !/^[A-Za-zÄÖÜäöüß\s\-]+$/.test(nameInput.value)) {
+  if (!nameInput.value.length) {
     nameInput.classList.add('input-error');
     nameWarning.classList.remove('d-none');
-    shakeInput(nameInput);
+    shakeInput(nameInput, 'Bitte nur Buchstaben eingeben!');
   } else {
     nameInput.classList.remove('input-error');
     nameWarning.classList.add('d-none');
@@ -251,7 +277,7 @@ function checkEmail() {
   if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(emailInput.value)) {
     emailInput.classList.add('input-error');
     emailWarning.classList.remove('d-none');
-    shakeInput(emailInput);
+    shakeInput(emailInput, 'Ungültige E-Mail-Adresse.');
   } else {
     emailInput.classList.remove('input-error');
     emailWarning.classList.add('d-none');
@@ -263,7 +289,7 @@ function checkPassword() {
   if (passwordInput.value.length < 8 || !/[A-ZÄÖÜ]/.test(passwordInput.value)) {
     passwordInput.classList.add('input-error');
     passwordWarning.classList.remove('d-none');
-    shakeInput(passwordInput);
+    shakeInput(passwordInput, 'Das Passwort muss mindestens 8 Zeichen besitzen und ein Großbuchstabe!');
   } else {
     passwordInput.classList.remove('input-error');
     passwordWarning.classList.add('d-none');
@@ -275,7 +301,7 @@ function checkPasswordConfirm() {
   if (passwordConfirmInput.value !== passwordInput.value || !passwordConfirmInput.value) {
     passwordConfirmInput.classList.add('input-error');
     passwordConfirmWarning.classList.remove('d-none');
-    shakeInput(passwordConfirmInput);
+    shakeInput(passwordConfirmInput, 'Die Passwörter stimmen nicht überein!');
   } else {
     passwordConfirmInput.classList.remove('input-error');
     passwordConfirmWarning.classList.add('d-none');
