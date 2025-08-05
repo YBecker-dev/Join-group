@@ -1,5 +1,6 @@
 .main-content{
     padding-top: 80px; /*new*/
+    overflow: hidden;
 }
 .headline_container {
     position: fixed;

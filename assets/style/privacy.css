@@ -62,7 +62,7 @@ h4{
     
     .main-content{
         padding-top: 80px;
-        padding-bottom: 128px;
+        /*padding-bottom: 128px;*/
     }
     .body-flex{
         padding-top: 48px;
@@ -73,7 +73,7 @@ h4{
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 100;
+        
     }
     .backward:hover{
         cursor: pointer;

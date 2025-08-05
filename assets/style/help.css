@@ -1,3 +1,6 @@
+.main-content{
+    overflow: hidden;
+}
 .content-position{
     position: absolute;
     overflow: auto;
@@ -9,10 +12,10 @@
 }
 .sticky-wrapper{
     width: 100%;
-    padding-top: 169px;
+    padding-top: calc(206px - 96px);
     padding-left: 96px;
     padding-right: 96px;
-    padding-bottom: 50px;
+    padding-bottom: 150px;
 }
 h1{
     padding: 0;
@@ -110,6 +113,7 @@ a,.join-color{
     }
     .backward{
         position: static;
+        z-index: 0;
     }
 }
 @media(max-width: 1160px){
