@@ -134,9 +134,11 @@ async function saveToFirebase(contact) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    await loadContacts();
-    renderContacts();
-    closeOverlay();
+    try {
+      await loadContacts();
+      renderContacts();
+      closeOverlay();
+    } catch (error) {}
   } catch (error) {
     console.error('Fehler beim Speichern:', error);
   }
@@ -322,12 +324,11 @@ function shakeInput(input, message) {
   input.classList.add('shake');
   input.setCustomValidity(message);
   input.reportValidity();
-  let parentDiv = input.closest('.input-group');
+  let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.add('input-error');
   setTimeout(() => {
     input.classList.remove('shake');
-    input.setCustomValidity(''); // Fehlermeldung zurücksetzen
-    if (parentDiv) parentDiv.classList.remove('input-error');
+    input.setCustomValidity('');
   }, 300);
 }
 

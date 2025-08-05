@@ -1,33 +1,9 @@
 const BASE_URL = 'https://authenticationprototyp-default-rtdb.europe-west1.firebasedatabase.app/';
-let passwordInput = document.getElementById('password');
-const passwordValue = document.getElementById('password-icon');
+let passwordInput;
+let passwordValue;
 let logo;
 let headerLogo;
 //let announcedUserStorage = [];
-
-// Eventlistner
-passwordInput.addEventListener('input', function () {
-  let inputValue = this.value.trim();
-  if (inputValue === '') {
-    passwordValue.src = './assets/img/icon/lock.png';
-    passwordValue.classList.remove('eye-icon');
-  } else {
-    passwordValue.src = './assets/img/icon/hidden.png';
-    passwordValue.classList.add('eye-icon');
-  }
-});
-
-passwordValue.addEventListener('click', function () {
-  if (passwordValue.classList.contains('eye-icon')) {
-    if (passwordInput.type == 'password') {
-      passwordValue.src = './assets/img/icon/show.png';
-      passwordInput.type = 'text';
-    } else {
-      passwordValue.src = './assets/img/icon/hidden.png';
-      passwordInput.type = 'password';
-    }
-  }
-});
 
 function setLogoForWidth() {
   if (window.innerWidth <= 1180) {
@@ -49,10 +25,53 @@ function animateLogo() {
 function init() {
   logo = document.getElementById('start-logo');
   headerLogo = document.querySelector('.main-header-logo');
+  passwordInput = document.getElementById('password');
+  passwordValue = document.getElementById('password-icon');
+  
   logo.classList.remove('preload');
   setLogoForWidth();
   animateLogo();
+  
+  passwordInput.addEventListener('input', handlePasswordInput);
+  document.getElementById('email').addEventListener('input', handleEmailInput);
+  passwordValue.addEventListener('click', togglePasswordVisibility);
 }
+
+function handlePasswordInput() {
+  let inputValue = this.value.trim();
+  if (inputValue === '') {
+    passwordValue.src = './assets/img/icon/lock.png';
+    passwordValue.classList.remove('eye-icon');
+  } else {
+    passwordValue.src = './assets/img/icon/hidden.png';
+    passwordValue.classList.add('eye-icon');
+  }
+  clearInputError(this);
+}
+
+function handleEmailInput() {
+  clearInputError(this);
+}
+
+function togglePasswordVisibility() {
+  if (passwordValue.classList.contains('eye-icon')) {
+    if (passwordInput.type == 'password') {
+      passwordValue.src = './assets/img/icon/show.png';
+      passwordInput.type = 'text';
+    } else {
+      passwordValue.src = './assets/img/icon/hidden.png';
+      passwordInput.type = 'password';
+    }
+  }
+}
+
+function clearInputError(input) {
+  input.setCustomValidity('');
+  input.classList.remove('input-error');
+  let parentDiv = input.closest('.addNewContactDiv');
+  if (parentDiv) parentDiv.classList.remove('input-error');
+}
+
 
 function loginUser(event) {
   checkUser(event);
@@ -62,64 +81,71 @@ async function checkUser(event) {
   event.preventDefault();
   let mail = document.getElementById('email');
   let password = document.getElementById('password');
-  let valid = true;
-  if (!mail.value || mail.value.trim() === '') {
-    shakeInput(mail, 'Bitte eine E-Mail eingeben!');
-    valid = false;
-  }
-  if (!password.value || password.value.trim() === '') {
-    shakeInput(password, 'Bitte ein Passwort eingeben!');
-    valid = false;
-  }
-  if (!valid) {
-    return;
-  }
-  let findUser = false;
+  if (!validateInputs(mail, password)) return;
+  
   try {
     let response = await fetch(BASE_URL + '/login' + '.json');
     if (response.ok) {
       const userDataObject = await response.json();
       if (userDataObject) {
-        const userKey = Object.keys(userDataObject);
-        for (i = 0; i < userKey.length; i++) {
-          const userID = userKey[i];
-          const userObjekt = userDataObject[userID];
-          if (mail.value == userObjekt.mail && password.value == userObjekt.password) {
-            findUser = true;
-            let announcedUser = userObjekt.name;
-            if (userObjekt.surname && userObjekt.surname.trim() !== '') {
-              announcedUser += ' ' + userObjekt.surname;
-            }
-            storeAnnoncedUserName(announcedUser);
-            break;
-          }
-        }
-        if (findUser === true) {
-          localStorage.setItem('showGreeting', 'true');
-          console.log('User gefunden');
-          window.location.href = '/assets/html/summery.html';
-          resetForm();
-        } else {
-          console.log('User nicht gefunden oder Eingaben falsch');
-          document.getElementById('login-failed').classList.remove('d-none');
-          resetForm();
-          resetPwIcon();
-        }
+        let findUser = authenticateUser(mail, password, userDataObject);
+        handleAuthResult(findUser, mail, password);
       }
     }
-  } catch (error) {
-    console.error(error);
+  } catch (error) {}
+}
+
+function validateInputs(mail, password) {
+  let valid = true;
+  if (!mail.value || mail.value.trim() === '') {
+    shakeInput(mail);
+    valid = false;
+  }
+  if (!password.value || password.value.trim() === '') {
+    shakeInput(password);
+    valid = false;
+  }
+  return valid;
+}
+
+function authenticateUser(mail, password, userDataObject) {
+  const userKey = Object.keys(userDataObject);
+  for (i = 0; i < userKey.length; i++) {
+    const userID = userKey[i];
+    const userObjekt = userDataObject[userID];
+    if (mail.value == userObjekt.mail && password.value == userObjekt.password) {
+      let announcedUser = userObjekt.name;
+      if (userObjekt.surname && userObjekt.surname.trim() !== '') {
+        announcedUser += ' ' + userObjekt.surname;
+      }
+      storeAnnoncedUserName(announcedUser);
+      return true;
+    }
+  }
+  return false;
+}
+
+function handleAuthResult(findUser, mail, password) {
+  if (findUser === true) {
+    localStorage.setItem('showGreeting', 'true');
+    window.location.href = '/assets/html/summery.html';
+    resetForm();
+  } else {
+    document.getElementById('login-failed').classList.remove('d-none');
+    resetForm();
+    resetPwIcon();
+    shakeInput(mail);
+    shakeInput(password);
   }
 }
 
 function shakeInput(input, message) {
-  input.classList.add('shake');
+  input.classList.add('shake', 'input-error');
   input.setCustomValidity(message);
   input.reportValidity();
-  let parentDiv = input.closest('.input-group');
-  if (parentDiv) parentDiv.classList.add('input-error');
   setTimeout(() => {
     input.classList.remove('shake');
+    input.setCustomValidity('');
   }, 300);
 }
 

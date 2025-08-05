@@ -525,6 +525,18 @@ h4 {
     border: 1px solid #a89a9a;
 }
 
+.addNewContactDiv:focus-within,
+.addNewContactDiv:focus-within:hover {
+    border: 1px solid #29abe2 !important;
+}
+
+.addNewContactDiv.input-error,
+.addNewContactDiv.input-error:focus-within,
+.addNewContactDiv.input-error:hover,
+.addNewContactDiv.input-error:focus-within:hover {
+    border: 1px solid #e74c3c !important;
+}
+
 @keyframes slideInFromRight {
     from {
         opacity: 0;
@@ -537,35 +549,6 @@ h4 {
     }
 }
 
-.shake {
-    animation: shake 0.3s;
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.input-error {
-    border: 2px solid #e74c3c;
-}
 
 @media (max-width: 1440px) {
     .background-new-contact-button {

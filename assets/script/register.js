@@ -1,16 +1,40 @@
 const BASE_URL = 'https://authenticationprototyp-default-rtdb.europe-west1.firebasedatabase.app/';
-let button = document.getElementById('signup-btn');
-let checkbox = document.getElementById('accept');
-let nameInput = document.getElementById('name');
-let emailInput = document.getElementById('email');
-let passwordInput = document.getElementById('password');
-let passwordConfirmInput = document.getElementById('password-confirm');
+let button;
+let checkbox;
+let nameInput;
+let emailInput;
+let passwordInput;
+let passwordConfirmInput;
+let pw1Icon;
+let pw2Icon;
 
-const pw1Icon = document.getElementById('password-icon');
-const pw2Icon = document.getElementById('password-confirm-icon');
+function init() {
+  initializeElements();
+  setupEventListeners();
+}
 
-// EventListner password-Icon-change
-passwordInput.addEventListener('input', function () {
+function initializeElements() {
+  button = document.getElementById('signup-btn');
+  checkbox = document.getElementById('accept');
+  nameInput = document.getElementById('name');
+  emailInput = document.getElementById('email');
+  passwordInput = document.getElementById('password');
+  passwordConfirmInput = document.getElementById('password-confirm');
+  pw1Icon = document.getElementById('password-icon');
+  pw2Icon = document.getElementById('password-confirm-icon');
+}
+
+function setupEventListeners() {
+  passwordInput.addEventListener('input', handlePasswordInput);
+  passwordConfirmInput.addEventListener('input', handlePasswordConfirmInput);
+  pw1Icon.addEventListener('click', togglePassword1Visibility);
+  pw2Icon.addEventListener('click', togglePassword2Visibility);
+  nameInput.addEventListener('input', handleNameInput);
+  emailInput.addEventListener('input', handleEmailInput);
+  checkbox.addEventListener('change', handleCheckboxChange);
+}
+
+function handlePasswordInput() {
   let inputValue = this.value.trim();
   if (inputValue === '') {
     pw1Icon.src = '../img/icon/lock.png';
@@ -19,9 +43,11 @@ passwordInput.addEventListener('input', function () {
     pw1Icon.classList.add('eye-icon');
     pw1Icon.src = '../img/icon/hidden.png';
   }
-});
+  this.classList.remove('input-error');
+  document.getElementById('password-warning').classList.add('d-none');
+}
 
-passwordConfirmInput.addEventListener('input', function () {
+function handlePasswordConfirmInput() {
   let inputValue = this.value.trim();
   if (inputValue === '') {
     pw2Icon.src = '../img/icon/lock.png';
@@ -30,33 +56,49 @@ passwordConfirmInput.addEventListener('input', function () {
     pw2Icon.classList.add('eye-icon');
     pw2Icon.src = '../img/icon/hidden.png';
   }
-});
+  this.classList.remove('input-error');
+  document.getElementById('password-confirm-warning').classList.add('d-none');
+}
 
-pw1Icon.addEventListener('click', function () {
+function togglePassword1Visibility() {
   if (pw1Icon.classList.contains('eye-icon')) {
     if (passwordInput.type == 'password') {
       pw1Icon.src = '../img/icon/show.png';
-      passwordInput.type = 'text'; //Fleg
+      passwordInput.type = 'text';
     } else {
       pw1Icon.src = '../img/icon/hidden.png';
       passwordInput.type = 'password';
     }
   }
-});
+}
 
-pw2Icon.addEventListener('click', function () {
+function togglePassword2Visibility() {
   if (pw2Icon.classList.contains('eye-icon')) {
     if (passwordConfirmInput.type == 'password') {
       pw2Icon.src = '../img/icon/show.png';
-      passwordConfirmInput.type = 'text'; //Fleg
+      passwordConfirmInput.type = 'text';
     } else {
       pw2Icon.src = '../img/icon/hidden.png';
       passwordConfirmInput.type = 'password';
     }
   }
-});
+}
 
-function init() {}
+function handleNameInput() {
+  this.classList.remove('input-error');
+  document.getElementById('name-warning').classList.add('d-none');
+}
+
+function handleEmailInput() {
+  this.classList.remove('input-error');
+  document.getElementById('email-warning').classList.add('d-none');
+}
+
+function handleCheckboxChange() {
+  if (checkbox.checked) {
+    checkbox.classList.remove('input-error');
+  }
+}
 
 function successRegister(event) {
   if (allFieldsFilledCorrect(event)) {
@@ -72,65 +114,84 @@ async function checkUserOnRegistration(event) {
     let response = await fetch(BASE_URL + '/login' + '.json');
     if (response.ok) {
       const userDataObject = await response.json();
-      let mailAlreadyExist = false;
-      if (userDataObject) {
-        const userkey = Object.keys(userDataObject);
-        for (i = 0; i < userkey.length; i++) {
-          const userId = userkey[i]; // Objektindex
-          const userObjekt = userDataObject[userId];
-          if (emailInput.value == userObjekt.mail) {
-            console.log('Email bereits an ein anderes Konto gebunden');
-            resetForm();
-            mailAlreadyExist = true;
-            break;
-          }
-        }
-        if (!mailAlreadyExist) {
-          console.log('Mail an kein bestehendes Konto gebunden');
-          await addUser();
-        }
-      } else {
-        addUser(); // Für den Fall das die DB keine Einträge enthält
-      }
+      await handleUserDataResponse(userDataObject);
     }
-  } catch (error) {
-    console.error(error);
+  } catch (error) {}
+}
+
+async function handleUserDataResponse(userDataObject) {
+  if (userDataObject) {
+    let mailAlreadyExist = checkIfEmailExists(userDataObject);
+    if (!mailAlreadyExist) {
+      await addUser();
+    }
+  } else {
+    addUser();
   }
 }
 
+function checkIfEmailExists(userDataObject) {
+  const userkey = Object.keys(userDataObject);
+  for (i = 0; i < userkey.length; i++) {
+    const userId = userkey[i];
+    const userObjekt = userDataObject[userId];
+    if (emailInput.value == userObjekt.mail) {
+      showEmailAlreadyExistsError();
+      return true;
+    }
+  }
+  return false;
+}
+
+function showEmailAlreadyExistsError() {
+  emailInput.classList.add('input-error');
+  let emailWarning = document.getElementById('email-warning');
+  emailWarning.textContent = 'Diese E-Mail-Adresse ist bereits registriert!';
+  emailWarning.classList.remove('d-none');
+  shakeInput(emailInput);
+}
+
 async function addUser() {
-  // Login-Daten (Mail & Passwort)
-  let loginData = {
-    mail: emailInput.value,
-    password: passwordInput.value,
-    name: nameInput.value
-  };
-  // User-Daten (Name)
-  let userData = {
-    name: nameInput.value,
-    email: emailInput.value,
-    phone: "-",
-    color: getRandomColor(),
-    initials: getInitials(nameInput.value)
-  };
+  let loginData = createLoginData();
+  let userData = createUserData();
 
   try {
-    let loginResponse = await fetch(BASE_URL + 'login.json', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginData),
-    });
-
+    let loginResponse = await saveLoginData(loginData);
     await saveToFirebase(userData);
+    handleUserCreationResult(loginResponse);
+  } catch (error) {}
+}
 
-    if (loginResponse.ok) {
-      showSuccessMessage();
-      resetForm();
-    } else {
-      console.log('Ein Fehler ist aufgetreten');
-    }
-  } catch (error) {
-    console.error(error);
+function createLoginData() {
+  return {
+    mail: emailInput.value,
+    password: passwordInput.value,
+    name: nameInput.value,
+  };
+}
+
+function createUserData() {
+  return {
+    name: nameInput.value,
+    email: emailInput.value,
+    phone: '-',
+    color: getRandomColor(),
+    initials: getInitials(nameInput.value),
+  };
+}
+
+async function saveLoginData(loginData) {
+  return await fetch(BASE_URL + 'login.json', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(loginData),
+  });
+}
+
+function handleUserCreationResult(loginResponse) {
+  if (loginResponse.ok) {
+    showSuccessMessage();
+    resetForm();
   }
 }
 
@@ -178,6 +239,7 @@ function checkName() {
   if (nameInput.value.length < 3 || !/^[A-Za-zÄÖÜäöüß\s\-]+$/.test(nameInput.value)) {
     nameInput.classList.add('input-error');
     nameWarning.classList.remove('d-none');
+    shakeInput(nameInput);
   } else {
     nameInput.classList.remove('input-error');
     nameWarning.classList.add('d-none');
@@ -189,6 +251,7 @@ function checkEmail() {
   if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(emailInput.value)) {
     emailInput.classList.add('input-error');
     emailWarning.classList.remove('d-none');
+    shakeInput(emailInput);
   } else {
     emailInput.classList.remove('input-error');
     emailWarning.classList.add('d-none');
@@ -200,6 +263,7 @@ function checkPassword() {
   if (passwordInput.value.length < 8 || !/[A-ZÄÖÜ]/.test(passwordInput.value)) {
     passwordInput.classList.add('input-error');
     passwordWarning.classList.remove('d-none');
+    shakeInput(passwordInput);
   } else {
     passwordInput.classList.remove('input-error');
     passwordWarning.classList.add('d-none');
@@ -211,6 +275,7 @@ function checkPasswordConfirm() {
   if (passwordConfirmInput.value !== passwordInput.value || !passwordConfirmInput.value) {
     passwordConfirmInput.classList.add('input-error');
     passwordConfirmWarning.classList.remove('d-none');
+    shakeInput(passwordConfirmInput);
   } else {
     passwordConfirmInput.classList.remove('input-error');
     passwordConfirmWarning.classList.add('d-none');

@@ -238,6 +238,9 @@ input#password-confirm:hover {
     border: 1px solid #a89a9a;
 }
 
+.input-group.input-error input {
+    border: 1px solid #e74c3c !important;
+}
 
 @media (max-width: 1180px) {
     .main-header-logo {

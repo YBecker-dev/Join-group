@@ -45,15 +45,6 @@ a:hover {
     display: none !important;
 }
 
-.input-error {
-    border: 2px solid #e74c3c !important;
-}
-
-.checkbox.input-error {
-    outline: 2px solid #e74c3c;
-    border-color: #e74c3c !important;
-}
-
 input:focus {
     outline: none;
     box-shadow: none;
@@ -61,9 +52,9 @@ input:focus {
 }
 
 textarea:focus,
-input#email:focus,
-input#password-confirm:focus,
-input#password:focus,
+input#email:focus:not(.input-error),
+input#password-confirm:focus:not(.input-error),
+input#password:focus:not(.input-error),
 input#title:focus,
 input#date:focus,
 input[type="date"]:focus,
@@ -83,7 +74,6 @@ input#editContactPhone:focus,
     outline: none;
     border-color: initial;
     border: none !important;
-
 }
 
 #subtask-edit-input:focus {
@@ -110,4 +100,39 @@ input#editContactPhone:focus,
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.input-error {
+    border: 1px solid #e74c3c !important;
+}
+
+input.input-error:focus {
+    border: 1px solid #e74c3c !important;
 }
