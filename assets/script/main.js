@@ -87,3 +87,23 @@ function toggleMoveToOverlay() {
   let moveToRef = document.getElementById('selection');
   moveToRef.classList.toggle('d-none');
 }
+
+
+function shakeInput(input, message) {
+  input.classList.add('shake');
+  input.classList.add('input-error');
+  input.setCustomValidity(message);
+  input.reportValidity();
+  let parentDiv = input.closest('.addNewContactDiv');
+  if (parentDiv) parentDiv.classList.add('input-error');
+  setTimeout(() => {
+    input.classList.remove('shake');
+  }, 300);
+}
+
+function clearInputError(input) {
+  input.setCustomValidity('');
+  input.classList.remove('input-error');
+  let parentDiv = input.closest('.addNewContactDiv');
+  if (parentDiv) parentDiv.classList.remove('input-error');
+}

@@ -549,6 +549,13 @@ h4 {
     }
 }
 
+#newContactName,
+#newContactMail,
+#editContactName,
+#editContactMail {
+    border: unset !important;
+}
+
 
 @media (max-width: 1440px) {
     .background-new-contact-button {

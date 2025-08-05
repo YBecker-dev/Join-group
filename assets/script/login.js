@@ -3,7 +3,6 @@ let passwordInput;
 let passwordValue;
 let logo;
 let headerLogo;
-//let announcedUserStorage = [];
 
 function setLogoForWidth() {
   if (window.innerWidth <= 1180) {
@@ -98,11 +97,11 @@ async function checkUser(event) {
 function validateInputs(mail, password) {
   let valid = true;
   if (!mail.value || mail.value.trim() === '') {
-    shakeInput(mail);
+    shakeInput(mail, 'Please check its is filled with a valid email');
     valid = false;
   }
   if (!password.value || password.value.trim() === '') {
-    shakeInput(password);
+    shakeInput(password, 'Please check its is filled with a valid password');
     valid = false;
   }
   return valid;
@@ -134,20 +133,11 @@ function handleAuthResult(findUser, mail, password) {
     document.getElementById('login-failed').classList.remove('d-none');
     resetForm();
     resetPwIcon();
-    shakeInput(mail);
-    shakeInput(password);
+    shakeInput(mail, '');
+    shakeInput(password, '');
   }
 }
 
-function shakeInput(input, message) {
-  input.classList.add('shake', 'input-error');
-  input.setCustomValidity(message);
-  input.reportValidity();
-  setTimeout(() => {
-    input.classList.remove('shake');
-    input.setCustomValidity('');
-  }, 300);
-}
 
 let resetForm = () => document.getElementById('login-form').reset();
 

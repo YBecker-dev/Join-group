@@ -19,7 +19,7 @@
           <img id="start-logo" class="preload" src="/assets/img/Logo/logo_dark.png" alt="Logo" />
           <div class="Signup">
             <p>Not a Join user?</p>
-            <a href="./assets/html/register.html"><button>Sign up</button></a>
+            <a href="./assets/html/register.html"><button class="sign-up-button">Sign up</button></a>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <div class="login-underline"></div>
           </div>
 
-          <form id="login-form" onsubmit="loginUser(event)">
+          <form id="login-form">
             <div class="input-group-container">
               <div class="input-group">
                 <input type="email" placeholder="Email" id="email" autocomplete="email"/>
@@ -47,12 +47,12 @@
             </div>
             <div id="login-failed" class="d-none warning">
               <span>
-                <p>Die Email oder das Password kann keinem Konto zugeordnet werden.</p>
-                <p>Versuche es nochmal oder erstelle ein JOIN Konto</p>
+                <p>This email address or password cannot be assigned to an account</p>
+                <p>Please try again or create a JOIN account</p>
               </span>
             </div>
             <div class="login-buttons">
-              <button class="login-btn">Log in</button>
+              <button class="login-btn" onclick="loginUser(event)">Log in</button>
               <button class="guest-btn" type="button" onclick="logginAsGuest()">Guest Log in</button>
             </div>
           </form>
@@ -69,6 +69,7 @@
       </div>
     </main>
 
+    <script src="assets/script/main.js"></script>
     <script src="assets/script/login.js"></script>
     <!--<script src="/assets/script/main.js"></script>-->
   </body>

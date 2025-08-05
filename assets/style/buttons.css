@@ -4,6 +4,12 @@
     border: 1px solid rgb(41, 54, 71);
 }
 
+.guest-btn:hover {
+    background-color: white;
+    border: #29abe2 solid 1px;
+    color: #29abe2;
+}
+
 button {
     background-color: rgb(41, 54, 71);
     color: white;
@@ -20,13 +26,6 @@ button:hover {
     background-color: #2AABE2;
 }
 
-.date-input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-}
-
 .create-button:hover,
 .ok-button:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
@@ -40,4 +39,34 @@ button:hover {
     color: #29abe2;
     transform: translateY(1px);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.addTaskBtn:hover,
+.guest-btn:hover,
+.sign-up-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
+    transform: translateY(-1px);
+}
+
+.addTaskBtn {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 11px;
+    width: 160px;
+    height: 48px;
+    ;
+}
+
+.login-btn,
+.addTaskBtn,
+.guest-btn,
+.sign-up-button {
+    transition: all 0.2s;
+}
+
+.login-btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
+    transform: translateY(-1px);
 }

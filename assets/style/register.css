@@ -8,6 +8,13 @@
     top: 73px;
     left: 58px;
     cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.go-to-start:hover {
+    background-color: #EEEEEE;
+    border-radius: 50%;
+    scale: 1.1;
 }
 
 .signup-header {
@@ -56,6 +63,10 @@
     animation: fadeInUp 0.5s ease-in forwards;
 }
 
+.checkbox:hover {
+    background-color: #EDF2FA;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -89,7 +100,6 @@
 .eye-icon:hover {
     cursor: pointer;
 }
-
 
 @media (max-width: 1180px) {
     .signup-header h1 {

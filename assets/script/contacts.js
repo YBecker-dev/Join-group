@@ -271,12 +271,12 @@ function checkContactInputs(userName, userEmail, userPhone) {
   let valid = true;
 
   if (!userName || userName.trim().length < 2) {
-    shakeInput(nameInput, 'Bitte einen gültigen Namen eingeben!');
+    shakeInput(nameInput,'Please check its is filled with a name');
     valid = false;
   }
 
   if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
-    shakeInput(mailInput, 'Bitte eine gültige E-Mail-Adresse eingeben!');
+    shakeInput(mailInput,'Please check its is filled with a valid email');
     valid = false;
   }
 
@@ -314,24 +314,6 @@ function validatePhoneInput(input) {
   clearInputError(input);
 }
 
-function shakeInput(input, message) {
-  input.classList.add('shake');
-  input.classList.add('input-error');
-  input.setCustomValidity(message);
-  input.reportValidity();
-  let parentDiv = input.closest('.addNewContactDiv');
-  if (parentDiv) parentDiv.classList.add('input-error');
-  setTimeout(() => {
-    input.classList.remove('shake');
-  }, 300);
-}
-
-function clearInputError(input) {
-  input.setCustomValidity('');
-  input.classList.remove('input-error');
-  let parentDiv = input.closest('.addNewContactDiv');
-  if (parentDiv) parentDiv.classList.remove('input-error');
-}
 
 function validateEmailInput(input) {
   input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');

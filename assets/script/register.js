@@ -156,9 +156,9 @@ function checkIfEmailExists(userDataObject) {
 function showEmailAlreadyExistsError() {
   emailInput.classList.add('input-error');
   let emailWarning = document.getElementById('email-warning');
-  emailWarning.textContent = 'Diese E-Mail-Adresse ist bereits registriert!';
+  emailWarning.textContent = 'This email address is already registered.';
   emailWarning.classList.remove('d-none');
-  shakeInput(emailInput, 'Diese E-Mail-Adresse ist bereits registriert!');
+  shakeInput(emailInput, 'This email address is already registered.');
 }
 
 async function addUser() {
@@ -207,6 +207,10 @@ function handleUserCreationResult(loginResponse) {
 
 let resetForm = () => {
   document.getElementById('register-form').reset();
+  nameInput.setCustomValidity('');
+  emailInput.setCustomValidity('');
+  passwordInput.setCustomValidity('');
+  passwordConfirmInput.setCustomValidity('');
   setupEventListeners();
 };
 
@@ -239,20 +243,8 @@ function formSubmit(event) {
   }
 }
 
-function clearAllValidationStates() {
-  nameInput.setCustomValidity('');
-  emailInput.setCustomValidity('');
-  passwordInput.setCustomValidity('');
-  passwordConfirmInput.setCustomValidity('');
-  nameInput.classList.remove('input-error');
-  emailInput.classList.remove('input-error');
-  passwordInput.classList.remove('input-error');
-  passwordConfirmInput.classList.remove('input-error');
-  checkbox.classList.remove('input-error');
-}
 
 function checkAllFields() {
-  clearAllValidationStates();
   checkName();
   checkEmail();
   checkPassword();
@@ -265,7 +257,7 @@ function checkName() {
   if (!nameInput.value.length) {
     nameInput.classList.add('input-error');
     nameWarning.classList.remove('d-none');
-    shakeInput(nameInput, 'Bitte nur Buchstaben eingeben!');
+    shakeInput(nameInput, 'Please enter a valid name.');
   } else {
     nameInput.classList.remove('input-error');
     nameWarning.classList.add('d-none');
@@ -277,7 +269,7 @@ function checkEmail() {
   if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(emailInput.value)) {
     emailInput.classList.add('input-error');
     emailWarning.classList.remove('d-none');
-    shakeInput(emailInput, 'Ungültige E-Mail-Adresse.');
+    shakeInput(emailInput, 'Enter a valid password.');
   } else {
     emailInput.classList.remove('input-error');
     emailWarning.classList.add('d-none');
@@ -289,7 +281,7 @@ function checkPassword() {
   if (passwordInput.value.length < 8 || !/[A-ZÄÖÜ]/.test(passwordInput.value)) {
     passwordInput.classList.add('input-error');
     passwordWarning.classList.remove('d-none');
-    shakeInput(passwordInput, 'Das Passwort muss mindestens 8 Zeichen besitzen und ein Großbuchstabe!');
+    shakeInput(passwordInput, 'Enter a valid password.');
   } else {
     passwordInput.classList.remove('input-error');
     passwordWarning.classList.add('d-none');
@@ -301,7 +293,7 @@ function checkPasswordConfirm() {
   if (passwordConfirmInput.value !== passwordInput.value || !passwordConfirmInput.value) {
     passwordConfirmInput.classList.add('input-error');
     passwordConfirmWarning.classList.remove('d-none');
-    shakeInput(passwordConfirmInput, 'Die Passwörter stimmen nicht überein!');
+    shakeInput(passwordConfirmInput, 'Passwords do not match!');
   } else {
     passwordConfirmInput.classList.remove('input-error');
     passwordConfirmWarning.classList.add('d-none');

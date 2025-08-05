@@ -160,12 +160,6 @@
     min-width: 120px;
 }
 
-.guest-btn {
-    background-color: white;
-    color: rgb(41, 54, 71);
-    border: 1px solid rgb(41, 54, 71);
-}
-
 input::placeholder,
 textarea::placeholder {
     color: #BEBEBE;

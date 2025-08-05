@@ -11,6 +11,7 @@ async function initAddTask() {
   initFrameworkFunctions();
   setPriority('medium');
   addFormValidation('add-task-form');
+  addInputErrorListeners();
   document.addEventListener('click', function () {
     handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
     handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
@@ -104,7 +105,40 @@ function selectCustomOption(element) {
   if (!categoryDropdown) return;
   let p = categoryDropdown.querySelector('p');
   if (p) p.textContent = element.textContent;
+  
+  categoryDropdown.classList.remove('input-error');
+  let categoryWarning = document.getElementById('category-dropdown-warning');
+  if (categoryWarning) categoryWarning.classList.add('d-none');
+  
   handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+}
+
+function addInputErrorListeners() {
+  let titleInput = document.querySelector('input[name="add-task-input1"]');
+  let dateInput = document.querySelector('input[name="add-task-input2"]');
+  let descriptionInput = document.querySelector('textarea[name="add-task-textarea"]');
+  
+  if (titleInput) {
+    titleInput.addEventListener('input', function() {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input1-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+  
+  if (dateInput) {
+    dateInput.addEventListener('input', function() {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input2-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+  
+  if (descriptionInput) {
+    descriptionInput.addEventListener('input', function() {
+      clearInputError(this);
+    });
+  }
 }
 
 function addFormValidation(formId) {
@@ -129,7 +163,10 @@ function validateAddTaskForm() {
 }
 
 function isFormValid() {
-  return checkTitle() && checkDate() && checkCategory();
+  let titleValid = checkTitle();
+  let dateValid = checkDate();
+  let categoryValid = checkCategory();
+  return titleValid && dateValid && categoryValid;
 }
 
 function handleValidForm() {
@@ -154,6 +191,7 @@ function checkTitle() {
   if (!input1 || !input1.value.trim()) {
     if (input1) input1.classList.add('input-error');
     if (input1Warning) input1Warning.classList.remove('d-none');
+    shakeInput(input1, '');
     return false;
   }
   return true;
@@ -162,30 +200,33 @@ function checkTitle() {
 function checkDate() {
   let input2 = document.querySelector('input[name="add-task-input2"]');
   let input2Warning = document.getElementById('add-task-input2-warning');
-  if (!input2 || !input2.value.trim()) {
-    if (input2) input2.classList.add('input-error');
-    if (input2Warning) input2Warning.classList.remove('d-none');
+  
+  if (!input2?.value.trim()) {
+    input2?.classList.add('input-error');
+    input2Warning?.classList.remove('d-none');
+    if (input2) shakeInput(input2, '');
     return false;
   }
 
   const value = input2.value.trim();
-  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value) || !isValidDate(value)) {
     input2.classList.add('input-error');
-    if (input2Warning) input2Warning.classList.remove('d-none');
-    return false;
-  }
-
-  const [day, month, year] = value.split('/').map(Number);
-  const dateObj = new Date(year, month - 1, day);
-  if (dateObj.getFullYear() !== year || dateObj.getMonth() + 1 !== month || dateObj.getDate() !== day) {
-    input2.classList.add('input-error');
-    if (input2Warning) input2Warning.classList.remove('d-none');
+    input2Warning?.classList.remove('d-none');
+    shakeInput(input2, '');
     return false;
   }
 
   input2.classList.remove('input-error');
-  if (input2Warning) input2Warning.classList.add('d-none');
+  input2Warning?.classList.add('d-none');
   return true;
+}
+
+function isValidDate(value) {
+  const [day, month, year] = value.split('/').map(Number);
+  const dateObj = new Date(year, month - 1, day);
+  return dateObj.getFullYear() === year && 
+         dateObj.getMonth() + 1 === month && 
+         dateObj.getDate() === day;
 }
 
 function checkCategory() {
@@ -195,6 +236,10 @@ function checkCategory() {
   let categoryText = getCategoryTextFromDropdown(categoryDropdownSelectedRef);
   if (categoryText === 'Select a task category') {
     showCategoryError(categoryDropdownSelectedRef, categoryWarningRef);
+    categoryDropdownSelectedRef.classList.add('shake');
+    setTimeout(() => {
+      categoryDropdownSelectedRef.classList.remove('shake');
+    }, 300);
     return false;
   }
   return true;
@@ -231,7 +276,15 @@ function clearAllTaskFields() {
   showPlusIcon();
   clearSubtaskElements();
   clearCheckedContacts();
+  clearRedBorder();
   subtasks = [];
+}
+
+function clearRedBorder() {
+  let inputs = document.querySelectorAll('.input-error');
+  inputs.forEach(input => {
+    input.classList.remove('input-error');
+  });
 }
 
 function clearCheckedContacts() {
@@ -349,8 +402,7 @@ function enableCreateTaskButton(dateInput) {
   if (!title || !date || !categorySelected || !button) return;
   sanitizeAndValidateDate(date);
   let categoryText = getCategoryTextFromSelected(categorySelected);
-  let allFilled = areAllFieldsFilled(title, date, categoryText);
-  button.disabled = !allFilled;
+  areAllFieldsFilled(title, date, categoryText);
 }
 
 function sanitizeAndValidateDate(date) {

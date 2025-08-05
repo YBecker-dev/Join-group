@@ -225,11 +225,6 @@ header {
     line-height: 120%;
 }
 
-body {
-    background-color: #F6F7F8 !important;
-    text-align: center;
-}
-
 @font-face {
     font-display: swap;
     /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -263,12 +258,8 @@ a:hover {
     display: none !important;
 }
 
-.input-error {
-    border: 2px solid #e74c3c !important;
-}
-
 .checkbox.input-error {
-    outline: 2px solid #e74c3c;
+    outline: 1px solid #e74c3c;
     border-color: #e74c3c !important;
 }
 

@@ -299,22 +299,6 @@
     z-index: 100;
 }
 
-.addTaskBtn {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 11px;
-    width: 160px;
-    height: 48px;
-    transition: all 0.2s;
-}
-
-.addTaskBtn:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
-    transform: translateY(-1px);
-}
-
 .addTaskBtn>img {
     height: 18.67px;
     width: 18.67px;
