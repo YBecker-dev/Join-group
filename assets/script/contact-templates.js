@@ -54,7 +54,7 @@ function getNoteTemplateContactDetails(indexDetails) {
                   <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
-              <button class="editContactBtnMobile" onclick="showMobileEditOverlay()">
+              <button class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
                 <div class="dotted"></div>
                 <div class="dotted"></div>
                 <div class="dotted"></div>
@@ -145,14 +145,14 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
-function getNoteTemplateMobileEditOverlay() {
+function getNoteTemplateMobileEditOverlay(indexDetails) {
 
-  return` <div class="editDeleteOverlayMobile"> 
+  return` <div class="editDeleteOverlayMobile" id="editDeleteOverlayMobile"> 
             <div id="editOverlayMobile" class="mobile" onclick="openEditOverlay(${indexDetails})">
               <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
               <span class="editText">Edit</span>
             </div>
-            <div id="deleteOverlayMobile" onclick="deleteContact(${indexDetails})">
+            <div id="deleteOverlayMobile" class="mobile" onclick="deleteContact(${indexDetails})">
               <img class="editIcon" src="../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
               <span class="editText">Delete</span>
             </div>

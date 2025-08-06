@@ -54,8 +54,6 @@ function showSearchResult() {
   }
   const inputValue = inputRef.value;
   const searchResult = processTaskSearch(taskCollection, inputValue);
-  console.log('Suchbegriff', inputValue);
-  console.log('Gefundene Tasks', searchResult);
   if (searchResult.length === 0) {
     toggleNoResultOverlay();
   }

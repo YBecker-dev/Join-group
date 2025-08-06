@@ -354,7 +354,7 @@
     display: none;
 }
 
-
+/*
 @media (max-width: 1440px){
 
     body{
@@ -373,7 +373,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start; /*change */
+        justify-content: flex-start; 
         gap: 80px;
         padding-bottom: 80px;
         margin-bottom: 30px;
@@ -636,11 +636,7 @@
         }
     }
 }
-@media(max-width: 425px){
-    /*.contentspace-html{
-        gap: 40px;
-        
-    }*/
+
     .headline_container{
         width: 100%;
     }
@@ -706,4 +702,9 @@
 
     }
 
-}
+}*/
+/*@media(max-width: 425px){
+    .contentspace-html{
+        gap: 40px;
+        
+    }*/

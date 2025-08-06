@@ -79,10 +79,12 @@ function openDetails(index) {
   setanimation(details, index);
 }
 
-function showMobileEditOverlay() {
-  let mobileButton = document.getElementById('editDeleteOverlayMobile');
-  mobileButton.classList.toggle('d-none');
-  innerHTML = getNoteTemplateMobileEditOverlay();
+function showMobileEditOverlay(indexDetails) {
+  let overlayRef = document.getElementById('editContact-Overlay');
+  
+  overlayRef.classList.toggle('d-none');
+  
+  overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
 }
 
 function closeContactDetails(allContacts, details) {
@@ -261,6 +263,8 @@ async function saveToLocalstorage() {
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
+  let menuOverlay = document.getElementById('editDeleteOverlayMobile');
+  menuOverlay.classList.toggle('mobile-activ');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
 
