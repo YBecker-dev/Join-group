@@ -66,6 +66,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
+              <p onclick="closeOverlay()" class="closeMobile">x</p>
               <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
               <div class="add-headline">
               <p class="add-contact">Add contact</p>
@@ -96,7 +97,6 @@ function getNoteTemplateAddNewContact() {
                   </div>
                 </div>
                 <div class="accept">
-                  <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
                   <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
                 </div>         
               </div>
@@ -110,6 +110,7 @@ function getNoteTemplateEditContact(index) {
 
   return ` <div class="newContactOverlay" onclick="eventBubbling(event)">
             <div class="headDiv">
+              <p onclick="closeOverlay()" class="closeMobile">x</p>
               <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
               <div class="add-headline">
               <p class="add-contact">Edit contact</p>
