@@ -56,8 +56,8 @@
     font-size: 20px;
 }
 
-.background-new-contact-button {
-    width: 456px;
+.backgroundNewContactButton {
+    width: 450px;
     height: 101px;
     position: fixed;
     top: 95px;
@@ -559,17 +559,20 @@ h4 {
 
 
 @media (max-width: 1440px) {
-    .background-new-contact-button {
-        display: none;
-    }
 
     .contactList {
         width: 100vw;
-        height: 90vh;
         padding: 0;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        /* justify-content: center; */
     }
+
+    .person {
+        width: 100%;
+    }
+
+
 
      .namesDetails {
         width: 100vw;
@@ -614,16 +617,10 @@ h4 {
         height: 60px;
         width: 60px;
         border-radius: 10rem;
+        top: 80%;
+        left: 85%;
     }
 
-    .addNewContactButtonMobile {
-        top: 90%;
-    }
-
-    .editContactBtnMobile {
-        bottom: 120px;
-        left: 88%;
-    }
 
     .editOverlayMobile {
         width: 100px;
@@ -631,10 +628,12 @@ h4 {
         background-color: #404447;
     }
 
+    .clear-button,
     .contactIcons,
     .cancel-button,
     .close,
     .contactLogo,
+    .backgroundNewContactButton,
     .addNewContactButton,
     .contactHeadline,
     .closeDiv {
@@ -659,6 +658,7 @@ h4 {
         margin-right: auto;
         margin-left: auto;
     }
+
     .editContact-Overlay{
         position: fixed;
         top: 0;
@@ -783,10 +783,6 @@ h4 {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* width: 18rem;
-        margin-left: 4px;
-        margin-right: 4px; */
-
     }
 
     .addNewContactDiv {
@@ -823,7 +819,7 @@ h4 {
 }
 @media (max-width: 1008px) {
     .main-content {
-        display: flex !important;
+        display: block !important;
     }
 
     .addNewContactButtonMobile {
@@ -860,6 +856,8 @@ h4 {
 }
 
 @media (max-width: 500px) {
+
+
     .person-details {
         padding-left: 0;
         padding-right: 0;
