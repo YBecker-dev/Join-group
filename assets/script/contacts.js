@@ -261,8 +261,6 @@ async function saveToLocalstorage() { // zu lang
 function openEditOverlay(index) { // zu lang
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
-  let menuOverlay = document.getElementById('editDeleteOverlayMobile');
-  menuOverlay.classList.toggle('mobile-activ');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
 
