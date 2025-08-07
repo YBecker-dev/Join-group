@@ -81,9 +81,7 @@ function openDetails(index) { //ok
 
 function showMobileEditOverlay(indexDetails) { //ok
   let overlayRef = document.getElementById('editContact-Overlay');
-  
   overlayRef.classList.toggle('d-none');
-  
   overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
 }
 
