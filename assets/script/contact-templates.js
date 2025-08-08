@@ -66,21 +66,28 @@ function getNoteTemplateContactDetails(indexDetails) {
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
-              <p onclick="closeOverlay()" class="closeMobile">x</p>
-              <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-              <div class="add-headline">
-              <p class="add-contact">Add contact</p>
-              <p class="addTastText">Tasks are better with a team!</p>
+              <div class="headDiv-wrapper-newContact">
+                <p onclick="closeOverlay()" class="closeMobile">x</p>
+                  <div class="contactLogo-wrapper">
+                    <img class="contactLogo" src="/assets/img/logo/logo_white.png" alt="Logo_white">
+                  </div>
+                  <div class="add-headline">
+                    <p class="add-contact">Add contact</p>
+                    <p class="addTastText">Tasks are better with a team!</p>
+                    <div class="line"></div>
+                  </div> 
               </div>
-              <div class="line"></div>
             </div>
-            <div class="editDiv">
-              <div class="profile-img">
-                <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../img/icon/profile.png" alt="profile Image"></p>
+
+            <div class="editDiv-addContact">
+              <div class="profileInitials-addContacts">
+                <img class="profileImg-addContacts" src="../img/icon/profile.png" alt="profile Image">
               </div>        
-              <div class="profilDiv">
+              <div class="profilDiv-addContacts">
               <div class="closeDiv">
-                <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+                <div class="close-wrapper">
+                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+                </div>
               </div>
                 <div class="add-new-contact-inputs">
                   <div class="addNewContactDiv" onclick="event.stopPropagation(), clearInputError()" id="addNewContactInput">
@@ -96,8 +103,8 @@ function getNoteTemplateAddNewContact() {
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
                 </div>
-                <div class="accept">
-                  <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
+                <div class="accept-addContact">
+                  <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png"></button>
                   <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
                 </div>         
               </div>
@@ -111,21 +118,32 @@ function getNoteTemplateEditContact(index) {
 
   return ` <div class="newContactOverlay" onclick="eventBubbling(event)">
             <div class="headDiv">
-              <p onclick="closeOverlay()" class="closeMobile">x</p>
-              <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-              <div class="add-headline">
-              <p class="add-contact">Edit contact</p>
+              <div class ="headDiv-wrapper">
+                <div class="closeMobile-wrapper">
+                  <img onclick="closeOverlay()" class="closeMobile" src="../img/icon/Close-white.png">
+                </div>
+                <div class ="contactLogo-wrapper">
+                  <img class="contactLogo" src="/assets/img/logo/logo_white.png" alt="Logo_white">
+                </div>
+                <div class="headline-wrapper">
+                  <div class="add-headline">
+                  <p class="add-contact">Edit contact</p>
+                  </div>
+                  <div class="line"></div>
+                </div>
               </div>
-              <div class="line"></div>
             </div>
+
             <div class="editDiv">
-              <div class="profile-img profileInitials">
+              <div class="profileInitials">
                 <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
               </div>        
               <div class="profilDiv">
-              <div class="closeDiv">
-                <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
-              </div>
+                <div class="closeDiv">
+                   <div class="close-wrapper">
+                    <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+                  </div>
+                </div>
                 <div class="add-new-contact-inputs">
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="addNewContactInput">
                     <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${user.name || ''}" oninput="validateNameInput(this)">
