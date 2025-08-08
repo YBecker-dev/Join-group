@@ -729,7 +729,7 @@ h4 {
         background-color: #404447;
     }
 
-    .clear-button,
+   
     .contactIcons,
     .cancel-button,
     .close,
@@ -864,16 +864,21 @@ h4 {
         cursor: pointer;
     }
 
+    .mobile-headline{
+        padding-top: 30px;
+    }
+
     .add-contact {
         font-size: 47px;
     }
 
     .addTastText {
-        font-size: 14px;
+        font-size: 20px;
     }
 
     .line {
         height: 2px;
+        width: 90px;
         margin-bottom: 40px;
     }
 
@@ -884,6 +889,19 @@ h4 {
         width: 100%;
         height: calc(760px - 351px);
         
+        /*width: 20rem;*/
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        background-color: ffffff;
+    }
+
+    .editDiv-addContact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: calc(760px - 351px);
         /*width: 20rem;*/
         border-top-right-radius: 0;
         border-bottom-right-radius: 30px;
@@ -903,7 +921,30 @@ h4 {
       
     }
 
+    .profilDiv-addContacts {
+        width: 364px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        left: 0;
+        padding-top: 33px;
+      
+    }
+
+    /*.add-new-contact-inputs{
+        height: 153px;
+        width: 364px;
+        gap: 15px;
+    }*/
+
     .profileInitials{
+        left: 0;
+        top: -60px;    
+    }
+
+    .profileInitials-addContacts{
         left: 0;
         top: -60px;    
     }
@@ -916,16 +957,25 @@ h4 {
 
     .accept{
         height: 51px;
-        margin: 0;
+        margin-top: 30px;
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
+
+    .accept-addContact{
+        height: 51px;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
     .add-new-contact-inputs {
+        height: 171px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 24px;
     }
 
     .addNewContactDiv {
@@ -934,7 +984,7 @@ h4 {
     }
 
     .addNewContact {
-        width: 12rem;
+        /*width: 12rem;*/
         height: 2.2rem;
         font-size: 20px;
     }
@@ -950,7 +1000,18 @@ h4 {
         /*margin-bottom: 60px;*/
         font-size: 21px;
         padding: 8px !important;
-        height: auto;
+        height: 100%;
+    }
+
+    .hide-button{
+        height: 100%;
+        width: 82px;
+    }
+    
+    .hide-button-addContact{
+        height: 100%;
+        width: 82px;
+        display: none;
     }
 
     .clear-button {
@@ -958,8 +1019,9 @@ h4 {
         height: 100%;
         font-size: 21px;
         padding: 8px !important;
-        height: auto;
     }
+   
+  
 }
 @media (max-width: 1008px) {
     .main-content {

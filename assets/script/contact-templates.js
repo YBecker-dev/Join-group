@@ -67,11 +67,13 @@ function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
               <div class="headDiv-wrapper-newContact">
-                <p onclick="closeOverlay()" class="closeMobile">x</p>
+                <div class="closeMobile-wrapper">
+                  <img onclick="closeOverlay()" class="closeMobile" src="../img/icon/Close-white.png">
+                </div>
                   <div class="contactLogo-wrapper">
                     <img class="contactLogo" src="/assets/img/logo/logo_white.png" alt="Logo_white">
                   </div>
-                  <div class="add-headline">
+                  <div class="add-headline mobile-headline">
                     <p class="add-contact">Add contact</p>
                     <p class="addTastText">Tasks are better with a team!</p>
                     <div class="line"></div>
@@ -104,7 +106,9 @@ function getNoteTemplateAddNewContact() {
                   </div>
                 </div>
                 <div class="accept-addContact">
-                  <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png"></button>
+                  <div class="hide-button-addContact">
+                    <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png"></button>
+                  </div>
                   <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
                 </div>         
               </div>
@@ -157,11 +161,15 @@ function getNoteTemplateEditContact(index) {
                     <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${user.phone || ''}" oninput="validatePhoneInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
-                <div class="accept">
-                  <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
+                
+              </div>
+              <div class="accept">
+                  <div class="hide-button">
+                    <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
+                  </div>
                   <button onclick="updateContact(${index})" class="create-button">Save<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
                 </div>
-              </div>
+              
             </div>`;
 }
 
