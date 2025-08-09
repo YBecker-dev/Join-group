@@ -54,7 +54,7 @@ function getNoteTemplateContactDetails(indexDetails) {
                   <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
-              <button class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
+              <button id="showOverlayBtn" class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
                 <div class="dotted"></div>
                 <div class="dotted"></div>
                 <div class="dotted"></div>
