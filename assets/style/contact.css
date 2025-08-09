@@ -56,7 +56,6 @@
 }
 
 .backgroundNewContactButton {
-    /*width: 450px;*/
     height: 101px;
     position: fixed;
     top: 95px;
@@ -177,7 +176,7 @@ h2 {
 .contactInformations {
     display: flex;
     align-items: center;
-    /* gap: 52px; */
+     gap: 52px; 
 }
 
 .contact-Information {
