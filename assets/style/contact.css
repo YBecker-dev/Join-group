@@ -564,6 +564,12 @@ h4 {
     height: 130px;
     width: 130px;
 }
+.editContactBtn-wrapper{
+    width: 100%;
+    position: fixed;
+    bottom: 18%;
+    padding-right: 20px;
+}
 
 #contactDetails {
     transition: all 0.3s ease-in-out;
@@ -699,7 +705,7 @@ h4 {
         width: 60px;
         border-radius: 10rem;
         bottom: 3%;
-        left: 90%;
+        left: 91%;
     }
     .editOverlayMobile {
         width: 100px;
@@ -939,6 +945,7 @@ h4 {
         padding: 8px !important;
     }
 }
+
 @media (max-width: 1008px) {
     .addNewContactButtonMobile {
         display: block !important;
@@ -949,9 +956,7 @@ h4 {
     .infoName {
         font-size: 1.5rem;
     }
-    .showArrowMobile {
-        left: 75%;
-    }
+   
 }
 
 @media (max-width: 640px) {
@@ -979,6 +984,9 @@ h4 {
     .contactDetails{
         text-align: start;
         width: 250px;
+    }
+    .editContactBtn-wrapper{
+        padding-right: 25px;
     }
 }
 
@@ -1094,3 +1102,5 @@ h4 {
     }
     
 }
+
+

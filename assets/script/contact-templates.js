@@ -55,11 +55,14 @@ function getNoteTemplateContactDetails(indexDetails) {
                 </div>
               </div>
              
-            </div> <button id="showOverlayBtn" class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
-                <div class="dotted"></div>
-                <div class="dotted"></div>
-                <div class="dotted"></div>
-              </button>`;
+            </div>
+            <div class="editContactBtn-wrapper">
+              <button id="showOverlayBtn" class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
+                  <div class="dotted"></div>
+                  <div class="dotted"></div>
+                  <div class="dotted"></div>
+                </button>
+              </div>`;
 }
 
 // add new Contact
