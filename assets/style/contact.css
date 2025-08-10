@@ -1,11 +1,5 @@
-.myMain {
-    display: flex;
-    position: absolute;
-    top: 6rem;
-    left: 14.8rem;
-}
-
 .main-content {
+     position: absolute;
     display: flex;
     overflow: hidden;
 }
@@ -177,7 +171,7 @@ h2 {
 .contactInformations {
     display: flex;
     align-items: center;
-     gap: 52px; 
+     gap: 52px;
 }
 
 .contact-Information {
@@ -196,7 +190,6 @@ h2 {
     font-size: 47px;
     border: 3px solid #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000005E;
-    /*margin-right: 40px;*/
 }
 
 .infoNames {
@@ -269,10 +262,6 @@ h4 {
 .editContactOverlay {
     height: 592px;
     width: 1212px;
-    /*position: fixed;*/
-    /*top: 50%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, -50%);*/
     z-index: 1000;
     display: flex;
 }
@@ -299,27 +288,25 @@ h4 {
     align-items: center;
     gap: 12px;
     padding-bottom: 35px;
-    /*padding: 66px 48px;*/
 }
 
 .headDiv-wrapper{
-    /*test*/
     position: relative;
     bottom: 30px;
     display: flex;
     flex-direction: column;
     gap: 34px;
-    
+
 }
 
- .headDiv-wrapper-newContact{
-        bottom: 0;
-        padding-top: 24px;
-        width: 371px;
-        display: flex;
-        flex-direction: column; 
-        gap: 20px;   
-    }
+.headDiv-wrapper-newContact{
+    bottom: 0;
+    padding-top: 24px;
+    width: 371px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 .contactLogo-wrapper{
     width: 361px;
@@ -329,7 +316,6 @@ h4 {
 .contactLogo {
     height: 67px;
     width: 54px;
-    /*position: absolute;*/
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -368,29 +354,19 @@ h4 {
 
 .editDiv {
     height: 100%;
-    /*width: 49rem;*/
     width: calc(1212px - 453px);
     border-bottom-right-radius: 30px;
     border-top-right-radius: 30px;
     background-color: #ffffff;
-    /*display: flex;*/
 }
 
 .editDiv-addContact {
     height: 100%;
-    /*width: 49rem;*/
     width: calc(1212px - 453px);
     border-bottom-right-radius: 30px;
     border-top-right-radius: 30px;
     background-color: #ffffff;
-    /*display: flex;*/
 }
-
-/*.profile-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}*/
 
 .closeDiv {
     display: flex;
@@ -439,22 +415,18 @@ h4 {
     height: 120px;
     width: 120px;
     display: flex;
-    /*padding: 0 83px 0 72px;*/
     position: relative;
     top: 204px;
     left: calc(550px - 453px)
-    /*bottom: 32px;*/
 }
 
 .profileInitials-addContacts {
     height: 130px;
     width: 130px;
     display: flex;
-    /*padding: 0 83px 0 72px;*/
     position: relative;
     top: 204px;
-    left: calc(550px - 467px)
-    /*bottom: 32px;*/
+    left: calc(550px - 467px);
 }
 
 .addNewContactDiv {
@@ -545,7 +517,6 @@ h4 {
     gap: 25px;
     margin-top: 52px;
 }
-
 
 .save-close {
     width: 1.5rem;
@@ -660,40 +631,30 @@ h4 {
     border: unset !important;
 }
 
-
 @media (max-width: 1440px) {
-
     .contactList {
         width: 100vw;
         padding: 0;
         display: flex;
         justify-content: space-between;
-        /* justify-content: center; */
     }
-
     .person {
         width: 100%;
     }
-
-
-
      .namesDetails {
         width: 100vw;
         display: flex;
         flex-direction: column;
     }
-
     .contactHeadlineMobile {
         display: block;
         margin-top: 120px;
     }
-
     .headlineMobile {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-
     .separatingLineMobile {
         width: 7rem;
         height: 3px;
@@ -701,17 +662,16 @@ h4 {
         margin-bottom: 3rem;
         background-color: #29abe2;
     }
-
     .showArrowMobile {
         display: block;
         position: fixed;
         width: 24px;
         height: auto;
         top: 120px;
-        left: 90%;
+        /* left: 93%; */
+        right: 10%;
         cursor: pointer;
     }
-
     .editContactBtnMobile,
     .addNewContactButtonMobile {
         margin-right: 16px;
@@ -721,18 +681,14 @@ h4 {
         height: 60px;
         width: 60px;
         border-radius: 10rem;
-        top: 85%;
-        left: 94%;
+        top: 80%;
+        left: 93%;
     }
-
-
     .editOverlayMobile {
         width: 100px;
         height: 200px;
         background-color: #404447;
     }
-
-   
     .contactIcons,
     .cancel-button,
     .close,
@@ -743,16 +699,13 @@ h4 {
     .closeDiv {
         display: none;
     }
-
     h2 {
         margin-bottom: 1rem;
     }
-
     .newContactMobile {
         margin: auto;
         height: 28px;
     }
-
     .dotted {
         background-color: #ffffff;
         width: 6px;
@@ -762,7 +715,6 @@ h4 {
         margin-right: auto;
         margin-left: auto;
     }
-
     .editContact-Overlay{
         position: fixed;
         top: 0;
@@ -771,13 +723,13 @@ h4 {
         height: 100vh;
         z-index: 1;
     }
-
     .editDeleteOverlayMobile {
         position: fixed;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
+        background-color: white;
         gap: 8px;
         width: 116px;
         height: 110px;
@@ -789,7 +741,6 @@ h4 {
         border-bottom-left-radius: 1.2rem;
         z-index: 5;
     }
-
     .mobile {
         height: 40px;
         width: 96px;
@@ -802,44 +753,34 @@ h4 {
     .mobile:hover{
         cursor: pointer;
     }
-
     .editDivMobile {
         margin-top: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
     .newContactOverlay,
     .editContactOverlay {
-        /*position: absolute;*/
-        /* top: 100px; */
-        /* height: 30rem; */
-        /*height: 60%;*/
-        /*width: 10rem;*/
         height: 760px;
         width: 396px;
         display: flex;
         align-items: center;
         flex-direction: column;
     }
-
     .headDiv-wrapper{
         bottom: 0;
         padding-top: 24px;
-        width: 348px; 
-        gap: 40px;   
+        width: 348px;
+        gap: 40px;
     }
-
     .headDiv-wrapper-newContact{
         bottom: 0;
         padding-top: 24px;
         width: 348px;
         display: flex;
-        flex-direction: column; 
-        gap: 15px;   
+        flex-direction: column;
+        gap: 15px;
     }
-
     .headDiv {
         width: 100%;
         height: 351px;
@@ -851,7 +792,6 @@ h4 {
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0;
     }
-
     .closeMobile-wrapper{
         display: flex;
         justify-content: flex-end;
@@ -863,55 +803,44 @@ h4 {
         display: flex;
         justify-content: flex-end;
         align-items:start;
-        /*margin-bottom: 50px;*/
         cursor: pointer;
     }
-
     .mobile-headline{
         padding-top: 30px;
     }
-
     .add-contact {
         font-size: 47px;
     }
-
     .addTastText {
         font-size: 20px;
     }
-
     .line {
         height: 2px;
         width: 90px;
         margin-bottom: 40px;
     }
-
     .editDiv {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         height: calc(760px - 351px);
-        
-        /*width: 20rem;*/
         border-top-right-radius: 0;
         border-bottom-right-radius: 30px;
         border-bottom-left-radius: 30px;
         background-color: ffffff;
     }
-
     .editDiv-addContact {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         height: calc(760px - 351px);
-        /*width: 20rem;*/
         border-top-right-radius: 0;
         border-bottom-right-radius: 30px;
         border-bottom-left-radius: 30px;
         background-color: ffffff;
     }
-
     .profilDiv {
         width: 364px;
         display: flex;
@@ -921,9 +850,7 @@ h4 {
         margin: 0;
         left: 0;
         padding-top: 33px;
-      
     }
-
     .profilDiv-addContacts {
         width: 364px;
         display: flex;
@@ -933,31 +860,16 @@ h4 {
         margin: 0;
         left: 0;
         padding-top: 33px;
-      
+
     }
-
-    /*.add-new-contact-inputs{
-        height: 153px;
-        width: 364px;
-        gap: 15px;
-    }*/
-
     .profileInitials{
         left: 0;
-        top: -60px;    
+        top: -60px;
     }
-
     .profileInitials-addContacts{
         left: 0;
-        top: -60px;    
-    }
-    /*.profileImg {
         top: -60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }*/
-
+    }
     .accept{
         height: 51px;
         margin-top: 30px;
@@ -965,13 +877,11 @@ h4 {
         flex-direction: row;
         justify-content: center;
     }
-
     .accept-addContact{
         height: 51px;
         margin-top: 30px;
         justify-content: center;
     }
-
     .add-new-contact-inputs {
         height: 171px;
         display: flex;
@@ -980,69 +890,48 @@ h4 {
         align-items: center;
         gap: 24px;
     }
-
     .addNewContactDiv {
         width: 364px;
         height: 41px
     }
-
     .addNewContact {
-        /*width: 12rem;*/
         height: 2.2rem;
         font-size: 20px;
     }
-
     .addNewContactIcon {
         width: 24px;
         height: 24px;
-        /*padding-left: 4px;
-        padding-right: 4px;*/
     }
-
     .create-button {
-        /*margin-bottom: 60px;*/
         font-size: 21px;
         padding: 8px !important;
         height: 100%;
     }
-
     .hide-button{
         height: 100%;
         width: 82px;
     }
-    
     .hide-button-addContact{
         height: 100%;
         width: 82px;
         display: none;
     }
-
     .clear-button {
-        /*margin-bottom: 60px;*/
         height: 100%;
         font-size: 21px;
         padding: 8px !important;
     }
-   
-  
 }
 @media (max-width: 1008px) {
-    .main-content {
-        display: block !important;
-    }
-
     .addNewContactButtonMobile {
         display: block !important;
     }
 }
 
 @media (max-width: 700px) {
-    
-
     .infoName {
         font-size: 1.5rem;
     }
-
     .showArrowMobile {
         left: 75%;
     }
@@ -1053,39 +942,28 @@ h4 {
         margin-left: auto;
         margin-right: auto;;
     }
-
     .infoName {
         font-size: 1rem;
     }
 }
 
 @media (max-width: 500px) {
-
-
     .person-details {
         padding-left: 0;
         padding-right: 0;
     }
-
-
     .contact-name {
         font-size: 16px;
     }
-
-
     .mail {
         font-size: 12px;
     }
-
-
     .addNewContactButton {
         padding-left: 4px;
         padding-right: 4px;
-        
     }
-
-
 }
+
 @media (max-width: 415px){
     .newContactOverlay{
         width: 340px;
@@ -1138,5 +1016,4 @@ h4 {
     .headDiv-wrapper{
         width: 270px;
     }
-
 }
