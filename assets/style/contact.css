@@ -535,8 +535,7 @@ h4 {
 }
 
 .agenda-line {
-    max-width: 352px;
-    width: 100%;
+    width: 352px;
     border: 1px solid #D1D1D1;
     margin: 8px 0;
 }
@@ -636,22 +635,25 @@ h4 {
     .main-content{
         padding: 0;
         padding-top: 80px;
+        padding-bottom: 80px;
     }
 
     .contactList {
-        position: fixed;
+        /* position: fixed; */
         width: 100vw;
         padding: 0;
-        display: flex;
-        justify-content: space-between;
+        /* display: flex; */ 
+        /* justify-content: space-between; */
     }
 
     #contactContent{
         padding-top: 10px;
-        padding-bottom: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .person {
-        width: 100%;
+        width: 400px;
     }
      .namesDetails {
         width: 100vw;
@@ -693,7 +695,7 @@ h4 {
         height: 60px;
         width: 60px;
         border-radius: 10rem;
-        top: 80%;
+        bottom: 3%;
         left: 93%;
     }
     .editOverlayMobile {
@@ -1028,4 +1030,16 @@ h4 {
     .headDiv-wrapper{
         width: 270px;
     }
+
+    .person{
+       max-width: 290px;
+        
+    }
+    .agenda-category{
+        padding-left: 42px;
+    }
+    .agenda-line{
+        width: 300px;
+    }
+    
 }
