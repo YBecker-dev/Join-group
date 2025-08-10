@@ -632,11 +632,23 @@ h4 {
 }
 
 @media (max-width: 1440px) {
+
+    .main-content{
+        padding: 0;
+        padding-top: 80px;
+    }
+
     .contactList {
+        position: fixed;
         width: 100vw;
         padding: 0;
         display: flex;
         justify-content: space-between;
+    }
+
+    #contactContent{
+        padding-top: 10px;
+        padding-bottom: 200px;
     }
     .person {
         width: 100%;
