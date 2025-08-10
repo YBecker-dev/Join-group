@@ -57,10 +57,12 @@ function groupContactsByInitial(contacts) { //zu lang
 function changeContactColorIfSelected(index, isSelected) { //ok
   let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
   if (openDetails) {
-    if (isSelected) {
-      openDetails.classList.add('active');
-    } else {
-      openDetails.classList.remove('active');
+    if(!window.innerWidth >= 1440){
+        if (isSelected) {
+        openDetails.classList.add('active');
+      } else {
+        openDetails.classList.remove('active');
+      }
     }
   }
 }
@@ -170,7 +172,10 @@ function closeOverlay() { //ok
 
 function closeDetails() { //ok
   let contentCloseDetails = document.getElementById('namesDetails');
+  let overlayBtn = document.getElementById('showOverlayBtn');
+ 
   if (contentCloseDetails) {
+    overlayBtn.classList.toggle('d-none');
     contentCloseDetails.classList.add('d-none');
     contentCloseDetails.innerHTML = '';
   }

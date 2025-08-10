@@ -632,6 +632,9 @@ h4 {
 
 @media (max-width: 1440px) {
 
+    .active{
+        background-color: rgb(246, 247, 248);
+    }
     .main-content{
         padding: 0;
         padding-top: 80px;
@@ -696,7 +699,7 @@ h4 {
         width: 60px;
         border-radius: 10rem;
         bottom: 3%;
-        left: 93%;
+        left: 90%;
     }
     .editOverlayMobile {
         width: 100px;
@@ -951,13 +954,31 @@ h4 {
     }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 640px) {
     .details {
         margin-left: auto;
         margin-right: auto;;
     }
     .infoName {
         font-size: 1rem;
+    }
+    .namesDetails{
+        margin-left: 16px;
+    }
+     .infoNames{
+        font-size: 36px;
+    }
+    .mail{
+        font-size: 16px;
+    }
+    .contactInformations{
+        gap: 30px;
+        width: 500px;
+       
+    }
+    .contactDetails{
+        text-align: start;
+        width: 250px;
     }
 }
 
@@ -976,6 +997,30 @@ h4 {
         padding-left: 4px;
         padding-right: 4px;
     }
+    .namesDetails{
+        margin-left: 16px;
+    }
+    .headlineMobile>h2{
+        font-size: 47px;
+    }
+    .team{
+       font-size: 20px; 
+    }
+    .initialOverlay{
+        height: 80px;
+        width: 80px;
+        font-size: 27px;
+    }
+    .separatingLineMobile{
+        width: 90px;
+    }
+    .contact-Information{
+        font-size: 20px;
+    }
+    .contactInformations{
+        gap: 20px;
+    }
+   
 }
 
 @media (max-width: 415px){
@@ -1040,6 +1085,12 @@ h4 {
     }
     .agenda-line{
         width: 300px;
+    }
+    .contactDetails{
+        width: 200px;
+    }
+    .infoNames{
+        font-size: 30px;
     }
     
 }
