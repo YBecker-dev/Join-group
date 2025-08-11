@@ -1,0 +1,24 @@
+@media(max-height: 670px){
+    .newContactOverlay{
+        height: 630px;
+
+    }
+    .editDiv-addContact{
+        height: 300px;
+        
+    }
+    .profileImg-addContacts{
+        height: 80px;
+        width: 80px;
+    }
+    .profileInitials-addContacts{
+        width: auto;
+        padding-top: 20px;
+    }
+    .accept-addContact{
+        margin-top: 10px;
+    }
+    .profilDiv-addContacts{
+        padding-top: 20px;
+    }
+}
