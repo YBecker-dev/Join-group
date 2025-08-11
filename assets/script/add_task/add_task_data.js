@@ -1,4 +1,5 @@
 async function buildTaskData() {
+  let status = getTaskStatus();
   return {
     addTaskId: await getNextTaskId(),
     title: getInputValue('title'),
@@ -8,8 +9,8 @@ async function buildTaskData() {
     subtasks: getSubtasks(),
     assignedTo: getAssignedTo(),
     priority: getPriority(),
-    status: 'todo',
-    sequence: await getNextSequence(),
+    status: status,
+    sequence: await getNextSequence(status),
   };
 }
 
@@ -41,18 +42,30 @@ async function getNextTaskId() {
   return usedIds.length;
 }
 
-async function getNextSequence() {
+async function getNextSequence(status = 'todo') {
   let sequence = 0;
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let tasks = await response.json();
   if (tasks) {
     Object.values(tasks).forEach((task) => {
-      if (task.sequence != null && task.status === 'todo' && task.sequence >= sequence) {
+      if (task.sequence != null && task.status === status && task.sequence >= sequence) {
         sequence = task.sequence + 1;
       }
     });
   }
   return sequence;
+}
+
+function getTaskStatus() {
+  if (window.currentTaskStatus) {
+    return window.currentTaskStatus;
+  }
+  let urlParams = new URLSearchParams(window.location.search);
+  let statusFromUrl = urlParams.get('status');
+  if (statusFromUrl) {
+    return statusFromUrl;
+  }
+  return 'todo';
 }
 
 function getInputValue(id) {

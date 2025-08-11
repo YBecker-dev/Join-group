@@ -1,47 +1,30 @@
-function showDropDown(trueTaskId){
-    
-    //findStatusArea(trueTaskId);
-    //hideActivStatus(trueTaskId);
+function showDropDown(){
     let dropdown_menu = document.getElementById('drop-down')
     dropdown_menu.classList.toggle('d-none');    
 }
 
 function findStatusArea(trueTaskId){
-    //let choosenTask = document.getElementById(trueTaskId);
     let boardTaskContainer= document.getElementById('task-'+trueTaskId);
     let firstParent = boardTaskContainer.parentElement;
-    //console.log(firstParent.parentElement)
     let targetParentElement = firstParent.parentElement;
-    //console.log(targetParentElement.id);
     let statusID = targetParentElement.id
-    //console.log(statusID);
     hideActivStatus(trueTaskId, statusID);  
 }
 
 function hideActivStatus(trueTaskId, statusID){
-    //console.log(trueTaskId)
-    //let targetArea = document.getElementById('todo');
     let targetArea = document.getElementById(statusID);
     let todoDropDown = document.getElementById(statusID+'-mobil-'+trueTaskId)
-    //console.log(todoDropDown);
     let sections = targetArea.getElementsByTagName('section');
     let sectionId;
     for(let section  of sections){
         let sectionbodys = section.children;
         for(let sectionbody of sectionbodys){
-            //console.log(sectionbody.parentElement);
-            let area=sectionbody.parentElement
-            //console.log(area.parentElement)
             sectionId = sectionbody.id;
-            //console.log(sectionId)
             let filterId = sectionId.slice(5)
             let targetId = Number(filterId);
             if(trueTaskId === targetId){
-                //console.log(true);
                 todoDropDown.classList.add('d-none');
-            }else{
-                //console.log(false)
-            }      
+            }
         }
     }
 }

@@ -246,14 +246,15 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
   await pushTasksInBoard();
 }
 
-async function openCreateTask() {
+async function openCreateTask(event) {
   selectedContacts = [];
+  let targetStatus = getTargetStatusFromEvent(event);
   if (shouldRedirectToAddTaskPage()) {
-    window.location.href = '/assets/html/add_task.html';
+    window.location.href = `/assets/html/add_task.html?status=${targetStatus}`;
     return;
   }
   await setupAddTaskOverlay();
-  initializeAddTaskForm();
+  await initializeAddTaskForm(targetStatus);
 }
 
 function closeCreateTask() {

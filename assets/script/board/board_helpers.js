@@ -191,9 +191,26 @@ async function setupAddTaskOverlay() {
   animatedOpeningAddTask(overlayBg, overlayContent);
 }
 
-async function initializeAddTaskForm() {
+async function initializeAddTaskForm(targetStatus) {
   setPriority('medium');
+  setTaskStatus(targetStatus);
   await initAddTask();
+}
+
+function getTargetStatusFromEvent(event) {
+  if (!event || !event.target) {
+    return 'todo';
+  }
+  let elementId = event.target.id;
+  if (elementId.includes('todo')) return 'todo';
+  if (elementId.includes('inProgress')) return 'inProgress';  
+  if (elementId.includes('awaitFeedback')) return 'awaitFeedback';
+  if (elementId.includes('done')) return 'done';
+  return 'todo';
+}
+
+function setTaskStatus(status) {
+  window.currentTaskStatus = status || 'todo';
 }
 
 function collectTasksForColumn(entries, status) {

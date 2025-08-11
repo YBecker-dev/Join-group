@@ -7,6 +7,7 @@ async function initAddTask() {
   await loadContacts();
   initFrameworkFunctions();
   setPriority('medium');
+  initializeTaskStatusFromUrl();
   addFormValidation('add-task-form');
   addInputErrorListeners();
   document.addEventListener('click', function () {
@@ -263,5 +264,13 @@ function showWrapperCreateTask() {
   let wrapper = document.getElementById('wrapper-create-task-section');
   if (wrapper) {
     wrapper.classList.remove('d-none');
+  }
+}
+
+function initializeTaskStatusFromUrl() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let statusFromUrl = urlParams.get('status');
+  if (statusFromUrl) {
+    window.currentTaskStatus = statusFromUrl;
   }
 }
