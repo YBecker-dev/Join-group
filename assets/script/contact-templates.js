@@ -2,7 +2,7 @@
 function getNoteTemplateContact(index) {
   let user = contacts[index];
 
-  return ` <div data-index="${index}" onclick="openDetails(${index}), event.stopPropagation()" class="person">
+  return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
               <p class="initial" style="background-color: ${user.color}">${user.initials}</p>
               <div class="person-details">
                 <p class="contact-name">${user.name}</p>
