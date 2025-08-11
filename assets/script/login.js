@@ -78,26 +78,26 @@ function loginUser(event) {
 
 async function checkUser(event) {
   event.preventDefault();
-  let mail = document.getElementById('email');
+  let email = document.getElementById('email');
   let password = document.getElementById('password');
-  if (!validateInputs(mail, password)) return;
+  if (!validateInputs(email, password)) return;
   
   try {
     let response = await fetch(BASE_URL + '/login' + '.json');
     if (response.ok) {
       const userDataObject = await response.json();
       if (userDataObject) {
-        let findUser = authenticateUser(mail, password, userDataObject);
-        handleAuthResult(findUser, mail, password);
+        let findUser = authenticateUser(email, password, userDataObject);
+        handleAuthResult(findUser, email, password);
       }
     }
   } catch (error) {}
 }
 
-function validateInputs(mail, password) {
+function validateInputs(email, password) {
   let valid = true;
-  if (!mail.value || mail.value.trim() === '') {
-    shakeInput(mail, 'Please check its is filled with a valid email');
+  if (!email.value || email.value.trim() === '') {
+    shakeInput(email, 'Please check its is filled with a valid email');
     valid = false;
   }
   if (!password.value || password.value.trim() === '') {
@@ -107,12 +107,12 @@ function validateInputs(mail, password) {
   return valid;
 }
 
-function authenticateUser(mail, password, userDataObject) {
+function authenticateUser(email, password, userDataObject) {
   const userKey = Object.keys(userDataObject);
   for (i = 0; i < userKey.length; i++) {
     const userID = userKey[i];
     const userObjekt = userDataObject[userID];
-    if (mail.value == userObjekt.mail && password.value == userObjekt.password) {
+    if (email.value == userObjekt.email && password.value == userObjekt.password) {
       let announcedUser = userObjekt.name;
       if (userObjekt.surname && userObjekt.surname.trim() !== '') {
         announcedUser += ' ' + userObjekt.surname;
@@ -124,7 +124,7 @@ function authenticateUser(mail, password, userDataObject) {
   return false;
 }
 
-function handleAuthResult(findUser, mail, password) {
+function handleAuthResult(findUser, email, password) {
   if (findUser === true) {
     localStorage.setItem('showGreeting', 'true');
     window.location.href = '/assets/html/summery.html';
@@ -133,7 +133,7 @@ function handleAuthResult(findUser, mail, password) {
     document.getElementById('login-failed').classList.remove('d-none');
     resetForm();
     resetPwIcon();
-    shakeInput(mail, '');
+    shakeInput(email, '');
     shakeInput(password, '');
   }
 }

@@ -1,4 +1,5 @@
 const BASE_URL = 'https://authenticationprototyp-default-rtdb.europe-west1.firebasedatabase.app/';
+const FIREBASE_URL_USERSDATA = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json';
 let button;
 let checkbox;
 let nameInput;
@@ -121,32 +122,69 @@ function successRegister(event) {
 async function checkUserOnRegistration(event) {
   event.preventDefault();
   try {
-    let response = await fetch(BASE_URL + '/login' + '.json');
-    if (response.ok) {
-      const userDataObject = await response.json();
-      await handleUserDataResponse(userDataObject);
-    }
-  } catch (error) {}
-}
+    const emailExists = await checkEmailInBothDatabases();
 
-async function handleUserDataResponse(userDataObject) {
-  if (userDataObject) {
-    let mailAlreadyExist = checkIfEmailExists(userDataObject);
-    if (!mailAlreadyExist) {
+    if (!emailExists) {
       await addUser();
+    } else {
+      showEmailAlreadyExistsError();
     }
-  } else {
-    addUser();
+  } catch (error) {
+    console.error('Fehler bei der Benutzerregistrierung:', error);
   }
 }
 
-function checkIfEmailExists(userDataObject) {
-  const userkey = Object.keys(userDataObject);
-  for (i = 0; i < userkey.length; i++) {
-    const userId = userkey[i];
-    const userObjekt = userDataObject[userId];
-    if (emailInput.value == userObjekt.mail) {
-      showEmailAlreadyExistsError();
+async function handleUserDataResponse(userDataObject) {
+  const emailExists = await checkEmailInBothDatabases();
+
+  if (!emailExists) {
+    await addUser();
+  } else {
+    showEmailAlreadyExistsError();
+  }
+}
+
+async function checkEmailInBothDatabases() {
+  try {
+    const [loginResponse, userResponse] = await Promise.all([
+      fetch(BASE_URL + '/login.json'),
+      fetch(FIREBASE_URL_USERSDATA),
+    ]);
+
+    const emailExists = await checkEmails(loginResponse, userResponse);
+    return emailExists;
+  } catch (error) {
+    console.error('Fehler bei der E-Mail-Überprüfung:', error);
+    return false;
+  }
+}
+
+async function checkEmails(loginResponse, userResponse) {
+  if (loginResponse.ok) {
+    const loginData = await loginResponse.json();
+    if (loginData && CheckEmailExistsInData(loginData, 'email')) {
+      return true;
+    }
+  }
+
+  if (userResponse.ok) {
+    const userData = await userResponse.json();
+    if (userData && CheckEmailExistsInData(userData, 'email')) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function CheckEmailExistsInData(dataObject, emailField) {
+  const keys = Object.keys(dataObject);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const userObject = dataObject[key];
+    const userEmail = userObject[emailField];
+    const inputEmail = emailInput.value;
+    if (userEmail === inputEmail) {
       return true;
     }
   }
@@ -174,7 +212,7 @@ async function addUser() {
 
 function createLoginData() {
   return {
-    mail: emailInput.value,
+    email: emailInput.value,
     password: passwordInput.value,
     name: nameInput.value,
   };
@@ -242,7 +280,6 @@ function formSubmit(event) {
     checkAllFields();
   }
 }
-
 
 function checkAllFields() {
   checkName();

@@ -344,31 +344,3 @@ function validatePhoneInput(input) {
   clearInputError(input);
 }
 
-function validateEmailInput(input) {
-  //ok
-  input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
-  clearInputError(input);
-  input.setCustomValidity('');
-}
-
-function validateNameInput(input) {
-  //zu lang
-  if (input.value.endsWith(' ')) {
-    clearInputError(input);
-    return;
-  }
-  let cleaned = input.value
-    .replace(/[^a-zA-ZäöüÄÖÜß\- ]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  let words = cleaned.split(' ').slice(0, 3);
-  let capitalized = [];
-  for (let i = 0; i < words.length; i++) {
-    let word = words[i];
-    if (word.length > 0) {
-      capitalized.push(word.charAt(0).toUpperCase() + word.slice(1));
-    }
-  }
-  input.value = capitalized.join(' ');
-  clearInputError(input);
-}

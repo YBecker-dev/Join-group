@@ -475,10 +475,6 @@ input[type="text"] {
     position: relative;
 }
 
-.subtask-input-container {
-    /* padding-bottom: 16px; */
-}
-
 #assigned-to-dropdown-selected:hover,
 #category-dropdown-selected:hover,
 #title:hover,
