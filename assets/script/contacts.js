@@ -19,7 +19,6 @@ function getInitials(name) {
 
 
 function renderContacts() {
-  //zu lang
   let contentRef = document.getElementById('contactContent');
   if (!contentRef) return;
 
@@ -43,7 +42,6 @@ function renderContacts() {
 
 
 function groupContactsByInitial(contacts) {
-  //zu lang
   let groups = {};
   for (let i = 0; i < contacts.length; i++) {
     let name = contacts[i].name || '';
@@ -278,7 +276,6 @@ async function updateContact(index) {
 
 
 async function saveToLocalstorage() {
-  // zu lang
   let userName = document.getElementById('newContactName').value;
   let userEmail = document.getElementById('newContactMail').value;
   let userPhone = document.getElementById('newContactPhone').value;
@@ -299,7 +296,6 @@ async function saveToLocalstorage() {
 
 
 function openEditOverlay(index) {
-  // zu lang
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
