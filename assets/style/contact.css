@@ -15,30 +15,11 @@
     position: relative;
 }
 
-.addNewContactButton {
-    height: 52px;
-    width: 352px;
-    transition: transform 0.2s;
-}
-
-.addNewContactButton:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
-    transform: translateY(-1px);
-}
-
 .closeMobile,
 .editContactBtnMobile,
 .contactHeadlineMobile,
 .addNewContactButtonMobile {
     display: none;
-}
-
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    font-size: 21px;
 }
 
 .newContact {
@@ -47,19 +28,6 @@
 
 .contact-name {
     font-size: 20px;
-}
-
-.backgroundNewContactButton {
-    height: 101px;
-    position: fixed;
-    top: 95px;
-    left: 232px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: calc(400px - 352px);
-    padding-right: 43px;
 }
 
 .person {
@@ -473,51 +441,6 @@ h4 {
     width: 24px;
 }
 
-.clear-button {
-    background-color: #ffffff;
-    color: #293647;
-    border: solid 1px #293647;
-    font-weight: 400;
-    transition: border 0.1s, color 0.1s, transform 0.1s;
-}
-
-.clear-button:hover .save-close {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
-    transition: filter 0.1s;
-}
-
-.create-button,
-.clear-button {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-}
-
-.create-button {
-    font-weight: 700;
-    font-size: 21px;
-    transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
-}
-
-.accept {
-    width: 249px;
-    display: flex;
-    justify-content: start;
-    gap: 25px;
-    margin-top: 50px;
-}
-
-.accept-addContact {
-    width: 364px;
-    display: flex;
-    justify-content: start;
-    gap: 25px;
-    margin-top: 52px;
-}
-
 .save-close {
     width: 1.5rem;
     height: 1.5rem;
@@ -636,7 +559,7 @@ h4 {
     border: unset !important;
 }
 
-@media (max-width: 1440px) {
+/* @media (max-width: 1440px) {
 
     .active{
         background-color: rgb(246, 247, 248);
@@ -648,11 +571,11 @@ h4 {
     }
 
     .contactList {
-        /* position: fixed; */
+        /* position: fixed;
         width: 100vw;
         padding: 0;
-        /* display: flex; */ 
-        /* justify-content: space-between; */
+        display: flex;
+        justify-content: space-between; 
     }
 
     #contactContent{
@@ -691,7 +614,7 @@ h4 {
         width: 24px;
         height: auto;
         top: 120px;
-        /* left: 93%; */
+        /* left: 93%;
         right: 10%;
         cursor: pointer;
     }
@@ -1101,6 +1024,6 @@ h4 {
         font-size: 30px;
     }
     
-}
+} */
 
 
