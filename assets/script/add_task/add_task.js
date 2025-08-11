@@ -10,13 +10,67 @@ async function initAddTask() {
   initializeTaskStatusFromUrl();
   addFormValidation('add-task-form');
   addInputErrorListeners();
-  document.addEventListener('click', function () {
-    handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
-    handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
-    clearAssignedTo();
-  });
+  setupGlobalDropdownListener();
+  setupOverlaySpecificListener();
   dateInputMinDate();
 }
+
+function setupGlobalDropdownListener() {
+  if (window.globalDropdownListener) {
+    document.removeEventListener('click', window.globalDropdownListener);
+  }
+  window.globalDropdownListener = function(event) {
+    closeDropdownsOnOutsideClick(event);
+  };
+  document.addEventListener('click', window.globalDropdownListener);
+}
+
+function setupOverlaySpecificListener() {
+  let overlayAddTask = document.getElementById('overlay-add-task');
+  let isInOverlay = overlayAddTask && !overlayAddTask.classList.contains('d-none');
+  if (isInOverlay) {
+    let overlayContent = document.getElementById('add-task-overlay-content');
+    if (overlayContent && !window.overlayContentListener) {
+      window.overlayContentListener = function(event) {
+        setTimeout(() => {
+          checkAndCloseOverlayDropdowns(event);
+        }, 0);
+      };
+      overlayContent.addEventListener('click', window.overlayContentListener, true);
+    }
+  }
+}
+
+function checkAndCloseOverlayDropdowns(event) {
+  let overlayAddTask = document.getElementById('overlay-add-task');
+  if (!overlayAddTask || overlayAddTask.classList.contains('d-none')) return;
+  let overlayContent = document.getElementById('add-task-overlay-content');
+  if (!overlayContent) return;
+  checkOverlayAssignedToDropdown(event, overlayContent);
+  checkOverlayCategoryDropdown(event, overlayContent);
+}
+
+function checkOverlayAssignedToDropdown(event, overlayContent) {
+  let assignedToDropdown = overlayContent.querySelector('#assigned-to-dropdown');
+  let assignedToDropdownOptions = overlayContent.querySelector('#assigned-to-dropdown-options');
+  if (assignedToDropdown && !assignedToDropdown.contains(event.target)) {
+    if (assignedToDropdownOptions && isDropdownOpen(assignedToDropdownOptions)) {
+      handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
+      clearAssignedTo();
+    }
+  }
+}
+
+function checkOverlayCategoryDropdown(event, overlayContent) {
+  let categoryDropdown = overlayContent.querySelector('#category-dropdown');
+  let categoryDropdownOptions = overlayContent.querySelector('#category-dropdown-options');
+  if (categoryDropdown && !categoryDropdown.contains(event.target)) {
+    if (categoryDropdownOptions && isDropdownOpen(categoryDropdownOptions)) {
+      handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+    }
+  }
+}
+
 
 function handleDropdown(dropdownId, arrowId, action = 'toggle') {
   let dropdown = document.getElementById(dropdownId);
@@ -122,10 +176,6 @@ function animatedSearch(contactsRef, searchTerm) {
   contactsRef.classList.add('expanded');
 }
 
-function clearAssignedTo() {
-  let input = document.getElementById('add-task-input3');
-  if (input) input.value = '';
-}
 
 function assignedToDropdown(searchTerm = '') {
   let contactsRef = document.getElementById('assigned-to-dropdown-options');
@@ -272,5 +322,38 @@ function initializeTaskStatusFromUrl() {
   let statusFromUrl = urlParams.get('status');
   if (statusFromUrl) {
     window.currentTaskStatus = statusFromUrl;
+  }
+}
+
+function closeDropdownsOnOutsideClick(event) {
+  if (event.defaultPrevented) return;
+  let dropdownElements = getDropdownElements();
+  checkAssignedToDropdown(event, dropdownElements);
+  checkCategoryDropdown(event, dropdownElements);
+}
+
+function getDropdownElements() {
+  return {
+    assignedToDropdown: document.getElementById('assigned-to-dropdown'),
+    categoryDropdown: document.getElementById('category-dropdown'),
+    assignedToDropdownOptions: document.getElementById('assigned-to-dropdown-options'),
+    categoryDropdownOptions: document.getElementById('category-dropdown-options')
+  };
+}
+
+function checkAssignedToDropdown(event, elements) {
+  if (elements.assignedToDropdown && !elements.assignedToDropdown.contains(event.target)) {
+    if (elements.assignedToDropdownOptions && isDropdownOpen(elements.assignedToDropdownOptions)) {
+      handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
+      clearAssignedTo();
+    }
+  }
+}
+
+function checkCategoryDropdown(event, elements) {
+  if (elements.categoryDropdown && !elements.categoryDropdown.contains(event.target)) {
+    if (elements.categoryDropdownOptions && isDropdownOpen(elements.categoryDropdownOptions)) {
+      handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+    }
   }
 }

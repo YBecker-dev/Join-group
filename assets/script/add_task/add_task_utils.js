@@ -331,3 +331,16 @@ function clearAssignedTo() {
   if (input) input.value = '';
 }
 
+function isDropdownOpen(dropdown) {
+  return dropdown.classList.contains('show') || dropdown.classList.contains('expanded');
+}
+
+function getDropdownElements() {
+  return {
+    assignedToDropdown: document.getElementById('assigned-to-dropdown'),
+    categoryDropdown: document.getElementById('category-dropdown'),
+    assignedToDropdownOptions: document.getElementById('assigned-to-dropdown-options'),
+    categoryDropdownOptions: document.getElementById('category-dropdown-options')
+  };
+}
+

@@ -263,11 +263,19 @@ function closeCreateTask() {
   overlayContent.classList.remove('show');
   overlayContent.classList.add('hide');
   overlayBg.classList.remove('visible');
+  removeOverlayListener(overlayContent);
   setTimeout(() => {
     overlayBg.classList.add('d-none');
     overlayContent.innerHTML = '';
     overlayContent.classList.remove('hide');
   }, 300);
+}
+
+function removeOverlayListener(content) {
+  if (window.overlayContentListener) {
+    content.removeEventListener('click', window.overlayContentListener, true);
+    window.overlayContentListener = null;
+  }
 }
 
 function animatedOpeningAddTask(overlayBg, overlayContent) {
