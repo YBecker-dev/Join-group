@@ -1,14 +1,14 @@
 let currentSelectedIndex = null;
 
+
 async function initContacts() {
-  //ok
   await loadContacts();
   renderContacts();
   initFrameworkFunctions();
 }
 
+
 function getInitials(name) {
-  // ok
   if (!name) return '??';
   return name
     .split(' ')
@@ -16,6 +16,7 @@ function getInitials(name) {
     .join('')
     .substring(0, 2);
 }
+
 
 function renderContacts() {
   //zu lang
@@ -40,6 +41,7 @@ function renderContacts() {
   contentRef.innerHTML = html;
 }
 
+
 function groupContactsByInitial(contacts) {
   //zu lang
   let groups = {};
@@ -58,6 +60,7 @@ function groupContactsByInitial(contacts) {
   return sortedGroups;
 }
 
+
 function changeContactColorIfSelected(index, isSelected) {
   let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
   if (openDetails) {
@@ -71,8 +74,8 @@ function changeContactColorIfSelected(index, isSelected) {
   }
 }
 
+
 function openDetails(index) {
-  //ok
   let allContacts = document.querySelectorAll('.person');
   let details = document.getElementById('contactDetails');
   if (currentSelectedIndex === index) {
@@ -86,8 +89,8 @@ function openDetails(index) {
   setanimation(details, index);
 }
 
+
 function showMobileEditOverlay(indexDetails) {
-  //ok
   let overlayRef = document.getElementById('editContact-Overlay');
   let overlayBtn = document.getElementById('showOverlayBtn');
   overlayBtn.classList.toggle('d-none');
@@ -95,8 +98,8 @@ function showMobileEditOverlay(indexDetails) {
   overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
 }
 
+
 function closeContactDetails(allContacts, details) {
-  //ok
   allContacts.forEach((contact) => contact.classList.remove('active'));
   details.classList.remove('show');
   details.classList.add('hide');
@@ -106,8 +109,8 @@ function closeContactDetails(allContacts, details) {
   currentSelectedIndex = null;
 }
 
+
 function setanimation(details, index) {
-  //ok
   setTimeout(() => {
     details.innerHTML = getNoteTemplateContactDetails(index);
     details.classList.remove('hide');
@@ -120,8 +123,8 @@ function setanimation(details, index) {
   }, 20);
 }
 
+
 function toggleContactOverlay() {
-  //ok
   let overlayRef = document.getElementById('add-new-contact');
   if (overlayRef.classList.contains('d-none')) {
     overlayRef.classList.remove('d-none');
@@ -131,6 +134,7 @@ function toggleContactOverlay() {
     overlayRef.innerHTML = '';
   }
 }
+
 
 async function saveToFirebase(contact) {
   // zu lang
@@ -158,8 +162,8 @@ async function saveToFirebase(contact) {
   }
 }
 
+
 function getRandomColor() {
-  //ok
   return (
     '#' +
     Math.floor(Math.random() * 16777215)
@@ -168,8 +172,13 @@ function getRandomColor() {
   );
 }
 
+
+function showSuccesButton() {
+  
+}
+
+
 function closeOverlay() {
-  //ok
   let overlayRef = document.getElementById('add-new-contact');
   let contentOverlayRef = document.getElementById('edit-contact');
   if (overlayRef) {
@@ -182,8 +191,8 @@ function closeOverlay() {
   }
 }
 
+
 function closeDetails() {
-  //ok
   let contentCloseDetails = document.getElementById('namesDetails');
   let overlayBtn = document.getElementById('showOverlayBtn');
   if (contentCloseDetails) {
@@ -197,6 +206,7 @@ function closeDetails() {
     });
   }
 }
+
 
 async function deleteContact(index) {
   //zu lang
@@ -221,6 +231,7 @@ async function deleteContact(index) {
   document.getElementById('contactDetails').innerHTML = '';
   return true;
 }
+
 
 async function updateContact(index) {
   // zu lang
@@ -265,6 +276,7 @@ async function updateContact(index) {
   closeOverlay();
 }
 
+
 async function saveToLocalstorage() {
   // zu lang
   let userName = document.getElementById('newContactName').value;
@@ -285,12 +297,14 @@ async function saveToLocalstorage() {
   await saveToFirebase(newContact);
 }
 
+
 function openEditOverlay(index) {
   // zu lang
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
+
 
 function checkContactInputs(userName, userEmail, userPhone) {
   let nameInput = document.getElementById('editContactName') || document.getElementById('newContactName');
@@ -314,6 +328,7 @@ function checkContactInputs(userName, userEmail, userPhone) {
 
   return valid;
 }
+
 
 function validatePhoneInput(input) {
   //zu lang
