@@ -103,7 +103,7 @@ async function changeTaskStatusMobilDone(trueTaskId ,taskId){
     taskOverlayRef.classList.toggle('show');
 }
 
-async function changeFirebaseStatus(targetArea, taskId){
+async function changeFirebaseStatus(targetArea, taskId){ /// 14Zeilen
     try{
             let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
             let data = await response.json();

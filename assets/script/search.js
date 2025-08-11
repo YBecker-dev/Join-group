@@ -1,5 +1,6 @@
 let taskCollection = [];
 
+/**Call function enables the Live Search  */
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
   if (searchInput) {
@@ -30,8 +31,16 @@ function processTasksInformation() {
       storeTaskCollection(taskId, currentTaskTitle,currentTaskDescription ,taskContainer)
     }
   }
+  showSearchResult();
 }
 
+/**
+ * Stores all essential task information in the taskCollection array.
+ * @param {int} taskId 
+ * @param {String} currentTaskTitle 
+ * @param {String} currentTaskDescription 
+ * @param {Object} taskContainer 
+ */
 function storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, taskContainer){
     taskCollection.push({
         id: taskId,
@@ -39,7 +48,6 @@ function storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, t
         description: currentTaskDescription,
         element: taskContainer,
     });
-    showSearchResult();
 }
 
 /**
@@ -59,7 +67,9 @@ function showSearchResult() {
   }
   taskVisibilty(searchResult);
 }
-
+/**
+ * show Overlay if the search got no target
+ */
 function toggleNoResultOverlay(){
   let overlay = document.getElementById('overlay-no-result');
   let content = document.getElementById('no-result-content');
