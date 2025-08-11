@@ -168,10 +168,8 @@ function animatedSearch(contactsRef, searchTerm) {
   let contentHeight = contactsRef.scrollHeight;
   if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
     contactsRef.style.maxHeight = contentHeight + 'px';
-    contactsRef.style.overflowY = 'hidden';
   } else {
     contactsRef.style.maxHeight = maxDropdownHeight + 'px';
-    contactsRef.style.overflowY = 'auto';
   }
   contactsRef.classList.add('expanded');
 }

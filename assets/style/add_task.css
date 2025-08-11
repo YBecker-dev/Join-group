@@ -294,11 +294,18 @@ input[type="text"] {
 #assigned-to-dropdown-options.expanded,
 #category-dropdown-options.expanded {
     max-height: 305px;
-    overflow-y: auto;
     scrollbar-width: thin;
     /* For Firefox */
     scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0;
     /* For Firefox */
+}
+
+.scrollbar {
+    overflow-y: auto;
+}
+
+.scrollbar:hover {
+    background-color: white;
 }
 
 #assigned-to-dropdown-options.expanded::-webkit-scrollbar {

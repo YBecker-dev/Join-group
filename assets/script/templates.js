@@ -222,7 +222,7 @@ function saveSubtaskEditHTML(newText) {
 function assignedToDropdownHTML(contacts, i, checked) {
   let isChecked = checked === 'checked';
   let checkedClass = isChecked ? 'checked-assigned-to' : '';
-  return `
+  return `<div class="scrollbar">
     <div class="assigned-contacts ${checkedClass}" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
       <div class="user-dropdown ${checkedClass}" id="user-dropdown-${i}">
         <div class="user-name-dropdown ${checkedClass}" style="background-color: ${contacts[i].color} !important;">
@@ -235,8 +235,7 @@ function assignedToDropdownHTML(contacts, i, checked) {
       <div>
         <input type="checkbox" class="checkbox dropdown-checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 function getEmptyDragArea(noTaskText) {
