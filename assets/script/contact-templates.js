@@ -189,3 +189,8 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
             </div>
           </div>`;
 }
+
+function getNoteTemplateSuccesfuulBtn() {
+
+  return `<button id="succesfully" class="succesfullyBtn">Contact succesfully created</button>`
+}
