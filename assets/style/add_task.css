@@ -402,7 +402,7 @@ input[type="text"] {
     gap: 16px;
     left: 763px;
     top: 793px;
-    z-index: 1;
+    z-index: 100;
     background-color: #F6F7F8;
 }
 

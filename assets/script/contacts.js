@@ -60,15 +60,14 @@ function groupContactsByInitial(contacts) {
 
 function changeContactColorIfSelected(index, isSelected) {
   let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
-  if (!openDetails) return;
-  if (window.innerWidth > 1440) {
-    if (isSelected) {
-      openDetails.classList.add('active');
-    } else {
-      openDetails.classList.remove('active');
+  if (openDetails) {
+    if(window.innerWidth >= 1440){
+        if (isSelected) {
+        openDetails.classList.add('active');
+      } else {
+        openDetails.classList.remove('active');
+      }
     }
-  } else {
-    openDetails.classList.remove('active');
   }
 }
 
