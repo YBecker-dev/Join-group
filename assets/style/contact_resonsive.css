@@ -10,11 +10,8 @@
     }
 
     .contactList {
-        /* position: fixed; */
         width: 100vw;
         padding: 0;
-        /* display: flex; */ 
-        /* justify-content: space-between; */
     }
 
     #contactContent{
@@ -447,8 +444,7 @@
     }
 
     .person{
-       max-width: 290px;
-        
+       max-width: 290px;  
     }
     .agenda-category{
         padding-left: 42px;
