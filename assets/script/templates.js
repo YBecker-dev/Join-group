@@ -286,7 +286,7 @@ function editTaskHtml(task, taskId) {
         <span>Title</span>
         <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${
           task.title || ''
-        }" required>
+        }">
         <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="input-group edittask add-task">

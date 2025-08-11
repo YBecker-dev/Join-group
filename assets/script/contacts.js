@@ -1,12 +1,14 @@
 let currentSelectedIndex = null;
 
-async function initContacts() { //ok
+async function initContacts() {
+  //ok
   await loadContacts();
   renderContacts();
   initFrameworkFunctions();
 }
 
-function getInitials(name) { // ok
+function getInitials(name) {
+  // ok
   if (!name) return '??';
   return name
     .split(' ')
@@ -15,7 +17,8 @@ function getInitials(name) { // ok
     .substring(0, 2);
 }
 
-function renderContacts() { //zu lang
+function renderContacts() {
+  //zu lang
   let contentRef = document.getElementById('contactContent');
   if (!contentRef) return;
 
@@ -37,8 +40,9 @@ function renderContacts() { //zu lang
   contentRef.innerHTML = html;
 }
 
-function groupContactsByInitial(contacts) { //zu lang
-  let groups = {}; 
+function groupContactsByInitial(contacts) {
+  //zu lang
+  let groups = {};
   for (let i = 0; i < contacts.length; i++) {
     let name = contacts[i].name || '';
     let initial = name.charAt(0).toUpperCase();
@@ -54,20 +58,22 @@ function groupContactsByInitial(contacts) { //zu lang
   return sortedGroups;
 }
 
-function changeContactColorIfSelected(index, isSelected) { //ok
+function changeContactColorIfSelected(index, isSelected) {
   let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
-  if (openDetails) {
-    if(!window.innerWidth >= 1440){
-        if (isSelected) {
-        openDetails.classList.add('active');
-      } else {
-        openDetails.classList.remove('active');
-      }
+  if (!openDetails) return;
+  if (window.innerWidth > 1440) {
+    if (isSelected) {
+      openDetails.classList.add('active');
+    } else {
+      openDetails.classList.remove('active');
     }
+  } else {
+    openDetails.classList.remove('active');
   }
 }
 
-function openDetails(index) { //ok
+function openDetails(index) {
+  //ok
   let allContacts = document.querySelectorAll('.person');
   let details = document.getElementById('contactDetails');
   if (currentSelectedIndex === index) {
@@ -81,7 +87,8 @@ function openDetails(index) { //ok
   setanimation(details, index);
 }
 
-function showMobileEditOverlay(indexDetails) { //ok
+function showMobileEditOverlay(indexDetails) {
+  //ok
   let overlayRef = document.getElementById('editContact-Overlay');
   let overlayBtn = document.getElementById('showOverlayBtn');
   overlayBtn.classList.toggle('d-none');
@@ -89,7 +96,8 @@ function showMobileEditOverlay(indexDetails) { //ok
   overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
 }
 
-function closeContactDetails(allContacts, details) { //ok
+function closeContactDetails(allContacts, details) {
+  //ok
   allContacts.forEach((contact) => contact.classList.remove('active'));
   details.classList.remove('show');
   details.classList.add('hide');
@@ -99,7 +107,8 @@ function closeContactDetails(allContacts, details) { //ok
   currentSelectedIndex = null;
 }
 
-function setanimation(details, index) { //ok
+function setanimation(details, index) {
+  //ok
   setTimeout(() => {
     details.innerHTML = getNoteTemplateContactDetails(index);
     details.classList.remove('hide');
@@ -112,7 +121,8 @@ function setanimation(details, index) { //ok
   }, 20);
 }
 
-function toggleContactOverlay() { //ok
+function toggleContactOverlay() {
+  //ok
   let overlayRef = document.getElementById('add-new-contact');
   if (overlayRef.classList.contains('d-none')) {
     overlayRef.classList.remove('d-none');
@@ -123,7 +133,8 @@ function toggleContactOverlay() { //ok
   }
 }
 
-async function saveToFirebase(contact) { // zu lang
+async function saveToFirebase(contact) {
+  // zu lang
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
     let response = await fetch(url, {
@@ -148,7 +159,8 @@ async function saveToFirebase(contact) { // zu lang
   }
 }
 
-function getRandomColor() { //ok
+function getRandomColor() {
+  //ok
   return (
     '#' +
     Math.floor(Math.random() * 16777215)
@@ -157,7 +169,8 @@ function getRandomColor() { //ok
   );
 }
 
-function closeOverlay() { //ok
+function closeOverlay() {
+  //ok
   let overlayRef = document.getElementById('add-new-contact');
   let contentOverlayRef = document.getElementById('edit-contact');
   if (overlayRef) {
@@ -170,18 +183,24 @@ function closeOverlay() { //ok
   }
 }
 
-function closeDetails() { //ok
+function closeDetails() {
+  //ok
   let contentCloseDetails = document.getElementById('namesDetails');
   let overlayBtn = document.getElementById('showOverlayBtn');
- 
   if (contentCloseDetails) {
     overlayBtn.classList.toggle('d-none');
     contentCloseDetails.classList.add('d-none');
     contentCloseDetails.innerHTML = '';
   }
+  if (window.innerWidth < 1440) {
+    document.querySelectorAll('.active').forEach(function(element) {
+      element.classList.remove('active');
+    });
+  }
 }
 
-async function deleteContact(index) { //zu lang
+async function deleteContact(index) {
+  //zu lang
   let firebaseId = contacts[index].id;
   if (!firebaseId) {
     console.error('Firebase-ID nicht gefunden für Index:', index);
@@ -204,7 +223,8 @@ async function deleteContact(index) { //zu lang
   return true;
 }
 
-async function updateContact(index) { // zu lang
+async function updateContact(index) {
+  // zu lang
   let userName = document.getElementById('editContactName').value.trim();
   let userEmail = document.getElementById('editContactMail').value.trim();
   let userPhone = document.getElementById('editContactPhone').value.trim();
@@ -213,7 +233,7 @@ async function updateContact(index) { // zu lang
     return;
   }
 
-    if (!userPhone) {
+  if (!userPhone) {
     userPhone = '-';
   }
 
@@ -246,7 +266,8 @@ async function updateContact(index) { // zu lang
   closeOverlay();
 }
 
-async function saveToLocalstorage() { // zu lang
+async function saveToLocalstorage() {
+  // zu lang
   let userName = document.getElementById('newContactName').value;
   let userEmail = document.getElementById('newContactMail').value;
   let userPhone = document.getElementById('newContactPhone').value;
@@ -265,7 +286,8 @@ async function saveToLocalstorage() { // zu lang
   await saveToFirebase(newContact);
 }
 
-function openEditOverlay(index) { // zu lang
+function openEditOverlay(index) {
+  // zu lang
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
@@ -278,12 +300,12 @@ function checkContactInputs(userName, userEmail, userPhone) {
   let valid = true;
 
   if (!userName || userName.trim().length < 2) {
-    shakeInput(nameInput,'Please check its is filled with a name');
+    shakeInput(nameInput, 'Please check its is filled with a name');
     valid = false;
   }
 
   if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
-    shakeInput(mailInput,'Please check its is filled with a valid email');
+    shakeInput(mailInput, 'Please check its is filled with a valid email');
     valid = false;
   }
 
@@ -294,7 +316,8 @@ function checkContactInputs(userName, userEmail, userPhone) {
   return valid;
 }
 
-function validatePhoneInput(input) { //zu lang
+function validatePhoneInput(input) {
+  //zu lang
   let value = input.value.replace(/[^+\d]/g, '');
   value = value.replace(/(?!^)\+/g, '');
 
@@ -321,14 +344,15 @@ function validatePhoneInput(input) { //zu lang
   clearInputError(input);
 }
 
-
-function validateEmailInput(input) { //ok
+function validateEmailInput(input) {
+  //ok
   input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
   clearInputError(input);
   input.setCustomValidity('');
 }
 
-function validateNameInput(input) { //zu lang
+function validateNameInput(input) {
+  //zu lang
   if (input.value.endsWith(' ')) {
     clearInputError(input);
     return;

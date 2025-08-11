@@ -1,4 +1,7 @@
 let contacts = [];
+let selectedContacts = [];
+let lastValidDate = '';
+let lastDateLength = 0;
 let BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function loadContacts() {
@@ -82,13 +85,6 @@ let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
 
-
-function toggleMoveToOverlay() {
-  let moveToRef = document.getElementById('selection');
-  moveToRef.classList.toggle('d-none');
-}
-
-
 function shakeInput(input, message) {
   input.classList.add('shake');
   input.classList.add('input-error');
@@ -106,4 +102,8 @@ function clearInputError(input) {
   input.classList.remove('input-error');
   let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.remove('input-error');
+}
+
+function eventBubbling(event) {
+  event.stopPropagation();
 }

@@ -164,21 +164,95 @@ function showCategoryError(dropdownRef, warningRef) {
   if (warningRef) warningRef.classList.remove('d-none');
 }
 
-function showError(errorId, inputId, isCategory) {
-  let warningElement = document.getElementById(errorId);
-  let inputElement = document.getElementById(inputId);
-  if (!warningElement || !inputElement) return;
-  let fieldIsEmpty = isCategory ? isCategoryFieldEmpty(inputElement) : isInputEmpty(inputElement);
-  toggleWarning(warningElement, fieldIsEmpty);
+
+function validateEditTaskForm() {
+  if (!isEditFormValid()) return false;
+  return true;
 }
 
-function enableCreateTaskButton(dateInput) {
-  let title = document.getElementById('title');
-  let date = dateInput || document.getElementById('date');
-  let categorySelected = document.getElementById('category-dropdown-selected');
-  let button = document.getElementById('create-task-button');
-  if (!title || !date || !categorySelected || !button) return;
-  sanitizeAndValidateDate(date);
-  let categoryText = getCategoryTextFromSelected(categorySelected);
-  areAllFieldsFilled(title, date, categoryText);
+function isEditFormValid() {
+  let titleValid = checkEditTitle();
+  let dateValid = checkEditDate();
+  return titleValid && dateValid;
+}
+
+function checkEditTitle() {
+  let input1 = document.getElementById('edit-title');
+  let input1Warning = document.getElementById('add-task-input1-warning');
+  if (!input1 || !input1.value.trim()) {
+    if (input1) input1.classList.add('input-error');
+    if (input1Warning) input1Warning.classList.remove('d-none');
+    shakeInput(input1, '');
+    return false;
+  }
+  return true;
+}
+
+function checkEditDate() {
+  let input2 = document.getElementById('edit-date');
+  let input2Warning = document.getElementById('add-task-input2-warning');
+  
+  if (!checkEditDateNotEmpty(input2, input2Warning)) {
+    return false;
+  }
+  
+  if (!checkEditDateFormat(input2, input2Warning)) {
+    return false;
+  }
+  
+  showEditDateValidationSuccess(input2, input2Warning);
+  return true;
+}
+
+function checkEditDateNotEmpty(input2, input2Warning) {
+  if (!input2?.value.trim()) {
+    input2?.classList.add('input-error');
+    input2Warning?.classList.remove('d-none');
+    if (input2) shakeInput(input2, '');
+    return false;
+  }
+  return true;
+}
+
+function checkEditDateFormat(input2, input2Warning) {
+  const value = input2.value.trim();
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value) || !isValidDate(value)) {
+    input2.classList.add('input-error');
+    input2Warning?.classList.remove('d-none');
+    shakeInput(input2, '');
+    return false;
+  }
+  return true;
+}
+
+function showEditDateValidationSuccess(input2, input2Warning) {
+  input2.classList.remove('input-error');
+  input2Warning?.classList.add('d-none');
+}
+
+function addEditInputErrorListeners() {
+  addEditTitleInputListener();
+  addEditDateInputListener();
+}
+
+function addEditTitleInputListener() {
+  let titleInput = document.getElementById('edit-title');
+  if (titleInput) {
+    titleInput.addEventListener('input', function() {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input1-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+}
+
+function addEditDateInputListener() {
+  let dateInput = document.getElementById('edit-date');
+  if (dateInput) {
+    dateInput.addEventListener('input', function() {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input2-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
 }

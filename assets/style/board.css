@@ -729,10 +729,8 @@
 
 .close-overlay-x {
     position: absolute;
-    top: 65px;
-    right: 40px;
-    width: 32px;
-    height: 32px;
+    top: 110px;
+    right: 24px;
     cursor: pointer;
     z-index: 10;
 }
@@ -899,11 +897,31 @@
     transition: 0.5s;
 }
 
+#add-task-input1-warning {
+    bottom: -16px
+}
+
+#board-input1-warning {
+    bottom: -14px
+}
+
+#add-task-input2-warning {
+    bottom: -8px
+}
+
+.create-task-in-board {
+    bottom: -4px !important;
+}
+
+.cancel-button:hover .cancel-icon {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
+}   
+
 @media (max-width: 1439px) {
     .main-content {
         top: 80px !important;
     }
-
 
     .overlay-content-render form {
         width: 100%;
@@ -1083,6 +1101,7 @@
     .overlay-position {
         max-height: 748px;
     }
+
     .selection {
         top: 104px;
     }
@@ -1122,7 +1141,8 @@
     .overlay-position {
         padding: 24px;
     }
-        .selection {
+
+    .selection {
         top: 108px;
         left: 24px;
     }
@@ -1142,7 +1162,8 @@
     .overlay-content-render form {
         max-height: 100px;
     }
-        .overlay-position {
+
+    .overlay-position {
         max-height: 248px;
     }
 }

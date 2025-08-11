@@ -225,17 +225,6 @@ header {
     line-height: 120%;
 }
 
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../../fonts/inter-v19-latin-regular.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-
 h1 {
     font-size: 64px;
     font-weight: bold;
@@ -283,12 +272,6 @@ input#add-task-input3:focus {
 .checkbox:checked {
     background: url('/assets/img/icon/checked_checkbox.png') no-repeat center center;
     background-size: contain;
-}
-
-.contentspace-html {
-    width: 100%;
-    height: 100%;
-    position: relative;
 }
 
 .main-content {

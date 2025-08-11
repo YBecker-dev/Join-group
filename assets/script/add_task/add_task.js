@@ -1,6 +1,3 @@
-selectedContacts = [];
-let lastValidDate = '';
-let lastDateLength = 0;
 let urgentButton = document.getElementById('urgent');
 let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
@@ -18,17 +15,6 @@ async function initAddTask() {
     clearAssignedTo();
   });
   dateInputMinDate();
-}
-
-function dateInputMinDate() {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const minDate = `${dd}/${mm}/${yyyy}`;
-  const dateInput = document.getElementById('date');
-  dateInput.setAttribute('min', minDate);
-  dateInput.value = minDate;
 }
 
 function handleDropdown(dropdownId, arrowId, action = 'toggle') {
@@ -135,27 +121,9 @@ function animatedSearch(contactsRef, searchTerm) {
   contactsRef.classList.add('expanded');
 }
 
-function togglePriority(priority, prefix = '') {
-  let ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
-  for (let i = 0; i < ids.length; i++) {
-    let btn = document.getElementById(ids[i]);
-    if (btn) btn.classList.remove('active', 'urgent', 'medium', 'low');
-  }
-  let selectedBtn = document.getElementById(prefix + priority.toLowerCase());
-  if (selectedBtn) selectedBtn.classList.add('active', priority.toLowerCase());
-  if (!prefix) setPriority(priority);
-}
-
-function setPriority(priority) {
-  let urgentButton = document.getElementById('urgent');
-  let mediumButton = document.getElementById('medium');
-  let lowButton = document.getElementById('low');
-  if (urgentButton) urgentButton.classList.remove('urgent');
-  if (mediumButton) mediumButton.classList.remove('medium');
-  if (lowButton) lowButton.classList.remove('low');
-  if (priority === 'urgent' && urgentButton) urgentButton.classList.add('urgent');
-  if (priority === 'medium' && mediumButton) mediumButton.classList.add('medium');
-  if (priority === 'low' && lowButton) lowButton.classList.add('low');
+function clearAssignedTo() {
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
 }
 
 function assignedToDropdown(searchTerm = '') {
@@ -213,6 +181,29 @@ function changeColorIfItsChecked(i, checked) {
   userNameDropdownRef.classList.toggle('checked-assigned-to', checked);
 }
 
+function toggleContactSelection(index) {
+  let pos = selectedContacts.indexOf(index);
+  if (pos === -1) {
+    selectedContacts.push(index);
+  } else {
+    selectedContacts.splice(pos, 1);
+  }
+  showContactsAddTask();
+  clearAssignedTo();
+}
+
+function showContactsAddTask() {
+  let container = document.getElementById('show-contacts-add-task');
+  if (!container) return;
+  container.classList.remove('d-none');
+  let html = '';
+  for (let i = 0; i < selectedContacts.length; i++) {
+    const contact = contacts[selectedContacts[i]];
+    html += showContactsAddTaskHtml(contact);
+  }
+  container.innerHTML = html;
+}
+
 function selectCustomOption(element) {
   let categoryDropdown = document.getElementById('category-dropdown-selected');
   if (!categoryDropdown) return;
@@ -233,84 +224,40 @@ function handleCategoryOptionClick(event, optionElement) {
   showError('category-dropdown-warning', 'category-dropdown-selected', true);
 }
 
-function pushSubtaskInput(event) {
-  let input = document.getElementById('add-task-input4');
-  let container = document.getElementById('subtasks-container');
-  if (!input || !container) return;
-  if (!event.key || event.key === 'Enter') {
-    if (event.key === 'Enter') event.preventDefault();
-    if (input.value.trim()) {
-      container.innerHTML += pushSubtaskInputHTML(input.value.trim());
-      input.value = '';
-      showPlusIcon();
-    }
+function togglePriority(priority, prefix = '') {
+  let ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
+  for (let i = 0; i < ids.length; i++) {
+    let btn = document.getElementById(ids[i]);
+    if (btn) btn.classList.remove('active', 'urgent', 'medium', 'low');
   }
+  let selectedBtn = document.getElementById(prefix + priority.toLowerCase());
+  if (selectedBtn) selectedBtn.classList.add('active', priority.toLowerCase());
+  if (!prefix) setPriority(priority);
 }
 
-function editSubtask(element) {
-  let listItem = element.closest('.subtask-item');
-  let span = listItem ? listItem.querySelector('span') : null;
-  if (!span) return;
-  let oldText = span.textContent.trim();
-  let newDiv = document.createElement('div');
-  if (newDiv) {
-    newDiv.className = 'subtask-item-edit';
-    newDiv.innerHTML = editSubtaskInputHTML(oldText);
-  }
-  if (listItem.parentNode) {
-    listItem.parentNode.replaceChild(newDiv, listItem);
-  }
+function setPriority(priority) {
+  let urgentButton = document.getElementById('urgent');
+  let mediumButton = document.getElementById('medium');
+  let lowButton = document.getElementById('low');
+  if (urgentButton) urgentButton.classList.remove('urgent');
+  if (mediumButton) mediumButton.classList.remove('medium');
+  if (lowButton) lowButton.classList.remove('low');
+  if (priority === 'urgent' && urgentButton) urgentButton.classList.add('urgent');
+  if (priority === 'medium' && mediumButton) mediumButton.classList.add('medium');
+  if (priority === 'low' && lowButton) lowButton.classList.add('low');
 }
 
-function saveSubtaskEdit(event, inputElement) {
-  if (event && event.key && event.key !== 'Enter') return;
-  inputElement = inputElement.closest('.input-with-icons').querySelector('input');
-  if (!inputElement) return;
-  let newText = inputElement.value;
-  let subtaskItem = inputElement.closest('.subtask-item-edit');
-  if (!subtaskItem) return;
-  let subtaskDiv = buildSubtaskDiv(newText);
-  subtaskItem.parentNode.replaceChild(subtaskDiv, subtaskItem);
+function dateInputMinDate() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const minDate = `${dd}/${mm}/${yyyy}`;
+  const dateInput = document.getElementById('date');
+  dateInput.setAttribute('min', minDate);
+  dateInput.value = minDate;
 }
 
-function deleteSubtask(element) {
-  let subtaskItem = element.closest('.subtask-item');
-  let editSubtaskItem = element.closest('.subtask-item-edit');
-  if (subtaskItem) subtaskItem.remove();
-  if (editSubtaskItem) editSubtaskItem.remove();
-}
-
-function showPlusIcon() {
-  let iconSpan = document.getElementById('subtasks-icon');
-  if (iconSpan) {
-    iconSpan.innerHTML = `
-      <img src="/assets/img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
-    `;
-  }
-}
-
-function onSubtaskInputChange() {
-  let input = document.getElementById('add-task-input4');
-  if (input && input.value.trim()) {
-    showSaveCancelIcons();
-  } else {
-    showPlusIcon();
-  }
-}
-
-function showSaveCancelIcons() {
-  let iconSpan = document.getElementById('subtasks-icon');
-  if (iconSpan) {
-    iconSpan.innerHTML = showSaveCancelIconsHtml();
-  }
-}
-
-function onSubtaskInputKeydown(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    pushSubtaskInput(event);
-  }
-}
 
 function showWrapperCreateTask() {
   let wrapper = document.getElementById('wrapper-create-task-section');

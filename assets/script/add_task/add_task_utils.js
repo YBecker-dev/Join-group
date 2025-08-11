@@ -1,34 +1,3 @@
-function isInputEmpty(inputElement) {
-  if (inputElement.value.trim() === '') {
-    return true;
-  }
-  return false;
-}
-
-function isCategoryFieldEmpty(inputElement) {
-  let categoryTextElement = inputElement.querySelector('p');
-  let categoryText = '';
-  if (categoryTextElement) {
-    categoryText = categoryTextElement.textContent.trim();
-  }
-  if (categoryText === '' || categoryText === 'Select a task category') {
-    return true;
-  }
-  return false;
-}
-
-function toggleWarning(warningElement, fieldIsEmpty) {
-  if (fieldIsEmpty) {
-    warningElement.classList.remove('d-none');
-  } else {
-    warningElement.classList.add('d-none');
-  }
-}
-
-function areAllFieldsFilled(title, date, categoryText) {
-  let categoryChosen = categoryText !== '' && categoryText !== 'Select a task category';
-  return title.value.trim() !== '' && date.value.trim() !== '' && categoryChosen;
-}
 
 function checkInputsFilled(inputs) {
   for (let i = 0; i < inputs.length; i++) {
@@ -39,12 +8,6 @@ function checkInputsFilled(inputs) {
   return true;
 }
 
-function preventEnterSubmit(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    return false;
-  }
-}
 
 function clearAllTaskFields() {
   clearAssignedTo();
@@ -78,10 +41,6 @@ function clearSubtaskInput() {
   if (input) input.value = '';
 }
 
-function clearAssignedTo() {
-  let input = document.getElementById('add-task-input3');
-  if (input) input.value = '';
-}
 
 function clearSubtaskElements() {
   let container = document.getElementById('subtasks-container');
@@ -108,12 +67,166 @@ function clearCategory() {
   }
 }
 
+function pushSubtaskInput(event) {
+  let input = document.getElementById('add-task-input4');
+  let container = document.getElementById('subtasks-container');
+  if (!input || !container) return;
+  if (!event.key || event.key === 'Enter') {
+    if (event.key === 'Enter') event.preventDefault();
+    if (input.value.trim()) {
+      container.innerHTML += pushSubtaskInputHTML(input.value.trim());
+      input.value = '';
+      showPlusIcon();
+    }
+  }
+}
+
+function editSubtask(element) {
+  let listItem = element.closest('.subtask-item');
+  let span = listItem ? listItem.querySelector('span') : null;
+  if (!span) return;
+  let oldText = span.textContent.trim();
+  let newDiv = document.createElement('div');
+  if (newDiv) {
+    newDiv.className = 'subtask-item-edit';
+    newDiv.innerHTML = editSubtaskInputHTML(oldText);
+  }
+  if (listItem.parentNode) {
+    listItem.parentNode.replaceChild(newDiv, listItem);
+  }
+}
+
+function saveSubtaskEdit(event, inputElement) {
+  if (event && event.key && event.key !== 'Enter') return;
+  inputElement = inputElement.closest('.input-with-icons').querySelector('input');
+  if (!inputElement) return;
+  let newText = inputElement.value;
+  let subtaskItem = inputElement.closest('.subtask-item-edit');
+  if (!subtaskItem) return;
+  let subtaskDiv = buildSubtaskDiv(newText);
+  subtaskItem.parentNode.replaceChild(subtaskDiv, subtaskItem);
+}
+
 function buildSubtaskDiv(newText) {
   let subtaskDiv = document.createElement('div');
   subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
   subtaskDiv.className = 'subtask-item';
   subtaskDiv.innerHTML = saveSubtaskEditHTML(newText);
   return subtaskDiv;
+}
+
+function deleteSubtask(element) {
+  let subtaskItem = element.closest('.subtask-item');
+  let editSubtaskItem = element.closest('.subtask-item-edit');
+  if (subtaskItem) subtaskItem.remove();
+  if (editSubtaskItem) editSubtaskItem.remove();
+}
+
+function showPlusIcon() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  if (iconSpan) {
+    iconSpan.innerHTML = `
+      <img src="/assets/img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
+    `;
+  }
+}
+
+function onSubtaskInputChange() {
+  let input = document.getElementById('add-task-input4');
+  if (input && input.value.trim()) {
+    showSaveCancelIcons();
+  } else {
+    showPlusIcon();
+  }
+}
+
+function showSaveCancelIcons() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  if (iconSpan) {
+    iconSpan.innerHTML = showSaveCancelIconsHtml();
+  }
+}
+
+function onSubtaskInputKeydown(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    pushSubtaskInput(event);
+  }
+}
+
+function showError(errorId, inputId, isCategory) {
+  let warningElement = document.getElementById(errorId);
+  let inputElement = document.getElementById(inputId);
+  if (!warningElement || !inputElement) return;
+  let fieldIsEmpty = isCategory ? isCategoryFieldEmpty(inputElement) : isInputEmpty(inputElement);
+  toggleWarning(warningElement, fieldIsEmpty);
+}
+
+function isCategoryFieldEmpty(inputElement) {
+  let categoryTextElement = inputElement.querySelector('p');
+  let categoryText = '';
+  if (categoryTextElement) {
+    categoryText = categoryTextElement.textContent.trim();
+  }
+  if (categoryText === '' || categoryText === 'Select a task category') {
+    return true;
+  }
+  return false;
+}
+
+function isInputEmpty(inputElement) {
+  if (inputElement.value.trim() === '') {
+    return true;
+  }
+  return false;
+}
+
+function toggleWarning(warningElement, fieldIsEmpty) {
+  if (fieldIsEmpty) {
+    warningElement.classList.remove('d-none');
+  } else {
+    warningElement.classList.add('d-none');
+  }
+}
+
+function enableCreateTaskButton(dateInput) {
+  let title = document.getElementById('title');
+  let date = dateInput || document.getElementById('date');
+  let categorySelected = document.getElementById('category-dropdown-selected');
+  let button = document.getElementById('create-task-button');
+  if (!title || !date || !categorySelected || !button) return;
+  sanitizeAndValidateDate(date);
+  let categoryText = getCategoryTextFromSelected(categorySelected);
+  areAllFieldsFilled(title, date, categoryText);
+}
+
+function getCategoryTextFromSelected(categorySelected) {
+  let categoryTextRef = categorySelected.querySelector('p');
+  if (categoryTextRef) {
+    return categoryTextRef.textContent.trim();
+  }
+  return '';
+}
+
+function areAllFieldsFilled(title, date, categoryText) {
+  let categoryChosen = categoryText !== '' && categoryText !== 'Select a task category';
+  return title.value.trim() !== '' && date.value.trim() !== '' && categoryChosen;
+}
+
+function sanitizeAndValidateDate(date) {
+  date.value = date.value.replace(/[A-Za-z]/g, '');
+  autoInsertSlashes(date);
+  validateAndCorrectDate(date);
+}
+
+function autoInsertSlashes(date) {
+  let value = date.value.replace(/[^\d\/]/g, '');
+  value = handleFirstSlash(value, date);
+  value = handleSecondSlash(value, date);
+  lastDateLength = value.length;
+  let parts = value.split('/');
+  handleDayCorrection(parts, date);
+  handleMonthCorrection(parts, date);
 }
 
 function handleFirstSlash(value, date) {
@@ -152,6 +265,18 @@ function handleMonthCorrection(parts, date) {
       parts[1] = '12';
       date.value = parts.join('/');
     }
+  }
+}
+
+function validateAndCorrectDate(date) {
+  let value = date.value.replace(/[^\d\/]/g, '');
+  if (/^\d{2,}\/\d{2,}\/\d{4,}$/.test(value)) {
+    let [day, month, year] = getLimitedDateParts(value);
+    day = correctDay(day, month, year);
+    month = Math.max(1, Math.min(12, month));
+    year = Math.max(1900, Math.min(2035, year));
+    let corrected = correctDateLimits(day, month, year);
+    date.value = buildDateString(corrected[0], corrected[1], corrected[2]);
   }
 }
 
@@ -194,30 +319,15 @@ function buildDateString(day, month, year) {
   return result;
 }
 
-function autoInsertSlashes(date) {
-  let value = date.value.replace(/[^\d\/]/g, '');
-  value = handleFirstSlash(value, date);
-  value = handleSecondSlash(value, date);
-  lastDateLength = value.length;
-  let parts = value.split('/');
-  handleDayCorrection(parts, date);
-  handleMonthCorrection(parts, date);
-}
-
-function validateAndCorrectDate(date) {
-  let value = date.value.replace(/[^\d\/]/g, '');
-  if (/^\d{2,}\/\d{2,}\/\d{4,}$/.test(value)) {
-    let [day, month, year] = getLimitedDateParts(value);
-    day = correctDay(day, month, year);
-    month = Math.max(1, Math.min(12, month));
-    year = Math.max(1900, Math.min(2035, year));
-    let corrected = correctDateLimits(day, month, year);
-    date.value = buildDateString(corrected[0], corrected[1], corrected[2]);
+function preventEnterSubmit(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    return false;
   }
 }
 
-function sanitizeAndValidateDate(date) {
-  date.value = date.value.replace(/[A-Za-z]/g, '');
-  autoInsertSlashes(date);
-  validateAndCorrectDate(date);
+function clearAssignedTo() {
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
 }
+

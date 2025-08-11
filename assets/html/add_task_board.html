@@ -3,21 +3,22 @@
     <div class="wrapper-create-task">
       <div class="wrapper-create-task-center">
         <p>Task added to board</p>
-        <img src="../img/icon/tasks_icon/board.png" alt="" />
+        <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
       </div>
     </div>
   </section>
-  <div class="contentspace-html addtask">
+  <div class="contentspace-html addtask content-add-task">
     <div class="headline-addtask">
       <h1>Add Task</h1>
     </div>
+    <img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">
     <div class="required"></div>
-    <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
+    <form id="add-task-form" onkeydown="return preventEnterSubmit(event);">
       <div class="create-clear-buttons">
-        <button type="button" class="clear-button" onclick="clearAllTaskFields();">
-          Clear <img src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
+        <button type="button" class="cancel-button" onclick="closeCreateTask()">
+          Cancel <img class="cancel-icon" src="../img/icon/close.png" alt=""   />
         </button>
-        <button disabled type="submit" class="create-button" id="create-task-button">
+        <button class="create-button" id="create-task-button" onclick="validateAddTaskForm()">
           Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
         </button>
       </div>
@@ -33,7 +34,9 @@
               oninput="showError('add-task-input1-warning', 'title'); enableCreateTaskButton();"
               placeholder="Enter a Title"
             />
-            <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
+            <span id="add-task-input1-warning" class="input-warning d-none create-task-in-board"
+              >This field is required</span
+            >
           </div>
           <div class="input-group add-task">
             <span>Description</span>

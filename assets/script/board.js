@@ -1,5 +1,10 @@
 let currentDraggedTaskId = null;
 
+function toggleMoveToOverlay() {
+  let moveToRef = document.getElementById('selection');
+  moveToRef.classList.toggle('d-none');
+}
+
 async function initBoard() {
   await loadContacts();
   await pushTasksInBoard();
@@ -350,6 +355,33 @@ function backgroundColorTitle(task) {
   return { categoryText: categoryText, categoryClass: categoryClass };
 }
 
+function setDateInputToTodayOnFirstClick() {
+  const dateInput = document.getElementById('edit-date');
+  if (!dateInput) return;
+
+  function setTodayIfPast() {
+    const value = dateInput.value.trim();
+    // Prüfe, ob ein Wert vorhanden ist und ob er ein gültiges Datum ist
+    if (value) {
+      const [dd, mm, yyyy] = value.split('/');
+      const inputDate = new Date(`${yyyy}-${mm}-${dd}`);
+      const today = new Date();
+      today.setHours(0,0,0,0); // Nur Datum vergleichen
+      if (inputDate < today) {
+        const ddNow = String(today.getDate()).padStart(2, '0');
+        const mmNow = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyyNow = today.getFullYear();
+        dateInput.value = `${ddNow}/${mmNow}/${yyyyNow}`;
+      }
+    }
+    dateInput.removeEventListener('focus', setTodayIfPast);
+    dateInput.removeEventListener('click', setTodayIfPast);
+  }
+
+  dateInput.addEventListener('focus', setTodayIfPast);
+  dateInput.addEventListener('click', setTodayIfPast);
+}
+
 async function editTask(taskId) {
   let overlay_content = document.getElementById('overlay-content-loader');
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
@@ -377,10 +409,17 @@ async function editTask(taskId) {
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
   showContactsAddTask();
+  addEditInputErrorListeners();
+  setDateInputToTodayOnFirstClick();
 }
 
 async function saveEditedTask(event, taskId) {
   event.preventDefault();
+
+  if (!validateEditTaskForm()) {
+    return false;
+  }
+
   let title = document.getElementById('edit-title').value.trim();
   let description = document.getElementById('edit-description').value.trim();
   let date = document.getElementById('edit-date').value;
@@ -430,14 +469,14 @@ async function saveEditedTask(event, taskId) {
   });
 
   await pushTasksInBoard();
-  
+
   let overlay_content = document.getElementById('overlay-content-loader');
   let response2 = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let updatedTaskData = await response2.json();
   if (updatedTaskData) {
     overlay_content.innerHTML = getTaskOverlay(updatedTaskData, taskId, oldTask.addTaskId);
   }
-  
+
   return false;
 }
 
@@ -467,21 +506,9 @@ async function openCreateTask() {
   }
   let response = await fetch('../html/add_task_board.html');
   let html = await response.text();
-  let tempDiv = document.createElement('div'); // <- wird benötigt damit ich die HTML-Elemente manipulieren kann
-  tempDiv.innerHTML += html;
-  let clearBtn = tempDiv.querySelector('.clear-button');
-  if (clearBtn) {
-    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../img/icon/close.png" alt="" class=""></button>`;
-    clearBtn.outerHTML = cancelBtnHtml;
-  }
-  let contentSpace = tempDiv.querySelector('.contentspace-html');
-  if (contentSpace) {
-    contentSpace.classList.add('content-add-task');
-  }
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');
-  overlayContent.innerHTML =
-    `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
+  overlayContent.innerHTML = html;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
   await initAddTask();
