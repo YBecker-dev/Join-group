@@ -54,7 +54,6 @@ function getNoteTemplateContactDetails(indexDetails) {
                   <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
                 </div>
               </div>
-             
             </div>
             <div class="editContactBtn-wrapper">
               <button id="showOverlayBtn" class="editContactBtnMobile" onclick="showMobileEditOverlay(${indexDetails})">
@@ -112,7 +111,7 @@ function getNoteTemplateAddNewContact() {
                   <div class="hide-button-addContact">
                     <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png"></button>
                   </div>
-                  <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
+                  <button onclick=" saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
                 </div>         
               </div>
             </div>
@@ -190,7 +189,10 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
           </div>`;
 }
 
-function getNoteTemplateSuccesfuulBtn() {
+function getNoteTemplateSuccesfullOverlay() {
 
-  return `<button id="succesfully" class="succesfullyBtn">Contact succesfully created</button>`
+  return `  <div  id="succesfully" class="succesfullyOverlay d-none">
+                  <p>Contact succesfully created</p>
+              </div>
+              `
 }

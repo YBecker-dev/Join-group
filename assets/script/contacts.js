@@ -154,12 +154,19 @@ async function saveToFirebase(contact) {
       await loadContacts();
       renderContacts();
       closeOverlay();
+      toggleSuccessfullOverlay();
     } catch (error) {}
   } catch (error) {
     console.error(error);
   }
 }
 
+function toggleSuccessfullOverlay(){
+  let overlayRef = document.getElementById('succesfully-Overlay');
+  let overlayContent = document.getElementById('successWraper');
+  overlayRef.classList.toggle('d-none');
+  overlayContent.innerHTML =  getNoteTemplateSuccesfullOverlay();
+}
 
 function getRandomColor() {
   return (
@@ -283,7 +290,6 @@ async function saveToLocalstorage() {
   if (!checkContactInputs(userName, userEmail, userPhone)) {
     return;
   }
-
   let newContact = {
     name: userName,
     email: userEmail,
@@ -297,8 +303,9 @@ async function saveToLocalstorage() {
 
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
+  let overlayContent = document.getElementById('successWrapper');
   contentOverlayRef.classList.remove('d-none');
-  contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+  overlayContent.innerHTML = getNoteTemplateEditContact(index);
 }
 
 

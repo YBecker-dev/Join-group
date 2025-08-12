@@ -558,3 +558,34 @@ h4 {
 #editContactMail {
     border: unset !important;
 }
+
+.succesfully-Overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
+}
+.succesfullyOverlay {
+    width: 326px; 
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+    position: relative;
+    margin-left: 250px;
+    margin-top: 450px;
+}
+.slide{ 
+    transition: 1s;
+    transform: translateX(-5000px);
+}
