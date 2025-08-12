@@ -1,3 +1,16 @@
+@media(max-width: 1439px){
+    .successfully-Overlay{
+        transform: translateY(100vh);
+        margin-bottom: 250px;
+    }
+    .successfully-Overlay.slide-in{
+        transform: translateY(0);
+    }
+    .successfully-Overlay.slide-out{
+        transform: translateY(100vh);
+    }
+}
+
 @media(max-height: 670px){
     .newContactOverlay{
         height: 630px;

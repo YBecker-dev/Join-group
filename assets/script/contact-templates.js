@@ -191,8 +191,8 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
 
 function getNoteTemplateSuccesfullOverlay() {
 
-  return `  <div  id="succesfully" class="succesfullyOverlay">
-                  <p>Contact succesfully created</p>
+  return `  <div  id="successfully" class="successfullyOverlay">
+                  <p>Contact successfully created</p>
               </div>
               `
 }

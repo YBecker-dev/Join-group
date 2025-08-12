@@ -559,7 +559,7 @@ h4 {
     border: unset !important;
 }
 
-.succesfully-Overlay{
+.successfully-Overlay{
     position: fixed;
     display: flex;
     justify-content: center;
@@ -573,7 +573,7 @@ h4 {
     overflow: hidden;
 
 }
-.succesfullyOverlay {
+.successfullyOverlay {
     width: 326px; 
     height: 74px;
     border-radius: 20px;

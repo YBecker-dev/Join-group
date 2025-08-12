@@ -162,10 +162,10 @@ async function saveToFirebase(contact) {
 }
 
 function toggleSuccessfullOverlay(){
-  let overlayRef = document.getElementById('succesfully-Overlay');
+  let overlayRef = document.getElementById('successfully-Overlay');
   let overlayContent = document.getElementById('successWraper');
   overlayContent.innerHTML =  getNoteTemplateSuccesfullOverlay()
-  let overlayContentDiv = document.getElementById('succesfully');
+  let overlayContentDiv = document.getElementById('successfully');
   overlayRef.classList.toggle('d-none');
   setTimeout(()=>{overlayContentDiv.classList.add('slide-in');},10);
   setTimeout(()=>{overlayContentDiv.classList.remove('slide-in');
