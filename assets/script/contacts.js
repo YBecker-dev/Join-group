@@ -311,9 +311,8 @@ async function saveToLocalstorage() {
 
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
-  let overlayContent = document.getElementById('successWraper');
   contentOverlayRef.classList.remove('d-none');
-  overlayContent.innerHTML = getNoteTemplateEditContact(index);
+  contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
 
 

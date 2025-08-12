@@ -169,7 +169,7 @@ function getNoteTemplateEditContact(index) {
                   <div class="hide-button">
                     <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
                   </div>
-                  <button onclick="updateContact(${index})" class="create-button">Save<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
+                  <button onclick="updateContact(${index})" class="saveBtn">Save<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
                 </div>
               
             </div>`;

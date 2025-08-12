@@ -16,6 +16,36 @@
     .successfullyOverlay.slide-out{
         transform: translateY(100vh);
     }
+    .saveBtn{
+        width: 99px;
+    }
+    
+}
+@media(max-height: 1000px){
+      .contactHeadlineMobile{
+        margin-top: 20px;
+    }
+     .showArrowMobile{
+        top: 25px;
+    }
+     .editContactBtn-wrapper{
+        bottom: 25%;
+    }
+}
+@media(max-height: 800px){
+
+    .contactHeadlineMobile{
+        margin-top: 0;
+    }
+     .showArrowMobile{
+        top: 10px;
+    }
+     .editContactBtn-wrapper{
+        bottom: 30%;
+    }
+    
+}
+@media(max-height: 760px){
 }
 
 @media(max-height: 670px){
@@ -33,12 +63,51 @@
     }
     .profileInitials-addContacts{
         width: auto;
-        padding-top: 20px;
+        padding-top: 10px;
+    }
+}
+
+@media(max-height: 670px){
+    .newContactOverlay{
+        height: 630px;
+    }
+    .headDiv{
+        height: 250px;
+    }
+    .contactLogo-wrapper{
+        display: none;
+    }
+    .editDiv-addContact{
+        height: 300px;
+        
+    }
+    .editDiv{
+        height: 300px;
+    }
+    .profilDiv{
+        width: auto;
+       
     }
     .accept-addContact{
+        margin-top: 10px;
+    }
+    .accept{
         margin-top: 10px;
     }
     .profilDiv-addContacts{
         padding-top: 20px;
     }
+    .namesDetails{
+        gap: 0;
+    }
+    .profileInitials{
+        top: -40px;
+        justify-content: center;
+    }
+    .mobile-headline{
+        padding-top: 0px;
+    }
+    
 }
+
+
