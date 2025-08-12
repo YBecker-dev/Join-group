@@ -2,25 +2,27 @@
     .successfully-Overlay{
         align-items: flex-end;
     }
+
     .successfullyOverlay{
         transform: translateY(100vh);
         margin-bottom: 250px;
        
     }
+
     .successfullyOverlay.slide-in{
         transform: translateY(0);
     }
+
     .successfullyOverlay.slide-out{
         transform: translateY(100vh);
     }
-    
 }
 
 @media(max-height: 670px){
     .newContactOverlay{
         height: 630px;
-
     }
+    
     .editDiv-addContact{
         height: 300px;
         
