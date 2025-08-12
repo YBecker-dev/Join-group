@@ -1,13 +1,17 @@
 let currentSelectedIndex = null;
 
-/* contacts are loaded and displayed in HTML */
+/**
+* contacts are loaded and displayed in HTML 
+*/
 async function initContacts() {
   await loadContacts();
   renderContacts();
   initFrameworkFunctions();
 }
 
-/* Initials of all contacts are displayed. */
+/**
+* Initials of all contacts are displayed. 
+*/
 function getInitials(name) {
   if (!name) return '??';
   return name
@@ -17,7 +21,9 @@ function getInitials(name) {
     .substring(0, 2);
 }
 
-/* Loads contacts from ContactTemplate into contact.html in alphabetical order. */
+/**
+* Loads contacts from ContactTemplate into contact.html in alphabetical order. 
+*/
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
   if (!contentRef) return;
@@ -40,7 +46,9 @@ function renderContacts() {
   contentRef.innerHTML = html;
 }
 
-/* Ensures that contacts are sorted alphabetically */
+/**
+* Ensures that contacts are sorted alphabetically 
+*/
 function groupContactsByInitial(contacts) {
   let groups = {};
   for (let i = 0; i < contacts.length; i++) {
@@ -58,7 +66,9 @@ function groupContactsByInitial(contacts) {
   return sortedGroups;
 }
 
-/* Ensures that newly created contacts are assigned a color. */
+/**
+* Ensures that newly created contacts are assigned a color. 
+*/
 function changeContactColorIfSelected(index, isSelected) {
   let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
   if (openDetails) {
@@ -72,7 +82,9 @@ function changeContactColorIfSelected(index, isSelected) {
   }
 }
 
-/* Opens a contact in the detail view. */
+/** 
+* Opens a contact in the detail view.
+*/
 function openDetails(index) {
   let allContacts = document.querySelectorAll('.person');
   let details = document.getElementById('contactDetails');
@@ -87,7 +99,9 @@ function openDetails(index) {
   setanimation(details, index);
 }
 
-/* Opens a small editing overlay to edit or delete contacts in the mobile version. */
+/**
+* Opens a small editing overlay to edit or delete contacts in the mobile version.
+*/
 function showMobileEditOverlay(indexDetails) {
   let overlayRef = document.getElementById('editContact-Overlay');
   let overlayBtn = document.getElementById('showOverlayBtn');
@@ -96,7 +110,9 @@ function showMobileEditOverlay(indexDetails) {
   overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
 }
 
-/* Close the Edit Overlay after making changes */
+/**
+* Close the Edit Overlay after making changes
+*/
 function closeContactDetails(allContacts, details) {
   allContacts.forEach((contact) => contact.classList.remove('active'));
   details.classList.remove('show');
@@ -107,7 +123,9 @@ function closeContactDetails(allContacts, details) {
   currentSelectedIndex = null;
 }
 
-/* Ensures that contacts open with a slight delay and load completely to prevent jerkiness  */
+/**
+* Ensures that contacts open with a slight delay and load completely to prevent jerkiness
+*/
 function setanimation(details, index) {
   setTimeout(() => {
     details.innerHTML = getNoteTemplateContactDetails(index);
@@ -121,7 +139,9 @@ function setanimation(details, index) {
   }, 20);
 }
 
-/* Opens an overlay from the template to create new contacts. */
+/** 
+* Opens an overlay from the template to create new contacts.
+*/
 function toggleContactOverlay() {
   let overlayRef = document.getElementById('add-new-contact');
   if (overlayRef.classList.contains('d-none')) {
@@ -133,7 +153,9 @@ function toggleContactOverlay() {
   }
 }
 
-/* Saves newly created contacts in Firebase */
+/** 
+* Saves newly created contacts in Firebase
+*/
 async function saveToFirebase(contact) {
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
@@ -160,7 +182,9 @@ async function saveToFirebase(contact) {
   }
 }
 
-/* Indicates when a contact has been successfully created. */
+/**
+* Indicates when a contact has been successfully created.
+*/
 function toggleSuccessfullOverlay(){
   let overlayRef = document.getElementById('successfully-Overlay');
   let overlayContent = document.getElementById('successWraper');
@@ -176,7 +200,9 @@ function toggleSuccessfullOverlay(){
   },3000);
 }
 
-/* assigns colors when a new contact is created */
+/** 
+* assigns colors when a new contact is created
+*/
 function getRandomColor() {
   return (
     '#' +
@@ -186,7 +212,9 @@ function getRandomColor() {
   );
 }
 
-/* Closes all overlays, both desktop and mobile versions. */
+/** 
+* Closes all overlays, both desktop and mobile versions. 
+*/
 function closeOverlay() {
   let overlayRef = document.getElementById('add-new-contact');
   let contentOverlayRef = document.getElementById('edit-contact');
@@ -200,7 +228,9 @@ function closeOverlay() {
   }
 }
 
-/* closes the details in the mobile version */
+/** 
+* closes the details in the mobile version
+*/
 function closeDetails() {
   let contentCloseDetails = document.getElementById('namesDetails');
   let overlayBtn = document.getElementById('showOverlayBtn');
@@ -216,7 +246,9 @@ function closeDetails() {
   }
 }
 
-/* Permanently deletes the contact from both the directory and Firebase. */
+/**
+* Permanently deletes the contact from both the directory and Firebase. 
+*/
 async function deleteContact(index) {
   let firebaseId = contacts[index].id;
   if (!firebaseId) {
@@ -240,7 +272,9 @@ async function deleteContact(index) {
   return true;
 }
 
-/* Existing contacts are modified here and uploaded to Firebase */
+/**
+* Existing contacts are modified here and uploaded to Firebase
+*/
 async function updateContact(index) {
   let userName = document.getElementById('editContactName').value.trim();
   let userEmail = document.getElementById('editContactMail').value.trim();
@@ -283,7 +317,9 @@ async function updateContact(index) {
   closeOverlay();
 }
 
-/* Stores created contact data in local storage and forwards it to Firebase. */
+/** 
+* Stores created contact data in local storage and forwards it to Firebase.
+*/
 async function saveToLocalstorage() {
   let userName = document.getElementById('newContactName').value;
   let userEmail = document.getElementById('newContactMail').value;
@@ -302,15 +338,19 @@ async function saveToLocalstorage() {
   await saveToFirebase(newContact);
 }
 
-/* Opens the contact editing overlay */
+/** 
+* Opens the contact editing overlay 
+*/
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
 
-/* Ensures that input fields can only be filled in with correct validation, e.g. 
-only strings can be entered in name fields, or email addresses must contain the @ sign.  */
+/** 
+* Ensures that input fields can only be filled in with correct validation, e.g. 
+* only strings can be entered in name fields, or email addresses must contain the @ sign.
+*/
 function checkContactInputs(userName, userEmail, userPhone) {
   let nameInput = document.getElementById('editContactName') || document.getElementById('newContactName');
   let mailInput = document.getElementById('editContactMail') || document.getElementById('newContactMail');
@@ -334,7 +374,9 @@ function checkContactInputs(userName, userEmail, userPhone) {
   return valid;
 }
 
-/* ensures that telephone numbers receive the international country code for the German area code */
+/**
+* ensures that telephone numbers receive the international country code for the German area code 
+*/
 function validatePhoneInput(input) {
   let value = input.value.replace(/[^+\d]/g, '');
   value = value.replace(/(?!^)\+/g, '');
