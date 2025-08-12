@@ -675,12 +675,6 @@
     font-size: 20px;
 }
 
-.create-clear-buttons-edit {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-}
-
 .overlay-section {
     padding: 48px 40px;
     max-height: 931px;
@@ -912,8 +906,3 @@
 .create-task-in-board {
     bottom: -4px !important;
 }
-
-.cancel-button:hover .cancel-icon {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
-    transition: filter 0.1s;
-}   

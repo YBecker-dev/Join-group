@@ -134,6 +134,18 @@ button:hover {
     background-color: #F6F7F8;
 }
 
+/*bord*/
+.create-clear-buttons-edit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.cancel-button:hover .cancel-icon {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
+}
+
 /* contacts */
 .addNewContactButton {
     height: 52px;
