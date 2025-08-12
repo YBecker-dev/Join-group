@@ -354,7 +354,6 @@ function openEditOverlay(index) {
 function checkContactInputs(userName, userEmail, userPhone) {
   let nameInput = document.getElementById('editContactName') || document.getElementById('newContactName');
   let mailInput = document.getElementById('editContactMail') || document.getElementById('newContactMail');
-
   let valid = true;
 
   if (!userName || userName.trim().length < 2) {
@@ -370,7 +369,6 @@ function checkContactInputs(userName, userEmail, userPhone) {
   if (!userPhone || userPhone.trim() === '') {
     userPhone = '-';
   }
-
   return valid;
 }
 
@@ -380,7 +378,6 @@ function checkContactInputs(userName, userEmail, userPhone) {
 function validatePhoneInput(input) {
   let value = input.value.replace(/[^+\d]/g, '');
   value = value.replace(/(?!^)\+/g, '');
-
   if (value.length > 0 && value[0] !== '0' && value[0] !== '+') {
     value = value.slice(1);
   }
@@ -388,18 +385,14 @@ function validatePhoneInput(input) {
   if (value.startsWith('0')) {
     value = '+49 ' + value.slice(1);
   }
-
   let prefix = value.slice(0, 3);
   let rest = value.slice(3).replace(/^\s*/, '');
-
   let firstBlock = rest.slice(0, 3);
   let secondBlock = rest.slice(3);
-
   let formatted = prefix;
   if (rest.length > 0) formatted += ' ' + firstBlock;
   if (secondBlock.length > 0) formatted += ' ' + secondBlock;
   formatted = formatted.slice(0, 17);
-
   input.value = formatted;
   clearInputError(input);
 }
