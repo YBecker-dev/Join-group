@@ -164,8 +164,16 @@ async function saveToFirebase(contact) {
 function toggleSuccessfullOverlay(){
   let overlayRef = document.getElementById('succesfully-Overlay');
   let overlayContent = document.getElementById('successWraper');
+  overlayContent.innerHTML =  getNoteTemplateSuccesfullOverlay()
+  let overlayContentDiv = document.getElementById('succesfully');
   overlayRef.classList.toggle('d-none');
-  overlayContent.innerHTML =  getNoteTemplateSuccesfullOverlay();
+  setTimeout(()=>{overlayContentDiv.classList.add('slide-in');},10);
+  setTimeout(()=>{overlayContentDiv.classList.remove('slide-in');
+                  overlayContentDiv.classList.add('slide-out');
+  },2000);
+  setTimeout(()=>{overlayRef.classList.add('d-none');
+                  overlayContent.innerHTML ="";
+  },3000);
 }
 
 function getRandomColor() {
