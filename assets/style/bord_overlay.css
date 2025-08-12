@@ -1,0 +1,422 @@
+/*Overlay-Design */
+.p-Tag {
+    padding: 0;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.overlay-no-result {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F7F8;
+    z-index: 1;
+}
+
+.no-result-position {
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: rgb(41, 54, 71);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.overlay-content-render-edit {
+    padding: 40px 48px;
+}
+
+.overlay-position {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding: 48px 40px;
+    max-height: 913px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.overlay-position::-webkit-scrollbar {
+    display: none;
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-type>p {
+    padding: 4px 24px;
+    font-size: 23px;
+    font-weight: 400;
+}
+
+.close-icon>img {
+    height: 24px;
+    width: 24px;
+}
+
+.close-icon:hover {
+    cursor: pointer;
+    background-color: rgb(202, 199, 199);
+    /*Nicht aus Figma*/
+    border-radius: 50%;
+}
+
+.overlay-titel>h1 {
+    font-size: 60px;
+    color: #000000;
+    text-align: start;
+    padding: unset;
+}
+
+.overlay-titel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    word-break: break-word;
+}
+
+.overlay-description-flex {
+    display: flex;
+    gap: 25px;
+}
+
+.overlay-priority {
+    height: 24px;
+    width: 139px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.overlay-priority>img {
+    height: 6.33px;
+    width: 17px;
+}
+
+.assigned-to {
+    width: 445px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.overlay-peoples {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 280px;
+}
+
+.peoples-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-left: 16px;
+    padding: 7px 16px;
+}
+
+.initials {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.initials p {
+    color: white;
+    font-size: 12px;
+}
+
+.people-name>p {
+    white-space: nowrap;
+    height: 23px;
+    display: flex;
+    flex-direction: row;
+}
+
+.subtask-info {
+    height: 32px;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+}
+
+.subtask-info:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #D1D1D1;
+}
+
+.overlay-subtasks {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.overlay-checkbox {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-edit-wrapper {
+    height: 24px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.overlay-edit {
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.overlay-edit-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.trashImg p,
+.editImg p {
+    font-size: 16px;
+}
+
+.trashImg,
+.editImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    transform-origin: right center;
+    gap: 8px;
+}
+
+.trashImg:hover,
+.editImg:hover {
+    transform: scaleX(1.05);
+}
+
+.trashImg:hover p,
+.trashImg:hover img,
+.editImg:hover p,
+.editImg:hover img {
+    color: #2AABE2;
+    filter: brightness(0) saturate(100%) invert(56%) sepia(94%) saturate(749%) hue-rotate(161deg) brightness(97%) contrast(92%);
+}
+
+.overlay-seperator {
+    height: 24px;
+    width: 1px;
+    background-color: #D1D1D1;
+}
+
+.transform-left {
+    transform-origin: right top;
+}
+
+.transform-bottom {
+    transform-origin: right bottom;
+}
+
+.overlay-content-render form {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% + 27px);
+    gap: 32px;
+    max-height: 725px;
+    height: 100%;
+    overflow-y: scroll;
+    margin-top: 16px;
+}
+
+.input-icon-edit {
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+    bottom: 4px;
+}
+
+#edit-date {
+    font-size: 20px;
+    cursor: pointer;
+    width: unset;
+}
+
+.date-input-edit {
+    gap: 0;
+}
+
+.date-icon-edit {
+    position: absolute;
+    right: 16px;
+    bottom: 22px;
+    z-index: 10;
+}
+
+#edit-urgent,
+#edit-medium,
+#edit-low {
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+#edit-urgent:hover,
+#edit-medium:hover,
+#edit-low:hover {
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.priority-edit {
+    max-width: 440px;
+}
+
+.priority-edit span {
+    text-align: start;
+    font-size: 20px;
+}
+
+.overlay-section {
+    padding: 48px 40px;
+    max-height: 931px;
+    height: 100%;
+    max-width: 525px;
+    width: 100%;
+}
+
+.subtask-edit {
+    margin: 0;
+}
+
+.overlay-add-task {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-overlay-content {
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.10);
+    min-width: 1116px;
+    min-height: 870px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.add-task-overlay-content.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.add-task-overlay-content.hide {
+    transform: translateX(100vw);
+    opacity: 0;
+}
+
+.close-overlay-x {
+    position: absolute;
+    top: 110px;
+    right: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.content-add-task {
+    bottom: 36px;
+    right: 24px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgb(84, 94, 97, 0);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.overlay.visible {
+    background-color: rgba(84, 94, 97, 0.375);
+}
+
+.overlay-content-flex {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content-render {
+    width: 525px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.overlay-content-render.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.overlay-content-render.hide {
+    transform: translateX(100vw);
+    opacity: 0;
+}
+
+.overlay-header-edit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dragging {
+    opacity: 0.5;
+}
