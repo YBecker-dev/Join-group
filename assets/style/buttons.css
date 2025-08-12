@@ -58,7 +58,6 @@ button:hover {
     gap: 11px;
     width: 160px;
     height: 48px;
-    ;
 }
 
 .login-btn,
@@ -74,6 +73,68 @@ button:hover {
     transform: translateY(-1px);
 }
 
+/*add task*/
+.create-button,
+.clear-button,
+.cancel-button,
+.ok-button {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
+    padding: 16px;
+    width: 183px;
+    height: 56px;
+    justify-content: space-between;
+    transition: all 0.1s;
+}
+
+.clear-button:hover .clear-icon {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
+}
+
+.ok-button,
+.cancel-button {
+    width: unset;
+}
+
+.create-button {
+    font-size: 21px;
+}
+
+.clear-button {
+    width: 110px;
+}
+
+.create-button img,
+.clear-button img,
+.cancel-button img {
+    height: 24px;
+    width: 24px;
+}
+
+.clear-button,
+.cancel-button {
+    background-color: white;
+    color: rgb(41, 54, 71);
+    font-weight: normal;
+    border: 1px solid rgb(41, 54, 71);
+}
+
+.create-clear-buttons {
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    gap: 16px;
+    left: 763px;
+    top: 793px;
+    z-index: 100;
+    background-color: #F6F7F8;
+}
+
+/* contacts */
 .addNewContactButton {
     height: 52px;
     width: 352px;
