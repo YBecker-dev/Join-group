@@ -111,7 +111,7 @@ function getNoteTemplateAddNewContact() {
                   <div class="hide-button-addContact">
                     <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png"></button>
                   </div>
-                  <button onclick=" saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
+                  <button onclick=" saveToLocalstorage()" class="create-button create-contact-btn">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
                 </div>         
               </div>
             </div>

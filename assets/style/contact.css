@@ -564,7 +564,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     z-index: 1;
@@ -588,7 +588,7 @@ h4 {
     
 }
 .slide-in{ 
-    transform: translateX(0);
+    transform: translateX(60px);
 }
 .slide-out{
     transform: translateX(100vw);

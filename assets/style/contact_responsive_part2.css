@@ -1,14 +1,19 @@
 @media(max-width: 1439px){
     .successfully-Overlay{
+        align-items: flex-end;
+    }
+    .successfullyOverlay{
         transform: translateY(100vh);
         margin-bottom: 250px;
+       
     }
-    .successfully-Overlay.slide-in{
+    .successfullyOverlay.slide-in{
         transform: translateY(0);
     }
-    .successfully-Overlay.slide-out{
+    .successfullyOverlay.slide-out{
         transform: translateY(100vh);
     }
+    
 }
 
 @media(max-height: 670px){

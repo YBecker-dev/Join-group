@@ -207,6 +207,9 @@ button:hover {
     font-size: 21px;
     transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
 }
+.create-contact-btn{
+    width: 214px;
+}
 
 .accept {
     width: 249px;
