@@ -46,13 +46,12 @@
     
 }
 @media(max-height: 760px){
-}
-
-@media(max-height: 670px){
     .newContactOverlay{
-        height: 630px;
+        justify-content: center;
     }
-    
+    .headDiv{
+        height: 280px;
+    }
     .editDiv-addContact{
         height: 300px;
         
@@ -63,11 +62,16 @@
     }
     .profileInitials-addContacts{
         width: auto;
+        padding-top: 20px;
+    }
+    .profilDiv-addContacts{
         padding-top: 10px;
     }
+
+
 }
 
-@media(max-height: 670px){
+@media(max-height: 680px){
     .newContactOverlay{
         height: 630px;
     }
