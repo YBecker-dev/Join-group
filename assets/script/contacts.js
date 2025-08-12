@@ -186,9 +186,9 @@ function getRandomColor() {
 }
 
 
-function showSuccesButton() {
+// function showSuccesButton() {
   
-}
+// }
 
 
 function closeOverlay() {
@@ -311,7 +311,7 @@ async function saveToLocalstorage() {
 
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
-  let overlayContent = document.getElementById('successWrapper');
+  let overlayContent = document.getElementById('successWraper');
   contentOverlayRef.classList.remove('d-none');
   overlayContent.innerHTML = getNoteTemplateEditContact(index);
 }
