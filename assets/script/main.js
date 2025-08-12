@@ -4,6 +4,11 @@ let lastValidDate = '';
 let lastDateLength = 0;
 let BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
+
+/**
+ * Asynchronously fetches a list of users from a specified URL,
+ * processes the data, and populates the global 'contacts' array.
+ */
 async function loadContacts() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'users.json');
   let data = await response.json();
@@ -29,8 +34,12 @@ function initFrameworkFunctions() {
   displayUserInitials();
 }
 
+
+/**
+ * Retrieves user initials from localStorage and displays them in the 'userInitials' element.
+ * It handles both standard users and guests, and redirects to the login page on unauthorized access.
+ */
 function displayUserInitials() {
-  // Sehr Fehleranfällig !!!
   try {
     let userInitials = document.getElementById('userInitials');
     let userName = JSON.parse(localStorage.getItem('announcedUser'));
@@ -62,6 +71,8 @@ function redirectLogin() {
   timeout = setTimeout((window.location.href = '/index.html'), 2000);
 }
 
+
+/**toggle Overlay */
 function toggleLogOutOverlay() {
   let logOutRef = document.getElementById('overlay-logout');
   let menuContent = document.getElementById('logout-overlay-content');
@@ -84,7 +95,14 @@ function handleLogOut(event) {
 let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
-
+/**
+ * Triggers a visual "shaking" and error state for a given input element.
+ * This function adds CSS classes to an input and its closest parent container to indicate an error.
+ * It also uses browser's built-in validation reporting to display a custom error message.
+ * The "shaking" animation is removed after 300ms.
+ * @param {HTMLElement} input 
+ * @param {string} message 
+ */
 function shakeInput(input, message) {
   input.classList.add('shake');
   input.classList.add('input-error');
@@ -96,7 +114,10 @@ function shakeInput(input, message) {
     input.classList.remove('shake');
   }, 300);
 }
-
+/**
+ * lears any validation error states from a given input element and its parent container.
+ * @param {HTMLElement} input 
+ */
 function clearInputError(input) {
   input.setCustomValidity('');
   input.classList.remove('input-error');
@@ -105,12 +126,17 @@ function clearInputError(input) {
 }
 
 function validateEmailInput(input) {
-  //ok
   input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
   clearInputError(input);
   input.setCustomValidity('');
 }
-
+/**
+ * Validates and formats a name input by cleaning, capitalizing, and limiting the number of words.
+ * This function removes invalid characters, replaces multiple spaces with a single space, 
+ * trims the input, and capitalizes the first letter of each word. It also limits the 
+ * input to a maximum of three words and cleans up any trailing spaces.
+ * @param {HTMLElement} input 
+ */
 function validateNameInput(input) {
   //zu lang
   if (input.value.endsWith(' ')) {

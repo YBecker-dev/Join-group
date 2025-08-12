@@ -14,6 +14,9 @@ function init() {
   setupEventListeners();
 }
 
+/**
+ * Retrieves and stores key HTML elements for the registration form.
+ */
 function initializeElements() {
   button = document.getElementById('signup-btn');
   checkbox = document.getElementById('accept');
@@ -25,6 +28,9 @@ function initializeElements() {
   pw2Icon = document.getElementById('password-confirm-icon');
 }
 
+/**
+ * Attaches event listeners to all relevant form elements to handle user input and interaction.
+ */
 function setupEventListeners() {
   passwordInput.addEventListener('input', handlePasswordInput);
   passwordConfirmInput.addEventListener('input', handlePasswordConfirmInput);
@@ -35,6 +41,11 @@ function setupEventListeners() {
   checkbox.addEventListener('change', handleCheckboxChange);
 }
 
+
+/**
+ * Handles input in the password field, updating the icon and clearing validation errors.
+ * @param {Event} this - The input event object.
+ */
 function handlePasswordInput() {
   let inputValue = this.value.trim();
   if (inputValue === '') {
@@ -49,6 +60,11 @@ function handlePasswordInput() {
   this.setCustomValidity('');
 }
 
+
+/**
+ * Handles input in the password confirmation field, updating the icon and clearing validation errors.
+ * @param {Event} this - The input event object.
+ */
 function handlePasswordConfirmInput() {
   let inputValue = this.value.trim();
   if (inputValue === '') {
@@ -63,6 +79,10 @@ function handlePasswordConfirmInput() {
   this.setCustomValidity('');
 }
 
+
+/**
+ * Toggles the visibility of the first password input field and updates its icon.
+ */
 function togglePassword1Visibility() {
   if (pw1Icon.classList.contains('eye-icon')) {
     if (passwordInput.type == 'password') {
@@ -75,6 +95,10 @@ function togglePassword1Visibility() {
   }
 }
 
+
+/**
+ * Toggles the visibility of the first password input field and updates its icon.
+ */
 function togglePassword2Visibility() {
   if (pw2Icon.classList.contains('eye-icon')) {
     if (passwordConfirmInput.type == 'password') {
@@ -87,6 +111,11 @@ function togglePassword2Visibility() {
   }
 }
 
+
+/**
+ * Handles input in the name field, running a validation function and clearing errors.
+ * @param {Event} this - The input event object.
+ */
 function handleNameInput() {
   if (validateNameInput) {
     validateNameInput(this);
@@ -96,6 +125,10 @@ function handleNameInput() {
   this.setCustomValidity('');
 }
 
+/**
+ * Handles input in the email field, running a validation function and clearing errors.
+ * @param {Event} this - The input event object.
+ */
 function handleEmailInput() {
   if (validateEmailInput) {
     validateEmailInput(this);
@@ -105,12 +138,21 @@ function handleEmailInput() {
   this.setCustomValidity('');
 }
 
+
+/**
+ * Handles changes to the checkbox, removing the error class if it is checked.
+ */
 function handleCheckboxChange() {
   if (checkbox.checked) {
     checkbox.classList.remove('input-error');
   }
 }
 
+
+/**
+ * Initiates the user registration process by first validating all fields.
+ * @param {Event} event - The form submission event.
+ */
 function successRegister(event) {
   if (allFieldsFilledCorrect(event)) {
     checkUserOnRegistration(event);
@@ -119,6 +161,11 @@ function successRegister(event) {
   }
 }
 
+
+/**
+ * Asynchronously checks if the email is already in use before adding a new user.
+ * @param {Event} event - The form submission event.
+ */
 async function checkUserOnRegistration(event) {
   event.preventDefault();
   try {
@@ -134,6 +181,10 @@ async function checkUserOnRegistration(event) {
   }
 }
 
+
+/**
+ * Asynchronously checks for an existing email and adds a new user if the email is unique.
+ */
 async function handleUserDataResponse(userDataObject) {
   const emailExists = await checkEmailInBothDatabases();
 
@@ -144,6 +195,11 @@ async function handleUserDataResponse(userDataObject) {
   }
 }
 
+
+/**
+ * Asynchronously checks for the existence of the entered email in two different databases.
+ * @returns {Promise<boolean>} A promise that resolves to true if the email exists, otherwise false.
+ */
 async function checkEmailInBothDatabases() {
   try {
     const [loginResponse, userResponse] = await Promise.all([
@@ -159,6 +215,13 @@ async function checkEmailInBothDatabases() {
   }
 }
 
+
+/**
+ * Checks if a given email exists within the provided login and user data.
+ * @param {Response} loginResponse - The response object for login data.
+ * @param {Response} userResponse - The response object for user data.
+ * @returns {Promise<boolean>} True if the email exists, otherwise false.
+ */
 async function checkEmails(loginResponse, userResponse) {
   if (loginResponse.ok) {
     const loginData = await loginResponse.json();
@@ -177,6 +240,13 @@ async function checkEmails(loginResponse, userResponse) {
   return false;
 }
 
+
+/**
+ * Checks if a specific email exists within a given data object.
+ * @param {object} dataObject - The data object to search in.
+ * @param {string} emailField - The key for the email field in the object.
+ * @returns {boolean} True if the email exists, otherwise false.
+ */
 function CheckEmailExistsInData(dataObject, emailField) {
   const keys = Object.keys(dataObject);
   for (let i = 0; i < keys.length; i++) {
@@ -191,6 +261,10 @@ function CheckEmailExistsInData(dataObject, emailField) {
   return false;
 }
 
+
+/**
+ * Displays a specific error message and triggers a shake animation for the email input field.
+ */
 function showEmailAlreadyExistsError() {
   emailInput.classList.add('input-error');
   let emailWarning = document.getElementById('email-warning');
@@ -199,6 +273,10 @@ function showEmailAlreadyExistsError() {
   shakeInput(emailInput, 'This email address is already registered.');
 }
 
+
+/**
+ * Asynchronously creates and saves new user data to the database.
+ */
 async function addUser() {
   let loginData = createLoginData();
   let userData = createUserData();
@@ -210,6 +288,11 @@ async function addUser() {
   } catch (error) {}
 }
 
+
+/**
+ * Creates a login data object from the current form input values.
+ * @returns {object} The login data object.
+ */
 function createLoginData() {
   return {
     email: emailInput.value,
@@ -218,6 +301,11 @@ function createLoginData() {
   };
 }
 
+
+/**
+ * Creates a full user data object with a random color and initials from the input values.
+ * @returns {object} The user data object.
+ */
 function createUserData() {
   return {
     name: nameInput.value,
@@ -228,6 +316,12 @@ function createUserData() {
   };
 }
 
+
+/**
+ * Asynchronously sends a POST request to save the login data.
+ * @param {object} loginData - The data to be saved.
+ * @returns {Promise<Response>} The fetch response object.
+ */
 async function saveLoginData(loginData) {
   return await fetch(BASE_URL + 'login.json', {
     method: 'POST',
@@ -236,6 +330,11 @@ async function saveLoginData(loginData) {
   });
 }
 
+
+/**
+ * Handles the result of user creation, redirecting on success.
+ * @param {Response} loginResponse - The response from the server.
+ */
 function handleUserCreationResult(loginResponse) {
   if (loginResponse.ok) {
     showSuccessMessage();
@@ -243,6 +342,10 @@ function handleUserCreationResult(loginResponse) {
   }
 }
 
+
+/**
+ * Resets the registration form and clears all validation errors.
+ */
 let resetForm = () => {
   document.getElementById('register-form').reset();
   nameInput.setCustomValidity('');
@@ -252,6 +355,10 @@ let resetForm = () => {
   setupEventListeners();
 };
 
+
+/**
+ * Displays a success message and redirects the user to the login page after a short delay.
+ */
 function showSuccessMessage() {
   let successSection = document.getElementById('success-register-section');
   successSection.classList.remove('d-none');
@@ -260,6 +367,12 @@ function showSuccessMessage() {
   }, 1500);
 }
 
+
+/**
+ * Checks if all form fields are filled correctly according to predefined validation rules.
+ * @param {Event} event - The form submission event.
+ * @returns {boolean} True if all fields are valid, otherwise false.
+ */
 function allFieldsFilledCorrect(event) {
   event.preventDefault();
   return (
@@ -272,6 +385,11 @@ function allFieldsFilledCorrect(event) {
   );
 }
 
+
+/**
+ * Handles the form submission event, validating fields and showing a success message if valid.
+ * @param {Event} event - The form submission event.
+ */
 function formSubmit(event) {
   event.preventDefault();
   if (allFieldsFilledCorrect()) {
@@ -280,67 +398,92 @@ function formSubmit(event) {
     checkAllFields();
   }
 }
+///////////////////////////////////////////////////////////////////////
 
-function checkAllFields() {
-  checkName();
-  checkEmail();
-  checkPassword();
-  checkPasswordConfirm();
-  checkCheckbox();
-}
 
-function checkName() {
-  nameWarning = document.getElementById('name-warning');
-  if (!nameInput.value.length) {
-    nameInput.classList.add('input-error');
-    nameWarning.classList.remove('d-none');
-    shakeInput(nameInput, 'Please enter a valid name.');
-  } else {
-    nameInput.classList.remove('input-error');
-    nameWarning.classList.add('d-none');
-  }
-}
-
-function checkEmail() {
-  emailWarning = document.getElementById('email-warning');
-  if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(emailInput.value)) {
-    emailInput.classList.add('input-error');
-    emailWarning.classList.remove('d-none');
-    shakeInput(emailInput, 'Enter a valid password.');
-  } else {
-    emailInput.classList.remove('input-error');
-    emailWarning.classList.add('d-none');
-  }
-}
-
-function checkPassword() {
-  passwordWarning = document.getElementById('password-warning');
-  if (passwordInput.value.length < 8 || !/[A-ZÄÖÜ]/.test(passwordInput.value)) {
-    passwordInput.classList.add('input-error');
-    passwordWarning.classList.remove('d-none');
-    shakeInput(passwordInput, 'Enter a valid password.');
-  } else {
-    passwordInput.classList.remove('input-error');
-    passwordWarning.classList.add('d-none');
-  }
-}
-
-function checkPasswordConfirm() {
-  passwordConfirmWarning = document.getElementById('password-confirm-warning');
-  if (passwordConfirmInput.value !== passwordInput.value || !passwordConfirmInput.value) {
-    passwordConfirmInput.classList.add('input-error');
-    passwordConfirmWarning.classList.remove('d-none');
-    shakeInput(passwordConfirmInput, 'Passwords do not match!');
-  } else {
-    passwordConfirmInput.classList.remove('input-error');
-    passwordConfirmWarning.classList.add('d-none');
-  }
-}
-
-function checkCheckbox() {
-  if (!checkbox.checked) {
-    checkbox.classList.add('input-error');
-  } else {
-    checkbox.classList.remove('input-error');
-  }
-}
+///**
+// * Runs validation checks on all individual fields of the registration form.
+// */
+//function checkAllFields() {
+//  checkName();
+//  checkEmail();
+//  checkPassword();
+//  checkPasswordConfirm();
+//  checkCheckbox();
+//}
+//
+//
+///**
+// * Validates the name input field, showing an error if it's empty.
+// */
+//function checkName() {
+//  nameWarning = document.getElementById('name-warning');
+//  if (!nameInput.value.length) {
+//    nameInput.classList.add('input-error');
+//    nameWarning.classList.remove('d-none');
+//    shakeInput(nameInput, 'Please enter a valid name.');
+//  } else {
+//    nameInput.classList.remove('input-error');
+//    nameWarning.classList.add('d-none');
+//  }
+//}
+//
+//
+///**
+// * Validates the email input field with a regex, showing an error if invalid.
+// */
+//function checkEmail() {
+//  emailWarning = document.getElementById('email-warning');
+//  if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(emailInput.value)) {
+//    emailInput.classList.add('input-error');
+//    emailWarning.classList.remove('d-none');
+//    shakeInput(emailInput, 'Enter a valid password.');
+//  } else {
+//    emailInput.classList.remove('input-error');
+//    emailWarning.classList.add('d-none');
+//  }
+//}
+//
+//
+///**
+// * Validates the password input field, checking for length and required characters.
+// */
+//function checkPassword() {
+//  passwordWarning = document.getElementById('password-warning');
+//  if (passwordInput.value.length < 8 || !/[A-ZÄÖÜ]/.test(passwordInput.value)) {
+//    passwordInput.classList.add('input-error');
+//    passwordWarning.classList.remove('d-none');
+//    shakeInput(passwordInput, 'Enter a valid password.');
+//  } else {
+//    passwordInput.classList.remove('input-error');
+//    passwordWarning.classList.add('d-none');
+//  }
+//}
+//
+//
+///**
+// * Validates the password confirmation input, ensuring it matches the password field.
+// */
+//function checkPasswordConfirm() {
+//  passwordConfirmWarning = document.getElementById('password-confirm-warning');
+//  if (passwordConfirmInput.value !== passwordInput.value || !passwordConfirmInput.value) {
+//    passwordConfirmInput.classList.add('input-error');
+//    passwordConfirmWarning.classList.remove('d-none');
+//    shakeInput(passwordConfirmInput, 'Passwords do not match!');
+//  } else {
+//    passwordConfirmInput.classList.remove('input-error');
+//    passwordConfirmWarning.classList.add('d-none');
+//  }
+//}
+//
+//
+///**
+// * Validates the checkbox, adding an error class if it is not checked.
+// */
+//function checkCheckbox() {
+//  if (!checkbox.checked) {
+//    checkbox.classList.add('input-error');
+//  } else {
+//    checkbox.classList.remove('input-error');
+//  }
+//}
