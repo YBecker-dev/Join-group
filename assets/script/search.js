@@ -1,5 +1,6 @@
 let taskCollection = [];
 
+
 /**Call function enables the Live Search  */
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
@@ -7,6 +8,8 @@ let initEventListnerProcessTasksInformation = () => {
     searchInput.addEventListener('input', processTasksInformation);
   }
 };
+
+
 /**
  * iterate through all tasks in the DOM and save the task title,
  * the description, the ID and the HTML element in the taskCollection array
@@ -34,6 +37,7 @@ function processTasksInformation() {
   showSearchResult();
 }
 
+
 /**
  * Stores all essential task information in the taskCollection array.
  * @param {int} taskId 
@@ -49,6 +53,7 @@ function storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, t
         element: taskContainer,
     });
 }
+
 
 /**
  * receive the input value and call the functions processTaskSearch() and taskVisibility()
@@ -67,6 +72,8 @@ function showSearchResult() {
   }
   taskVisibilty(searchResult);
 }
+
+
 /**
  * show Overlay if the search got no target
  */
@@ -77,11 +84,14 @@ function toggleNoResultOverlay(){
   content.innerHTML = noteNoTaskFounded();
 }
 
+
 let closeOverlay = () =>{
   let overlay = document.getElementById('overlay-no-result');
   overlay.classList.add('d-none');
   window.location.reload();
 }
+
+
 /**
  * take the inputValue and filter the TaskCollection array by Object -title and description.
  * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
@@ -105,6 +115,8 @@ function processTaskSearch(filterTask, searchString) {
     return textOutput.includes(searchTerm);
   });
 }
+
+
 /**
  * Controls the visibility of tasks through search input.
  * @param {Arraa[Object]} filterTask

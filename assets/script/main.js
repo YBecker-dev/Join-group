@@ -30,6 +30,7 @@ async function loadContacts() {
   }
 }
 
+
 function initFrameworkFunctions() {
   displayUserInitials();
 }
@@ -62,9 +63,11 @@ function displayUserInitials() {
   }
 }
 
+
 let loadHelp = () => {
   window.location.href = '/assets/html/help.html';
 };
+
 
 function redirectLogin() {
   let timeout;
@@ -92,9 +95,12 @@ function handleLogOut(event) {
   window.location.href = '/index.html';
 }
 
+
 let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
+
+
 /**
  * Triggers a visual "shaking" and error state for a given input element.
  * This function adds CSS classes to an input and its closest parent container to indicate an error.
@@ -114,6 +120,8 @@ function shakeInput(input, message) {
     input.classList.remove('shake');
   }, 300);
 }
+
+
 /**
  * lears any validation error states from a given input element and its parent container.
  * @param {HTMLElement} input 
@@ -125,11 +133,18 @@ function clearInputError(input) {
   if (parentDiv) parentDiv.classList.remove('input-error');
 }
 
+
+/**
+ * Cleans the email input field by removing invalid characters and resets its validation state.
+ * @param {HTMLInputElement} input - The email input element.
+ */
 function validateEmailInput(input) {
   input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
   clearInputError(input);
   input.setCustomValidity('');
 }
+
+
 /**
  * Validates and formats a name input by cleaning, capitalizing, and limiting the number of words.
  * This function removes invalid characters, replaces multiple spaces with a single space, 
@@ -158,6 +173,7 @@ function validateNameInput(input) {
   input.value = capitalized.join(' ');
   clearInputError(input);
 }
+
 
 function eventBubbling(event) {
   event.stopPropagation();

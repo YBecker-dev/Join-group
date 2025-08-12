@@ -51,6 +51,10 @@ async function checkTasks() {
 }
 
 
+/**
+ * Processes the 'priorityArray' to count all tasks marked as 'Urgent' and
+ * passes this count to the 'includePriorityToSummery' function.
+ */
 function processPriority() {
   priorityArray.forEach((element) => {
     if (element === 'Urgent') {
@@ -336,7 +340,6 @@ function findTasksInSummary(tasks, urgentTasks, today) {
  * @param {Array<Date>} urgentTasks - An array of urgent task dates.
  * @param {HTMLElement} deadlineElement - The element to display the date in.
  */
-
 function showUrgentDate(urgentTasks, deadlineElement) {
   urgentTasks.sort((a, b) => a - b);
   let nextDeadline = urgentTasks[0];
