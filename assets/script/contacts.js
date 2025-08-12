@@ -135,7 +135,6 @@ function toggleContactOverlay() {
 
 
 async function saveToFirebase(contact) {
-  // zu lang
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
     let response = await fetch(url, {
@@ -161,6 +160,7 @@ async function saveToFirebase(contact) {
   }
 }
 
+
 function toggleSuccessfullOverlay(){
   let overlayRef = document.getElementById('successfully-Overlay');
   let overlayContent = document.getElementById('successWraper');
@@ -184,11 +184,6 @@ function getRandomColor() {
       .padStart(6, '0')
   );
 }
-
-
-// function showSuccesButton() {
-  
-// }
 
 
 function closeOverlay() {
@@ -222,7 +217,6 @@ function closeDetails() {
 
 
 async function deleteContact(index) {
-  //zu lang
   let firebaseId = contacts[index].id;
   if (!firebaseId) {
     console.error('Firebase-ID nicht gefunden für Index:', index);
@@ -247,7 +241,6 @@ async function deleteContact(index) {
 
 
 async function updateContact(index) {
-  // zu lang
   let userName = document.getElementById('editContactName').value.trim();
   let userEmail = document.getElementById('editContactMail').value.trim();
   let userPhone = document.getElementById('editContactPhone').value.trim();
@@ -341,7 +334,6 @@ function checkContactInputs(userName, userEmail, userPhone) {
 
 
 function validatePhoneInput(input) {
-  //zu lang
   let value = input.value.replace(/[^+\d]/g, '');
   value = value.replace(/(?!^)\+/g, '');
 
