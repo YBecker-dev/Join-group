@@ -1,4 +1,8 @@
-// Contact Overview
+/**
+ * @param {*} index 
+ * @returns
+ * Contactlist 
+ */
 function getNoteTemplateContact(index) {
   let user = contacts[index];
 
@@ -13,7 +17,11 @@ function getNoteTemplateContact(index) {
             </div>`;
 }
 
-// view Contact
+/**
+ * @param {*} indexDetails 
+ * @returns
+ * show Cointact Details 
+ */
 function getNoteTemplateContactDetails(indexDetails) {
   let user = contacts[indexDetails];
 
@@ -64,7 +72,9 @@ function getNoteTemplateContactDetails(indexDetails) {
               </div>`;
 }
 
-// add new Contact
+/** 
+* add new Contact
+*/ 
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
@@ -118,7 +128,9 @@ function getNoteTemplateAddNewContact() {
           </div>`;
 }
 
-// edit Contact
+/**
+* edit Contact 
+*/
 function getNoteTemplateEditContact(index) {
   let user = contacts[index] || {};
 
@@ -175,6 +187,9 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
+/**
+* Overlay to Edit or Delete from Contacts
+*/
 function getNoteTemplateMobileEditOverlay(indexDetails) {
 
   return` <div class="editDeleteOverlayMobile" id="editDeleteOverlayMobile"> 
@@ -189,6 +204,9 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
           </div>`;
 }
 
+/**
+* Overlay to show that Contacts Succesfull addet
+*/
 function getNoteTemplateSuccesfullOverlay() {
 
   return `  <div  id="successfully" class="successfullyOverlay">
