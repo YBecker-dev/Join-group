@@ -67,7 +67,7 @@
     .profilDiv-addContacts{
         padding-top: 10px;
     }
-    
+
 }
 
 @media(max-height: 680px){
@@ -88,8 +88,10 @@
         height: 300px;
     }
     .profilDiv{
-        width: auto;
-       
+        width: auto;  
+    }
+      .headDiv-wrapper-newContact{
+        width: 280px;
     }
     .accept-addContact{
         margin-top: 10px;
@@ -110,7 +112,64 @@
     .mobile-headline{
         padding-top: 0px;
     }
+    .initialOverlay{
+        height: 80px;
+        width: 80px;
+        font-size: 27px;
+    }
+  
     
+}
+@media(max-width: 650px){
+     .contactInformations{
+        gap: 20px;
+    }
+     
+    .infoNames{
+        text-align: start;
+        font-size: 27px;
+    }
+}
+@media(max-width: 400px){
+    .newContactOverlay{
+        width: 300px;
+    }
+    .headDiv-wrapper-newContact{
+        width: 280px;
+    }
+    .headDiv-wrapper{
+        width: 280px;
+    }
+    .add-contact{
+        font-size: 35px;
+    }
+
+    .profilDiv-addContacts{
+        width: 290px;
+    }
+    .addNewContactDiv{
+        width: 290px;
+    }
+    .addNewContact{
+        font-size: 16px;
+    }
+    .initialOverlay{
+        height: 80px;
+        width: 80px;
+        font-size: 27px;
+    }
+    .infoNames{
+        font-size: 30px;
+    }
+    
+}
+@media(max-width: 380px){
+    .headlineMobile>h2{
+        font-size: 47px;
+    }
+    .infoNames{
+        font-size: 18px;
+    }
 }
 
 
