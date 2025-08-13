@@ -167,6 +167,9 @@ let loadBoard = () => {
 };
 
 
+/**
+ * Shows the main content block if the viewport width is greater than 1440px.
+ */
 function showMainContentIfWideScreen() {
   let mainContent = document.querySelector('.main-content');
   if (window.innerWidth > 1440 && mainContent) {

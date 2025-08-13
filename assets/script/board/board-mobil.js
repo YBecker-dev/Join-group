@@ -1,8 +1,16 @@
+/**
+ * Toggles the visibility of the dropdown menu.
+ */
 function showDropDown(){
     let dropdown_menu = document.getElementById('drop-down')
     dropdown_menu.classList.toggle('d-none');    
 }
 
+
+/**
+ * Finds the status area of a task and calls a function to hide the active status.
+ * @param {string} trueTaskId - The ID of the task.
+ */
 function findStatusArea(trueTaskId){
     let boardTaskContainer= document.getElementById('task-'+trueTaskId);
     let firstParent = boardTaskContainer.parentElement;
@@ -11,6 +19,12 @@ function findStatusArea(trueTaskId){
     hideActivStatus(trueTaskId, statusID);  
 }
 
+
+/**
+ * Hides the dropdown menu for the currently active status.
+ * @param {string} trueTaskId - The ID of the task.
+ * @param {string} statusID - The ID of the status area.
+ */
 function hideActivStatus(trueTaskId, statusID){
     let targetArea = document.getElementById(statusID);
     let todoDropDown = document.getElementById(statusID+'-mobil-'+trueTaskId)
@@ -29,6 +43,12 @@ function hideActivStatus(trueTaskId, statusID){
     }
 }
 
+
+/**
+ * Changes a task's status to 'todo' on mobile.
+ * @param {string} trueTaskId - The ID of the task.
+ * @param {string} taskId - The database ID of the task.
+ */
 async function changeTaskStatusMobilToDo(trueTaskId ,taskId){
     let overlayRef = document.getElementById('overlayBoard');
     let taskOverlayRef = document.getElementById('overlay-content-loader');
@@ -44,6 +64,12 @@ async function changeTaskStatusMobilToDo(trueTaskId ,taskId){
     taskOverlayRef.classList.toggle('show');
 }
 
+
+/**
+ * Changes a task's status to 'inProgress' on mobile.
+ * @param {string} trueTaskId - The ID of the task.
+ * @param {string} taskId - The database ID of the task.
+ */
 async function changeTaskStatusMobilInProgress(trueTaskId ,taskId){
     let overlayRef = document.getElementById('overlayBoard');
     let taskOverlayRef = document.getElementById('overlay-content-loader');
@@ -58,6 +84,12 @@ async function changeTaskStatusMobilInProgress(trueTaskId ,taskId){
     taskOverlayRef.classList.toggle('show');
 }
 
+
+/**
+ * Changes a task's status to 'awaitFeedback' on mobile.
+ * @param {string} trueTaskId - The ID of the task.
+ * @param {string} taskId - The database ID of the task.
+ */
 async function changeTaskStatusMobilAwaitFeedback(trueTaskId ,taskId){
     let overlayRef = document.getElementById('overlayBoard');
     let taskOverlayRef = document.getElementById('overlay-content-loader');
@@ -72,6 +104,12 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId ,taskId){
     taskOverlayRef.classList.toggle('show');
 }
 
+
+/**
+ * Changes a task's status to 'done' on mobile.
+ * @param {string} trueTaskId - The ID of the task.
+ * @param {string} taskId - The database ID of the task.
+ */
 async function changeTaskStatusMobilDone(trueTaskId ,taskId){
     let overlayRef = document.getElementById('overlayBoard');
     let taskOverlayRef = document.getElementById('overlay-content-loader');
@@ -86,6 +124,12 @@ async function changeTaskStatusMobilDone(trueTaskId ,taskId){
     taskOverlayRef.classList.toggle('show');
 }
 
+
+/**
+ * Updates a task's status in the Firebase database.
+ * @param {HTMLElement} targetArea - The target HTML element representing the new status.
+ * @param {string} taskId - The database ID of the task.
+ */
 async function changeFirebaseStatus(targetArea, taskId){ /// 14Zeilen
     try{
             let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
@@ -113,6 +157,13 @@ async function changeFirebaseStatus(targetArea, taskId){ /// 14Zeilen
     }   
 }
 
+
+/**
+ * Checks the sequence numbers of all tasks to determine the next one.
+ * @param {Array<string>} allTasksId - An array of all task IDs.
+ * @param {object} data - The task data object.
+ * @returns {number} - The next sequence number.
+ */
 function checkSequenzNr(allTasksId, data){
     let processingSequenz = [];
     for(s = 0; s < allTasksId.length; s++){
@@ -125,6 +176,12 @@ function checkSequenzNr(allTasksId, data){
     return(newMaxCount)
 }
 
+
+/**
+ * Updates a task's status and sequence number in the database via a PATCH request.
+ * @param {object} statusUpdate - The object containing the new status and sequence.
+ * @param {string} targetTaskId - The database ID of the task to update.
+ */
 async function updateNewStatus(statusUpdate, targetTaskId) {
     try{
         const update = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + targetTaskId + '.json', {

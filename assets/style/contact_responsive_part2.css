@@ -171,5 +171,32 @@
         font-size: 18px;
     }
 }
+@media(max-width: 370px){
+    .agenda{
+        width: 100vw;
+    }
+    .agenda-line{
+     width: 100vw;
+    }
+    .person{
+        width: 100vw;
+    }
+    .contactList::-webkit-scrollbar{
+        width: 0; 
+    }
+    .contactList{
+        overflow-y: auto
+    }
+    .contact-name{
+        font-size: 16px;
+    }
+    .mail{
+        font-size: 12px;
+    }
+    .addNewContactButtonMobile{
+        left: 80%;
+        bottom: 2%;
+    }
+}
 
 

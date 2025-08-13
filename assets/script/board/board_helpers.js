@@ -1,3 +1,8 @@
+/**
+ * Creates a date validator function.
+ * @param {HTMLInputElement} dateInput - The date input element.
+ * @returns {Function} - The validation function.
+ */
 function createDateValidator(dateInput) {
   return function setTodayIfPast() {
     const value = dateInput.value.trim();
@@ -9,6 +14,12 @@ function createDateValidator(dateInput) {
   };
 }
 
+
+/**
+ * Checks if a date is in the past.
+ * @param {string} dateValue - The date string in "dd/mm/yyyy" format.
+ * @returns {boolean} - True if the date is in the past, otherwise false.
+ */
 function isDateInPast(dateValue) {
   const [dd, mm, yyyy] = dateValue.split('/');
   const inputDate = new Date(`${yyyy}-${mm}-${dd}`);
@@ -17,6 +28,11 @@ function isDateInPast(dateValue) {
   return inputDate < today;
 }
 
+
+/**
+ * Gets today's date formatted as "dd/mm/yyyy".
+ * @returns {string} - The formatted date string.
+ */
 function getTodayFormatted() {
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
@@ -25,16 +41,33 @@ function getTodayFormatted() {
   return `${dd}/${mm}/${yyyy}`;
 }
 
+
+/**
+ * Loads a task for editing from the database.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Promise<object>} - A promise that resolves to the task object.
+ */
 async function loadTaskForEdit(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   return await response.json();
 }
 
+
+/**
+ * Sets up the edit task overlay with task data.
+ * @param {object} task - The task object to edit.
+ * @param {string} taskId - The ID of the task.
+ */
 function setupEditTaskOverlay(task, taskId) {
   let overlay_content = document.getElementById('overlay-content-loader');
   overlay_content.innerHTML = editTaskHtml(task, taskId);
 }
 
+
+/**
+ * Sets up the subtasks in the edit task form.
+ * @param {object} task - The task object.
+ */
 function setupEditTaskSubtasks(task) {
   let subtasksContainer = document.getElementById('subtasks-container');
   subtasksContainer.innerHTML = '';
@@ -47,6 +80,11 @@ function setupEditTaskSubtasks(task) {
   }
 }
 
+
+/**
+ * Sets up the selected contacts for the edit task form.
+ * @param {object} task - The task object.
+ */
 function setupEditTaskContacts(task) {
   selectedContacts = [];
   if (task.assignedTo && Array.isArray(task.assignedTo)) {
@@ -58,6 +96,10 @@ function setupEditTaskContacts(task) {
   }
 }
 
+
+/**
+ * Initializes the edit task form.
+ */
 function initializeEditTaskForm() {
   loadContacts();
   let input = document.getElementById('add-task-input3');
@@ -67,6 +109,11 @@ function initializeEditTaskForm() {
   setDateInputToTodayOnFirstClick();
 }
 
+
+/**
+ * Collects form data from the edit task overlay.
+ * @returns {object} - An object with the collected form data.
+ */
 function getEditTaskFormData() {
   let title = document.getElementById('edit-title').value.trim();
   let description = document.getElementById('edit-description').value.trim();
@@ -77,6 +124,11 @@ function getEditTaskFormData() {
   return { title, description, date, priority, assignedTo, subtasks };
 }
 
+
+/**
+ * Gets the selected priority from the edit task form.
+ * @returns {string} - The priority level ('Urgent', 'Medium', 'Low', or empty string).
+ */
 function getSelectedPriority() {
   if (document.getElementById('edit-urgent').classList.contains('active')) return 'Urgent';
   if (document.getElementById('edit-medium').classList.contains('active')) return 'Medium';
@@ -84,6 +136,11 @@ function getSelectedPriority() {
   return '';
 }
 
+
+/**
+ * Gets the selected contacts from the edit task form.
+ * @returns {string[]} - An array of contact IDs.
+ */
 function getSelectedContacts() {
   let assignedTo = [];
   for (let i = 0; i < selectedContacts.length; i++) {
@@ -92,6 +149,11 @@ function getSelectedContacts() {
   return assignedTo;
 }
 
+
+/**
+ * Gets the edited subtasks from the form.
+ * @returns {Array<object>} - An array of subtask objects.
+ */
 function getEditedSubtasks() {
   let subtasks = [];
   let subtaskItemRefs = document.querySelectorAll('#subtasks-container .subtask-item');
@@ -106,11 +168,24 @@ function getEditedSubtasks() {
   return subtasks;
 }
 
+
+/**
+ * Fetches an existing task from the database.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Promise<object>} - A promise that resolves to the task object.
+ */
 async function getExistingTask(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   return await response.json();
 }
 
+
+/**
+ * Creates an updated task object from form data and an old task object.
+ * @param {object} formData - The form data.
+ * @param {object} oldTask - The existing task object.
+ * @returns {object} - The new updated task object.
+ */
 function createUpdatedTaskObject(formData, oldTask) {
   return {
     title: formData.title,
@@ -126,6 +201,13 @@ function createUpdatedTaskObject(formData, oldTask) {
   };
 }
 
+
+/**
+ * Updates a task in the database.
+ * @param {string} taskId - The ID of the task.
+ * @param {object} updatedTask - The updated task object.
+ * @returns {Promise<void>}
+ */
 async function updateTaskInDatabase(taskId, updatedTask) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'PUT',
@@ -134,6 +216,13 @@ async function updateTaskInDatabase(taskId, updatedTask) {
   });
 }
 
+
+/**
+ * Updates the task overlay with fresh data.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} addTaskId - The ID for adding a task.
+ * @returns {Promise<void>}
+ */
 async function updateTaskOverlay(taskId, addTaskId) {
   let overlay_content = document.getElementById('overlay-content-loader');
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
@@ -143,6 +232,12 @@ async function updateTaskOverlay(taskId, addTaskId) {
   }
 }
 
+
+/**
+ * Hides an overlay with a fading animation.
+ * @param {HTMLElement} overlayRef - The overlay element.
+ * @param {HTMLElement} contentRender - The content element inside the overlay.
+ */
 function hideOverlayWithAnimation(overlayRef, contentRender) {
   contentRender.classList.remove('show');
   contentRender.classList.add('hide');
@@ -153,11 +248,21 @@ function hideOverlayWithAnimation(overlayRef, contentRender) {
   }, 200);
 }
 
+
+/**
+ * Hides an overlay immediately without animation.
+ * @param {HTMLElement} overlayRef - The overlay element.
+ */
 function hideOverlayDirectly(overlayRef) {
   overlayRef.classList.remove('visible');
   overlayRef.classList.add('d-none');
 }
 
+
+/**
+ * Fills an empty task area with a placeholder.
+ * @param {object} area - The area object with id and text properties.
+ */
 function checkAndFillEmptyArea(area) {
   let areaElement = document.getElementById(area.id);
   if (areaElement.childElementCount === 0) {
@@ -165,6 +270,13 @@ function checkAndFillEmptyArea(area) {
   }
 }
 
+
+/**
+ * Finds the maximum sequence number for a given status in a tasks array.
+ * @param {Array<object>} tasksArray - The array of task objects.
+ * @param {string} status - The status to check for.
+ * @returns {number} - The maximum sequence number plus one.
+ */
 function findMaxSequenceInTasks(tasksArray, status) {
   let maxSequence = 0;
   for (let index = 0; index < tasksArray.length; index++) {
@@ -178,10 +290,20 @@ function findMaxSequenceInTasks(tasksArray, status) {
   return maxSequence;
 }
 
+
+/**
+ * Checks if the user should be redirected to the add task page.
+ * @returns {boolean} - True if the window width is less than or equal to 1233px.
+ */
 function shouldRedirectToAddTaskPage() {
   return window.innerWidth <= 1233;
 }
 
+
+/**
+ * Sets up the add task overlay asynchronously.
+ * @returns {Promise<void>}
+ */
 async function setupAddTaskOverlay() {
   let response = await fetch('../html/add_task_board.html');
   let html = await response.text();
@@ -191,12 +313,24 @@ async function setupAddTaskOverlay() {
   animatedOpeningAddTask(overlayBg, overlayContent);
 }
 
+
+/**
+ * Initializes the add task form.
+ * @param {string} targetStatus - The initial status for the new task.
+ * @returns {Promise<void>}
+ */
 async function initializeAddTaskForm(targetStatus) {
   setPriority('medium');
   setTaskStatus(targetStatus);
   await initAddTask();
 }
 
+
+/**
+ * Gets the target status for a new task from a click event.
+ * @param {Event} event - The click event.
+ * @returns {string} - The status ('todo', 'inProgress', 'awaitFeedback', or 'done').
+ */
 function getTargetStatusFromEvent(event) {
   if (!event || !event.target) {
     return 'todo';
@@ -209,10 +343,21 @@ function getTargetStatusFromEvent(event) {
   return 'todo';
 }
 
+/**
+ * Sets the global status for a new task.
+ * @param {string} status - The status to set.
+ */
 function setTaskStatus(status) {
   window.currentTaskStatus = status || 'todo';
 }
 
+
+/**
+ * Collects tasks for a specific column status.
+ * @param {Array<Array>} entries - The array of task entries.
+ * @param {string} status - The status to filter by.
+ * @returns {Array<object>} - An array of tasks for that column.
+ */
 function collectTasksForColumn(entries, status) {
   let tasksInColumn = [];
   for (let entryIndex = 0; entryIndex < entries.length; entryIndex++) {
@@ -225,120 +370,26 @@ function collectTasksForColumn(entries, status) {
   return tasksInColumn;
 }
 
+
+/**
+ * Renders tasks in a specified column.
+ * @param {Array<object>} tasksInColumn - The array of tasks to render.
+ * @param {string} elementId - The ID of the HTML element to render into.
+ */
 function renderTasksInColumn(tasksInColumn, elementId) {
   for (let taskIndex = 0; taskIndex < tasksInColumn.length; taskIndex++) {
     renderSingleTaskInColumn(tasksInColumn[taskIndex], elementId);
   }
 }
 
+
+/**
+ * Renders a single task in a column.
+ * @param {object} taskObj - The task object with id and task data.
+ * @param {string} elementId - The ID of the HTML element.
+ */
 function renderSingleTaskInColumn(taskObj, elementId) {
   let div = createTaskSection(taskObj);
   document.getElementById(elementId).appendChild(div);
   enableDragAndDropBoard(taskObj.task, div);
-}
-
-function createTaskSection(taskObj) {
-  let taskId = taskObj.id;
-  let task = taskObj.task;
-  let categoryInfo = backgroundColorTitle(task);
-  let div = document.createElement('section');
-  div.innerHTML = buildTaskHtml(taskId, task, categoryInfo);
-  return div;
-}
-
-function buildTaskHtml(taskId, task, categoryInfo) {
-  return boardHtmlTemplate(
-    taskId,
-    categoryInfo.categoryClass,
-    categoryInfo.categoryText,
-    task.title || '',
-    task.description || '',
-    getAssignedContactsHtml(task, 'board'),
-    showPriorityImg(task),
-    progressBarSubtasks(task),
-    task.addTaskId
-  );
-}
-
-function getAssignedContactsHtml(task, type) {
-  let html = '';
-  let hasContact = false;
-  if (Array.isArray(task.assignedTo) && contacts && contacts.length > 0) {
-    html = buildContactsHtml(task, type);
-    hasContact = html.length > 0;
-  }
-  if (type === 'overlay' && !hasContact) {
-    html = `<div class="no-contacts">Keine Kontakte ausgewählt</div>`;
-  }
-  return html;
-}
-
-function buildContactsHtml(task, type) {
-  let html = '';
-  for (let i = 0; i < task.assignedTo.length; i++) {
-    let userId = task.assignedTo[i];
-    let contact = findContactById(userId);
-    if (contact) {
-      html += getContactHtmlByType(contact, type);
-    }
-  }
-  return html;
-}
-
-function getContactHtmlByType(contact, type) {
-  if (type === 'board') {
-    return `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
-  } else if (type === 'overlay') {
-    return contactsOverlayTemplate(contact.initials, contact.name, contact.color);
-  }
-  return '';
-}
-
-function sortTasksBySequence(tasksArray) {
-  for (let outerIndex = 0; outerIndex < tasksArray.length - 1; outerIndex++) {
-    for (let innerIndex = 0; innerIndex < tasksArray.length - outerIndex - 1; innerIndex++) {
-      let sequenceA = tasksArray[innerIndex].task.sequence != null ? tasksArray[innerIndex].task.sequence : 0;
-      let sequenceB = tasksArray[innerIndex + 1].task.sequence != null ? tasksArray[innerIndex + 1].task.sequence : 0;
-      if (sequenceA > sequenceB) {
-        let temp = tasksArray[innerIndex];
-        tasksArray[innerIndex] = tasksArray[innerIndex + 1];
-        tasksArray[innerIndex + 1] = temp;
-      }
-    }
-  }
-}
-
-function showPriorityImg(task) {
-  let priorityImg = '';
-  if (task.priority === 'Urgent') {
-    priorityImg = '<img src="/assets/img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
-  } else if (task.priority === 'Medium') {
-    priorityImg = '<img src="/assets/img/icon/priority/medium.png" alt="Medium" class="priority-img">';
-  } else if (task.priority === 'Low') {
-    priorityImg = '<img src="/assets/img/icon/priority/low.png" alt="Low" class="priority-img">';
-  }
-  return priorityImg;
-}
-
-function progressBarSubtasks(task) {
-  let doneCount = 0;
-  let totalCount = 0;
-  let progressBar = '';
-  if (Array.isArray(task.subtasks)) {
-    totalCount = task.subtasks.length;
-    doneCount = countDoneSubtasks(task.subtasks);
-    let percent = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
-    progressBar = progressbarHtml(percent, doneCount, totalCount);
-  }
-  return progressBar;
-}
-
-function countDoneSubtasks(subtasks) {
-  let done = 0;
-  for (let i = 0; i < subtasks.length; i++) {
-    if (subtasks[i].status === 'checked') {
-      done++;
-    }
-  }
-  return done;
 }
