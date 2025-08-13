@@ -124,7 +124,8 @@
     height: 130px;
     width: 130px;
 }
-.editContactBtn-wrapper{
+
+.editContactBtn-wrapper {
     width: 100%;
     position: fixed;
     bottom: 18%;
@@ -196,7 +197,7 @@
     border: unset !important;
 }
 
-.successfully-Overlay{
+.successfully-Overlay {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -210,8 +211,9 @@
     overflow: hidden;
 
 }
+
 .successfullyOverlay {
-    width: 326px; 
+    width: 326px;
     height: 74px;
     border-radius: 20px;
     background-color: #2A3647;
@@ -222,11 +224,13 @@
     margin-top: 500px;
     transform: translateX(100vw);
     transition: transform 1s ease-in-out;
-    
+
 }
-.slide-in{ 
+
+.slide-in {
     transform: translateX(60px);
 }
-.slide-out{
+
+.slide-out {
     transform: translateX(100vw);
 }

@@ -1,19 +1,10 @@
 /**
- * Adds an event listener to the document that removes highlights from all drag-and-drop areas when dragging ends.
- */
-function dragAndDropEventListner(){
-  document.addEventListener('dragend', removeAllHighlights);
-}
-
-
-/**
  * Prevents the default browser behavior to allow elements to be dropped.
  * @param {Event} ev - The drag event.
  */
 function allowDrop(ev) {
   ev.preventDefault();
 }
-
 
 /**
  * Toggles a visual highlight class on an element based on its ID.
@@ -30,7 +21,6 @@ function toggleHighlight(id, add) {
   }
 }
 
-
 /**
  * Removes the highlight from all drag-and-drop status areas.
  */
@@ -41,7 +31,6 @@ function removeAllHighlights() {
   toggleHighlight('done', false);
 }
 
-
 /**
  * Stores the ID of the task that is currently being dragged.
  * @param {string} taskId - The ID of the task.
@@ -49,7 +38,6 @@ function removeAllHighlights() {
 function startDragging(taskId) {
   currentDraggedTaskId = taskId;
 }
-
 
 /**
  * Moves the currently dragged task to a new status, updates its data, and re-renders the board.
@@ -67,7 +55,6 @@ async function moveTo(newStatus) {
   emptyDragArea();
   currentDraggedTaskId = null;
 }
-
 
 /**
  * Appends a task's HTML element to the corresponding status column on the board.

@@ -1,0 +1,341 @@
+/**
+ * Shows the "Create Task" wrapper section.
+ */
+function showWrapperCreateTask() {
+  let wrapper = document.getElementById('wrapper-create-task-section');
+  if (wrapper) {
+    wrapper.classList.remove('d-none');
+  }
+}
+
+/**
+ * Adds an input listener for the title field to clear errors.
+ */
+function addTitleInputListener() {
+  let titleInput = document.querySelector('input[name="add-task-input1"]');
+  if (titleInput) {
+    titleInput.addEventListener('input', function () {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input1-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+}
+
+/**
+ * Adds an input listener for the date field to clear errors.
+ */
+function addDateInputListener() {
+  let dateInput = document.querySelector('input[name="add-task-input2"]');
+  if (dateInput) {
+    dateInput.addEventListener('input', function () {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input2-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+}
+
+/**
+ * Adds an input listener for the description field to clear errors.
+ */
+function addDescriptionInputListener() {
+  let descriptionInput = document.querySelector('textarea[name="add-task-textarea"]');
+  if (descriptionInput) {
+    descriptionInput.addEventListener('input', function () {
+      clearInputError(this);
+    });
+  }
+}
+
+/**
+ * Handles the click event on a contact checkbox.
+ * @param {number} i - The index of the contact.
+ * @param {HTMLInputElement} checkbox - The checkbox element.
+ */
+function onContactCheckboxClick(i, checkbox) {
+  changeColorIfItsChecked(i, checkbox.checked);
+  toggleContactSelection(i);
+  checkCheckbox(checkbox);
+}
+
+/**
+ * Toggles the checked state of a checkbox.
+ * @param {HTMLElement} divElement - The div containing the checkbox.
+ */
+function checkCheckbox(divElement) {
+  let checkbox = divElement.querySelector('input[type="checkbox"]');
+  if (checkbox) {
+    checkbox.checked = !checkbox.checked;
+  }
+}
+
+/**
+ * Changes the styling of a contact element based on its checked state.
+ * @param {number} i - The index of the contact.
+ * @param {boolean} checked - True if the contact is checked.
+ */
+function changeColorIfItsChecked(i, checked) {
+  let userDropdownRef = document.getElementById('user-dropdown-' + i);
+  let assignedContactRef = document.getElementById('assigned-contact-' + i);
+  let userNameDropdownRef = document.getElementById('user-name-dropdown-' + i);
+  if (!userDropdownRef || !assignedContactRef || !userNameDropdownRef) return;
+
+  userDropdownRef.classList.toggle('checked-assigned-to', checked);
+  assignedContactRef.classList.toggle('checked-assigned-to', checked);
+  userNameDropdownRef.classList.toggle('checked-assigned-to', checked);
+}
+
+/**
+ * Toggles the selection of a contact by its index.
+ * @param {number} index - The index of the contact.
+ */
+function toggleContactSelection(index) {
+  let pos = selectedContacts.indexOf(index);
+  if (pos === -1) {
+    selectedContacts.push(index);
+  } else {
+    selectedContacts.splice(pos, 1);
+  }
+  showContactsAddTask();
+  clearAssignedTo();
+}
+
+/**
+ * Displays the selected contacts in the form.
+ */
+function showContactsAddTask() {
+  let container = document.getElementById('show-contacts-add-task');
+  if (!container) return;
+  container.classList.remove('d-none');
+  let html = '';
+  for (let i = 0; i < selectedContacts.length; i++) {
+    const contact = contacts[selectedContacts[i]];
+    html += showContactsAddTaskHtml(contact);
+  }
+  container.innerHTML = html;
+}
+
+/**
+ * Clears all fields and warnings in the task form.
+ */
+function clearAllTaskFields() {
+  clearAssignedTo();
+  clearSubtaskInput();
+  clearInputTexts();
+  clearWarningMessages();
+  clearCategory();
+  showPlusIcon();
+  clearSubtaskElements();
+  clearCheckedContacts();
+  clearRedBorder();
+  subtasks = [];
+}
+
+/**
+ * Clears red borders from all input fields.
+ */
+function clearRedBorder() {
+  let inputs = document.querySelectorAll('.input-error');
+  inputs.forEach((input) => {
+    input.classList.remove('input-error');
+  });
+}
+
+/**
+ * Clears all checked contacts.
+ */
+function clearCheckedContacts() {
+  let selected = [...selectedContacts];
+  for (let i = 0; i < selected.length; i++) {
+    toggleContactSelection(selected[i]);
+  }
+}
+
+/**
+ * Clears the subtask input field.
+ */
+function clearSubtaskInput() {
+  let input = document.getElementById('add-task-input4');
+  if (input) input.value = '';
+}
+
+/**
+ * Clears all subtask elements from the container.
+ */
+function clearSubtaskElements() {
+  let container = document.getElementById('subtasks-container');
+  if (container) container.innerHTML = '';
+}
+
+/**
+ * Resets the main task form.
+ */
+function clearInputTexts() {
+  let inputText = document.getElementById('add-task-form');
+  if (inputText) inputText.reset();
+}
+
+/**
+ * Hides all warning messages.
+ */
+function clearWarningMessages() {
+  let warnings = document.getElementsByClassName('input-warning');
+  for (let i = 0; i < warnings.length; i++) {
+    warnings[i].classList.add('d-none');
+  }
+}
+
+/**
+ * Resets the category dropdown to its default state.
+ */
+function clearCategory() {
+  let category = document.getElementById('category-dropdown-selected');
+  if (category) {
+    let p = category.querySelector('p');
+    if (p) p.textContent = 'Select a task category';
+  }
+}
+
+/**
+ * Adds a new subtask from the input field.
+ * @param {Event} event - The event object.
+ */
+function pushSubtaskInput(event) {
+  let input = document.getElementById('add-task-input4');
+  let container = document.getElementById('subtasks-container');
+  if (!input || !container) return;
+  if (!event.key || event.key === 'Enter') {
+    if (event.key === 'Enter') event.preventDefault();
+    if (input.value.trim()) {
+      container.innerHTML += pushSubtaskInputHTML(input.value.trim());
+      input.value = '';
+      showPlusIcon();
+    }
+  }
+}
+
+/**
+ * Switches a subtask element to an editable input field.
+ * @param {HTMLElement} element - The subtask item element.
+ */
+function editSubtask(element) {
+  let listItem = element.closest('.subtask-item');
+  let span = listItem ? listItem.querySelector('span') : null;
+  if (!span) return;
+  let oldText = span.textContent.trim();
+  let newDiv = document.createElement('div');
+  if (newDiv) {
+    newDiv.className = 'subtask-item-edit';
+    newDiv.innerHTML = editSubtaskInputHTML(oldText);
+  }
+  if (listItem.parentNode) {
+    listItem.parentNode.replaceChild(newDiv, listItem);
+  }
+}
+
+/**
+ * Saves the edited subtask text.
+ * @param {Event} event - The event object.
+ * @param {HTMLElement} inputElement - The input element for the subtask.
+ */
+function saveSubtaskEdit(event, inputElement) {
+  if (event && event.key && event.key !== 'Enter') return;
+  inputElement = inputElement.closest('.input-with-icons').querySelector('input');
+  if (!inputElement) return;
+  let newText = inputElement.value;
+  let subtaskItem = inputElement.closest('.subtask-item-edit');
+  if (!subtaskItem) return;
+  let subtaskDiv = buildSubtaskDiv(newText);
+  subtaskItem.parentNode.replaceChild(subtaskDiv, subtaskItem);
+}
+
+/**
+ * Builds a subtask div with a new text.
+ * @param {string} newText - The new subtask text.
+ * @returns {HTMLElement} The new subtask div.
+ */
+function buildSubtaskDiv(newText) {
+  let subtaskDiv = document.createElement('div');
+  subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
+  subtaskDiv.className = 'subtask-item';
+  subtaskDiv.innerHTML = saveSubtaskEditHTML(newText);
+  return subtaskDiv;
+}
+
+/**
+ * Deletes a subtask element.
+ * @param {HTMLElement} element - The element inside the subtask to be deleted.
+ */
+function deleteSubtask(element) {
+  let subtaskItem = element.closest('.subtask-item');
+  let editSubtaskItem = element.closest('.subtask-item-edit');
+  if (subtaskItem) subtaskItem.remove();
+  if (editSubtaskItem) editSubtaskItem.remove();
+}
+
+/**
+ * Shows the plus icon for the subtask input.
+ */
+function showPlusIcon() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  if (iconSpan) {
+    iconSpan.innerHTML = `
+      <img src="/assets/img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
+    `;
+  }
+}
+
+/**
+ * Handles changes in the subtask input, showing save/cancel icons if text is present.
+ */
+function onSubtaskInputChange() {
+  let input = document.getElementById('add-task-input4');
+  if (input && input.value.trim()) {
+    showSaveCancelIcons();
+  } else {
+    showPlusIcon();
+  }
+}
+
+/**
+ * Shows the save and cancel icons for the subtask input.
+ */
+function showSaveCancelIcons() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  if (iconSpan) {
+    iconSpan.innerHTML = showSaveCancelIconsHtml();
+  }
+}
+
+/**
+ * Handles the 'Enter' key press on the subtask input.
+ * @param {KeyboardEvent} event - The keydown event.
+ */
+function onSubtaskInputKeydown(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    pushSubtaskInput(event);
+  }
+}
+
+/**
+ * Clears the assigned-to input field.
+ */
+function clearAssignedTo() {
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
+}
+
+/**
+ * Gets the category text from a dropdown element.
+ * @param {HTMLElement} dropdownRef - The dropdown element.
+ * @returns {string} The category text.
+ */
+function getCategoryTextFromDropdown(dropdownRef) {
+  let categoryTextRef = dropdownRef.querySelector('p');
+  if (categoryTextRef) {
+    return categoryTextRef.textContent.trim();
+  }
+  return '';
+}

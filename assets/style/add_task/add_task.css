@@ -305,7 +305,7 @@ input[type="text"] {
 }
 
 .scrollbar:hover {
-    background-color: white;
+    background-color: none;
 }
 
 #assigned-to-dropdown-options.expanded::-webkit-scrollbar {

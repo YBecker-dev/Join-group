@@ -41,7 +41,6 @@ function setupEventListeners() {
   checkbox.addEventListener('change', handleCheckboxChange);
 }
 
-
 /**
  * Handles input in the password field, updating the icon and clearing validation errors.
  * @param {Event} this - The input event object.
@@ -59,7 +58,6 @@ function handlePasswordInput() {
   document.getElementById('password-warning').classList.add('d-none');
   this.setCustomValidity('');
 }
-
 
 /**
  * Handles input in the password confirmation field, updating the icon and clearing validation errors.
@@ -79,7 +77,6 @@ function handlePasswordConfirmInput() {
   this.setCustomValidity('');
 }
 
-
 /**
  * Toggles the visibility of the first password input field and updates its icon.
  */
@@ -95,7 +92,6 @@ function togglePassword1Visibility() {
   }
 }
 
-
 /**
  * Toggles the visibility of the first password input field and updates its icon.
  */
@@ -110,7 +106,6 @@ function togglePassword2Visibility() {
     }
   }
 }
-
 
 /**
  * Handles input in the name field, running a validation function and clearing errors.
@@ -138,7 +133,6 @@ function handleEmailInput() {
   this.setCustomValidity('');
 }
 
-
 /**
  * Handles changes to the checkbox, removing the error class if it is checked.
  */
@@ -147,7 +141,6 @@ function handleCheckboxChange() {
     checkbox.classList.remove('input-error');
   }
 }
-
 
 /**
  * Initiates the user registration process by first validating all fields.
@@ -160,7 +153,6 @@ function successRegister(event) {
     checkAllFields();
   }
 }
-
 
 /**
  * Asynchronously checks if the email is already in use before adding a new user.
@@ -181,7 +173,6 @@ async function checkUserOnRegistration(event) {
   }
 }
 
-
 /**
  * Asynchronously checks for an existing email and adds a new user if the email is unique.
  */
@@ -194,7 +185,6 @@ async function handleUserDataResponse(userDataObject) {
     showEmailAlreadyExistsError();
   }
 }
-
 
 /**
  * Asynchronously checks for the existence of the entered email in two different databases.
@@ -214,7 +204,6 @@ async function checkEmailInBothDatabases() {
     return false;
   }
 }
-
 
 /**
  * Checks if a given email exists within the provided login and user data.
@@ -240,7 +229,6 @@ async function checkEmails(loginResponse, userResponse) {
   return false;
 }
 
-
 /**
  * Checks if a specific email exists within a given data object.
  * @param {object} dataObject - The data object to search in.
@@ -261,7 +249,6 @@ function CheckEmailExistsInData(dataObject, emailField) {
   return false;
 }
 
-
 /**
  * Displays a specific error message and triggers a shake animation for the email input field.
  */
@@ -272,7 +259,6 @@ function showEmailAlreadyExistsError() {
   emailWarning.classList.remove('d-none');
   shakeInput(emailInput, 'This email address is already registered.');
 }
-
 
 /**
  * Asynchronously creates and saves new user data to the database.
@@ -288,7 +274,6 @@ async function addUser() {
   } catch (error) {}
 }
 
-
 /**
  * Creates a login data object from the current form input values.
  * @returns {object} The login data object.
@@ -300,7 +285,6 @@ function createLoginData() {
     name: nameInput.value,
   };
 }
-
 
 /**
  * Creates a full user data object with a random color and initials from the input values.
@@ -316,7 +300,6 @@ function createUserData() {
   };
 }
 
-
 /**
  * Asynchronously sends a POST request to save the login data.
  * @param {object} loginData - The data to be saved.
@@ -330,7 +313,6 @@ async function saveLoginData(loginData) {
   });
 }
 
-
 /**
  * Handles the result of user creation, redirecting on success.
  * @param {Response} loginResponse - The response from the server.
@@ -341,7 +323,6 @@ function handleUserCreationResult(loginResponse) {
     resetForm();
   }
 }
-
 
 /**
  * Resets the registration form and clears all validation errors.
@@ -355,7 +336,6 @@ let resetForm = () => {
   setupEventListeners();
 };
 
-
 /**
  * Displays a success message and redirects the user to the login page after a short delay.
  */
@@ -366,7 +346,6 @@ function showSuccessMessage() {
     window.location.href = '../../index.html';
   }, 1500);
 }
-
 
 /**
  * Checks if all form fields are filled correctly according to predefined validation rules.
@@ -385,7 +364,6 @@ function allFieldsFilledCorrect(event) {
   );
 }
 
-
 /**
  * Handles the form submission event, validating fields and showing a success message if valid.
  * @param {Event} event - The form submission event.
@@ -398,6 +376,3 @@ function formSubmit(event) {
     checkAllFields();
   }
 }
-
-
-

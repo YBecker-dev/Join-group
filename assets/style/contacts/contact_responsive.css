@@ -1,8 +1,9 @@
 @media (max-width: 1440px) {
-    .active{
+    .active {
         background-color: rgb(246, 247, 248);
     }
-    .main-content{
+
+    .main-content {
         padding: 0;
         padding-top: 80px;
         padding-bottom: 80px;
@@ -13,7 +14,7 @@
         padding: 0;
     }
 
-    #contactContent{
+    #contactContent {
         padding-top: 10px;
         display: flex;
         flex-direction: column;
@@ -24,7 +25,7 @@
         width: 400px;
     }
 
-     .namesDetails {
+    .namesDetails {
         width: 100vw;
         display: flex;
         flex-direction: column;
@@ -109,7 +110,7 @@
         margin-left: auto;
     }
 
-    .editContact-Overlay{
+    .editContact-Overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -147,7 +148,7 @@
         gap: 8px;
     }
 
-    .mobile:hover{
+    .mobile:hover {
         cursor: pointer;
     }
 
@@ -167,14 +168,14 @@
         flex-direction: column;
     }
 
-    .headDiv-wrapper{
+    .headDiv-wrapper {
         bottom: 0;
         padding-top: 24px;
         width: 348px;
         gap: 40px;
     }
 
-    .headDiv-wrapper-newContact{
+    .headDiv-wrapper-newContact {
         bottom: 0;
         padding-top: 24px;
         width: 348px;
@@ -195,7 +196,7 @@
         border-bottom-left-radius: 0;
     }
 
-    .closeMobile-wrapper{
+    .closeMobile-wrapper {
         display: flex;
         justify-content: flex-end;
 
@@ -206,11 +207,11 @@
         color: white;
         display: flex;
         justify-content: flex-end;
-        align-items:start;
+        align-items: start;
         cursor: pointer;
     }
 
-    .mobile-headline{
+    .mobile-headline {
         padding-top: 30px;
     }
 
@@ -274,17 +275,17 @@
         padding-top: 33px;
     }
 
-    .profileInitials{
+    .profileInitials {
         left: 0;
         top: -60px;
     }
 
-    .profileInitials-addContacts{
+    .profileInitials-addContacts {
         left: 0;
         top: -60px;
     }
 
-    .accept{
+    .accept {
         height: 51px;
         margin-top: 30px;
         display: flex;
@@ -292,7 +293,7 @@
         justify-content: center;
     }
 
-    .accept-addContact{
+    .accept-addContact {
         height: 51px;
         margin-top: 30px;
         justify-content: center;
@@ -328,12 +329,12 @@
         height: 100%;
     }
 
-    .hide-button{
+    .hide-button {
         height: 100%;
         width: 82px;
     }
 
-    .hide-button-addContact{
+    .hide-button-addContact {
         height: 100%;
         width: 82px;
         display: none;

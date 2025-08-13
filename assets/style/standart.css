@@ -18,7 +18,8 @@ body {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-src: url('/assets/fonts/inter-v19-latin-regular.woff2') format('woff2');;
+    src: url('/assets/fonts/inter-v19-latin-regular.woff2') format('woff2');
+    ;
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -70,7 +71,7 @@ input#newContactPhone:focus,
 input#editContactName:focus,
 input#editContactMail:focus,
 input#editContactPhone:focus,
-.subtask-item-edit:focus-within  {
+.subtask-item-edit:focus-within {
     outline: none;
     border-color: initial;
     border: none !important;

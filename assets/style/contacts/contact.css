@@ -1,5 +1,5 @@
 .main-content {
-     position: absolute;
+    position: absolute;
     display: flex;
     overflow: hidden;
 }
@@ -139,7 +139,7 @@ h2 {
 .contactInformations {
     display: flex;
     align-items: center;
-     gap: 52px;
+    gap: 52px;
 }
 
 .contact-Information {
@@ -258,7 +258,7 @@ h4 {
     padding-bottom: 35px;
 }
 
-.headDiv-wrapper{
+.headDiv-wrapper {
     position: relative;
     bottom: 30px;
     display: flex;
@@ -267,7 +267,7 @@ h4 {
 
 }
 
-.headDiv-wrapper-newContact{
+.headDiv-wrapper-newContact {
     bottom: 0;
     padding-top: 24px;
     width: 371px;
@@ -276,7 +276,7 @@ h4 {
     gap: 20px;
 }
 
-.contactLogo-wrapper{
+.contactLogo-wrapper {
     width: 361px;
     height: auto;
 }
@@ -297,10 +297,11 @@ h4 {
     color: #ffffff;
 }
 
-.headline-wrapper{
+.headline-wrapper {
     width: 361px;
     height: 89px;
 }
+
 .add-headline {
     display: flex;
     flex-direction: column;
@@ -339,7 +340,7 @@ h4 {
 .closeDiv {
     display: flex;
     justify-content: end;
-    margin-bottom: 48px ;
+    margin-bottom: 48px;
 }
 
 .close {
@@ -348,7 +349,7 @@ h4 {
     cursor: pointer;
 }
 
-.close-wrapper{
+.close-wrapper {
     height: 32px;
     width: 32px;
     display: flex;
@@ -356,7 +357,7 @@ h4 {
     align-items: center;
 }
 
-.close-wrapper:hover{
+.close-wrapper:hover {
     background-color: #857f7f56;
     border-radius: 50%;
 }

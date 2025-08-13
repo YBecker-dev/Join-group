@@ -9,7 +9,6 @@ function checkAllFields() {
   checkCheckbox();
 }
 
-
 /**
  * Validates the name input field, showing an error if it's empty.
  */
@@ -24,7 +23,6 @@ function checkName() {
     nameWarning.classList.add('d-none');
   }
 }
-
 
 /**
  * Validates the email input field with a regex, showing an error if invalid.
@@ -41,7 +39,6 @@ function checkEmail() {
   }
 }
 
-
 /**
  * Validates the password input field, checking for length and required characters.
  */
@@ -57,7 +54,6 @@ function checkPassword() {
   }
 }
 
-
 /**
  * Validates the password confirmation input, ensuring it matches the password field.
  */
@@ -72,7 +68,6 @@ function checkPasswordConfirm() {
     passwordConfirmWarning.classList.add('d-none');
   }
 }
-
 
 /**
  * Validates the checkbox, adding an error class if it is not checked.

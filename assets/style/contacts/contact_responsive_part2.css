@@ -1,202 +1,245 @@
-@media(max-width: 1439px){
-    .successfully-Overlay{
+@media(max-width: 1439px) {
+    .successfully-Overlay {
         align-items: flex-end;
     }
 
-    .successfullyOverlay{
+    .successfullyOverlay {
         transform: translateY(100vh);
         margin-bottom: 250px;
-       
+
     }
 
-    .successfullyOverlay.slide-in{
+    .successfullyOverlay.slide-in {
         transform: translateY(0);
     }
 
-    .successfullyOverlay.slide-out{
+    .successfullyOverlay.slide-out {
         transform: translateY(100vh);
     }
-    .saveBtn{
+
+    .saveBtn {
         width: 99px;
     }
-    
+
 }
-@media(max-height: 1000px){
-      .contactHeadlineMobile{
+
+@media(max-height: 1000px) {
+    .contactHeadlineMobile {
         margin-top: 20px;
     }
-     .showArrowMobile{
+
+    .showArrowMobile {
         top: 25px;
     }
-     .editContactBtn-wrapper{
+
+    .editContactBtn-wrapper {
         bottom: 25%;
     }
 }
-@media(max-height: 800px){
 
-    .contactHeadlineMobile{
+@media(max-height: 800px) {
+
+    .contactHeadlineMobile {
         margin-top: 0;
     }
-     .showArrowMobile{
+
+    .showArrowMobile {
         top: 10px;
     }
-     .editContactBtn-wrapper{
+
+    .editContactBtn-wrapper {
         bottom: 30%;
     }
-    
+
 }
-@media(max-height: 760px){
-    .newContactOverlay{
+
+@media(max-height: 760px) {
+    .newContactOverlay {
         justify-content: center;
     }
-    .headDiv{
+
+    .headDiv {
         height: 280px;
     }
-    .editDiv-addContact{
+
+    .editDiv-addContact {
         height: 300px;
-        
+
     }
-    .profileImg-addContacts{
+
+    .profileImg-addContacts {
         height: 80px;
         width: 80px;
     }
-    .profileInitials-addContacts{
+
+    .profileInitials-addContacts {
         width: auto;
         padding-top: 20px;
     }
-    .profilDiv-addContacts{
+
+    .profilDiv-addContacts {
         padding-top: 10px;
     }
 
 }
 
-@media(max-height: 680px){
-    .newContactOverlay{
+@media(max-height: 680px) {
+    .newContactOverlay {
         height: 630px;
     }
-    .headDiv{
+
+    .headDiv {
         height: 250px;
     }
-    .contactLogo-wrapper{
+
+    .contactLogo-wrapper {
         display: none;
     }
-    .editDiv-addContact{
+
+    .editDiv-addContact {
         height: 300px;
-        
+
     }
-    .editDiv{
+
+    .editDiv {
         height: 300px;
     }
-    .profilDiv{
-        width: auto;  
+
+    .profilDiv {
+        width: auto;
     }
-      .headDiv-wrapper-newContact{
+
+    .headDiv-wrapper-newContact {
         width: 280px;
     }
-    .accept-addContact{
+
+    .accept-addContact {
         margin-top: 10px;
     }
-    .accept{
+
+    .accept {
         margin-top: 10px;
     }
-    .profilDiv-addContacts{
+
+    .profilDiv-addContacts {
         padding-top: 20px;
     }
-    .namesDetails{
+
+    .namesDetails {
         gap: 0;
     }
-    .profileInitials{
+
+    .profileInitials {
         top: -40px;
         justify-content: center;
     }
-    .mobile-headline{
+
+    .mobile-headline {
         padding-top: 0px;
     }
-    .initialOverlay{
+
+    .initialOverlay {
         height: 80px;
         width: 80px;
         font-size: 27px;
     }
-  
-    
+
+
 }
-@media(max-width: 650px){
-     .contactInformations{
+
+@media(max-width: 650px) {
+    .contactInformations {
         gap: 20px;
     }
-     
-    .infoNames{
+
+    .infoNames {
         text-align: start;
         font-size: 27px;
     }
 }
-@media(max-width: 400px){
-    .newContactOverlay{
+
+@media(max-width: 400px) {
+    .newContactOverlay {
         width: 300px;
     }
-    .headDiv-wrapper-newContact{
+
+    .headDiv-wrapper-newContact {
         width: 280px;
     }
-    .headDiv-wrapper{
+
+    .headDiv-wrapper {
         width: 280px;
     }
-    .add-contact{
+
+    .add-contact {
         font-size: 35px;
     }
 
-    .profilDiv-addContacts{
+    .profilDiv-addContacts {
         width: 290px;
     }
-    .addNewContactDiv{
+
+    .addNewContactDiv {
         width: 290px;
     }
-    .addNewContact{
+
+    .addNewContact {
         font-size: 16px;
     }
-    .initialOverlay{
+
+    .initialOverlay {
         height: 80px;
         width: 80px;
         font-size: 27px;
     }
-    .infoNames{
+
+    .infoNames {
         font-size: 30px;
     }
-    
+
 }
-@media(max-width: 380px){
-    .headlineMobile>h2{
+
+@media(max-width: 380px) {
+    .headlineMobile>h2 {
         font-size: 47px;
     }
-    .infoNames{
+
+    .infoNames {
         font-size: 18px;
     }
 }
-@media(max-width: 370px){
-    .agenda{
+
+@media(max-width: 370px) {
+    .agenda {
         width: 100vw;
     }
-    .agenda-line{
-     width: 100vw;
-    }
-    .person{
+
+    .agenda-line {
         width: 100vw;
     }
-    .contactList::-webkit-scrollbar{
-        width: 0; 
+
+    .person {
+        width: 100vw;
     }
-    .contactList{
+
+    .contactList::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .contactList {
         overflow-y: auto
     }
-    .contact-name{
+
+    .contact-name {
         font-size: 16px;
     }
-    .mail{
+
+    .mail {
         font-size: 12px;
     }
-    .addNewContactButtonMobile{
+
+    .addNewContactButtonMobile {
         left: 80%;
         bottom: 2%;
     }
 }
-
-

@@ -1,101 +1,117 @@
-.body-flex{
-    
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   padding-top: calc(206px - 96px);
-   padding-left: calc(328px - 232px);
-   padding-right: 96px; 
+.body-flex {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: calc(206px - 96px);
+    padding-left: calc(328px - 232px);
+    padding-right: 96px;
 }
-.headline{
+
+.headline {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.headline>h1{
+
+.headline>h1 {
     font-size: 61px;
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0;
     padding-top: 0;
 }
-.content{
+
+.content {
     display: flex;
     flex-direction: column;
     text-align: start;
     gap: 24px;
 }
-.Imprint>h2{
+
+.Imprint>h2 {
     font-size: 27px;
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0;
 
 }
-.join-color{
+
+.join-color {
     color: #29abe2;
     text-decoration: none;
 }
-.backward{
-   display: none;
+
+.backward {
+    display: none;
 }
+
 /*h3{
     font-size: 16px;
     font-weight: 900;
 
 }*/
 @media (max-width: 1439px) {
-    .body-flex{
+    .body-flex {
         padding-top: 128px;
     }
-    .backward{
-        
+
+    .backward {
+
         height: 37px;
         width: 37px;
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
     }
-    .backward:hover{
+
+    .backward:hover {
         cursor: pointer;
-        
-    }   
+
+    }
 }
-@media(max-width: 1015px){
-    .body-flex{
+
+@media(max-width: 1015px) {
+    .body-flex {
         padding-top: 128px;
         padding-left: 0;
         padding-right: 0;
         padding-bottom: 128px;
     }
-    .headline{
+
+    .headline {
         top: 128px;
-        
+
     }
-    .headline>h1{
+
+    .headline>h1 {
         padding: 0;
         font-size: 47px;
         font-weight: 700;
     }
-    .content{
+
+    .content {
         padding-top: calc(216px - 128px - 56px);
     }
-    .Imprint>h2{
+
+    .Imprint>h2 {
         font-size: 27px;
         font-weight: 700;
     }
-    h3{
+
+    h3 {
         font-size: 20px;
         font-weight: 700;
     }
-    
+
 }
-@media(max-width: 380px){
-    
-    .headline>h1{
+
+@media(max-width: 380px) {
+
+    .headline>h1 {
         text-align: start;
         font-size: 36px;
         font-weight: 700;

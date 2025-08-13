@@ -1,7 +1,7 @@
 /**
- * @param {*} index 
+ * @param {*} index
  * @returns
- * Contactlist 
+ * Contactlist
  */
 function getNoteTemplateContact(index) {
   let user = contacts[index];
@@ -18,9 +18,9 @@ function getNoteTemplateContact(index) {
 }
 
 /**
- * @param {*} indexDetails 
+ * @param {*} indexDetails
  * @returns
- * show Cointact Details 
+ * show Cointact Details
  */
 function getNoteTemplateContactDetails(indexDetails) {
   let user = contacts[indexDetails];
@@ -72,9 +72,9 @@ function getNoteTemplateContactDetails(indexDetails) {
               </div>`;
 }
 
-/** 
-* add new Contact
-*/ 
+/**
+ * add new Contact
+ */
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
@@ -129,8 +129,8 @@ function getNoteTemplateAddNewContact() {
 }
 
 /**
-* edit Contact 
-*/
+ * edit Contact
+ */
 function getNoteTemplateEditContact(index) {
   let user = contacts[index] || {};
 
@@ -154,7 +154,9 @@ function getNoteTemplateEditContact(index) {
 
             <div class="editDiv">
               <div class="profileInitials">
-                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
+                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${
+    user.initials
+  }</p>
               </div>        
               <div class="profilDiv">
                 <div class="closeDiv">
@@ -164,15 +166,21 @@ function getNoteTemplateEditContact(index) {
                 </div>
                 <div class="add-new-contact-inputs">
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="addNewContactInput">
-                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${user.name || ''}" oninput="validateNameInput(this)">
+                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${
+                      user.name || ''
+                    }" oninput="validateNameInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactEmailDiv">
-                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="eventBubbling(event)" value="${user.email || ''}" oninput="validateEmailInput(this)">
+                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="eventBubbling(event)" value="${
+                      user.email || ''
+                    }" oninput="validateEmailInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactPhoneDiv">
-                    <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${user.phone || ''}" oninput="validatePhoneInput(this)">
+                    <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${
+                      user.phone || ''
+                    }" oninput="validatePhoneInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
                 
@@ -188,11 +196,10 @@ function getNoteTemplateEditContact(index) {
 }
 
 /**
-* Overlay to Edit or Delete from Contacts
-*/
+ * Overlay to Edit or Delete from Contacts
+ */
 function getNoteTemplateMobileEditOverlay(indexDetails) {
-
-  return` <div class="editDeleteOverlayMobile" id="editDeleteOverlayMobile"> 
+  return ` <div class="editDeleteOverlayMobile" id="editDeleteOverlayMobile"> 
             <div id="editOverlayMobile" class="mobile" onclick="openEditOverlay(${indexDetails})">
               <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
               <span class="editText">Edit</span>
@@ -205,12 +212,11 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
 }
 
 /**
-* Overlay to show that Contacts Succesfull addet
-*/
+ * Overlay to show that Contacts Succesfull addet
+ */
 function getNoteTemplateSuccesfullOverlay() {
-
   return `  <div  id="successfully" class="successfullyOverlay">
                   <p>Contact successfully created</p>
               </div>
-              `
+              `;
 }

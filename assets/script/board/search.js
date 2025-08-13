@@ -1,15 +1,5 @@
 let taskCollection = [];
 
-
-/**Call function enables the Live Search  */
-let initEventListnerProcessTasksInformation = () => {
-  let searchInput = document.getElementById('find-Task');
-  if (searchInput) {
-    searchInput.addEventListener('input', processTasksInformation);
-  }
-};
-
-
 /**
  * iterate through all tasks in the DOM and save the task title,
  * the description, the ID and the HTML element in the taskCollection array
@@ -22,7 +12,8 @@ function processTasksInformation() {
     let taskContainers = dragArea.querySelectorAll('.board-task-container');
     for (let taskContainer of taskContainers) {
       let taskId = taskContainer.id;
-      let currentTaskTitle = '' ,currentTaskDescription = '';
+      let currentTaskTitle = '',
+        currentTaskDescription = '';
       let titleElement = taskContainer.querySelector('.board-task-title');
       if (titleElement) {
         currentTaskTitle = titleElement.innerText.trim();
@@ -31,29 +22,27 @@ function processTasksInformation() {
       if (descriptionElement) {
         currentTaskDescription = descriptionElement.innerText.trim();
       }
-      storeTaskCollection(taskId, currentTaskTitle,currentTaskDescription ,taskContainer)
+      storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, taskContainer);
     }
   }
   showSearchResult();
 }
 
-
 /**
  * Stores all essential task information in the taskCollection array.
- * @param {int} taskId 
- * @param {String} currentTaskTitle 
- * @param {String} currentTaskDescription 
- * @param {Object} taskContainer 
+ * @param {int} taskId
+ * @param {String} currentTaskTitle
+ * @param {String} currentTaskDescription
+ * @param {Object} taskContainer
  */
-function storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, taskContainer){
-    taskCollection.push({
-        id: taskId,
-        title: currentTaskTitle,
-        description: currentTaskDescription,
-        element: taskContainer,
-    });
+function storeTaskCollection(taskId, currentTaskTitle, currentTaskDescription, taskContainer) {
+  taskCollection.push({
+    id: taskId,
+    title: currentTaskTitle,
+    description: currentTaskDescription,
+    element: taskContainer,
+  });
 }
-
 
 /**
  * receive the input value and call the functions processTaskSearch() and taskVisibility()
@@ -73,24 +62,21 @@ function showSearchResult() {
   taskVisibilty(searchResult);
 }
 
-
 /**
  * show Overlay if the search got no target
  */
-function toggleNoResultOverlay(){
+function toggleNoResultOverlay() {
   let overlay = document.getElementById('overlay-no-result');
   let content = document.getElementById('no-result-content');
   overlay.classList.remove('d-none');
   content.innerHTML = noteNoTaskFounded();
 }
 
-
-let closeOverlay = () =>{
+let closeOverlay = () => {
   let overlay = document.getElementById('overlay-no-result');
   overlay.classList.add('d-none');
   window.location.reload();
-}
-
+};
 
 /**
  * take the inputValue and filter the TaskCollection array by Object -title and description.
@@ -101,21 +87,26 @@ let closeOverlay = () =>{
  */
 function processTaskSearch(filterTask, searchString) {
   const searchTerm = String(searchString).toLowerCase();
-  if (searchTerm === '') { return filterTask; }
+  if (searchTerm === '') {
+    return filterTask;
+  }
   return filterTask.filter((singleTaskObject) => {
     let title;
     let description;
     if (singleTaskObject.title) {
       title = singleTaskObject.title.trim();
-    } else {  title = ''; }
+    } else {
+      title = '';
+    }
     if (singleTaskObject.description) {
       description = singleTaskObject.description.trim();
-    } else { description = '';}
+    } else {
+      description = '';
+    }
     const textOutput = (title + '' + description).toLowerCase();
     return textOutput.includes(searchTerm);
   });
 }
-
 
 /**
  * Controls the visibility of tasks through search input.
@@ -130,5 +121,5 @@ function taskVisibilty(filterTask) {
     } else {
       taskObject.element.classList.add('d-none');
     }
-  }); 
+  });
 }

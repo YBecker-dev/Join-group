@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/assets/img/logo/logo_white.png" />
     <link rel="stylesheet" href="/assets/style/main/main.css" />
-    <link rel="stylesheet" href="/assets/style/main/main_responsive.css">
+    <link rel="stylesheet" href="/assets/style/main/main_responsive.css" />
     <link rel="stylesheet" href="/assets/style/board/board.css" />
-    <link rel="stylesheet" href="/assets/style/board/board_part2.css">
-    <link rel="stylesheet" href="/assets/style/board/board_responsive.css">
-    <link rel="stylesheet" href="/assets/style/board/board_overlay.css">
+    <link rel="stylesheet" href="/assets/style/board/board_part2.css" />
+    <link rel="stylesheet" href="/assets/style/board/board_responsive.css" />
+    <link rel="stylesheet" href="/assets/style/board/board_overlay.css" />
     <link rel="stylesheet" href="/assets/style/buttons.css" />
     <link rel="stylesheet" href="/assets/style/add_task/add_task.css" />
     <link rel="stylesheet" href="/assets/style/add_task/add_task_resonsive.css" />
@@ -19,7 +19,6 @@
     <title>Board</title>
   </head>
   <body onload="initBoard()">
-
     <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
       <div class="overlay-content-flex">
         <div class="overlay-content-render" id="overlay-content-loader" onclick="eventBubbling(event)"></div>
@@ -92,10 +91,17 @@
       </div>
       <div class="sidebar-legal-stuff">
         <div class="sidebar-legal-stuff-container">
-        <a class="sidebar-legal-stuff-links" id="sidebar-privacy-policy" href="/assets/html/privacy-policy_internal.html">Privacy Policy</a>
+          <a
+            class="sidebar-legal-stuff-links"
+            id="sidebar-privacy-policy"
+            href="/assets/html/privacy-policy_internal.html"
+            >Privacy Policy</a
+          >
         </div>
         <div class="sidebar-legal-stuff-container">
-        <a class="sidebar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html">Legal Notice</a>
+          <a class="sidebar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
+            >Legal Notice</a
+          >
         </div>
       </div>
     </div>
@@ -199,21 +205,21 @@
     </section>
     <script src="/assets/script/templates.js"></script>
     <script src="/assets/script/main.js"></script>
-    <script src="/assets/script/board/board-mobil.js"></script>
-    <script src="/assets/script/add_task/add_task_utils.js"></script>
-    <script src="/assets/script/add_task/add_task_data.js"></script>
+    <!-- Add Task Scripts -->
+    <script src="/assets/script/add_task/add_task_dropdowns.js"></script>
     <script src="/assets/script/add_task/add_task_validation.js"></script>
+    <script src="/assets/script/add_task/add_task_helpers.js"></script>
+    <script src="/assets/script/add_task/add_task_ui.js"></script>
+    <script src="/assets/script/add_task/add_task_data.js"></script>
     <script src="/assets/script/add_task/add_task.js"></script>
-    <script src="/assets/script/board/board_helpers.js"></script>
-    <script src="/assets/script/board/board_helpers_part2.js"></script>
-    <script src="/assets/script/board/board.js"></script>
-    <script src="/assets/script/board/board_part2.js"></script>
+    <!-- Board Scripts -->
+    <script src="/assets/script/board/board-mobil.js"></script>
+    <script src="/assets/script/board/board_ui.js"></script>
+    <script src="/assets/script/board/board_data.js"></script>
+    <script src="/assets/script/board/board_edit.js"></script>
+    <script src="/assets/script/board/board_tasks.js"></script>
     <script src="/assets/script/board/drag&drop.js"></script>
     <script src="/assets/script/board/search.js"></script>
+    <script src="/assets/script/board/board.js"></script>
   </body>
-   
-</body>
 </html>
-
-
-  

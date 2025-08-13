@@ -35,7 +35,7 @@ function init() {
   logo = document.getElementById('start-logo');
   headerLogo = document.querySelector('.main-header-logo');
   passwordInput = document.getElementById('password');
-  passwordValue = document.getElementById('password-icon');  
+  passwordValue = document.getElementById('password-icon');
   logo.classList.remove('preload');
   setLogoForWidth();
   animateLogo();
@@ -60,12 +60,9 @@ function handlePasswordInput() {
   clearInputError(this);
 }
 
-
 function handleEmailInput() {
   clearInputError(this);
 }
-
-
 
 /**
  * Toggles the visibility of the password input field and updates the icon.
@@ -94,11 +91,9 @@ function clearInputError(input) {
   if (parentDiv) parentDiv.classList.remove('input-error');
 }
 
-
 function loginUser(event) {
   checkUser(event);
 }
-
 
 /**
  * Asynchronously validates user credentials against a remote JSON file.
@@ -111,7 +106,7 @@ async function checkUser(event) {
   let email = document.getElementById('email');
   let password = document.getElementById('password');
   if (!validateInputs(email, password)) return;
-  
+
   try {
     let response = await fetch(BASE_URL + '/login' + '.json');
     if (response.ok) {
@@ -143,7 +138,6 @@ function validateInputs(email, password) {
   return valid;
 }
 
-
 /**
  * Authenticates a user by comparing their email and password with provided user data.
  * If a match is found, it stores the user's full name and returns true.
@@ -169,7 +163,6 @@ function authenticateUser(email, password, userDataObject) {
   return false;
 }
 
-
 /**
  * Handles the result of user authentication. On success, it redirects the user
  * to the summary page. On failure, it displays a login error message and resets the form.
@@ -191,9 +184,7 @@ function handleAuthResult(findUser, email, password) {
   }
 }
 
-
 let resetForm = () => document.getElementById('login-form').reset();
-
 
 let resetPwIcon = () => {
   passwordValue.src = './assets/img/icon/lock.png';
@@ -201,12 +192,9 @@ let resetPwIcon = () => {
   passwordValue.classList.remove('eye-icon');
 };
 
-
-
 let storeAnnoncedUserName = (announcedUser) => {
   localStorage.setItem('announcedUser', JSON.stringify(announcedUser));
 };
-
 
 /**
  * Logs in a user as a guest by setting 'Guest Guest' as the current user in localStorage
@@ -219,10 +207,8 @@ function logginAsGuest() {
   window.location.href = 'assets/html/summery.html';
 }
 
-
 let PrivacyPolicy = '/assets/html/privacy-policy_external.html';
 let LegalNotice = '/assets/html/legal-notice_external.html';
-
 
 /**
  * Sets 'Guest Guest' as the current user in localStorage and redirects to the privacy policy page.
@@ -234,7 +220,6 @@ function privacyPolicyMPA() {
   console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = PrivacyPolicy;
 }
-
 
 /**
  * Sets 'Guest Guest' as the current user in localStorage and redirects to the legal notice page.

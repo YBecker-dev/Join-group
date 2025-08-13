@@ -70,7 +70,6 @@ function getTaskOverlay(task, taskId, trueTaskId) {
   `;
 }
 
-
 function getInnerTaskOverlay() {
   return `
         <div class="help-mobil" onclick="window.location.href='/assets/html/help.html'" id="help-mobil">
@@ -88,7 +87,6 @@ function getInnerTaskOverlay() {
   `;
 }
 
-
 function contactsOverlayTemplate(initials, name, color) {
   return `
         <div class="peoples-info">
@@ -101,7 +99,6 @@ function contactsOverlayTemplate(initials, name, color) {
         </div>
       `;
 }
-
 
 function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
   return `
@@ -116,7 +113,6 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
       </div>
     </div>`;
 }
-
 
 function getLogOutMenu() {
   return `
@@ -135,8 +131,6 @@ function getLogOutMenu() {
     `;
 }
 let trueTaskId;
-
-
 
 function boardHtmlTemplate(
   taskId,
@@ -168,7 +162,6 @@ function boardHtmlTemplate(
     `;
 }
 
-
 function progressbarHtml(percent, doneCount, totalCount) {
   return `
     <div class="board-task-subtasks-row">
@@ -180,7 +173,6 @@ function progressbarHtml(percent, doneCount, totalCount) {
     </div>
   `;
 }
-
 
 function pushSubtaskInputHTML(text) {
   return `
@@ -195,7 +187,6 @@ function pushSubtaskInputHTML(text) {
   `;
 }
 
-
 function editSubtaskInputHTML(oldText) {
   return `
 <div class="input-with-icons">
@@ -208,7 +199,6 @@ function editSubtaskInputHTML(oldText) {
   `;
 }
 
-
 function showSaveCancelIconsHtml() {
   return `
       <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
@@ -216,7 +206,6 @@ function showSaveCancelIconsHtml() {
       <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
     `;
 }
-
 
 function saveSubtaskEditHTML(newText) {
   return `
@@ -229,11 +218,10 @@ function saveSubtaskEditHTML(newText) {
   `;
 }
 
-
 function assignedToDropdownHTML(contacts, i, checked) {
   let isChecked = checked === 'checked';
   let checkedClass = isChecked ? 'checked-assigned-to' : '';
-  return `<div class="scrollbar">
+  return `
     <div class="assigned-contacts ${checkedClass}" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
       <div class="user-dropdown ${checkedClass}" id="user-dropdown-${i}">
         <div class="user-name-dropdown ${checkedClass}" style="background-color: ${contacts[i].color} !important;">
@@ -249,7 +237,6 @@ function assignedToDropdownHTML(contacts, i, checked) {
     </div>`;
 }
 
-
 function getEmptyDragArea(noTaskText) {
   return `
     <div class="empty-task-box">
@@ -257,7 +244,6 @@ function getEmptyDragArea(noTaskText) {
     </div>
   `;
 }
-
 
 function noteNoTaskFounded() {
   return `
@@ -267,7 +253,6 @@ function noteNoTaskFounded() {
     </div>
   `;
 }
-
 
 function overlayPriority(task) {
   if (task.priority) {
@@ -281,7 +266,6 @@ function overlayPriority(task) {
   }
 }
 
-
 function showContactsAddTaskHtml(contact) {
   return `
     <div class="contact-items" style="background-color:${contact.color};">
@@ -289,7 +273,6 @@ function showContactsAddTaskHtml(contact) {
     </div>
   `;
 }
-
 
 function editTaskHtml(task, taskId) {
   return `

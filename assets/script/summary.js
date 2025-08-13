@@ -50,7 +50,6 @@ async function checkTasks() {
   }
 }
 
-
 /**
  * Processes the 'priorityArray' to count all tasks marked as 'Urgent' and
  * passes this count to the 'includePriorityToSummery' function.
@@ -64,7 +63,6 @@ function processPriority() {
   includePriorityToSummery(urgentCount);
 }
 
-
 /**
  * transfer the priority status "urgent" to summery.html to dispklay an overview for
  * tasks with the "urgent" priority
@@ -74,7 +72,6 @@ function includePriorityToSummery(urgentCount) {
   let urgent = document.getElementById('task_urgent');
   urgent.innerText = urgentCount;
 }
-
 
 /**
  * iterate through the "statusArray" and set for each element containing the specific declaration
@@ -95,7 +92,6 @@ function statusCount() {
   includeTaskCountToSummery(todoCount, inProgressCount, awaitFeedbackCount, doneCount);
   clearCounter();
 }
-
 
 /**
  * Transfer the actuall counts to summery.html to display an overview of all Tasks
@@ -118,7 +114,6 @@ function includeTaskCountToSummery(todoCount, inProgressCount, awaitFeedbackCoun
   tasksInBoard.innerText = statusArray.length;
 }
 
-
 /**
  * Delete used arrays to prevent an incorrect Summery Presentation
  * after reloadig the summery page
@@ -127,7 +122,6 @@ function clearArrays() {
   priorityArray = [];
   statusArray = [];
 }
-
 
 /**
  * Set all counters to = 0 to prevent also an incorect Summery Presentation
@@ -140,7 +134,6 @@ function clearCounter() {
   doneCount = 0;
   urgentCount = 0;
 }
-
 
 /**
  * load full name of the logged user from local Storage and displays on Summery.html
@@ -158,14 +151,12 @@ function setGreetingText() {
   }
 }
 
-
 /**
  * load Board.html if the User clicks a Task
  */
 let loadBoard = () => {
   window.location.href = '/assets/html/board.html';
 };
-
 
 /**
  * Shows the main content block if the viewport width is greater than 1440px.
@@ -176,7 +167,6 @@ function showMainContentIfWideScreen() {
     mainContent.classList.remove('d-none');
   }
 }
-
 
 /**
  * Displays a greeting message on smaller screens after login, based on a flag in localStorage.
@@ -199,7 +189,6 @@ function showGreetingMessagebyLogin() {
   }
 }
 
-
 /**
  * display Username Or Guest at the Greeting Message at Desktpot Version
  * @returns logged User name
@@ -213,7 +202,6 @@ function showGreetingMessage() {
     showGreetingOverlay('user', loggedUser);
   }
 }
-
 
 /**
  * Displays a personalized greeting overlay on screens smaller than 1440px.
@@ -236,7 +224,6 @@ function showGreetingOverlay(type, userName = '') {
   hideGreetingMessage(greetingElement);
 }
 
-
 /**
  * Hides a greeting element after a delay by applying and removing CSS classes.
  * It also removes the 'showGreeting' flag from localStorage after hiding the element.
@@ -253,7 +240,6 @@ function hideGreetingMessage(greetingElement) {
   }, 3000);
 }
 
-
 /**
  * Returns a time-of-day specific greeting based on the current hour.
  * @param {string} [punctuation=','] - Punctuation to append to the greeting.
@@ -265,7 +251,6 @@ function getGreetingTextByHour(punctuation = ',') {
   if (hour >= 12 && hour < 18) return `Good afternoon${punctuation}`;
   return `Good evening${punctuation}`;
 }
-
 
 /**
  * checks the availabilty of the local storage
@@ -281,7 +266,6 @@ function isLocalStorageAvailable() {
   }
 }
 
-
 /**
  * Sets a monthly interval on the 16th day
  */
@@ -292,7 +276,6 @@ function parseCustomDate(dateStr) {
   }
   return null;
 }
-
 
 /**
  * Asynchronously fetches tasks, identifies urgent deadlines, and displays the nearest one.
@@ -312,7 +295,6 @@ async function upcomingDeadline() {
     deadlineElement.innerText = 'No deadline';
   }
 }
-
 
 /**
  * Iterates through a list of tasks to find all urgent tasks with a future or current date,
@@ -336,7 +318,6 @@ function findTasksInSummary(tasks, urgentTasks, today) {
     }
   }
 }
-
 
 /**
  * Displays the earliest date from a sorted list of urgent deadlines in a human-readable format.
