@@ -1,3 +1,7 @@
+/**
+ * Builds a task data object from form inputs.
+ * @returns {Promise<object>} The complete task data object.
+ */
 async function buildTaskData() {
   let status = getTaskStatus();
   return {
@@ -14,6 +18,12 @@ async function buildTaskData() {
   };
 }
 
+
+/**
+ * Posts task data to the server.
+ * @param {object} taskData - The task data to be saved.
+ * @returns {Promise<void>}
+ */
 async function postTaskToServer(taskData) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json', {
     method: 'POST',
@@ -22,11 +32,21 @@ async function postTaskToServer(taskData) {
   });
 }
 
+
+/**
+ * Saves a new task to Firebase.
+ * @returns {Promise<void>}
+ */
 async function saveTaskToFirebase() {
   let taskData = await buildTaskData();
   await postTaskToServer(taskData);
 }
 
+
+/**
+ * Gets the next available task ID.
+ * @returns {Promise<number>} The next available ID.
+ */
 async function getNextTaskId() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let tasks = await response.json();
@@ -42,6 +62,12 @@ async function getNextTaskId() {
   return usedIds.length;
 }
 
+
+/**
+ * Gets the next sequence number for a given status.
+ * @param {string} status - The task status.
+ * @returns {Promise<number>} The next available sequence number.
+ */
 async function getNextSequence(status = 'todo') {
   let sequence = 0;
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
@@ -56,6 +82,12 @@ async function getNextSequence(status = 'todo') {
   return sequence;
 }
 
+
+/**
+ * Gets the next sequence number for a given status.
+ * @param {string} status - The task status.
+ * @returns {Promise<number>} The next available sequence number.
+ */
 function getTaskStatus() {
   if (window.currentTaskStatus) {
     return window.currentTaskStatus;
@@ -68,17 +100,33 @@ function getTaskStatus() {
   return 'todo';
 }
 
+
+/**
+ * Gets the trimmed value of an input element by ID.
+ * @param {string} id - The element ID.
+ * @returns {string} The input value.
+ */
 function getInputValue(id) {
   let inputRef = document.getElementById(id);
   return inputRef ? inputRef.value.trim() : '';
 }
 
+
+/**
+ * Gets the selected category text.
+ * @returns {string} The category text.
+ */
 function getCategoryText() {
   let categoryDropdownSelectedRef = document.getElementById('category-dropdown-selected');
   let categoryTextRef = categoryDropdownSelectedRef ? categoryDropdownSelectedRef.querySelector('p') : null;
   return categoryTextRef ? categoryTextRef.textContent.trim() : '';
 }
 
+
+/**
+ * Gets an array of subtask objects from the form.
+ * @returns {Array<object>} An array of subtasks.
+ */
 function getSubtasks() {
   let subtaskItemRefs = document.querySelectorAll('.subtask-item');
   return Array.from(subtaskItemRefs).map((subtaskItemRef) => {
@@ -87,6 +135,11 @@ function getSubtasks() {
   });
 }
 
+
+/**
+ * Gets an array of IDs of assigned contacts.
+ * @returns {Array<string>} An array of contact IDs.
+ */
 function getAssignedTo() {
   let assignedIds = [];
   for (let i = 0; i < selectedContacts.length; i++) {
@@ -97,6 +150,11 @@ function getAssignedTo() {
   return assignedIds;
 }
 
+
+/**
+ * Gets the selected priority.
+ * @returns {string} The priority level ('Urgent', 'Medium', 'Low', or empty).
+ */
 function getPriority() {
   let urgentButtonRef = document.getElementById('urgent');
   let mediumButtonRef = document.getElementById('medium');
@@ -107,6 +165,12 @@ function getPriority() {
   return '';
 }
 
+
+/**
+ * Gets the category text from a selected category element.
+ * @param {HTMLElement} categorySelected - The selected category element.
+ * @returns {string} The category text.
+ */
 function getCategoryTextFromSelected(categorySelected) {
   let categoryTextRef = categorySelected.querySelector('p');
   if (categoryTextRef) {
@@ -115,6 +179,12 @@ function getCategoryTextFromSelected(categorySelected) {
   return '';
 }
 
+
+/**
+ * Gets the category text from a dropdown element.
+ * @param {HTMLElement} dropdownRef - The dropdown element.
+ * @returns {string} The category text.
+ */
 function getCategoryTextFromDropdown(dropdownRef) {
   let categoryTextRef = dropdownRef.querySelector('p');
   if (categoryTextRef) {
@@ -123,6 +193,10 @@ function getCategoryTextFromDropdown(dropdownRef) {
   return '';
 }
 
+
+/**
+ * Displays the selected contacts for a new task.
+ */
 function showContactsAddTask() {
   let container = document.getElementById('show-contacts-add-task');
   if (!container) return;
@@ -135,6 +209,11 @@ function showContactsAddTask() {
   container.innerHTML = html;
 }
 
+
+/**
+ * Toggles the selection of a contact.
+ * @param {number} index - The index of the contact in the contacts array.
+ */
 function toggleContactSelection(index) {
   let pos = selectedContacts.indexOf(index);
   if (pos === -1) {
