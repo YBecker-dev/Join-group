@@ -1,6 +1,7 @@
-body{
+body {
     max-width: 1940px;
 }
+
 .main-header-content {
     display: flex;
     justify-content: end;
@@ -213,7 +214,7 @@ textarea::placeholder {
     max-width: 454px;
     display: flex;
     flex-direction: column;
-     gap: 8px; 
+    gap: 8px;
 }
 
 #register-form {
@@ -300,10 +301,15 @@ input#password-confirm:hover {
 }
 
 @media (max-height: 840px) {
+    .login-footer {
+        display: none;
+    }
 
     #start-logo,
-    .login-footer,
     .main-header img {
-        display: none;
+        width: 48px;
+        height: 58.5px;
+        top: 6px;
+        left: 32px;
     }
 }

@@ -1,6 +1,7 @@
-body{
+body {
     max-width: 1940px;
 }
+
 .register-content {
     max-width: 598px;
     height: 630px;
@@ -118,5 +119,23 @@ body{
 
     .register-content {
         height: 595px;
+    }
+}
+
+@media (max-height: 840px) {
+    .register-content {
+        height: 500px;
+    }
+
+    .go-to-start{
+        top: 16px;
+    }
+
+    .register-content {
+        gap: 20px
+    }
+
+    .input-privacy-policy {
+        padding: unset;
     }
 }
