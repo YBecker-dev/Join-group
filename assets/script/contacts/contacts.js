@@ -284,7 +284,9 @@ async function updateContact(index) {
   let userEmail = document.getElementById('editContactMail').value.trim();
   let userPhone = document.getElementById('editContactPhone').value.trim();
 
-  if (!checkContactInputs(userName, userEmail, userPhone)) {
+  let firebaseId = contacts[index].id;
+
+  if (!(await checkContactInputs(userName, userEmail, userPhone, firebaseId))) {
     return;
   }
 
@@ -300,7 +302,6 @@ async function updateContact(index) {
     initials: getInitials(userName),
   };
 
-  let firebaseId = contacts[index].id;
   let url = BASE_URL_TASKS_AND_USERS + 'users/' + firebaseId + '.json';
   let response = await fetch(url, {
     method: 'PUT',
@@ -316,8 +317,21 @@ async function updateContact(index) {
   }
 
   await loadContacts();
-  renderContacts();
-  openDetails(index);
+
+  let contactElement = document.querySelector(`.person[onclick*="openDetails(${index})"]`);
+  if (contactElement) {
+    contactElement.outerHTML = getNoteTemplateContact(index);
+    let newContactElement = document.querySelector(`.person[onclick*="openDetails(${index})"]`);
+    if (newContactElement) {
+      changeContactColorIfSelected(index, true);
+    }
+  }
+
+  let detailsElement = document.getElementById('contactDetails');
+  if (detailsElement) {
+    detailsElement.innerHTML = getNoteTemplateContactDetails(index);
+  }
+
   closeOverlay();
 }
 
@@ -329,7 +343,7 @@ async function saveToLocalstorage() {
   let userEmail = document.getElementById('newContactMail').value;
   let userPhone = document.getElementById('newContactPhone').value;
 
-  if (!checkContactInputs(userName, userEmail, userPhone)) {
+  if (!(await checkContactInputs(userName, userEmail, userPhone))) {
     return;
   }
   let newContact = {
@@ -355,40 +369,83 @@ function openEditOverlay(index) {
  * Ensures that input fields can only be filled in with correct validation, e.g.
  * only strings can be entered in name fields, or email addresses must contain the @ sign.
  */
-function checkContactInputs(userName, userEmail, userPhone) {
+async function checkContactInputs(userName, userEmail, userPhone, currentContactId = null) {
   let nameInput = document.getElementById('editContactName') || document.getElementById('newContactName');
   let mailInput = document.getElementById('editContactMail') || document.getElementById('newContactMail');
+  let phoneInput = document.getElementById('editContactPhone') || document.getElementById('newContactPhone');
   let valid = true;
 
   if (!userName || userName.trim().length < 2) {
-    shakeInput(nameInput, 'Please check its is filled with a name');
+    shakeInput(nameInput, 'Please check it is filled with a name');
     valid = false;
   }
 
   if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
-    shakeInput(mailInput, 'Please check its is filled with a valid email');
+    shakeInput(mailInput, 'Please check it is filled with a valid email');
     valid = false;
+  } else {
+    if (await isEmailTaken(userEmail, currentContactId)) {
+      shakeInput(mailInput, 'This email address is already in use');
+      valid = false;
+    }
   }
 
   if (!userPhone || userPhone.trim() === '') {
-    userPhone = '-';
+    shakeInput(phoneInput, 'Please check it is filled with a valid phone number (min. 5 digits)');
+    valid = false;
+  } else if (userPhone.trim() !== '-') {
+    let phoneLength = userPhone.replace(/\s/g, '').length;
+    if (userPhone.startsWith('+')) {
+      phoneLength -= 2;
+    }
+
+    if (phoneLength < 5) {
+      shakeInput(phoneInput, 'Please check it is filled with a valid phone number (min. 5 digits)');
+      valid = false;
+    }
   }
+
   return valid;
+}
+
+async function isEmailTaken(email, currentContactId = null) {
+  let url = BASE_URL_TASKS_AND_USERS + 'users.json';
+  let response = await fetch(url);
+  let users = await response.json();
+
+  for (let key in users) {
+    if (users[key].email === email && key !== currentContactId) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
  * ensures that telephone numbers receive the international country code for the German area code
  */
 function validatePhoneInput(input) {
-  let value = input.value.replace(/[^+\d]/g, '');
-  value = value.replace(/(?!^)\+/g, '');
-  if (value.length > 0 && value[0] !== '0' && value[0] !== '+') {
-    value = value.slice(1);
+  let value = input.value;
+  clearInputError(input);
+
+  if (value.length > 0) {
+    const firstChar = value.charAt(0);
+    if (firstChar !== '+' && firstChar !== '0' && firstChar !== '-') {
+      shakeInput(input, 'pls start with "0" or "+" or "-"');
+      input.value = '';
+      return;
+    }
   }
 
+  value = value.replace(/[^+\d-]/g, '');
+  value = value.replace(/(?!^)[-]/g, '');
+  value = value.replace(/(?!^)[+]/g, '');
+
   if (value.startsWith('0')) {
-    value = '+49 ' + value.slice(1);
+    value = '+49 ' + value.substring(1);
   }
+
   let prefix = value.slice(0, 3);
   let rest = value.slice(3).replace(/^\s*/, '');
   let firstBlock = rest.slice(0, 3);
@@ -398,5 +455,4 @@ function validatePhoneInput(input) {
   if (secondBlock.length > 0) formatted += ' ' + secondBlock;
   formatted = formatted.slice(0, 17);
   input.value = formatted;
-  clearInputError(input);
 }

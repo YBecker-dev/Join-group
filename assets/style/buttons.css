@@ -27,7 +27,8 @@ button:hover {
 }
 
 .create-button:hover,
-.ok-button:hover {
+.ok-button:hover,
+.save-button:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     background-color: #2AABE2;
     transform: translateY(1px);
@@ -77,7 +78,8 @@ button:hover {
 .create-button,
 .clear-button,
 .cancel-button,
-.ok-button {
+.ok-button,
+.save-button {
     margin: 0;
     display: flex;
     align-items: center;
@@ -100,7 +102,8 @@ button:hover {
     width: unset;
 }
 
-.create-button {
+.create-button,
+.save-button {
     font-size: 21px;
 }
 
@@ -110,7 +113,8 @@ button:hover {
 
 .create-button img,
 .clear-button img,
-.cancel-button img {
+.cancel-button img,
+.save-button img {
     height: 24px;
     width: 24px;
 }
@@ -193,7 +197,8 @@ button:hover {
 }
 
 .create-button,
-.clear-button {
+.clear-button,
+.save-button {
     display: flex;
     justify-content: center;
     gap: 4px;
@@ -201,13 +206,15 @@ button:hover {
     align-items: center;
 }
 
-.create-button {
+.create-button,
+.save-button {
     font-weight: 700;
     font-size: 21px;
     transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
 }
 
-.create-contact-btn {
+.create-contact-btn,
+.save-contact-btn {
     width: 214px;
 }
 
@@ -226,7 +233,6 @@ button:hover {
     gap: 25px;
     margin-top: 52px;
 }
-
 
 .saveBtn {
     height: 51px;

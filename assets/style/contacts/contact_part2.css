@@ -192,8 +192,10 @@
 
 #newContactName,
 #newContactMail,
+#newContactPhone,
 #editContactName,
-#editContactMail {
+#editContactMail,
+#editContactPhone {
     border: unset !important;
 }
 
