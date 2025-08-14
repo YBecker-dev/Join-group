@@ -109,10 +109,20 @@ function showContactsAddTask() {
   if (!container) return;
   container.classList.remove('d-none');
   let html = '';
-  for (let i = 0; i < selectedContacts.length; i++) {
+
+  const maxVisibleContacts = 5;
+  const displayCount = Math.min(selectedContacts.length, maxVisibleContacts);
+
+  for (let i = 0; i < displayCount; i++) {
     const contact = contacts[selectedContacts[i]];
     html += showContactsAddTaskHtml(contact);
   }
+
+  if (selectedContacts.length > maxVisibleContacts) {
+    const remainingCount = selectedContacts.length - maxVisibleContacts;
+    html += showRemainingContactsHtml(remainingCount);
+  }
+
   container.innerHTML = html;
 }
 
@@ -165,7 +175,10 @@ function clearSubtaskInput() {
  */
 function clearSubtaskElements() {
   let container = document.getElementById('subtasks-container');
-  if (container) container.innerHTML = '';
+  if (container) {
+    container.innerHTML = '';
+    container.classList.remove('scrollable');
+  }
 }
 
 /**
@@ -211,6 +224,11 @@ function pushSubtaskInput(event) {
       container.innerHTML += pushSubtaskInputHTML(input.value.trim());
       input.value = '';
       showPlusIcon();
+
+      const subtaskItems = container.querySelectorAll('.subtask-item');
+      if (subtaskItems.length >= 3) {
+        container.classList.add('scrollable');
+      }
     }
   }
 }
@@ -243,7 +261,10 @@ function saveSubtaskEdit(event, inputElement) {
   if (event && event.key && event.key !== 'Enter') return;
   inputElement = inputElement.closest('.input-with-icons').querySelector('input');
   if (!inputElement) return;
-  let newText = inputElement.value;
+  let newText = inputElement.value.trim();
+
+  if (!newText) return;
+  
   let subtaskItem = inputElement.closest('.subtask-item-edit');
   if (!subtaskItem) return;
   let subtaskDiv = buildSubtaskDiv(newText);
@@ -272,6 +293,14 @@ function deleteSubtask(element) {
   let editSubtaskItem = element.closest('.subtask-item-edit');
   if (subtaskItem) subtaskItem.remove();
   if (editSubtaskItem) editSubtaskItem.remove();
+
+  let container = document.getElementById('subtasks-container');
+  if (container) {
+    const subtaskItems = container.querySelectorAll('.subtask-item');
+    if (subtaskItems.length < 3) {
+      container.classList.remove('scrollable');
+    }
+  }
 }
 
 /**

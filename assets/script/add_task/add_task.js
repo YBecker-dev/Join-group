@@ -103,6 +103,7 @@ function addInputErrorListeners() {
 
 /**
  * Sets the minimum date for the date input to today's date.
+ * Does NOT set today's date as default value anymore.
  */
 function dateInputMinDate() {
   const today = new Date();
@@ -112,5 +113,42 @@ function dateInputMinDate() {
   const minDate = `${dd}/${mm}/${yyyy}`;
   const dateInput = document.getElementById('date');
   dateInput.setAttribute('min', minDate);
-  dateInput.value = minDate;
+  // Removed: dateInput.value = minDate; - Date field now starts empty
+}
+
+/**
+ * Sets today's date in the date input field when the user clicks the date icon.
+ * This function is simple and easy to understand for beginners.
+ */
+function setTodaysDate() {
+  // Get today's date
+  const today = new Date();
+  
+  // Get the year (like 2024)
+  const year = today.getFullYear();
+  
+  // Get the month (0-11, so we add 1) and make it 2 digits
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  
+  // Get the day and make it 2 digits
+  const day = String(today.getDate()).padStart(2, '0');
+  
+  // Create the date string in DD/MM/YYYY format
+  const todaysDate = `${day}/${month}/${year}`;
+  
+  // Find the date input field and put today's date in it
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    dateInput.value = todaysDate;
+    
+    // Remove any error styling if present
+    const warningElement = document.getElementById('add-task-input2-warning');
+    if (warningElement) {
+      warningElement.classList.add('d-none');
+    }
+    dateInput.classList.remove('input-error');
+    
+    // Enable the create button since we now have a date
+    enableCreateTaskButton();
+  }
 }

@@ -112,14 +112,6 @@
         </div>
         <div class="required"></div>
         <form id="add-task-form" onkeydown="return preventEnterSubmit(event);">
-          <div class="create-clear-buttons">
-            <button type="button" class="clear-button" onclick="clearAllTaskFields();">
-              Clear <img class="clear-icon" src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
-            </button>
-            <button class="create-button" id="create-task-button" onclick="validateAddTaskForm()">
-              Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
-            </button>
-          </div>
           <div class="title_description_date">
             <div class="container1">
               <div class="input-group add-task">
@@ -156,7 +148,7 @@
                     onclick="showError('add-task-input2-warning', 'date')"
                     oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton(this)"
                   />
-                  <span class="date-icon">
+                  <span class="date-icon" onclick="setTodaysDate()">
                     <img src="/assets/img/icon/add_task_icon/event.png" alt="" />
                   </span>
                 </div>
@@ -269,6 +261,14 @@
               </div>
               <div id="subtasks-container" class="subtasks-container"></div>
             </div>
+             <div class="create-clear-buttons">
+            <button type="button" class="clear-button" onclick="clearAllTaskFields();">
+              Clear <img class="clear-icon" src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
+            </button>
+            <button class="create-button" id="create-task-button" onclick="validateAddTaskForm()">
+              Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
+            </button>
+          </div>
           </div>
           <p class="required-responsive"><span class="required-star">*</span>This field is required</p>
         </form>

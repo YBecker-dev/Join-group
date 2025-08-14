@@ -82,6 +82,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     justify-content: center;
     z-index: 10;
+    cursor: pointer;
 }
 
 .dividing-strips {
@@ -402,17 +403,6 @@ input[type="text"] {
     border: 1px solid rgb(41, 54, 71);
 }
 
-.create-clear-buttons {
-    display: flex;
-    justify-content: end;
-    position: absolute;
-    gap: 16px;
-    left: 763px;
-    top: 793px;
-    z-index: 100;
-    background-color: #F6F7F8;
-}
-
 .user-dropdown {
     display: flex;
     align-items: center;
@@ -508,14 +498,6 @@ input[type="text"] {
     left: 6rem;
 }
 
-.show-contacts-add-task {
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-
-}
-
 .contact-items {
     height: 48px;
     width: 48px;
@@ -587,15 +569,6 @@ input[type="text"] {
     pointer-events: auto;
     background: #EEEEEE;
     transform: translateY(-1px);
-}
-
-.subtasks-container {
-    border-radius: 8px;
-    transition: background 0.2s, transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: -16px;
 }
 
 .subtask-item span {

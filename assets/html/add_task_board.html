@@ -14,14 +14,6 @@
     <img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">
     <div class="required"></div>
     <form id="add-task-form" onkeydown="return preventEnterSubmit(event);">
-      <div class="create-clear-buttons">
-        <button type="button" class="cancel-button" onclick="closeCreateTask()">
-          Cancel <img class="cancel-icon" src="../img/icon/close.png" alt=""   />
-        </button>
-        <button class="create-button" id="create-task-button" onclick="validateAddTaskForm()">
-          Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
-        </button>
-      </div>
       <div class="title_description_date">
         <div class="container1">
           <div class="input-group add-task">
@@ -169,6 +161,14 @@
           </div>
           <div id="subtasks-container" class="subtasks-container"></div>
         </div>
+              <div class="create-clear-buttons">
+        <button type="button" class="cancel-button" onclick="closeCreateTask()">
+          Cancel <img class="cancel-icon" src="../img/icon/close.png" alt=""   />
+        </button>
+        <button class="create-button" id="create-task-button" onclick="validateAddTaskForm()">
+          Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
+        </button>
+      </div>
       </div>
       <p class="required-responsive"><span class="required-star">*</span>This field is required</p>
     </form>

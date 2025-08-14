@@ -274,6 +274,14 @@ function showContactsAddTaskHtml(contact) {
   `;
 }
 
+function showRemainingContactsHtml(remainingCount) {
+  return `
+    <div class="contact-items remaining-contacts">
+      <span class="initials-span">+${remainingCount}</span>
+    </div>
+  `;
+}
+
 function editTaskHtml(task, taskId) {
   return `
     <div class="overlay-section">

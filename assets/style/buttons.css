@@ -130,12 +130,9 @@ button:hover {
 .create-clear-buttons {
     display: flex;
     justify-content: end;
-    position: absolute;
     gap: 16px;
-    left: 763px;
-    top: 793px;
-    z-index: 100;
     background-color: #F6F7F8;
+    margin: 24px 0;
 }
 
 /*bord*/
