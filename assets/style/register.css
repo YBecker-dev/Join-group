@@ -1,3 +1,6 @@
+body{
+    max-width: 1940px;
+}
 .register-content {
     max-width: 598px;
     height: 630px;
