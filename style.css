@@ -1,5 +1,7 @@
 body{
     max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .main-header-content {
@@ -22,7 +24,7 @@ body{
 }
 
 .main-header-logo {
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     top: 0;
@@ -53,7 +55,7 @@ body{
     width: 350px;
     height: 420px;
     top: 50vh;
-    left: 50vw;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
