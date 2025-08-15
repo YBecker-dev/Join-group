@@ -104,10 +104,26 @@ function openDetails(index) {
  */
 function showMobileEditOverlay(indexDetails) {
   let overlayRef = document.getElementById('editContact-Overlay');
-  let overlayBtn = document.getElementById('showOverlayBtn');
-  overlayBtn.classList.toggle('d-none');
-  overlayRef.classList.toggle('d-none');
-  overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
+  
+  if (overlayRef.classList.contains('d-none')) {
+    overlayRef.classList.remove('d-none');
+    overlayRef.innerHTML = getNoteTemplateMobileEditOverlay(indexDetails);
+    setTimeout(() => {
+      let mobileOverlay = document.getElementById('editDeleteOverlayMobile');
+      if (mobileOverlay) {
+        mobileOverlay.classList.add('slide-in-mobile');
+      }
+    }, 10);
+  } else {
+    let mobileOverlay = document.getElementById('editDeleteOverlayMobile');
+    if (mobileOverlay) {
+      mobileOverlay.classList.add('slide-out-mobile');
+      setTimeout(() => {
+        overlayRef.classList.add('d-none');
+        overlayRef.innerHTML = '';
+      }, 300);
+    }
+  }
 }
 
 /**
@@ -248,6 +264,7 @@ function closeDetails() {
       element.classList.remove('active');
     });
   }
+  currentSelectedIndex = null;
 }
 
 /**
@@ -376,22 +393,26 @@ async function checkContactInputs(userName, userEmail, userPhone, currentContact
   let valid = true;
 
   if (!userName || userName.trim().length < 2) {
-    shakeInput(nameInput, 'Please check it is filled with a name');
+    showInputError(nameInput, 'Please check it is filled with a name');
     valid = false;
+  } else {
+    hideInputError(nameInput);
   }
 
   if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
-    shakeInput(mailInput, 'Please check it is filled with a valid email');
+    showInputError(mailInput, 'Please check it is filled with a valid email');
     valid = false;
   } else {
     if (await isEmailTaken(userEmail, currentContactId)) {
-      shakeInput(mailInput, 'This email address is already in use');
+      showInputError(mailInput, 'This email address is already in use');
       valid = false;
+    } else {
+      hideInputError(mailInput);
     }
   }
 
   if (!userPhone || userPhone.trim() === '') {
-    shakeInput(phoneInput, 'Please check it is filled with a valid phone number (min. 5 digits)');
+    showInputError(phoneInput, 'Enter a valid phone number (min. 5 digits)');
     valid = false;
   } else if (userPhone.trim() !== '-') {
     let phoneLength = userPhone.replace(/\s/g, '').length;
@@ -400,9 +421,13 @@ async function checkContactInputs(userName, userEmail, userPhone, currentContact
     }
 
     if (phoneLength < 5) {
-      shakeInput(phoneInput, 'Please check it is filled with a valid phone number (min. 5 digits)');
+      showInputError(phoneInput, 'Enter a valid phone number (min. 5 digits)');
       valid = false;
+    } else {
+      hideInputError(phoneInput);
     }
+  } else {
+    hideInputError(phoneInput);
   }
 
   return valid;
@@ -422,17 +447,43 @@ async function isEmailTaken(email, currentContactId = null) {
   return false;
 }
 
+function showInputError(input, message) {
+  let errorDiv = document.getElementById(input.id + '-error');
+  if (errorDiv) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+  shakeInput(input, message);
+}
+
+function hideInputError(input) {
+  let errorDiv = document.getElementById(input.id + '-error');
+  if (errorDiv) {
+    errorDiv.textContent = '';
+    errorDiv.style.display = 'none';
+  }
+  clearInputError(input);
+}
+
+function validateNameInput(input) {
+  hideInputError(input);
+  let value = input.value.trim();
+  if (value.length >= 2) {
+    hideInputError(input);
+  }
+}
+
 /**
  * ensures that telephone numbers receive the international country code for the German area code
  */
 function validatePhoneInput(input) {
   let value = input.value;
-  clearInputError(input);
+  hideInputError(input);
 
   if (value.length > 0) {
     const firstChar = value.charAt(0);
     if (firstChar !== '+' && firstChar !== '0' && firstChar !== '-') {
-      shakeInput(input, 'pls start with "0" or "+" or "-"');
+      showInputError(input, 'Please start with "0" or "+" or "-"');
       input.value = '';
       return;
     }

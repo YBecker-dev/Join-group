@@ -93,7 +93,6 @@ header {
     display: flex;
     gap: 8px;
     align-items: center;
-    justify-content: center;
     color: #a3a7ab;
     height: 46px;
     transition: transform 0.2s;
@@ -102,6 +101,10 @@ header {
 .sidebar-legal-stuff-links:hover {
     transform: translateX(2px);
     font-weight: 700;
+}
+
+.sidebar-legal-stuff-links {
+    padding-left: 56px;
 }
 
 .sidebar-links img {

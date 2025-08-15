@@ -98,13 +98,10 @@ let resetAnnouncedUserStorage = () => {
  * It also uses browser's built-in validation reporting to display a custom error message.
  * The "shaking" animation is removed after 300ms.
  * @param {HTMLElement} input
- * @param {string} message
  */
-function shakeInput(input, message) {
+function shakeInput(input) {
   input.classList.add('shake');
   input.classList.add('input-error');
-  input.setCustomValidity(message);
-  input.reportValidity();
   let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.add('input-error');
   setTimeout(() => {
@@ -117,7 +114,6 @@ function shakeInput(input, message) {
  * @param {HTMLElement} input
  */
 function clearInputError(input) {
-  input.setCustomValidity('');
   input.classList.remove('input-error');
   let parentDiv = input.closest('.addNewContactDiv');
   if (parentDiv) parentDiv.classList.remove('input-error');
@@ -128,9 +124,9 @@ function clearInputError(input) {
  * @param {HTMLInputElement} input - The email input element.
  */
 function validateEmailInput(input) {
+  hideInputError(input);
   input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
   clearInputError(input);
-  input.setCustomValidity('');
 }
 
 /**

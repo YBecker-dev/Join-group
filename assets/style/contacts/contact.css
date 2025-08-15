@@ -4,6 +4,21 @@
     overflow: hidden;
 }
 
+.addNewContactDiv {
+    position: relative;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 2px;
+    display: none;
+    z-index: 10;
+}
+
 /* Contact List side */
 .contactList {
     overflow-y: scroll;

@@ -50,7 +50,8 @@
     border-color: #29abe2;
 }
 
-.add-new-contact-inputs {
+.add-new-contact-inputs,
+.edit-contacts-inputs {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -235,4 +236,17 @@
 
 .slide-out {
     transform: translateX(100vw);
+}
+
+.editDeleteOverlayMobile {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.editDeleteOverlayMobile.slide-in-mobile {
+    transform: translateX(0);
+}
+
+.editDeleteOverlayMobile.slide-out-mobile {
+    transform: translateX(100%);
 }

@@ -35,13 +35,18 @@ button:hover {
 }
 
 .clear-button:hover,
-.cancel-button:hover {
+.cancel-button:hover,
+.delete-button:hover {
     border: solid 1px #29abe2;
     background-color: white;
     color: #29abe2;
     transform: translateY(1px);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 
+}
+
+.cancel-button {
+    width: 126px;
 }
 
 .addTaskBtn:hover,
@@ -79,7 +84,8 @@ button:hover {
 .clear-button,
 .cancel-button,
 .ok-button,
-.save-button {
+.save-button,
+.delete-button {
     margin: 0;
     display: flex;
     align-items: center;
@@ -127,7 +133,8 @@ button:hover {
     border: 1px solid rgb(41, 54, 71);
 }
 
-.create-clear-buttons {
+.create-clear-buttons,
+.create-clear-buttons-edit {
     display: flex;
     justify-content: end;
     gap: 16px;
@@ -135,11 +142,8 @@ button:hover {
     margin: 24px 0;
 }
 
-/*bord*/
 .create-clear-buttons-edit {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
+    background-color: white !important;
 }
 
 .cancel-button:hover .cancel-icon {
@@ -188,14 +192,23 @@ button:hover {
     transition: border 0.1s, color 0.1s, transform 0.1s;
 }
 
+.delete-button {
+    width: 113px;
+}
+
 .clear-button:hover .save-close {
     filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
     transition: filter 0.1s;
 }
 
+.save-button {
+    width: 111px;
+}
+
 .create-button,
 .clear-button,
-.save-button {
+.save-button,
+.delete-button {
     display: flex;
     justify-content: center;
     gap: 4px;
@@ -210,8 +223,7 @@ button:hover {
     transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
 }
 
-.create-contact-btn,
-.save-contact-btn {
+.create-contact-btn{
     width: 214px;
 }
 

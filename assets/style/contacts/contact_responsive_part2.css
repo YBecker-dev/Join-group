@@ -105,10 +105,6 @@
         height: 300px;
     }
 
-    .profilDiv {
-        width: auto;
-    }
-
     .headDiv-wrapper-newContact {
         width: 280px;
     }
@@ -176,10 +172,6 @@
     }
 
     .profilDiv-addContacts {
-        width: 290px;
-    }
-
-    .addNewContactDiv {
         width: 290px;
     }
 
