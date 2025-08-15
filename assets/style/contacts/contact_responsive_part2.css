@@ -31,10 +31,6 @@
     .showArrowMobile {
         top: 25px;
     }
-
-    .editContactBtn-wrapper {
-        bottom: 25%;
-    }
 }
 
 @media(max-height: 800px) {
@@ -46,11 +42,6 @@
     .showArrowMobile {
         top: 10px;
     }
-
-    .editContactBtn-wrapper {
-        bottom: 30%;
-    }
-
 }
 
 @media(max-height: 760px) {

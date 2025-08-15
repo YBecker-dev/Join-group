@@ -128,9 +128,10 @@
 
 .editContactBtn-wrapper {
     width: 100%;
-    position: fixed;
-    bottom: 18%;
+    position: absolute;
+    bottom: 200px;
     padding-right: 20px;
+    
 }
 
 #contactDetails {
