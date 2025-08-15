@@ -374,7 +374,7 @@ function editTaskHtml(task, taskId) {
           </span>
         </div>
       </div>
-      <div id="subtasks-container" class="subtasks-container"></div>
+      <div id="subtasks-container" class="subtasks-container-edit"></div>
     </form>
     <div class="create-clear-buttons-edit">
       <button type="submit" class="ok-button" form="edit-task-form">OK <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" /></button>

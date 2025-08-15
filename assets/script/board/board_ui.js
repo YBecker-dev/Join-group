@@ -92,9 +92,12 @@ function showSubtasksInOverlay(task, taskId) {
     subtasks = Object.values(subtasks);
   }
   if (subtasks && subtasks.length > 0) {
+    const scrollableClass = subtasks.length > 3 ? ' scrollable' : '';
+    html = `<div class="subtasks-overlay-container${scrollableClass}">`;
     for (let i = 0; i < subtasks.length; i++) {
       html += overlaySubtaskHtml(subtasks[i], i, taskId);
     }
+    html += '</div>';
   } else {
     html = '<p class="p-Tag">-</p>';
   }
@@ -191,13 +194,23 @@ function getAssignedContactsHtml(task, type) {
  */
 function buildContactsHtml(task, type) {
   let html = '';
-  for (let i = 0; i < task.assignedTo.length; i++) {
+  const maxVisibleContacts = 3;
+  const totalContacts = task.assignedTo.length;
+  const displayCount = Math.min(totalContacts, maxVisibleContacts);
+  
+  for (let i = 0; i < displayCount; i++) {
     let userId = task.assignedTo[i];
     let contact = findContactById(userId);
     if (contact) {
       html += getContactHtmlByType(contact, type);
     }
   }
+  
+  if (totalContacts > maxVisibleContacts && type === 'overlay') {
+    const remainingCount = totalContacts - maxVisibleContacts;
+    html += getAdditionalContactsHtml(remainingCount);
+  }
+  
   return html;
 }
 
@@ -214,6 +227,24 @@ function getContactHtmlByType(contact, type) {
     return contactsOverlayTemplate(contact.initials, contact.name, contact.color);
   }
   return '';
+}
+
+/**
+ * Gets the HTML for additional contacts counter circle.
+ * @param {number} remainingCount - Number of additional contacts.
+ * @returns {string} - The HTML string for the counter circle.
+ */
+function getAdditionalContactsHtml(remainingCount) {
+  return `
+    <div class="peoples-info">
+      <div class="initials remaining-contacts">
+        <span class="overlay-span">+${remainingCount}</span>
+      </div>
+      <div class="people-name">
+        <p class="p-Tag">${remainingCount} weitere Kontakte</p>
+      </div>
+    </div>
+  `;
 }
 
 /**

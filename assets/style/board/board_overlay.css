@@ -178,6 +178,17 @@
     flex-direction: column;
 }
 
+.subtasks-overlay-container {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.subtasks-overlay-container.scrollable {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
 .overlay-checkbox {
     height: 24px;
     width: 24px;
@@ -418,4 +429,77 @@
 
 .dragging {
     opacity: 0.5;
+}
+
+.overlay-span {
+    color: black;
+}
+
+/* Responsive Design */
+@media (max-width: 965px) {
+    .overlay-content-render {
+        width: 90%;
+        max-width: 500px;
+        margin: 0 20px;
+    }
+    
+    .overlay-position {
+        padding: 32px 24px;
+        max-height: 80vh;
+    }
+    
+    .overlay-titel>h1 {
+        font-size: 36px;
+    }
+    
+    .assigned-to {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .task-type>p {
+        font-size: 18px;
+        padding: 4px 16px;
+    }
+}
+
+@media (max-width: 558px) {
+    .overlay-content-render {
+        width: 95%;
+        max-width: none;
+        margin: 0 10px;
+        border-radius: 20px;
+    }
+    
+    .overlay-position {
+        padding: 20px 16px;
+        max-height: 85vh;
+        gap: 16px;
+    }
+    
+    .overlay-titel>h1 {
+        font-size: 36px;
+    }
+    
+    .overlay-description-flex {
+        gap: 10px;
+    }
+    
+    .p-Tag {
+        font-size: 16px;
+    }
+    
+    .task-type>p {
+        font-size: 16px;
+        padding: 4px 12px;
+    }
+    
+    .peoples-info {
+        margin-left: 0;
+        padding: 7px 8px;
+    }
+    
+    .overlay-edit-wrapper {
+        height: auto;
+    }
 }

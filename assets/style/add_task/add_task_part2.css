@@ -142,7 +142,8 @@
     transform: translateY(-1px);
 }
 
-.subtasks-container {
+.subtasks-container,
+.subtasks-container-edit {
     border-radius: 8px;
     transition: background 0.2s, transform 0.2s;
     display: flex;
@@ -152,6 +153,10 @@
     min-height: 144px;
     max-height: 144px;
     overflow-y: auto;
+}
+
+.subtasks-container-edit {
+    min-height: unset !important;
 }
 
 

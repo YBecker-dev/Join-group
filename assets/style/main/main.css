@@ -217,15 +217,6 @@ header {
     gap: 15px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter';
-    scroll-behavior: smooth;
-    line-height: 120%;
-}
-
 h1 {
     font-size: 64px;
     font-weight: bold;
