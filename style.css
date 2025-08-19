@@ -302,9 +302,17 @@ input#password-confirm:hover {
     }
 }
 
+@media (max-width: 360px){
+    .board-header-content>h1{
+        font-size: 38px;
+    }
+}
 @media (max-height: 840px) {
     .login-footer {
-        display: none;
+        bottom: 1px;
+    }
+    .login-content{
+        margin-bottom: 10px;
     }
 
     #start-logo,

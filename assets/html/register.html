@@ -11,72 +11,76 @@
     <title>Join</title>
   </head>
   <body onload="init()">
-    <main>
-      <div class="main-header-content">
-        <div class="main-header">
-          <img src="/assets/img/logo/logo_dark.png" alt="Logo" />
-          <div class="Signup"></div>
-        </div>
-      </div>
-      <div class="login">
-        <div class="register-content">
-          <div class="signup-header">
-            <a href="/index.html"><img class="go-to-start" src="../img/icon/Vector.png" alt="Zurück" /></a>
-            <h1>Sign up</h1>
-            <div class="login-underline"></div>
+    
+      <div class="main-position">
+      
+        <main>
+          <div class="main-header-content">
+            <div class="main-header">
+              <img src="/assets/img/logo/logo_dark.png" alt="Logo" />
+              <div class="Signup"></div>
+            </div>
           </div>
-
-          <form id="register-form">
-            <div class="input-group">
-              <input id="name" type="text" placeholder="Name" minlength="3" />
-              <span class="input-icon">
-                <img src="../img/icon/person.png" />
-              </span>
-              <div id="name-warning" class="d-none warning">Please enter your first and last name.</div>
-            </div>
-            <div class="input-group">
-              <input id="email" type="email" placeholder="Email"/>
-              <span class="input-icon">
-                <img src="../img/icon/mail.png" />
-              </span>
-              <div id="email-warning" class="d-none warning">Please enter a valid email address.</div>
-            </div>
-            <div class="input-group">
-              <input id="password" type="password" placeholder="Password"/>
-              <span class="input-icon">
-                <img src="../img/icon/lock.png" id="password-icon" />
-              </span>
-              <div id="password-warning" class="d-none warning">
-                Password: min. 8 chars, 1 capital.
+          <div class="login">
+            <div class="register-content">
+              <div class="signup-header">
+                <a href="/index.html"><img class="go-to-start" src="../img/icon/Vector.png" alt="Zurück" /></a>
+                <h1>Sign up</h1>
+                <div class="login-underline"></div>
               </div>
-            </div>
-            <div class="input-group">
-              <input id="password-confirm" type="password" placeholder="Confirm Password"/>
-              <span class="input-icon">
-                <img src="../img/icon/lock.png" id="password-confirm-icon" />
-              </span>
-              <div id="password-confirm-warning" class="d-none warning" min-length="8">
-                The passwords do not match!
-              </div>
-            </div>
-            <div class="input-privacy-policy">
-              <label class="checkboxItem">
-                <input type="checkbox" id="accept" class="checkbox" />
-                <span>I accept the <a id="privacy" href="/assets/html/privacy-policy_external.html">Privacy policy</a></span>
-              </label>
-            </div>
-            <div class="login-buttons">
-              <button id="signup-btn" class="sign-up-button" onclick="successRegister(event)">Sign up</button>
-            </div>
-          </form>
-        </div>
-        <div class="login-footer">
-          <a href="/assets/html/MPA-architecture/privacy-policy_external.html">Prvacy Police</a>
-          <a href="/assets/html/MPA-architecture/legal-notice_external.html">Legal Notice</a>
-        </div>
-      </div>
-    </main>
 
+              <form id="register-form">
+                <div class="input-group">
+                  <input id="name" type="text" placeholder="Name" minlength="3" />
+                  <span class="input-icon">
+                    <img src="../img/icon/person.png" />
+                  </span>
+                  <div id="name-warning" class="d-none warning">Please enter your first and last name.</div>
+                </div>
+                <div class="input-group">
+                  <input id="email" type="email" placeholder="Email"/>
+                  <span class="input-icon">
+                    <img src="../img/icon/mail.png" />
+                  </span>
+                  <div id="email-warning" class="d-none warning">Please enter a valid email address.</div>
+                </div>
+                <div class="input-group">
+                  <input id="password" type="password" placeholder="Password"/>
+                  <span class="input-icon">
+                    <img src="../img/icon/lock.png" id="password-icon" />
+                  </span>
+                  <div id="password-warning" class="d-none warning">
+                    Password: min. 8 chars, 1 capital.
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input id="password-confirm" type="password" placeholder="Confirm Password"/>
+                  <span class="input-icon">
+                    <img src="../img/icon/lock.png" id="password-confirm-icon" />
+                  </span>
+                  <div id="password-confirm-warning" class="d-none warning" min-length="8">
+                    The passwords do not match!
+                  </div>
+                </div>
+                <div class="input-privacy-policy">
+                  <label class="checkboxItem">
+                    <input type="checkbox" id="accept" class="checkbox" />
+                    <span>I accept the <a id="privacy" href="/assets/html/privacy-policy_external.html">Privacy policy</a></span>
+                  </label>
+                </div>
+                <div class="login-buttons">
+                  <button id="signup-btn" class="sign-up-button" onclick="successRegister(event)">Sign up</button>
+                </div>
+              </form>
+            </div>
+            <div class="login-footer">
+              <a href="/assets/html/MPA-architecture/privacy-policy_external.html">Prvacy Police</a>
+              <a href="/assets/html/MPA-architecture/legal-notice_external.html">Legal Notice</a>
+            </div>
+          </div>
+        </main>
+      </div>  
+    </div>  
     <div id="email-warning" class="input-warning d-none">Bitte eine gültige E-Mail-Adresse eingeben!</div>
     <div id="password-warning" class="input-warning d-none">Bitte ein sicheres Passwort eingeben!</div>
     <div id="password-confirm-warning" class="input-warning d-none">Die Passwörter stimmen nicht überein!</div>
@@ -89,10 +93,7 @@
 
     <script src="/script.js"></script>
     <script src="/assets/script/main.js"></script>
-    <script src="/assets/script/contacts/contact.js"></script>
-    <script src="/assets/script/contacts/contact_validation.js"></script>
-    <script src="/assets/script/contacts/contact_firebase.js"></script>
-    <script src="/assets/script/contacts/contact_ui.js"></script>
+    <script src="/assets/script/contacts/contacts.js"></script>
     <script src="/assets/script/contacts/contact-templates.js"></script>
     <script src="/assets/script/register/register.js"></script>
     <script src="/assets/script/register/register_part2.js"></script>

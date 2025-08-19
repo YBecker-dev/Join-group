@@ -37,7 +37,7 @@
     }
 
     .board-header-content>h1 {
-        font-size: 47px;
+        font-size: 38px;
     }
 
     .input-find-Task {
@@ -66,6 +66,9 @@
         padding: 0;
     }
 
+    .board-form{
+        gap: 10px;
+    }
     .categorys {
         display: none;
     }
@@ -109,10 +112,7 @@
         display: none;
     }
 
-    .addTaskBtn {
-        width: 40px;
-        height: 40px;
-    }
+   
 
     .board {
         overflow: auto;
@@ -164,6 +164,11 @@
 
     .selection {
         top: 114.8px;
+    }
+    
+    .addTaskBtn {
+        width: 100px !important;
+        height: 40px;
     }
 }
 
