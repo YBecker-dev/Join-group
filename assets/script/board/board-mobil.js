@@ -80,7 +80,7 @@ function hideActivStatus(trueTaskId, statusID) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
+async function changeTaskStatusMobilToDo(trueTaskId, taskId ,event) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -89,10 +89,10 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
   section.appendChild(originalTask);
   targetArea.appendChild(section);
   await changeFirebaseStatus(targetArea, taskId);
-
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
+  closeOverlayOnOutside(event);
 }
 
 /**
@@ -100,7 +100,7 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
+async function changeTaskStatusMobilInProgress(trueTaskId, taskId, event) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -112,6 +112,7 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
+  closeOverlayOnOutside(event);
 }
 
 /**
@@ -119,7 +120,7 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
+async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId, event) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -131,6 +132,7 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
+  closeOverlayOnOutside(event);
 }
 
 /**
@@ -138,7 +140,7 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilDone(trueTaskId, taskId) {
+async function changeTaskStatusMobilDone(trueTaskId, taskId, event) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -150,7 +152,7 @@ async function changeTaskStatusMobilDone(trueTaskId, taskId) {
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
-  section.classList.toggle('d-none')
+  closeOverlayOnOutside(event)
 }
 
 /**
