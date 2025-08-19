@@ -184,14 +184,26 @@ function handleAuthResult(findUser, email, password) {
   }
 }
 
+/**
+ * Resets a form to its default values.
+ */
 let resetForm = () => document.getElementById('login-form').reset();
 
+/**
+ * Resets the password input field by changing its type to 'password', 
+ * setting the icon back to a lock, and removing the 'eye-icon' class.
+ */
 let resetPwIcon = () => {
   passwordValue.src = './assets/img/icon/lock.png';
   passwordInput.type = 'password';
   passwordValue.classList.remove('eye-icon');
 };
 
+/**
+ * Stores the announced user's data in local storage as a JSON string.
+ *
+ * @param {object} announcedUser - The user object to be stored.
+ */
 let storeAnnoncedUserName = (announcedUser) => {
   localStorage.setItem('announcedUser', JSON.stringify(announcedUser));
 };

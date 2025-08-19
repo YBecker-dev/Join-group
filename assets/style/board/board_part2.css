@@ -94,6 +94,13 @@
     align-items: flex-start;
 }
 
+.board-tasks-headline{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
 .board-tasks-header {
     width: 100%;
     display: flex;
@@ -226,6 +233,12 @@
     width: 100%;
     z-index: 10;
 }
+.task-overlay{
+    /* position: relative; */
+    /* top: 25px; */
+    /* left: -21px; */
+    /* z-index: 10; */
+}
 
 .option {
     text-align: start;
@@ -235,14 +248,17 @@
 }
 
 .selection {
-    position: absolute;
-    top: 132px;
-    left: 40px;
+    /* position: absolute; */
+    /* top: 132px; */
+    /* left: 40px; */
+    position: relative;
+    left: 220px;
     border-radius: 5px;
     width: 150px;
     background-color: #2A3647;
     color: #FFFFFF;
     display: none;
+    z-index: 11;
 }
 
 .selection:hover {
@@ -331,4 +347,14 @@
 
 .create-task-in-board {
     bottom: -4px !important;
+}
+
+.overlay-mobile{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: #e7e7e7;
 }

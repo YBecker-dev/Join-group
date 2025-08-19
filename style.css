@@ -302,11 +302,6 @@ input#password-confirm:hover {
     }
 }
 
-@media (max-width: 360px){
-    .board-header-content>h1{
-        font-size: 38px;
-    }
-}
 @media (max-height: 840px) {
     .login-footer {
         bottom: 1px;

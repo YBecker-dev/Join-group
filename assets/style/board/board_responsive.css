@@ -20,6 +20,9 @@
 
     .selection {
         display: block;
+        top: 25px;
+        left: 195px;
+        width: 105px;
     }
 
     .overlay-titel>h1 {
@@ -161,10 +164,6 @@
     .p-Tag {
         font-size: 16px;
     }
-
-    .selection {
-        top: 114.8px;
-    }
     
     .addTaskBtn {
         width: 100px !important;
@@ -186,9 +185,7 @@
         max-height: 748px;
     }
 
-    .selection {
-        top: 104px;
-    }
+    
 }
 
 @media (max-height: 815px) {
@@ -255,5 +252,13 @@
 @media (max-width: 400px) {
     .overlay-section {
         padding: 16px;
+    }
+}
+@media (max-width: 370px){
+    .selection{
+        left: 115px;
+    }
+    .input-find-Task>input {
+        font-size: 16px;
     }
 }

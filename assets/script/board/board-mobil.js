@@ -1,9 +1,43 @@
 /**
- * Toggles the visibility of the dropdown menu.
+ * Toggles the visibility of a dropdown menu and manages a global click listener
+ * to close it when the user clicks outside.
+ *
+ * @param {string} trueTaskId - The unique ID of the task associated with this menu.
+ * @param {Event} event - The click event object.
  */
-function showDropDown() {
-  let dropdown_menu = document.getElementById('drop-down');
+function showDropDown(trueTaskId,event) {
+  if (event) event.stopPropagation();
+   document.querySelectorAll('.task-overlay:not(.d-none)').forEach(menu => {
+    if (menu.id !== 'drop-down' + trueTaskId) {
+      menu.classList.add('d-none');
+    }
+  });
+  let dropdown_menu = document.getElementById('drop-down'+trueTaskId);
   dropdown_menu.classList.toggle('d-none');
+  if (!dropdown_menu.classList.contains('d-none')) {
+    setTimeout(() => {
+      document.addEventListener('mousedown', closeOverlayOnOutside);
+    }, 5);
+  }else {
+    document.removeEventListener('mousedown', closeOverlayOnOutside);
+  }
+}
+
+/**
+ * Closes the dropdown menu if a click occurs outside of the menu's selection area and the button.
+ *
+ * @param {Event} event - The Mousedown event object.
+ */
+function closeOverlayOnOutside(event){
+  const dropDownMenu = document.querySelector('.task-overlay:not(.d-none)')
+  const selection = dropDownMenu.querySelector('.selection');
+  const isClicked = selection && selection.contains(event.target);
+  const isClickedOnBtn = event.target.closest('.moveTo');
+  if (!isClicked && !isClickedOnBtn) {
+    dropDownMenu.classList.add('d-none');
+    // Optional: Event-Listener wieder entfernen, wenn nur ein Menü offen sein kann
+    document.removeEventListener('mousedown', closeOverlayOnOutside);
+  }
 }
 
 /**
@@ -116,6 +150,7 @@ async function changeTaskStatusMobilDone(trueTaskId, taskId) {
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
+  section.classList.toggle('d-none')
 }
 
 /**

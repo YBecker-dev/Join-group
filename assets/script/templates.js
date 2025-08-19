@@ -14,15 +14,6 @@ function getTaskOverlay(task, taskId, trueTaskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
-      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
-      <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
-        <section class="selection " onclick="eventBubbling(event)">
-          <div onclick="changeTaskStatusMobilToDo(${trueTaskId}, '${taskId}')" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
-          <div onclick="changeTaskStatusMobilInProgress(${trueTaskId}, '${taskId}')" id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
-          <div onclick="changeTaskStatusMobilAwaitFeedback(${trueTaskId}, '${taskId}')" id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
-          <div onclick="changeTaskStatusMobilDone(${trueTaskId}, '${taskId}')" id="done-mobil-${trueTaskId}" class="option">Done</div>
-        </section>
-      </div>
       <div class="overlay-titel">
         <h1>${task.title || ''}</h1>
       </div>
@@ -147,7 +138,20 @@ function boardHtmlTemplate(
   return `
     <div class="board-task-container rotateTask" id="task-${addTaskId}"  onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
-        <p class="${categoryClass}">${categoryText}</p>  
+        <div class="board-tasks-headline">
+          <p class="${categoryClass}">${categoryText}</p>
+            <div class="board-tasks-switchBtn">
+              <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId},event)">
+            </div>
+            <div class="task-overlay d-none" id="drop-down${trueTaskId}" onclick="showDropDown(${trueTaskId})">  
+              <section class="selection " onclick="eventBubbling(event)">
+                <div onclick="changeTaskStatusMobilToDo(${trueTaskId}, '${taskId}')" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
+                <div onclick="changeTaskStatusMobilInProgress(${trueTaskId}, '${taskId}')" id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
+                <div onclick="changeTaskStatusMobilAwaitFeedback(${trueTaskId}, '${taskId}')" id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
+                <div onclick="changeTaskStatusMobilDone(${trueTaskId}, '${taskId}')" id="done-mobil-${trueTaskId}" class="option">Done</div>
+              </section>
+            </div>  
+        </div>      
         <div class="board-tasks-title-description">
           <p class="board-task-title">${titleText}</p>
           <p class="board-task-description">${descriptionText}</p>

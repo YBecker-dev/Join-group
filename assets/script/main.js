@@ -59,10 +59,12 @@ function displayUserInitials() {
   }
 }
 
+/**load Help.html */
 let loadHelp = () => {
   window.location.href = '/assets/html/help.html';
 };
 
+/**Timeout funktion after 2s  */
 function redirectLogin() {
   let timeout;
   timeout = setTimeout((window.location.href = '/index.html'), 2000);
@@ -88,6 +90,9 @@ function handleLogOut(event) {
   window.location.href = '/index.html';
 }
 
+/**
+ * Resets the announced user by removing their data from local storage.
+ */
 let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
@@ -137,7 +142,6 @@ function validateEmailInput(input) {
  * @param {HTMLElement} input
  */
 function validateNameInput(input) {
-  //zu lang
   if (input.value.endsWith(' ')) {
     clearInputError(input);
     return;
@@ -158,6 +162,11 @@ function validateNameInput(input) {
   clearInputError(input);
 }
 
+/**
+ * Stops the propagation (bubbling) of a given event to parent elements.
+ *
+ * @param {Event} event - The event object.
+ */
 function eventBubbling(event) {
   event.stopPropagation();
 }

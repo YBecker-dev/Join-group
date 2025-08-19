@@ -1,3 +1,9 @@
+/**
+ * Initializes the summary page by performing a series of asynchronous and synchronous operations.
+ * * It first adjusts the main content display based on the screen width, sets a greeting message,
+ * checks for tasks, initializes framework functions, and then determines the next upcoming deadline.
+ * The function uses 'async/await' to handle asynchronous operations sequentially.
+ */
 async function initSummary() {
   showMainContentIfWideScreen();
   setGreetingText();
