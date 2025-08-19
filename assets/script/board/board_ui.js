@@ -197,7 +197,7 @@ function buildContactsHtml(task, type) {
   const maxVisibleContacts = 3;
   const totalContacts = task.assignedTo.length;
   const displayCount = Math.min(totalContacts, maxVisibleContacts);
-  
+
   for (let i = 0; i < displayCount; i++) {
     let userId = task.assignedTo[i];
     let contact = findContactById(userId);
@@ -205,12 +205,12 @@ function buildContactsHtml(task, type) {
       html += getContactHtmlByType(contact, type);
     }
   }
-  
-  if (totalContacts > maxVisibleContacts && type === 'overlay') {
+
+  if (totalContacts > maxVisibleContacts) {
     const remainingCount = totalContacts - maxVisibleContacts;
-    html += getAdditionalContactsHtml(remainingCount);
+    html += getAdditionalContactsHtml(remainingCount, type);
   }
-  
+
   return html;
 }
 
@@ -234,17 +234,22 @@ function getContactHtmlByType(contact, type) {
  * @param {number} remainingCount - Number of additional contacts.
  * @returns {string} - The HTML string for the counter circle.
  */
-function getAdditionalContactsHtml(remainingCount) {
-  return `
-    <div class="peoples-info">
-      <div class="initials remaining-contacts">
-        <span class="overlay-span">+${remainingCount}</span>
+function getAdditionalContactsHtml(remainingCount, type) {
+  if (type === 'board') {
+    return `<span class="board-contact-name remaining-contacts overlay-span">+${remainingCount}</span>`;
+  } else if (type === 'overlay') {
+    return `
+      <div class="peoples-info">
+        <div class="initials remaining-contacts">
+          <span class="overlay-span">+${remainingCount}</span>
+        </div>
+        <div class="people-name">
+          <p class="p-Tag">${remainingCount} weitere Kontakte</p>
+        </div>
       </div>
-      <div class="people-name">
-        <p class="p-Tag">${remainingCount} weitere Kontakte</p>
-      </div>
-    </div>
-  `;
+    `;
+  }
+  return '';
 }
 
 /**
