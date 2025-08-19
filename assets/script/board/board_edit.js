@@ -94,8 +94,8 @@ function setupEditTaskSubtasks(task) {
   if (task.subtasks && Array.isArray(task.subtasks)) {
     task.subtasks.forEach((subtask) => {
       const text = subtask.text !== undefined ? subtask.text : subtask;
-      const checked = subtask.status === 'checked';
-      subtasksContainer.innerHTML += pushSubtaskInputHTML(text, checked);
+      const status = subtask.status || 'unchecked';
+      subtasksContainer.innerHTML += pushSubtaskInputHTML(text, status);
     });
   }
 }
@@ -185,21 +185,39 @@ function getSelectedContacts() {
 }
 
 /**
- * Gets the edited subtasks from the form.
- * @returns {Array<object>} - An array of subtask objects.
+ * Returns all edited subtasks from the form, including the currently edited subtask if present.
  */
 function getEditedSubtasks() {
   let subtasks = [];
   let subtaskItemRefs = document.querySelectorAll('#subtasks-container .subtask-item');
   subtaskItemRefs.forEach((subtaskItemRef) => {
     let subtaskLiRef = subtaskItemRef.querySelector('li');
-    let checkbox = subtaskItemRef.querySelector('input[type="checkbox"]');
+    let originalStatus = subtaskItemRef.getAttribute('data-original-status') || 'unchecked';
     subtasks.push({
       text: subtaskLiRef ? subtaskLiRef.textContent.trim() : '',
-      status: checkbox && checkbox.checked ? 'checked' : 'unchecked',
+      status: originalStatus,
     });
   });
+
+  checkedSubtaskIfItEditing(subtasks);
   return subtasks;
+}
+
+/**
+ * Adds the currently edited subtask to the subtasks array if present.
+ */
+function checkedSubtaskIfItEditing(subtasks) {
+  let editingRef = document.querySelector('#subtasks-container .subtask-item-edit');
+  if (editingRef) {
+    let input = editingRef.querySelector('input[type="text"]');
+    let originalStatus = editingRef.getAttribute('data-original-status') || 'unchecked';
+    if (input && input.value.trim()) {
+      subtasks.push({
+        text: input.value.trim(),
+        status: originalStatus,
+      });
+    }
+  }
 }
 
 /**

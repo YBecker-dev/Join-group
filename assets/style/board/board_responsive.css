@@ -115,7 +115,6 @@
         display: none;
     }
 
-   
 
     .board {
         overflow: auto;
@@ -251,7 +250,7 @@
 
 @media (max-width: 400px) {
     .overlay-section {
-        padding: 16px;
+        padding: 16px !important;
     }
 }
 @media (max-width: 370px){

@@ -221,7 +221,13 @@ function pushSubtaskInput(event) {
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
     if (input.value.trim()) {
-      container.innerHTML += pushSubtaskInputHTML(input.value.trim());
+      // Check if we are in edit mode by looking for edit-specific classes
+      let isEditMode = container.classList.contains('subtasks-container-edit');
+      if (isEditMode) {
+        container.innerHTML += pushSubtaskInputHTML(input.value.trim(), false);
+      } else {
+        container.innerHTML += pushSubtaskInputHTML(input.value.trim());
+      }
       input.value = '';
       showPlusIcon();
 
@@ -242,9 +248,12 @@ function editSubtask(element) {
   let span = listItem ? listItem.querySelector('span') : null;
   if (!span) return;
   let oldText = span.textContent.trim();
+  let originalStatus = listItem.getAttribute('data-original-status') || 'unchecked';
   let newDiv = document.createElement('div');
   if (newDiv) {
     newDiv.className = 'subtask-item-edit';
+
+    newDiv.setAttribute('data-original-status', originalStatus);
     newDiv.innerHTML = editSubtaskInputHTML(oldText);
   }
   if (listItem.parentNode) {
@@ -264,7 +273,7 @@ function saveSubtaskEdit(event, inputElement) {
   let newText = inputElement.value.trim();
 
   if (!newText) return;
-  
+
   let subtaskItem = inputElement.closest('.subtask-item-edit');
   if (!subtaskItem) return;
   let subtaskDiv = buildSubtaskDiv(newText);

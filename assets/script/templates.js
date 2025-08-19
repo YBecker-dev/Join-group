@@ -178,9 +178,9 @@ function progressbarHtml(percent, doneCount, totalCount) {
   `;
 }
 
-function pushSubtaskInputHTML(text) {
+function pushSubtaskInputHTML(text, status) {
   return `
-    <div class="subtask-item">
+    <div class="subtask-item" data-original-status="${status}">
       <span><li>${text}</li></span>
       <div class="subtask-actions">
         <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />

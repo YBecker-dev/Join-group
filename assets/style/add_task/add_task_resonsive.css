@@ -24,6 +24,10 @@
         display: none;
     }
 
+    #category-dropdown p {
+        font-size: 16px;
+    }
+
     .task-attribute {
         position: unset;
     }
@@ -79,6 +83,11 @@
         width: 100% !important;
     }
 
+    #assigned-to-dropdown-selected,
+    #category-dropdown-selected {
+        max-width: 600px;
+    }
+
     .add-task input[type="text"],
     .task-attribute,
     .addtask,
@@ -116,8 +125,10 @@
     }
 
     .add-task span,
-    .priority span {
-        font-size: 16px;
+    .priority span,
+    .add-task input[type="text"]
+    {
+        font-size: 16px !important;
     }
 
     .required-responsive {

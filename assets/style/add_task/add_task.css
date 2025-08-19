@@ -145,7 +145,8 @@ label {
     font-size: 1.25rem;
 }
 
-.add-task-button {
+.add-task-button,
+.add-task-button-edit {
     display: flex;
     justify-content: space-between;
     width: 136px;
@@ -297,9 +298,7 @@ input[type="text"] {
 #category-dropdown-options.expanded {
     max-height: 305px;
     scrollbar-width: thin;
-    /* For Firefox */
     scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0;
-    /* For Firefox */
 }
 
 .scrollbar {
@@ -442,19 +441,6 @@ input[type="text"] {
     border-radius: 15px;
 }
 
-.add-task input[type="text"],
-#edit-date {
-    width: 100%;
-    max-width: 440px;
-    font-size: 1.25rem;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    height: 48px;
-    border: solid 1px #d1d1d1;
-    z-index: 10;
-}
-
 .add-task input[name="add-task-input3"] {
     border: none;
     height: unset;
@@ -536,16 +522,6 @@ input[type="text"] {
 
 .required-star {
     color: #e74c3c;
-}
-
-.subtask-item {
-    cursor: pointer;
-    padding: 8px 12px 8px 24px;
-    border-radius: 8px;
-    transition: background 0.2s, transform 0.2s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .subtask-wrapper {
@@ -683,10 +659,6 @@ input[type="text"] {
     background-color: #D2E3FF !important;
 }
 
-#category-dropdown p {
-    font-size: 20px;
-}
-
 .checked-assigned-to,
 .checkbox-dropdown.checked-assigned-to {
     background-color: #293647 !important;
@@ -768,4 +740,446 @@ input[type="text"] {
 .filllicker-category {
     background: white;
     padding: 0;
+}
+
+/* ===== RESPONSIVE DESIGN FÜR EDIT TASK MODAL ===== */
+
+/* Desktop und große Tablets (über 768px) - Standard Styles */
+.overlay-section {
+    padding: 48px 40px;
+    max-width: 525px;
+    width: 100%;
+}
+
+.input-group.edittask.add-task {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.input-group.edittask.add-task span {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.input-group.edittask.add-task input[type="text"],
+.input-group.edittask.add-task textarea {
+    width: 100%;
+    max-width: 440px;
+    font-size: 20px;
+    padding: 12px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+}
+
+/* Date Input spezielle Regeln für volle Breite */
+.date-input-edit input[type="text"] {
+    width: 100%;
+    max-width: 440px;
+    font-size: 20px;
+    padding: 12px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 48px;
+    min-height: 48px;
+}
+
+.input-textarea-edit {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+}
+
+.input-textarea-edit textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+}
+
+.priority-buttons-edit {
+    display: flex;
+    gap: 16px;
+}
+
+
+.subtask-edit-container {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+}
+
+.add-task-input-edit {
+    width: 100%;
+    font-size: 20px;
+    padding: 12px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    height: 48px;
+    min-height: 48px;
+}
+
+/* Medium Tablets (zwischen 769px und 965px) */
+
+@media(max-width: 965px) {
+    #edit-date {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 965px) and (min-width: 769px) {
+    .overlay-section {
+        padding: 32px 24px;
+        max-width: 100%;
+    }
+
+    .input-group.edittask.add-task input[type="text"],
+    .input-group.edittask.add-task textarea,
+    .input-textarea-edit,
+    .subtask-edit-container,
+    .add-task-input-edit,
+    .date-input-edit input[type="text"],
+    .add-task input[name="add-task-input3"],
+    .add-task input[type="text"],
+    #edit-date,
+    .priority-edit,
+    #category-dropdown-selected {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    #assigned-to-dropdown-selected {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* Tablets und kleine Desktops (zwischen 559px und 768px) */
+@media (max-width: 768px) and (min-width: 559px) {
+    .overlay-section {
+        padding: 24px 20px 0 20px;
+        max-width: 100%;
+        
+    }
+
+    .input-group.edittask.add-task {
+        margin-bottom: 20px;
+    }
+
+    .input-group.edittask.add-task span {
+        font-size: 18px;
+    }
+
+    .input-group.edittask.add-task input[type="text"],
+    .input-group.edittask.add-task textarea,
+    .add-task-input-edit {
+        font-size: 18px;
+        padding: 10px 14px;
+        max-width: 100%;
+    }
+
+    .date-input-edit input[type="text"] {
+        font-size: 18px;
+        padding: 10px 14px;
+        max-width: 100%;
+    }
+
+    .input-textarea-edit {
+        max-width: 100%;
+    }
+
+    .input-textarea-edit textarea {
+        height: 120px;
+        min-height: 120px;
+    }
+
+
+    .subtask-edit-container {
+        max-width: 100%;
+    }
+
+    #assigned-to-dropdown-selected {
+        max-width: 100%;
+    }
+
+    #assigned-to-dropdown-selected input {
+        font-size: 18px;
+    }
+}
+
+/* Mobile Devices (558px und kleiner) */
+@media (max-width: 558px) {
+    .overlay-section {
+        padding: 16px 12px 0 12px;
+        max-width: 100%;
+    }
+
+    .input-group.edittask.add-task {
+        margin-bottom: 16px;
+        gap: 6px;
+    }
+
+    .input-group.edittask.add-task span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .input-group.edittask.add-task input[type="text"],
+    .input-group.edittask.add-task textarea,
+    .add-task-input-edit {
+        font-size: 16px;
+        padding: 8px 12px;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .date-input-edit input[type="text"] {
+        font-size: 16px;
+        padding: 8px 12px;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .input-textarea-edit {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .input-textarea-edit textarea {
+        height: 120px;
+        min-height: 120px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .priority-edit {
+        max-width: 100%;
+    }
+
+    .subtask-edit-container {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #assigned-to-dropdown {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #assigned-to-dropdown-selected {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #assigned-to-dropdown-selected input {
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .custom-dropdown-options-edit {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .subtasks-container-edit {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Buttons responsive */
+    .create-clear-buttons-edit {
+        padding: 12px 0;
+        margin: 16px 0 0 0;
+    }
+
+    .ok-button {
+        font-size: 16px;
+    }
+
+    /* Input warnings */
+    .input-warning {
+        font-size: 11px;
+    }
+}
+
+/* Sehr kleine Mobile Devices (400px und kleiner) */
+@media (max-width: 400px) {
+    .overlay-section {
+        padding: 12px 8px;
+    }
+
+    .input-group.edittask.add-task span {
+        font-size: 14px;
+    }
+
+    .input-group.edittask.add-task input[type="text"],
+    .input-group.edittask.add-task textarea,
+    .add-task-input-edit {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .date-input-edit input[type="text"] {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .input-textarea-edit textarea {
+        height: 120px;
+        min-height: 120px;
+    }
+
+    .ok-button {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}
+
+/* Spezielle Regeln für Edit-Modal Container */
+@media (max-width: 965px) {
+    .overlay-content-render {
+        margin: 0 20px;
+        max-width: calc(100vw - 40px);
+    }
+}
+
+@media (max-width: 558px) {
+    .overlay-content-render {
+        width: 95%;
+        max-width: calc(100vw - 20px);
+        margin: 0 10px;
+        border-radius: 20px;
+    }
+}
+
+/* Scroll-Verhalten für kleine Bildschirme */
+@media (max-height: 700px) {
+    .overlay-section {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-height: 600px) {
+    .overlay-section {
+        max-height: 80vh;
+        padding: 16px 20px;
+    }
+
+    .input-group.edittask.add-task {
+        margin-bottom: 12px;
+    }
+
+    .input-textarea-edit textarea {
+        height: 120px;
+        min-height: 120px;
+    }
+}
+
+/* Landscape Orientation für Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .overlay-section {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 16px 20px 0 20px;
+    }
+
+    .input-textarea-edit textarea {
+        height: 120px;
+        min-height: 120px;
+    }
+
+    .priority-buttons-edit {
+        flex-direction: row;
+        gap: 8px;
+    }
+}
+
+.input-textarea-edit .input-icon-edit {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    z-index: 10;
+}
+
+
+@media (max-width: 558px) {
+    .assigned-arrow {
+        padding: 8px 12px 8px 0;
+    }
+
+    #edit-date {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .assigned-arrow {
+        padding: 6px 8px 6px 0;
+    }
+}
+
+/* Dropdown-Optimierungen für Edit-Modus */
+.overlay-section #assigned-to-dropdown-options.show {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Bessere Touch-Targets für Mobile (ohne Icon-Vergrößerung) */
+@media (max-width: 558px) {
+    .close-icon {
+        padding: 8px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+}
+
+/* Form-Element Verbesserungen */
+.overlay-section form {
+    width: 100%;
+    max-width: none;
+}
+
+.overlay-section .add-task {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Subtasks Container Responsive */
+@media (max-width: 768px) {
+    .subtasks-container-edit {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 558px) {
+    .subtasks-container-edit {
+        max-height: 150px;
+    }
+}
+
+/* Bessere Scrollbar-Gestaltung */
+.overlay-section::-webkit-scrollbar,
+.subtasks-container-edit::-webkit-scrollbar {
+    width: 6px;
+}
+
+.overlay-section::-webkit-scrollbar-thumb,
+.subtasks-container-edit::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.overlay-section::-webkit-scrollbar-track,
+.subtasks-container-edit::-webkit-scrollbar-track {
+    background: transparent;
 }

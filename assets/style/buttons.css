@@ -144,6 +144,11 @@ button:hover {
 
 .create-clear-buttons-edit {
     background-color: white !important;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    margin-top: auto;
+    padding: 16px 0;
 }
 
 .cancel-button:hover .cancel-icon {
@@ -223,7 +228,7 @@ button:hover {
     transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
 }
 
-.create-contact-btn{
+.create-contact-btn {
     width: 214px;
 }
 

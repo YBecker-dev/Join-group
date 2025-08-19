@@ -153,10 +153,12 @@
     min-height: 144px;
     max-height: 144px;
     overflow-y: auto;
+    overflow: visible;
 }
 
 .subtasks-container-edit {
-    min-height: unset !important;
+    min-height: unset;
+    margin-bottom: 16px;
 }
 
 
