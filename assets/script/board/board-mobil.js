@@ -89,10 +89,11 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId ,event) {
   section.appendChild(originalTask);
   targetArea.appendChild(section);
   await changeFirebaseStatus(targetArea, taskId);
+  closeOverlayOnOutside(event);
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
-  closeOverlayOnOutside(event);
+  
 }
 
 /**

@@ -224,7 +224,6 @@
     max-width: 440px;
 }
 
-/*Todo*/
 .task-overlay {
     position: absolute;
     top: 0;
@@ -232,12 +231,6 @@
     height: 100%;
     width: 100%;
     z-index: 10;
-}
-.task-overlay{
-    /* position: relative; */
-    /* top: 25px; */
-    /* left: -21px; */
-    /* z-index: 10; */
 }
 
 .option {
@@ -248,9 +241,6 @@
 }
 
 .selection {
-    /* position: absolute; */
-    /* top: 132px; */
-    /* left: 40px; */
     position: relative;
     left: 220px;
     border-radius: 5px;
@@ -318,7 +308,6 @@
     opacity: 0;
     transform: translateY(10px);
     pointer-events: none;
-    /* verhindert Klicks, wenn unsichtbar */
     transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -358,3 +347,4 @@
     z-index: 9;
     background-color: #e7e7e7;
 }
+
