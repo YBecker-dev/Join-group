@@ -34,11 +34,14 @@ a {
     text-decoration: none;
     color: #BEBEBE;
     opacity: 1;
+    transform: translateZ(0);
+    will-change: color;
 }
 
 a:hover {
     color: #2AABE2;
-    font-weight: bold;
+    /* font-weight: bold; */
+    transform: translateZ(0);
 }
 
 .d-none,
