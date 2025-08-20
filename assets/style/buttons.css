@@ -141,7 +141,7 @@ button:hover {
     gap: 16px;
     background-color: #F6F7F8;
     margin: 24px 0;
-    
+
 }
 
 .create-clear-buttons-edit,
@@ -152,6 +152,10 @@ button:hover {
     bottom: 0;
     z-index: 10000;
     margin: 0;
+}
+
+.create-clear-buttons-edit {
+    padding: 16px 0 0 0;
 }
 
 .cancel-create-buttons {

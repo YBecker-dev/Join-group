@@ -130,7 +130,8 @@
 
     .add-task span,
     .priority span,
-    .add-task input[type="text"]
+    .add-task input[type="text"],
+    #edit-description
     {
         font-size: 16px !important;
     }

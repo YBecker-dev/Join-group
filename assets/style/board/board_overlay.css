@@ -266,9 +266,9 @@
     display: flex;
     flex-direction: column;
     width: calc(100% + 27px);
-    gap: 32px;
+    gap: 24px;
     max-height: 725px;
-    overflow-y: scroll;
+    overflow-y: overlay;
     margin-top: 16px;
     height: calc(100vh - 180px);
 }
@@ -416,6 +416,7 @@
     opacity: 0;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, opacity;
+    position: relative;
 }
 
 .overlay-content-render.show {
