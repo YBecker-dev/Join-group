@@ -288,7 +288,7 @@ function showRemainingContactsHtml(remainingCount) {
 
 function editTaskHtml(task, taskId) {
   return `
-    <div class="overlay-section">
+    <div class="overlay-section" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');">
     <div class="overlay-header-edit">
      <img class="close-icon" src="/assets/img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
      </div>

@@ -742,20 +742,10 @@ input[type="text"] {
     padding: 0;
 }
 
-/* ===== RESPONSIVE DESIGN FÜR EDIT TASK MODAL ===== */
-
-/* Desktop und große Tablets (über 768px) - Standard Styles */
-.overlay-section {
-    padding: 48px 40px;
-    max-width: 525px;
-    width: 100%;
-}
-
 .input-group.edittask.add-task {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 24px;
 }
 
 .input-group.edittask.add-task span {
@@ -803,7 +793,6 @@ input[type="text"] {
     gap: 16px;
 }
 
-
 .subtask-edit-container {
     position: relative;
     width: 100%;
@@ -834,6 +823,10 @@ input[type="text"] {
         max-width: 100%;
     }
 
+    .overlay-content-render form {
+        gap: 24px;
+    }
+
     .input-group.edittask.add-task input[type="text"],
     .input-group.edittask.add-task textarea,
     .input-textarea-edit,
@@ -858,13 +851,12 @@ input[type="text"] {
 /* Tablets und kleine Desktops (zwischen 559px und 768px) */
 @media (max-width: 768px) and (min-width: 559px) {
     .overlay-section {
-        padding: 24px 20px 0 20px;
+        padding: 24px 20px;
         max-width: 100%;
-        
     }
 
-    .input-group.edittask.add-task {
-        margin-bottom: 20px;
+    .overlay-content-render form {
+        gap: 24px;
     }
 
     .input-group.edittask.add-task span {
@@ -911,7 +903,7 @@ input[type="text"] {
 /* Mobile Devices (558px und kleiner) */
 @media (max-width: 558px) {
     .overlay-section {
-        padding: 16px 12px 0 12px;
+        padding: 16px 12px;
         max-width: 100%;
     }
 
@@ -995,7 +987,6 @@ input[type="text"] {
     /* Buttons responsive */
     .create-clear-buttons-edit {
         padding: 12px 0;
-        margin: 16px 0 0 0;
     }
 
     .ok-button {
@@ -1034,11 +1025,6 @@ input[type="text"] {
         height: 120px;
         min-height: 120px;
     }
-
-    .ok-button {
-        font-size: 14px;
-        padding: 10px 12px;
-    }
 }
 
 /* Spezielle Regeln für Edit-Modal Container */
@@ -1062,7 +1048,6 @@ input[type="text"] {
 @media (max-height: 700px) {
     .overlay-section {
         max-height: 85vh;
-        overflow-y: auto;
     }
 }
 
@@ -1086,8 +1071,7 @@ input[type="text"] {
 @media (max-width: 768px) and (orientation: landscape) {
     .overlay-section {
         max-height: 90vh;
-        overflow-y: auto;
-        padding: 16px 20px 0 20px;
+        padding: 16px 20px;
     }
 
     .input-textarea-edit textarea {
@@ -1164,6 +1148,17 @@ input[type="text"] {
 @media (max-width: 558px) {
     .subtasks-container-edit {
         max-height: 150px;
+    }
+}
+
+@media (max-height: 680px) {
+
+    .subtask-edit-container,
+    .input-group.edittask.add-task input[type="text"],
+    #edit-date,
+    .input-group.edittask.add-task textarea,
+    .input-textarea-edit {
+        max-width: 100% !important;
     }
 }
 

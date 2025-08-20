@@ -134,21 +134,28 @@ button:hover {
 }
 
 .create-clear-buttons,
-.create-clear-buttons-edit {
+.create-clear-buttons-edit,
+.cancel-create-buttons {
     display: flex;
     justify-content: end;
     gap: 16px;
     background-color: #F6F7F8;
     margin: 24px 0;
+    
 }
 
-.create-clear-buttons-edit {
+.create-clear-buttons-edit,
+.cancel-create-buttons {
     background-color: white !important;
+    padding: 24px 0 0 0;
     position: sticky;
     bottom: 0;
-    z-index: 1000;
-    margin-top: auto;
-    padding: 16px 0;
+    z-index: 10000;
+    margin: 0;
+}
+
+.cancel-create-buttons {
+    padding: 40px 0 34px 0;
 }
 
 .cancel-button:hover .cancel-icon {

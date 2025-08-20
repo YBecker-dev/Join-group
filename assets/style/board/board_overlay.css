@@ -296,6 +296,7 @@
     right: 16px;
     bottom: 22px;
     z-index: 10;
+    cursor: pointer;
 }
 
 #edit-urgent,
@@ -329,6 +330,7 @@
     width: 100%;
     position: relative;
     overflow-y: auto;
+    overflow: hidden;
 }
 
 .subtask-edit {
@@ -444,27 +446,27 @@
     .overlay-content-render {
         margin: 0 20px;
     }
-    
+
     .overlay-position,
     .overlay-section {
         padding: 32px 24px;
         max-height: 80vh;
     }
-    
+
     .create-clear-buttons-edit {
         margin: unset !important;
         padding: 20px;
     }
-    
+
     .overlay-titel>h1 {
         font-size: 36px;
     }
-    
+
     .assigned-to {
         width: 100%;
         max-width: none;
     }
-    
+
     .task-type>p {
         font-size: 18px;
         padding: 4px 16px;
@@ -478,37 +480,42 @@
         margin: 0 10px;
         border-radius: 20px;
     }
-    
+
     .overlay-position,
     .overlay-section {
         padding: 20px 16px;
-        max-height: 85vh;
         gap: 16px;
     }
-    
+
     .overlay-titel>h1 {
         font-size: 36px;
     }
-    
+
     .overlay-description-flex {
         gap: 10px;
     }
-    
+
     .p-Tag {
         font-size: 16px;
     }
-    
+
     .task-type>p {
         font-size: 16px;
         padding: 4px 12px;
     }
-    
+
     .peoples-info {
         margin-left: 0;
         padding: 7px 8px;
     }
-    
+
     .overlay-edit-wrapper {
         height: auto;
+    }
+}
+
+@media (max-height: 1000px) {
+    .overlay-section {
+        max-height: 95vh;
     }
 }

@@ -62,6 +62,10 @@
         padding-top: 16px;
     }
 
+    .priority-edit {
+        padding-top: unset;
+    }
+
     .required {
         position: unset;
     }

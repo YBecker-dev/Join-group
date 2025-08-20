@@ -69,9 +69,10 @@
         padding: 0;
     }
 
-    .board-form{
+    .board-form {
         gap: 10px;
     }
+
     .categorys {
         display: none;
     }
@@ -163,7 +164,7 @@
     .p-Tag {
         font-size: 16px;
     }
-    
+
     .addTaskBtn {
         width: 100px !important;
         height: 40px;
@@ -184,7 +185,7 @@
         max-height: 748px;
     }
 
-    
+
 }
 
 @media (max-height: 815px) {
@@ -253,10 +254,12 @@
         padding: 16px !important;
     }
 }
-@media (max-width: 370px){
-    .selection{
+
+@media (max-width: 370px) {
+    .selection {
         left: 115px;
     }
+
     .input-find-Task>input {
         font-size: 16px;
     }

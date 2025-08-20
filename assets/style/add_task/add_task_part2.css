@@ -150,10 +150,14 @@
     flex-direction: column;
     gap: 8px;
     margin-top: -16px;
-    min-height: 144px;
     max-height: 144px;
     overflow-y: auto;
     overflow: visible;
+}
+
+.subtasks-container-board {
+    min-height: 144px;
+    overflow: auto;
 }
 
 .subtasks-container-edit {
