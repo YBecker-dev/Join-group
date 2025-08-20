@@ -66,6 +66,11 @@
     font-weight: 400;
 }
 
+.close-icon{
+    height: 24px;
+    width: 24px;
+}
+
 .close-icon>img {
     height: 24px;
     width: 24px;
