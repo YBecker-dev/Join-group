@@ -317,4 +317,7 @@ input#password-confirm:hover {
         top: 6px;
         left: 32px;
     }
+    .go-to-start{
+        top: -10px;
+    }
 }

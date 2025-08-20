@@ -11,10 +11,18 @@ body{
     max-width: 598px;
     height: 630px;
 }
+.register-content>a{
+    width: 100%;
+    height: 32px;
+}
 main{
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
+
 .login{
     width: 598px;
 }
@@ -37,6 +45,9 @@ main{
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+.signup-header>h1{
+    padding-top: 38px;
 }
 
 .input-privacy-policy {
@@ -132,6 +143,9 @@ main{
     .register-content {
         height: 595px;
     }
+    .login{
+        width: 400px;
+    }
 }
 
 @media (max-height: 840px) {
@@ -140,7 +154,8 @@ main{
     }
 
     .go-to-start{
-        top: 16px;
+        top: 56px;
+        left: 10px;
     }
 
     .register-content {
@@ -149,5 +164,15 @@ main{
 
     .input-privacy-policy {
         padding: unset;
+    }
+}
+@media (max-width: 400px){
+    .login{
+        width: 340px;
+    }
+}
+@media (max-width: 340px){
+    .login{
+        width: 300px;
     }
 }
