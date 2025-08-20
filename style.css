@@ -254,7 +254,7 @@ input#password-confirm:hover {
     .login-buttons {
         flex-direction: column;
         gap: 21px;
-        padding: 0 0 32px 0;
+        padding: 0 0 52px 0;
     }
 
     .login-btn,
@@ -317,7 +317,5 @@ input#password-confirm:hover {
         top: 6px;
         left: 32px;
     }
-    .go-to-start{
-        top: -10px;
-    }
+   
 }

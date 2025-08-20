@@ -168,6 +168,7 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
   });
 
   await pushTasksInBoard();
+  emptyDragArea();
 }
 
 /**

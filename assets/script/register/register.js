@@ -37,7 +37,7 @@ function setupEventListeners() {
   pw1Icon.addEventListener('click', togglePassword1Visibility);
   pw2Icon.addEventListener('click', togglePassword2Visibility);
   nameInput.addEventListener('input', handleNameInput);
-  emailInput.addEventListener('input', handleEmailInput);
+  //emailInput.addEventListener('input', handleEmailInput);
   checkbox.addEventListener('change', handleCheckboxChange);
 }
 
@@ -121,17 +121,27 @@ function handleNameInput() {
 }
 
 /**
+ * Cleans the email input field by removing invalid characters and resets its validation state.
+ * @param {HTMLInputElement} input - The email input element.
+ */
+function validateEmailInput(input) {
+  hideInputError(input);
+  input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
+  clearInputError(input);
+}
+
+/**
  * Handles input in the email field, running a validation function and clearing errors.
  * @param {Event} this - The input event object.
  */
-function handleEmailInput() {
-  if (validateEmailInput) {
-    validateEmailInput(this);
-  }
-  this.classList.remove('input-error');
-  document.getElementById('email-warning').classList.add('d-none');
-  this.setCustomValidity('');
-}
+//function handleEmailInput() {
+//  if (validateEmailInput) {
+//    validateEmailInput(this);
+//  }
+//  this.classList.remove('input-error');
+//  document.getElementById('email-warning').classList.add('d-none');
+//  this.setCustomValidity('');
+//}
 
 /**
  * Handles changes to the checkbox, removing the error class if it is checked.

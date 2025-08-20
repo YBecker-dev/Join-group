@@ -144,6 +144,7 @@ async function saveEditedTask(event, taskId) {
   await updateTaskInDatabase(taskId, updatedTask);
   await pushTasksInBoard();
   await updateTaskOverlay(taskId, oldTask.addTaskId);
+  emptyDragArea();
   return false;
 }
 
