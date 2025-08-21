@@ -162,7 +162,8 @@
 
 .subtasks-container-edit {
     margin-bottom: 16px;
-    min-height: 144px;
+    min-height: 150px;
+    padding-bottom: 20px;
 }
 
 .subtask-item span {
