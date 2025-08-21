@@ -35,27 +35,48 @@ async function checkTasks() {
     let response = await fetch(BASE_URL_TASKS_AND_USERS + '.json');
     if (response.ok) {
       const responseObject = await response.json();
-      if (responseObject) {
-        let dataBaseKey = Object.keys(responseObject);
-        for (i = 0; i < dataBaseKey.length; i++) {
-          taskID = dataBaseKey[0];
-          taskKey = Object.keys(responseObject[taskID]);
-          taskObjekt = Object.values(responseObject[taskID]);
-        }
-        for (z = 0; z < taskObjekt.length; z++) {
-          statusArray.push(taskObjekt[z].status);
-          priorityArray.push(taskObjekt[z].priority);
-        }
-        statusCount();
-        processPriority();
-        clearArrays();
-      }
+      processResponseObject(responseObject);
     }
   } catch (error) {
     console.error(error);
   }
 }
 
+/**
+ * Processes a response object, extracting and storing task status and priority information
+ * into global arrays. After data extraction, it calls a subsequent function.
+ *
+ * @param {object} responseObject - The data object to be processed. It is expected to contain
+ * nested task objects.
+ * @returns {void}
+ */
+function processResponseObject(responseObject){
+  if (responseObject) {
+    let dataBaseKey = Object.keys(responseObject);
+    for (i = 0; i < dataBaseKey.length; i++) {
+      taskID = dataBaseKey[0];
+      taskKey = Object.keys(responseObject[taskID]);
+      taskObjekt = Object.values(responseObject[taskID]);
+    }
+    for (z = 0; z < taskObjekt.length; z++) {
+      statusArray.push(taskObjekt[z].status);
+      priorityArray.push(taskObjekt[z].priority);
+    }
+    callSupFunctions();
+  }
+}
+
+/**
+ * Executes a series of supplementary functions in a specific order.
+ * This function serves as a coordinator for related data processing tasks.
+ *
+ * @returns {void}
+ */
+function callSupFunctions(){
+  statusCount();
+  processPriority();
+  clearArrays();
+}
 /**
  * Processes the 'priorityArray' to count all tasks marked as 'Urgent' and
  * passes this count to the 'includePriorityToSummery' function.
