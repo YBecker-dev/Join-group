@@ -4,9 +4,25 @@
  */
 function checkAndFillEmptyArea(area) {
   let areaElement = document.getElementById(area.id);
-  if (areaElement.childElementCount === 0) {
-    areaElement.innerHTML = getEmptyDragArea(area.text);
+  let tasks = areaElement.querySelectorAll('.board-task-container');
+  let emptyBox = areaElement.querySelector('.empty-task-box');
+   if (tasks.length === 0 && !emptyBox) {
+    areaElement.appendChild(createEmptyTaskBox(area.text));
+  } else if (tasks.length > 0 && emptyBox) {
+    emptyBox.remove();
   }
+}
+
+/**
+ * Creates a new HTML div element representing an empty task box.
+ * * @param {string} text - The text content to be displayed inside the empty task box.
+ * @returns {HTMLDivElement} The newly created div element with the class 'empty-task-box' and the specified text.
+ */
+function createEmptyTaskBox(text) {
+  let div = document.createElement('div');
+  div.className = 'empty-task-box';
+  div.innerText = text;
+  return div;
 }
 
 /**

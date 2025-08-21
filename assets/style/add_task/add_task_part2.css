@@ -153,12 +153,6 @@
     overflow-y: auto;
 }
 
-.subtasks-container::-webkit-scrollbar,
-.subtasks-container-edit::-webkit-scrollbar,
-.subtasks-container-board::-webkit-scrollbar{
-        display: none;
-    }
-
 .subtasks-container-board,
 .subtasks-container {
     min-height: 144px;

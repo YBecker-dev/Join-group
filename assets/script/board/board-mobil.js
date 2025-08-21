@@ -30,12 +30,15 @@ function showDropDown(trueTaskId,event) {
  */
 function closeOverlayOnOutside(event){
   const dropDownMenu = document.querySelector('.task-overlay:not(.d-none)')
+  if (!dropDownMenu) {
+    document.removeEventListener('mousedown', closeOverlayOnOutside);
+    return;
+  }
   const selection = dropDownMenu.querySelector('.selection');
   const isClicked = selection && selection.contains(event.target);
   const isClickedOnBtn = event.target.closest('.moveTo');
   if (!isClicked && !isClickedOnBtn) {
     dropDownMenu.classList.add('d-none');
-    // Optional: Event-Listener wieder entfernen, wenn nur ein Menü offen sein kann
     document.removeEventListener('mousedown', closeOverlayOnOutside);
   }
 }
@@ -80,7 +83,7 @@ function hideActivStatus(trueTaskId, statusID) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilToDo(trueTaskId, taskId ,event) {
+async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -88,12 +91,12 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId ,event) {
   let section = document.createElement('section');
   section.appendChild(originalTask);
   targetArea.appendChild(section);
+  hideDropDown(trueTaskId);
+  emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
-  closeOverlayOnOutside(event);
-  overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
+  overlayRef.classList.toggle('visible');
   taskOverlayRef.classList.toggle('show');
-  
 }
 
 /**
@@ -101,7 +104,7 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId ,event) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilInProgress(trueTaskId, taskId, event) {
+async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -109,11 +112,12 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId, event) {
   let section = document.createElement('section');
   section.appendChild(originalTask);
   targetArea.appendChild(section);
+  hideDropDown(trueTaskId);
+  emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
-  closeOverlayOnOutside(event);
 }
 
 /**
@@ -121,7 +125,7 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId, event) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId, event) {
+async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
@@ -129,11 +133,12 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId, event) {
   let section = document.createElement('section');
   section.appendChild(originalTask);
   targetArea.appendChild(section);
+  hideDropDown(trueTaskId);
+  emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
-  closeOverlayOnOutside(event);
 }
 
 /**
@@ -141,19 +146,21 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId, event) {
  * @param {string} trueTaskId - The ID of the task.
  * @param {string} taskId - The database ID of the task.
  */
-async function changeTaskStatusMobilDone(trueTaskId, taskId, event) {
+async function changeTaskStatusMobilDone(trueTaskId, taskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('done');
   let section = document.createElement('section');
+  hideDropDown(trueTaskId);
+  emptyDragArea();
   section.appendChild(originalTask);
   targetArea.appendChild(section);
   await changeFirebaseStatus(targetArea, taskId);
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
-  closeOverlayOnOutside(event)
+ 
 }
 
 /**
@@ -162,12 +169,10 @@ async function changeTaskStatusMobilDone(trueTaskId, taskId, event) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeFirebaseStatus(targetArea, taskId) {
-  /// 14Zeilen
   try {
     let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
     let data = await response.json();
     if (!data) {
-      console.log('Probleme beim API abruf');
       return;
     }
     let targetTaskId = taskId;
@@ -175,14 +180,11 @@ async function changeFirebaseStatus(targetArea, taskId) {
     if (allTasksId.includes(targetTaskId)) {
       let newStatus = targetArea.id;
       let newSequence = checkSequenzNr(allTasksId, data);
-      console.log(newStatus);
       const statusUpdate = {
         status: newStatus,
         sequence: newSequence,
       };
       await updateNewStatus(statusUpdate, targetTaskId);
-    } else {
-      console.log(false, 'Die ID wurde nicht gefunden');
     }
   } catch (error) {
     console.error(error);
@@ -222,11 +224,20 @@ async function updateNewStatus(statusUpdate, targetTaskId) {
     if (!update.ok) {
       let errorMessage = await update.text();
       console.error(errorMessage);
-    } else {
-      console.log('Update erfolgreich');
     }
   } catch (error) {
     console.error(error);
   }
-  window.location.reload();
+}
+
+/**
+ * Toggles the visibility of a dropdown menu associated with a specific task.
+ * The function hides the menu if it's visible, and shows it if it's hidden.
+ *
+ * @param {string} trueTaskId - The unique ID of the task. Used to construct the element's ID.
+ * @returns {void}
+ */
+function hideDropDown(trueTaskId){
+  let overlayRef = document.getElementById('drop-down'+trueTaskId);
+  overlayRef.classList.toggle('d-none');
 }
