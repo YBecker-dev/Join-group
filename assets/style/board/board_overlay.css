@@ -273,7 +273,7 @@
     width: calc(100% + 27px);
     gap: 24px;
     max-height: 725px;
-    overflow-y: overlay;
+    overflow-y: auto;
     margin-top: 16px;
     height: calc(100vh - 180px);
 }

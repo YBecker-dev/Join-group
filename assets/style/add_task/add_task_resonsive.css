@@ -148,6 +148,7 @@
 
     .subtasks-container {
         margin-top: -12px;
+        min-height: unset;
     }
 
     .subtask-item:hover,

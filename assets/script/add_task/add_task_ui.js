@@ -221,7 +221,6 @@ function pushSubtaskInput(event) {
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
     if (input.value.trim()) {
-      // Check if we are in edit mode by looking for edit-specific classes
       let isEditMode = container.classList.contains('subtasks-container-edit');
       if (isEditMode) {
         container.innerHTML += pushSubtaskInputHTML(input.value.trim(), false);
@@ -287,7 +286,6 @@ function saveSubtaskEdit(event, inputElement) {
  */
 function buildSubtaskDiv(newText) {
   let subtaskDiv = document.createElement('div');
-  subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
   subtaskDiv.className = 'subtask-item';
   subtaskDiv.innerHTML = saveSubtaskEditHTML(newText);
   return subtaskDiv;

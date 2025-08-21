@@ -152,19 +152,18 @@
     margin-top: -16px;
     max-height: 144px;
     overflow-y: auto;
-    overflow: visible;
 }
 
-.subtasks-container-board {
+.subtasks-container-board,
+.subtasks-container {
     min-height: 144px;
     overflow: auto;
 }
 
 .subtasks-container-edit {
-    min-height: unset;
     margin-bottom: 16px;
+    min-height: 144px;
 }
-
 
 .subtask-item span {
     font-size: 1rem;
