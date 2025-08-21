@@ -168,6 +168,7 @@ function clearCheckedContacts() {
 function clearSubtaskInput() {
   let input = document.getElementById('add-task-input4');
   if (input) input.value = '';
+  showPlusIcon();
 }
 
 /**

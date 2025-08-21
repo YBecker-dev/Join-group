@@ -203,6 +203,7 @@
 
     .person {
         width: 100vw;
+        gap: 24px;
     }
 
     .contactList::-webkit-scrollbar {
@@ -218,7 +219,8 @@
     }
 
     .mail {
-        font-size: 12px;
+        font-size: 16px;
+        overflow-wrap: anywhere;
     }
 
     .addNewContactButtonMobile {
