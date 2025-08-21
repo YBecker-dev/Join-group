@@ -152,15 +152,14 @@ async function changeTaskStatusMobilDone(trueTaskId, taskId) {
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('done');
   let section = document.createElement('section');
-  hideDropDown(trueTaskId);
-  emptyDragArea();
   section.appendChild(originalTask);
   targetArea.appendChild(section);
+  hideDropDown(trueTaskId);
+  emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
   taskOverlayRef.classList.toggle('show');
- 
 }
 
 /**
