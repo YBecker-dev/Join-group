@@ -84,8 +84,6 @@ function hideActivStatus(trueTaskId, statusID) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
-  let overlayRef = document.getElementById('overlayBoard');
-  let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('todo');
   let section = document.createElement('section');
@@ -94,9 +92,8 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
   hideDropDown(trueTaskId);
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
-  overlayRef.classList.add('d-none');
-  overlayRef.classList.toggle('visible');
-  taskOverlayRef.classList.toggle('show');
+  controlVisability();
+  callRemoveEmptySections()
 }
 
 /**
@@ -105,8 +102,6 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
-  let overlayRef = document.getElementById('overlayBoard');
-  let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('inProgress');
   let section = document.createElement('section');
@@ -115,9 +110,8 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
   hideDropDown(trueTaskId);
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
-  overlayRef.classList.toggle('visible');
-  overlayRef.classList.add('d-none');
-  taskOverlayRef.classList.toggle('show');
+  controlVisability();
+  callRemoveEmptySections()
 }
 
 /**
@@ -126,8 +120,8 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
-  let overlayRef = document.getElementById('overlayBoard');
-  let taskOverlayRef = document.getElementById('overlay-content-loader');
+  //let overlayRef = document.getElementById('overlayBoard');
+  //let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('awaitFeedback');
   let section = document.createElement('section');
@@ -136,9 +130,8 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
   hideDropDown(trueTaskId);
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
-  overlayRef.classList.toggle('visible');
-  overlayRef.classList.add('d-none');
-  taskOverlayRef.classList.toggle('show');
+  controlVisability();
+  callRemoveEmptySections()
 }
 
 /**
@@ -147,8 +140,6 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeTaskStatusMobilDone(trueTaskId, taskId) {
-  let overlayRef = document.getElementById('overlayBoard');
-  let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('done');
   let section = document.createElement('section');
@@ -157,9 +148,8 @@ async function changeTaskStatusMobilDone(trueTaskId, taskId) {
   hideDropDown(trueTaskId);
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
-  overlayRef.classList.toggle('visible');
-  overlayRef.classList.add('d-none');
-  taskOverlayRef.classList.toggle('show');
+  controlVisability();
+  callRemoveEmptySections();
 }
 
 /**
@@ -239,4 +229,41 @@ async function updateNewStatus(statusUpdate, targetTaskId) {
 function hideDropDown(trueTaskId){
   let overlayRef = document.getElementById('drop-down'+trueTaskId);
   overlayRef.classList.toggle('d-none');
+}
+
+/**
+ * Calls removeEmptySections on specific task board areas.
+ * @returns {void}
+ */
+function callRemoveEmptySections(){
+    removeEmptySections(document.getElementById('todo'));
+    removeEmptySections(document.getElementById('done'));
+    removeEmptySections(document.getElementById('inProgress'));
+    removeEmptySections(document.getElementById('awaitFeedback'));
+}
+
+/**
+ * Removes empty <section> elements within a given area.
+ * @param {HTMLElement} areaElement - The parent element to check for empty sections.
+ * @returns {void}
+ */
+function removeEmptySections(areaElement){
+  const sections = areaElement.querySelectorAll('section');
+  sections.forEach(section => {
+    if (section.children.length === 0) {
+      section.remove();
+    }
+  });  
+}
+
+/**
+ * Controls the visibility of two overlay elements by toggling CSS classes.
+ * @returns {void}
+ */
+function controlVisability(){
+  let overlayRef = document.getElementById('overlayBoard');
+  let taskOverlayRef = document.getElementById('overlay-content-loader');
+  overlayRef.classList.toggle('visible');
+  overlayRef.classList.add('d-none');
+  taskOverlayRef.classList.toggle('show');  
 }
