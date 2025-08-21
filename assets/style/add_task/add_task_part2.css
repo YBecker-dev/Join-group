@@ -113,6 +113,9 @@
     justify-content: space-between;
     align-items: center;
 }
+.subtask-item>span{
+    text-align: left;
+}
 
 .subtask-wrapper {
     border-left: solid 1px #A8A8A8;
