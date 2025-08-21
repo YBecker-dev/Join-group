@@ -17,7 +17,25 @@ async function loadContacts() {
     for (let i = 0; i < keys.length; i++) {
       let id = keys[i];
       let user = data[id];
-      contacts.push({
+      storeContact(id,user);
+    }
+  }
+}
+
+/**
+ * Stores a new contact by creating a contact object and adding it to the contacts array.
+ *
+ * @param {number|string} id - The unique ID for the new contact.
+ * @param {object} user - The user object containing contact information.
+ * @param {string} user.name - The full name of the contact.
+ * @param {string} user.initials - The initials of the contact's name.
+ * @param {string} user.email - The contact's email address.
+ * @param {string} user.phone - The contact's phone number.
+ * @param {string} user.color - The assigned color for the contact.
+ * @returns {void}
+ */
+function storeContact(id,user){
+  contacts.push({
         id: id,
         name: user.name,
         initials: user.initials,
@@ -25,8 +43,6 @@ async function loadContacts() {
         phone: user.phone,
         color: user.color,
       });
-    }
-  }
 }
 
 function initFrameworkFunctions() {
@@ -51,14 +67,24 @@ function displayUserInitials() {
       userInitials.innerText = 'G';
     }
   } catch (error) {
-    if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
+    secureLogin(error);
+}
+
+/**
+ * Handles a specific login error by redirecting the user, otherwise re-throws the error.
+ *
+ * @param {Error} error - The error object to be checked.
+ * @returns {void}
+ * @throws {Error} Throws the original error if it does not match the specific TypeError.
+ */
+function secureLogin(error){
+  if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
       redirectLogin();
     } else {
       throw error;
     }
   }
 }
-
 /**load Help.html */
 let loadHelp = () => {
   window.location.href = '/assets/html/help.html';
