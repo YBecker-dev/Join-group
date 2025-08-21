@@ -320,7 +320,7 @@
     }
 
     .edit-contacts-inputs {
-        gap: 24px;
+        gap: 16px;
     }
 
     .addNewContactDiv {
@@ -346,7 +346,6 @@
     }
 
     .hide-button {
-        height: 100%;
         width: 82px;
     }
 
@@ -362,6 +361,7 @@
         padding: 8px !important;
     }
 }
+
 
 @media (max-width: 1008px) {
     .addNewContactButtonMobile {

@@ -79,6 +79,12 @@
         height: 630px;
     }
 
+    .save-contact-btn,
+    .clear-button {
+        font-size: 18px;
+        height: 42px;
+    }
+
     .headDiv {
         height: 250px;
     }
@@ -101,11 +107,12 @@
     }
 
     .accept-addContact {
-        margin-top: 10px;
+        margin-top: 24px;
     }
 
     .accept {
         margin-top: 10px;
+        align-items: end;
     }
 
     .profilDiv-addContacts {

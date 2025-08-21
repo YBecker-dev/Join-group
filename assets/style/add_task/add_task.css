@@ -38,7 +38,6 @@
     flex-direction: column;
     gap: 8px;
     position: relative;
-    padding: 0 0 16px 0;
 }
 
 .add-task span {
@@ -939,6 +938,7 @@ input[type="text"] {
 
     .priority-edit {
         max-width: 100%;
+        margin-bottom: 16px;
     }
 
     .subtask-edit-container {
@@ -1044,7 +1044,6 @@ input[type="text"] {
 
 @media (max-height: 600px) {
     .overlay-section {
-        max-height: 80vh;
         padding: 16px 20px;
     }
 

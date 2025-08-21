@@ -64,6 +64,11 @@
 
     .priority-edit {
         padding-top: unset;
+        margin-bottom: 16px;
+    }
+
+    .assigned-to-edit {
+        margin-bottom: 16px;
     }
 
     .required {
@@ -131,8 +136,7 @@
     .add-task span,
     .priority span,
     .add-task input[type="text"],
-    #edit-description
-    {
+    #edit-description {
         font-size: 16px !important;
     }
 

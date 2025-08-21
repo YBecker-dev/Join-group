@@ -342,7 +342,7 @@ function editTaskHtml(task, taskId) {
           </button>
         </div>
       </div>
-      <div class="add-task">
+      <div class="add-task assigned-to-edit">
        <span>Assigned to</span>
        <div id="assigned-to-dropdown">
         <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">

@@ -28,7 +28,7 @@ function getInputElements() {
  */
 function validateNameField(userName, nameInput) {
   if (!userName || userName.trim().length < 2) {
-    showInputError(nameInput, 'Please check it is filled with a name');
+    showInputError(nameInput, 'Check it is filled with a name');
     return false;
   } else {
     hideInputError(nameInput);
@@ -41,7 +41,7 @@ function validateNameField(userName, nameInput) {
  */
 async function validateEmailField(userEmail, mailInput, currentContactId) {
   if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
-    showInputError(mailInput, 'Please check it is filled with a valid email');
+    showInputError(mailInput, 'Check it is filled with a valid email');
     return false;
   } else {
     if (await isEmailTaken(userEmail, currentContactId)) {
@@ -59,7 +59,7 @@ async function validateEmailField(userEmail, mailInput, currentContactId) {
  */
 function validatePhoneField(userPhone, phoneInput) {
   if (!userPhone || userPhone.trim() === '') {
-    showInputError(phoneInput, 'Enter a valid phone number (min. 5 digits)');
+    showInputError(phoneInput, 'Enter a number (min. 5 digits)');
     return false;
   } else if (userPhone.trim() !== '-') {
     return validatePhoneLength(userPhone, phoneInput);
@@ -79,7 +79,7 @@ function validatePhoneLength(userPhone, phoneInput) {
   }
 
   if (phoneLength < 5) {
-    showInputError(phoneInput, 'Enter a valid phone number (min. 5 digits)');
+    showInputError(phoneInput, 'Enter a number (min. 5 digits)');
     return false;
   } else {
     hideInputError(phoneInput);
