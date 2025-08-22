@@ -8,45 +8,6 @@ function showWrapperCreateTask() {
   }
 }
 
-/**
- * Adds an input listener for the title field to clear errors.
- */
-function addTitleInputListener() {
-  let titleInput = document.querySelector('input[name="add-task-input1"]');
-  if (titleInput) {
-    titleInput.addEventListener('input', function () {
-      clearInputError(this);
-      let warning = document.getElementById('add-task-input1-warning');
-      if (warning) warning.classList.add('d-none');
-    });
-  }
-}
-
-/**
- * Adds an input listener for the date field to clear errors.
- */
-function addDateInputListener() {
-  let dateInput = document.querySelector('input[name="add-task-input2"]');
-  if (dateInput) {
-    dateInput.addEventListener('input', function () {
-      clearInputError(this);
-      let warning = document.getElementById('add-task-input2-warning');
-      if (warning) warning.classList.add('d-none');
-    });
-  }
-}
-
-/**
- * Adds an input listener for the description field to clear errors.
- */
-function addDescriptionInputListener() {
-  let descriptionInput = document.querySelector('textarea[name="add-task-textarea"]');
-  if (descriptionInput) {
-    descriptionInput.addEventListener('input', function () {
-      clearInputError(this);
-    });
-  }
-}
 
 /**
  * Handles the click event on a contact checkbox.
@@ -108,22 +69,49 @@ function showContactsAddTask() {
   let container = document.getElementById('show-contacts-add-task');
   if (!container) return;
   container.classList.remove('d-none');
-  let html = '';
+  let html = buildContactsHTML();
+  container.innerHTML = html;
+}
 
+/**
+ * Builds the HTML for displaying selected contacts.
+ * @returns {string} The HTML string for contacts display.
+ */
+function buildContactsHTML() {
+  let html = '';
   const maxVisibleContacts = 5;
   const displayCount = Math.min(selectedContacts.length, maxVisibleContacts);
+  html += generateVisibleContactsHTML(displayCount);
 
+  if (selectedContacts.length > maxVisibleContacts) {
+    html += generateRemainingContactsHTML(maxVisibleContacts);
+  }
+
+  return html;
+}
+
+/**
+ * Generates HTML for the visible contacts.
+ * @param {number} displayCount - Number of contacts to display.
+ * @returns {string} HTML string for visible contacts.
+ */
+function generateVisibleContactsHTML(displayCount) {
+  let html = '';
   for (let i = 0; i < displayCount; i++) {
     const contact = contacts[selectedContacts[i]];
     html += showContactsAddTaskHtml(contact);
   }
+  return html;
+}
 
-  if (selectedContacts.length > maxVisibleContacts) {
-    const remainingCount = selectedContacts.length - maxVisibleContacts;
-    html += showRemainingContactsHtml(remainingCount);
-  }
-
-  container.innerHTML = html;
+/**
+ * Generates HTML for remaining contacts counter.
+ * @param {number} maxVisibleContacts - Maximum number of visible contacts.
+ * @returns {string} HTML string for remaining contacts display.
+ */
+function generateRemainingContactsHTML(maxVisibleContacts) {
+  const remainingCount = selectedContacts.length - maxVisibleContacts;
+  return showRemainingContactsHtml(remainingCount);
 }
 
 /**
@@ -219,23 +207,40 @@ function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
   let container = document.getElementById('subtasks-container');
   if (!input || !container) return;
+  
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
     if (input.value.trim()) {
-      let isEditMode = container.classList.contains('subtasks-container-edit');
-      if (isEditMode) {
-        container.innerHTML += pushSubtaskInputHTML(input.value.trim(), false);
-      } else {
-        container.innerHTML += pushSubtaskInputHTML(input.value.trim());
-      }
-      input.value = '';
-      showPlusIcon();
-
-      const subtaskItems = container.querySelectorAll('.subtask-item');
-      if (subtaskItems.length >= 3) {
-        container.classList.add('scrollable');
-      }
+      addSubtaskToContainer(input, container);
+      updateSubtaskScrollability(container);
     }
+  }
+}
+
+/**
+ * Adds a subtask to the container based on edit mode.
+ * @param {HTMLInputElement} input - The input element.
+ * @param {HTMLElement} container - The subtasks container.
+ */
+function addSubtaskToContainer(input, container) {
+  let isEditMode = container.classList.contains('subtasks-container-edit');
+  if (isEditMode) {
+    container.innerHTML += pushSubtaskInputHTML(input.value.trim(), false);
+  } else {
+    container.innerHTML += pushSubtaskInputHTML(input.value.trim());
+  }
+  input.value = '';
+  showPlusIcon();
+}
+
+/**
+ * Updates the scrollability of the subtasks container based on item count.
+ * @param {HTMLElement} container - The subtasks container.
+ */
+function updateSubtaskScrollability(container) {
+  const subtaskItems = container.querySelectorAll('.subtask-item');
+  if (subtaskItems.length >= 3) {
+    container.classList.add('scrollable');
   }
 }
 
@@ -247,15 +252,34 @@ function editSubtask(element) {
   let listItem = element.closest('.subtask-item');
   let span = listItem ? listItem.querySelector('span') : null;
   if (!span) return;
+  
   let oldText = span.textContent.trim();
   let originalStatus = listItem.getAttribute('data-original-status') || 'unchecked';
-  let newDiv = document.createElement('div');
-  if (newDiv) {
-    newDiv.className = 'subtask-item-edit';
+  let newDiv = createEditableSubtaskDiv(oldText, originalStatus);
+  
+  replaceSubtaskWithEditable(listItem, newDiv);
+}
 
-    newDiv.setAttribute('data-original-status', originalStatus);
-    newDiv.innerHTML = editSubtaskInputHTML(oldText);
-  }
+/**
+ * Creates an editable subtask div element.
+ * @param {string} oldText - The original text of the subtask.
+ * @param {string} originalStatus - The original status of the subtask.
+ * @returns {HTMLElement} The new editable div element.
+ */
+function createEditableSubtaskDiv(oldText, originalStatus) {
+  let newDiv = document.createElement('div');
+  newDiv.className = 'subtask-item-edit';
+  newDiv.setAttribute('data-original-status', originalStatus);
+  newDiv.innerHTML = editSubtaskInputHTML(oldText);
+  return newDiv;
+}
+
+/**
+ * Replaces a subtask item with its editable version.
+ * @param {HTMLElement} listItem - The original subtask item.
+ * @param {HTMLElement} newDiv - The new editable div.
+ */
+function replaceSubtaskWithEditable(listItem, newDiv) {
   if (listItem.parentNode) {
     listItem.parentNode.replaceChild(newDiv, listItem);
   }
@@ -356,23 +380,3 @@ function onSubtaskInputKeydown(event) {
   }
 }
 
-/**
- * Clears the assigned-to input field.
- */
-function clearAssignedTo() {
-  let input = document.getElementById('add-task-input3');
-  if (input) input.value = '';
-}
-
-/**
- * Gets the category text from a dropdown element.
- * @param {HTMLElement} dropdownRef - The dropdown element.
- * @returns {string} The category text.
- */
-function getCategoryTextFromDropdown(dropdownRef) {
-  let categoryTextRef = dropdownRef.querySelector('p');
-  if (categoryTextRef) {
-    return categoryTextRef.textContent.trim();
-  }
-  return '';
-}

@@ -317,7 +317,7 @@ function editTaskHtml(task, taskId) {
           <input id="edit-date" type="text" placeholder="DD/MM/YYYY" min="" max="31/12/2035" name="add-task-input2" onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date'); sanitizeAndValidateDate(this)"
             value="${task.date || ''}"/>
           <span>
-            <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
+            <img class="date-icon-edit" onclick="setTodaysDate()" src="/assets/img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
         <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>

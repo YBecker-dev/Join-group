@@ -196,3 +196,16 @@ function validateNameInput(input) {
 function eventBubbling(event) {
   event.stopPropagation();
 }
+
+/**
+ * Sets today's date in the date input field when the user clicks the date icon.
+ * This function is simple and easy to understand for beginners.
+ */
+function setTodaysDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todaysDate = `${day}/${month}/${year}`;
+  setDateInputValue(todaysDate);
+}

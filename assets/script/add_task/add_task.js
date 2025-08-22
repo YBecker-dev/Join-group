@@ -117,24 +117,11 @@ function dateInputMinDate() {
 }
 
 /**
- * Sets today's date in the date input field when the user clicks the date icon.
- * This function is simple and easy to understand for beginners.
- */
-function setTodaysDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  const todaysDate = `${day}/${month}/${year}`;
-  setDateInputValue(todaysDate);
-}
-
-/**
  * Sets the value of the date input field, removes warnings and error styling, and enables the create button.
  * @param {string} dateValue - The date string to set in the input field.
  */
 function setDateInputValue(dateValue) {
-  const dateInput = document.getElementById('date');
+  const dateInput = document.getElementById('date') || document.getElementById('edit-date');
   if (dateInput) {
     dateInput.value = dateValue;
     const warningElement = document.getElementById('add-task-input2-warning');

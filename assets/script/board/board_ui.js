@@ -1,31 +1,4 @@
 /**
- * Fills an empty task area with a placeholder.
- * @param {object} area - The area object with id and text properties.
- */
-function checkAndFillEmptyArea(area) {
-  let areaElement = document.getElementById(area.id);
-  let tasks = areaElement.querySelectorAll('.board-task-container');
-  let emptyBox = areaElement.querySelector('.empty-task-box');
-   if (tasks.length === 0 && !emptyBox) {
-    areaElement.appendChild(createEmptyTaskBox(area.text));
-  } else if (tasks.length > 0 && emptyBox) {
-    emptyBox.remove();
-  }
-}
-
-/**
- * Creates a new HTML div element representing an empty task box.
- * * @param {string} text - The text content to be displayed inside the empty task box.
- * @returns {HTMLDivElement} The newly created div element with the class 'empty-task-box' and the specified text.
- */
-function createEmptyTaskBox(text) {
-  let div = document.createElement('div');
-  div.className = 'empty-task-box';
-  div.innerText = text;
-  return div;
-}
-
-/**
  * Toggles the visibility of the "Move To" overlay.
  */
 function toggleMoveToOverlay() {
@@ -84,9 +57,32 @@ async function toggleBoardOverlay(taskId, trueTaskId) {
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
   overlayRef.classList.remove('d-none');
-  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
-  let task = await response.json();
+
+  let task = await loadTaskForOverlay(taskId);
   if (!task) return;
+
+  displayTaskInOverlay(task, taskId, trueTaskId, overlayRef, overlay_content);
+}
+
+/**
+ * Loads task data for the overlay.
+ * @param {string} taskId - The database ID of the task.
+ * @returns {Promise<object>} - The task object.
+ */
+async function loadTaskForOverlay(taskId) {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  return await response.json();
+}
+
+/**
+ * Displays task data in the overlay with animation.
+ * @param {object} task - The task object.
+ * @param {string} taskId - The database ID of the task.
+ * @param {string} trueTaskId - The internal ID of the task.
+ * @param {HTMLElement} overlayRef - The overlay element.
+ * @param {HTMLElement} overlay_content - The content container element.
+ */
+function displayTaskInOverlay(task, taskId, trueTaskId, overlayRef, overlay_content) {
   overlay_content.innerHTML = getTaskOverlay(task, taskId, trueTaskId);
   overlayRef.classList.add('visible');
   let contentRender = overlayRef.querySelector('.overlay-content-render');
@@ -102,21 +98,39 @@ async function toggleBoardOverlay(taskId, trueTaskId) {
  * @returns {string} - The HTML string for subtasks.
  */
 function showSubtasksInOverlay(task, taskId) {
-  let html = '';
-  let subtasks = task.subtasks;
-  if (subtasks && !Array.isArray(subtasks)) {
-    subtasks = Object.values(subtasks);
-  }
+  let subtasks = normalizeSubtasksArray(task.subtasks);
   if (subtasks && subtasks.length > 0) {
-    const scrollableClass = subtasks.length > 3 ? ' scrollable' : '';
-    html = `<div class="subtasks-overlay-container${scrollableClass}">`;
-    for (let i = 0; i < subtasks.length; i++) {
-      html += overlaySubtaskHtml(subtasks[i], i, taskId);
-    }
-    html += '</div>';
+    return buildSubtasksContainerHtml(subtasks, taskId);
   } else {
-    html = '<p class="p-Tag">-</p>';
+    return '<p class="p-Tag">-</p>';
   }
+}
+
+/**
+ * Normalizes subtasks to ensure they are in array format.
+ * @param {Array|object} subtasks - The subtasks data.
+ * @returns {Array} - The normalized subtasks array.
+ */
+function normalizeSubtasksArray(subtasks) {
+  if (subtasks && !Array.isArray(subtasks)) {
+    return Object.values(subtasks);
+  }
+  return subtasks;
+}
+
+/**
+ * Builds the HTML container for subtasks.
+ * @param {Array} subtasks - The array of subtasks.
+ * @param {string} taskId - The database ID of the task.
+ * @returns {string} - The HTML string for the subtasks container.
+ */
+function buildSubtasksContainerHtml(subtasks, taskId) {
+  const scrollableClass = subtasks.length > 3 ? ' scrollable' : '';
+  let html = `<div class="subtasks-overlay-container${scrollableClass}">`;
+  for (let i = 0; i < subtasks.length; i++) {
+    html += overlaySubtaskHtml(subtasks[i], i, taskId);
+  }
+  html += '</div>';
   return html;
 }
 
@@ -209,25 +223,48 @@ function getAssignedContactsHtml(task, type) {
  * @returns {string} - The HTML string.
  */
 function buildContactsHtml(task, type) {
-  let html = '';
   const maxVisibleContacts = 3;
   const totalContacts = task.assignedTo.length;
   const displayCount = Math.min(totalContacts, maxVisibleContacts);
 
+  let html = buildVisibleContactsHtml(task.assignedTo, displayCount, type);
+
+  if (totalContacts > maxVisibleContacts) {
+    html += buildRemainingContactsHtml(totalContacts, maxVisibleContacts, type);
+  }
+
+  return html;
+}
+
+/**
+ * Builds HTML for the visible contacts.
+ * @param {Array} assignedTo - Array of assigned contact IDs.
+ * @param {number} displayCount - Number of contacts to display.
+ * @param {string} type - The type of display.
+ * @returns {string} - The HTML string for visible contacts.
+ */
+function buildVisibleContactsHtml(assignedTo, displayCount, type) {
+  let html = '';
   for (let i = 0; i < displayCount; i++) {
-    let userId = task.assignedTo[i];
+    let userId = assignedTo[i];
     let contact = findContactById(userId);
     if (contact) {
       html += getContactHtmlByType(contact, type);
     }
   }
-
-  if (totalContacts > maxVisibleContacts) {
-    const remainingCount = totalContacts - maxVisibleContacts;
-    html += getAdditionalContactsHtml(remainingCount, type);
-  }
-
   return html;
+}
+
+/**
+ * Builds HTML for the remaining contacts counter.
+ * @param {number} totalContacts - Total number of contacts.
+ * @param {number} maxVisible - Maximum visible contacts.
+ * @param {string} type - The type of display.
+ * @returns {string} - The HTML string for remaining contacts.
+ */
+function buildRemainingContactsHtml(totalContacts, maxVisible, type) {
+  const remainingCount = totalContacts - maxVisible;
+  return getAdditionalContactsHtml(remainingCount, type);
 }
 
 /**
@@ -248,24 +285,43 @@ function getContactHtmlByType(contact, type) {
 /**
  * Gets the HTML for additional contacts counter circle.
  * @param {number} remainingCount - Number of additional contacts.
+ * @param {string} type - The type of display ('board' or 'overlay').
  * @returns {string} - The HTML string for the counter circle.
  */
 function getAdditionalContactsHtml(remainingCount, type) {
   if (type === 'board') {
-    return `<span class="board-contact-name remaining-contacts overlay-span">+${remainingCount}</span>`;
+    return getBoardAdditionalContactsHtml(remainingCount);
   } else if (type === 'overlay') {
-    return `
-      <div class="peoples-info">
-        <div class="initials remaining-contacts">
-          <span class="overlay-span">+${remainingCount}</span>
-        </div>
-        <div class="people-name">
-          <p class="p-Tag">${remainingCount} weitere Kontakte</p>
-        </div>
-      </div>
-    `;
+    return getOverlayAdditionalContactsHtml(remainingCount);
   }
   return '';
+}
+
+/**
+ * Gets the board-style HTML for additional contacts counter.
+ * @param {number} remainingCount - Number of additional contacts.
+ * @returns {string} - The HTML string for board display.
+ */
+function getBoardAdditionalContactsHtml(remainingCount) {
+  return `<span class="board-contact-name remaining-contacts overlay-span">+${remainingCount}</span>`;
+}
+
+/**
+ * Gets the overlay-style HTML for additional contacts counter.
+ * @param {number} remainingCount - Number of additional contacts.
+ * @returns {string} - The HTML string for overlay display.
+ */
+function getOverlayAdditionalContactsHtml(remainingCount) {
+  return `
+    <div class="peoples-info">
+      <div class="initials remaining-contacts">
+        <span class="overlay-span">+${remainingCount}</span>
+      </div>
+      <div class="people-name">
+        <p class="p-Tag">${remainingCount} weitere Kontakte</p>
+      </div>
+    </div>
+  `;
 }
 
 /**

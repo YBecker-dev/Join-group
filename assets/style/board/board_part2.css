@@ -323,7 +323,7 @@
 }
 
 #add-task-input1-warning {
-    bottom: -16px
+    bottom: -20px
 }
 
 #board-input1-warning {
@@ -331,7 +331,7 @@
 }
 
 #add-task-input2-warning {
-    bottom: -8px
+    bottom: -12px
 }
 
 .create-task-in-board {

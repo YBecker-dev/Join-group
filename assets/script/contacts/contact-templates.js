@@ -1,7 +1,7 @@
 /**
- * @param {*} index
- * @returns
- * Contactlist
+ * Generates HTML template for a contact item in the contact list.
+ * @param {number} index - Index of the contact in the contacts array.
+ * @returns {string} HTML string for the contact item.
  */
 function getNoteTemplateContact(index) {
   let user = contacts[index];
@@ -18,9 +18,9 @@ function getNoteTemplateContact(index) {
 }
 
 /**
- * @param {*} indexDetails
- * @returns
- * show Cointact Details
+ * Generates HTML template for the contact details view.
+ * @param {number} indexDetails - Index of the contact to show details for.
+ * @returns {string} HTML string for the contact details view.
  */
 function getNoteTemplateContactDetails(indexDetails) {
   let user = contacts[indexDetails];
@@ -73,7 +73,8 @@ function getNoteTemplateContactDetails(indexDetails) {
 }
 
 /**
- * add new Contact
+ * Generates HTML template for adding a new contact overlay.
+ * @returns {string} HTML string for the new contact form overlay.
  */
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
@@ -132,7 +133,9 @@ function getNoteTemplateAddNewContact() {
 }
 
 /**
- * edit Contact
+ * Generates HTML template for editing a contact overlay.
+ * @param {number} index - Index of the contact to edit.
+ * @returns {string} HTML string for the edit contact form overlay.
  */
 function getNoteTemplateEditContact(index) {
   let user = contacts[index] || {};
@@ -202,7 +205,9 @@ function getNoteTemplateEditContact(index) {
 }
 
 /**
- * Overlay to Edit or Delete from Contacts
+ * Generates HTML template for mobile edit/delete overlay.
+ * @param {number} indexDetails - Index of the contact for mobile actions.
+ * @returns {string} HTML string for the mobile edit/delete overlay.
  */
 function getNoteTemplateMobileEditOverlay(indexDetails) {
   return ` <div class="editDeleteOverlayMobile" id="editDeleteOverlayMobile"> 
@@ -218,7 +223,8 @@ function getNoteTemplateMobileEditOverlay(indexDetails) {
 }
 
 /**
- * Overlay to show that Contacts Succesfull addet
+ * Generates HTML template for successful contact creation overlay.
+ * @returns {string} HTML string for the success message overlay.
  */
 function getNoteTemplateSuccesfullOverlay() {
   return `  <div  id="successfully" class="successfullyOverlay">

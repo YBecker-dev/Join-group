@@ -193,15 +193,35 @@ function correctDateLimits(day, month, year) {
   let today = new Date();
   today.setHours(0, 0, 0, 0);
   let maxDate = new Date(2035, 11, 31);
+  
   if (inputDate < today) {
-    day = today.getDate();
-    month = today.getMonth() + 1;
-    year = today.getFullYear();
+    return getDatePartsFromToday(today);
   } else if (inputDate > maxDate) {
-    day = 31;
-    month = 12;
-    year = 2035;
+    return getMaxDateParts();
   }
+  return [day, month, year];
+}
+
+/**
+ * Extracts day, month, and year parts from today's date.
+ * @param {Date} today - Today's date object.
+ * @returns {number[]} Array with [day, month, year].
+ */
+function getDatePartsFromToday(today) {
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  return [day, month, year];
+}
+
+/**
+ * Returns the maximum allowed date parts (31/12/2035).
+ * @returns {number[]} Array with [31, 12, 2035].
+ */
+function getMaxDateParts() {
+  let day = 31;
+  let month = 12;
+  let year = 2035;
   return [day, month, year];
 }
 
@@ -218,4 +238,65 @@ function buildDateString(day, month, year) {
   let y = year;
   let result = `${d}/${m}/${y}`;
   return result;
+}
+
+/**
+ * Adds an input listener for the title field to clear errors.
+ */
+function addTitleInputListener() {
+  let titleInput = document.querySelector('input[name="add-task-input1"]');
+  if (titleInput) {
+    titleInput.addEventListener('input', function () {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input1-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+}
+
+/**
+ * Adds an input listener for the date field to clear errors.
+ */
+function addDateInputListener() {
+  let dateInput = document.querySelector('input[name="add-task-input2"]');
+  if (dateInput) {
+    dateInput.addEventListener('input', function () {
+      clearInputError(this);
+      let warning = document.getElementById('add-task-input2-warning');
+      if (warning) warning.classList.add('d-none');
+    });
+  }
+}
+
+/**
+ * Adds an input listener for the description field to clear errors.
+ */
+function addDescriptionInputListener() {
+  let descriptionInput = document.querySelector('textarea[name="add-task-textarea"]');
+  if (descriptionInput) {
+    descriptionInput.addEventListener('input', function () {
+      clearInputError(this);
+    });
+  }
+}
+
+/**
+ * Clears the assigned-to input field.
+ */
+function clearAssignedTo() {
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
+}
+
+/**
+ * Gets the category text from a dropdown element.
+ * @param {HTMLElement} dropdownRef - The dropdown element.
+ * @returns {string} The category text.
+ */
+function getCategoryTextFromDropdown(dropdownRef) {
+  let categoryTextRef = dropdownRef.querySelector('p');
+  if (categoryTextRef) {
+    return categoryTextRef.textContent.trim();
+  }
+  return '';
 }
