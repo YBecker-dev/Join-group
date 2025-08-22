@@ -17,7 +17,7 @@ async function loadContacts() {
     for (let i = 0; i < keys.length; i++) {
       let id = keys[i];
       let user = data[id];
-      storeContact(id,user);
+      storeContact(id, user);
     }
   }
 }
@@ -34,15 +34,15 @@ async function loadContacts() {
  * @param {string} user.color - The assigned color for the contact.
  * @returns {void}
  */
-function storeContact(id,user){
+function storeContact(id, user) {
   contacts.push({
-        id: id,
-        name: user.name,
-        initials: user.initials,
-        email: user.email,
-        phone: user.phone,
-        color: user.color,
-      });
+    id: id,
+    name: user.name,
+    initials: user.initials,
+    email: user.email,
+    phone: user.phone,
+    color: user.color,
+  });
 }
 
 function initFrameworkFunctions() {
@@ -68,17 +68,17 @@ function displayUserInitials() {
     }
   } catch (error) {
     secureLogin(error);
-}
+  }
 
-/**
- * Handles a specific login error by redirecting the user, otherwise re-throws the error.
- *
- * @param {Error} error - The error object to be checked.
- * @returns {void}
- * @throws {Error} Throws the original error if it does not match the specific TypeError.
- */
-function secureLogin(error){
-  if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
+  /**
+   * Handles a specific login error by redirecting the user, otherwise re-throws the error.
+   *
+   * @param {Error} error - The error object to be checked.
+   * @returns {void}
+   * @throws {Error} Throws the original error if it does not match the specific TypeError.
+   */
+  function secureLogin(error) {
+    if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
       redirectLogin();
     } else {
       throw error;
@@ -161,22 +161,11 @@ function validateEmailInput(input) {
 }
 
 /**
- * Validates and formats a name input by cleaning, capitalizing, and limiting the number of words.
- * This function removes invalid characters, replaces multiple spaces with a single space,
- * trims the input, and capitalizes the first letter of each word. It also limits the
- * input to a maximum of three words and cleans up any trailing spaces.
- * @param {HTMLElement} input
+ * Capitalizes the first letter of each word in an array.
+ * @param {string[]} words - Array of words to capitalize.
+ * @returns {string[]} Array with capitalized words.
  */
-function validateNameInput(input) {
-  if (input.value.endsWith(' ')) {
-    clearInputError(input);
-    return;
-  }
-  let cleaned = input.value
-    .replace(/[^a-zA-ZäöüÄÖÜß\- ]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  let words = cleaned.split(' ').slice(0, 3);
+function capitalizeWords(words) {
   let capitalized = [];
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
@@ -184,7 +173,33 @@ function validateNameInput(input) {
       capitalized.push(word.charAt(0).toUpperCase() + word.slice(1));
     }
   }
-  input.value = capitalized.join(' ');
+  return capitalized;
+}
+
+/**
+ * Cleans and formats the input value: removes invalid characters, trims spaces, limits to 3 words.
+ * @param {string} value - The input value to clean.
+ * @returns {string[]} Array of cleaned words.
+ */
+function cleanAndLimitName(value) {
+  let cleaned = value
+    .replace(/[^a-zA-ZäöüÄÖÜß\- ]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return cleaned.split(' ').slice(0, 3);
+}
+
+/**
+ * Validates and formats a name input by cleaning, capitalizing, and limiting the number of words.
+ * @param {HTMLElement} input
+ */
+function validateNameInput(input) {
+  if (input.value.endsWith(' ')) {
+    clearInputError(input);
+    return;
+  }
+  let words = cleanAndLimitName(input.value);
+  input.value = capitalizeWords(words).join(' ');
   clearInputError(input);
 }
 

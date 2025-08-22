@@ -37,9 +37,7 @@ async function checkTasks() {
       const responseObject = await response.json();
       processResponseObject(responseObject);
     }
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 }
 
 /**
@@ -50,7 +48,7 @@ async function checkTasks() {
  * nested task objects.
  * @returns {void}
  */
-function processResponseObject(responseObject){
+function processResponseObject(responseObject) {
   if (responseObject) {
     let dataBaseKey = Object.keys(responseObject);
     for (i = 0; i < dataBaseKey.length; i++) {
@@ -72,7 +70,7 @@ function processResponseObject(responseObject){
  *
  * @returns {void}
  */
-function callSupFunctions(){
+function callSupFunctions() {
   statusCount();
   processPriority();
   clearArrays();

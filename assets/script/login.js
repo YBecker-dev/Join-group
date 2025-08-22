@@ -227,9 +227,7 @@ let LegalNotice = '/assets/html/legal-notice_external.html';
  */
 function privacyPolicyMPA() {
   let guestUser = 'Guest Guest';
-  console.log(guestUser);
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
-  console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = PrivacyPolicy;
 }
 
@@ -238,8 +236,6 @@ function privacyPolicyMPA() {
  */
 function legalNoticeMPA() {
   let guestUser = 'Guest Guest';
-  console.log(guestUser);
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
-  console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = LegalNotice;
 }

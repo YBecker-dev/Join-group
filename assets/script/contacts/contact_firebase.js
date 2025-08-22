@@ -8,7 +8,6 @@ async function saveToFirebase(contact) {
       await refreshContactsAfterSave();
     }
   } catch (error) {
-    console.error(error);
   }
 }
 
@@ -61,7 +60,7 @@ async function refreshContactsAfterSave() {
  */
 async function deleteContact(index) {
   let firebaseId = contacts[index].id;
-  if (!validateFirebaseId(firebaseId, index)) {
+  if (!validateFirebaseId(firebaseId)) {
     return false;
   }
 
@@ -75,9 +74,8 @@ async function deleteContact(index) {
 /**
  * Validates Firebase ID exists for contact
  */
-function validateFirebaseId(firebaseId, index) {
+function validateFirebaseId(firebaseId) {
   if (!firebaseId) {
-    console.error('Firebase-ID nicht gefunden für Index:', index);
     return false;
   }
   return true;
@@ -196,7 +194,6 @@ async function makeFirebasePutRequest(updatedContact, firebaseId) {
  */
 function handleUpdateResponse(response) {
   if (!response.ok) {
-    console.error('Fehler beim Updaten:', response.status);
     return false;
   }
   return true;

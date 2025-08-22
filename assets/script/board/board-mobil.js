@@ -5,20 +5,20 @@
  * @param {string} trueTaskId - The unique ID of the task associated with this menu.
  * @param {Event} event - The click event object.
  */
-function showDropDown(trueTaskId,event) {
+function showDropDown(trueTaskId, event) {
   if (event) event.stopPropagation();
-   document.querySelectorAll('.task-overlay:not(.d-none)').forEach(menu => {
+  document.querySelectorAll('.task-overlay:not(.d-none)').forEach((menu) => {
     if (menu.id !== 'drop-down' + trueTaskId) {
       menu.classList.add('d-none');
     }
   });
-  let dropdown_menu = document.getElementById('drop-down'+trueTaskId);
+  let dropdown_menu = document.getElementById('drop-down' + trueTaskId);
   dropdown_menu.classList.toggle('d-none');
   if (!dropdown_menu.classList.contains('d-none')) {
     setTimeout(() => {
       document.addEventListener('mousedown', closeOverlayOnOutside);
     }, 5);
-  }else {
+  } else {
     document.removeEventListener('mousedown', closeOverlayOnOutside);
   }
 }
@@ -28,8 +28,8 @@ function showDropDown(trueTaskId,event) {
  *
  * @param {Event} event - The Mousedown event object.
  */
-function closeOverlayOnOutside(event){
-  const dropDownMenu = document.querySelector('.task-overlay:not(.d-none)')
+function closeOverlayOnOutside(event) {
+  const dropDownMenu = document.querySelector('.task-overlay:not(.d-none)');
   if (!dropDownMenu) {
     document.removeEventListener('mousedown', closeOverlayOnOutside);
     return;
@@ -93,7 +93,7 @@ async function changeTaskStatusMobilToDo(trueTaskId, taskId) {
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   controlVisability();
-  callRemoveEmptySections()
+  callRemoveEmptySections();
 }
 
 /**
@@ -111,7 +111,7 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   controlVisability();
-  callRemoveEmptySections()
+  callRemoveEmptySections();
 }
 
 /**
@@ -120,8 +120,6 @@ async function changeTaskStatusMobilInProgress(trueTaskId, taskId) {
  * @param {string} taskId - The database ID of the task.
  */
 async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
-  //let overlayRef = document.getElementById('overlayBoard');
-  //let taskOverlayRef = document.getElementById('overlay-content-loader');
   let originalTask = document.getElementById('task-' + trueTaskId);
   let targetArea = document.getElementById('awaitFeedback');
   let section = document.createElement('section');
@@ -131,7 +129,7 @@ async function changeTaskStatusMobilAwaitFeedback(trueTaskId, taskId) {
   emptyDragArea();
   await changeFirebaseStatus(targetArea, taskId);
   controlVisability();
-  callRemoveEmptySections()
+  callRemoveEmptySections();
 }
 
 /**
@@ -175,9 +173,7 @@ async function changeFirebaseStatus(targetArea, taskId) {
       };
       await updateNewStatus(statusUpdate, targetTaskId);
     }
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 }
 
 /**
@@ -210,14 +206,9 @@ async function updateNewStatus(statusUpdate, targetTaskId) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(statusUpdate),
     });
-    if (!update.ok) {
-      let errorMessage = await update.text();
-      console.error(errorMessage);
-    }
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 }
+
 
 /**
  * Toggles the visibility of a dropdown menu associated with a specific task.
@@ -226,8 +217,8 @@ async function updateNewStatus(statusUpdate, targetTaskId) {
  * @param {string} trueTaskId - The unique ID of the task. Used to construct the element's ID.
  * @returns {void}
  */
-function hideDropDown(trueTaskId){
-  let overlayRef = document.getElementById('drop-down'+trueTaskId);
+function hideDropDown(trueTaskId) {
+  let overlayRef = document.getElementById('drop-down' + trueTaskId);
   overlayRef.classList.toggle('d-none');
 }
 
@@ -235,11 +226,11 @@ function hideDropDown(trueTaskId){
  * Calls removeEmptySections on specific task board areas.
  * @returns {void}
  */
-function callRemoveEmptySections(){
-    removeEmptySections(document.getElementById('todo'));
-    removeEmptySections(document.getElementById('done'));
-    removeEmptySections(document.getElementById('inProgress'));
-    removeEmptySections(document.getElementById('awaitFeedback'));
+function callRemoveEmptySections() {
+  removeEmptySections(document.getElementById('todo'));
+  removeEmptySections(document.getElementById('done'));
+  removeEmptySections(document.getElementById('inProgress'));
+  removeEmptySections(document.getElementById('awaitFeedback'));
 }
 
 /**
@@ -247,23 +238,23 @@ function callRemoveEmptySections(){
  * @param {HTMLElement} areaElement - The parent element to check for empty sections.
  * @returns {void}
  */
-function removeEmptySections(areaElement){
+function removeEmptySections(areaElement) {
   const sections = areaElement.querySelectorAll('section');
-  sections.forEach(section => {
+  sections.forEach((section) => {
     if (section.children.length === 0) {
       section.remove();
     }
-  });  
+  });
 }
 
 /**
  * Controls the visibility of two overlay elements by toggling CSS classes.
  * @returns {void}
  */
-function controlVisability(){
+function controlVisability() {
   let overlayRef = document.getElementById('overlayBoard');
   let taskOverlayRef = document.getElementById('overlay-content-loader');
   overlayRef.classList.toggle('visible');
   overlayRef.classList.add('d-none');
-  taskOverlayRef.classList.toggle('show');  
+  taskOverlayRef.classList.toggle('show');
 }

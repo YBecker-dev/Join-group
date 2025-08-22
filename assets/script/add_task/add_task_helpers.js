@@ -1,8 +1,8 @@
-///**
-// * Toggles the priority button state.
-// * @param {string} priority - The priority level ('urgent', 'medium', 'low').
-// * @param {string} prefix - An optional prefix for the button IDs.
-// */
+/**
+ * Toggles the priority button state.
+ * @param {string} priority - The priority level ('urgent', 'medium', 'low').
+ * @param {string} prefix - An optional prefix for the button IDs.
+ */
 function togglePriority(priority, prefix = '') {
   let ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
   for (let i = 0; i < ids.length; i++) {

@@ -113,7 +113,6 @@ function dateInputMinDate() {
   const minDate = `${dd}/${mm}/${yyyy}`;
   const dateInput = document.getElementById('date');
   dateInput.setAttribute('min', minDate);
-  // Removed: dateInput.value = minDate; - Date field now starts empty
 }
 
 /**

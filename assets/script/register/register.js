@@ -37,7 +37,6 @@ function setupEventListeners() {
   pw1Icon.addEventListener('click', togglePassword1Visibility);
   pw2Icon.addEventListener('click', togglePassword2Visibility);
   nameInput.addEventListener('input', handleNameInput);
-  //emailInput.addEventListener('input', handleEmailInput);
   checkbox.addEventListener('change', handleCheckboxChange);
 }
 
@@ -131,19 +130,6 @@ function validateEmailInput(input) {
 }
 
 /**
- * Handles input in the email field, running a validation function and clearing errors.
- * @param {Event} this - The input event object.
- */
-//function handleEmailInput() {
-//  if (validateEmailInput) {
-//    validateEmailInput(this);
-//  }
-//  this.classList.remove('input-error');
-//  document.getElementById('email-warning').classList.add('d-none');
-//  this.setCustomValidity('');
-//}
-
-/**
  * Handles changes to the checkbox, removing the error class if it is checked.
  */
 function handleCheckboxChange() {
@@ -178,9 +164,7 @@ async function checkUserOnRegistration(event) {
     } else {
       showEmailAlreadyExistsError();
     }
-  } catch (error) {
-    console.error('Fehler bei der Benutzerregistrierung:', error);
-  }
+  } catch (error) {}
 }
 
 /**
@@ -210,7 +194,6 @@ async function checkEmailInBothDatabases() {
     const emailExists = await checkEmails(loginResponse, userResponse);
     return emailExists;
   } catch (error) {
-    console.error('Fehler bei der E-Mail-Überprüfung:', error);
     return false;
   }
 }
